@@ -242,6 +242,9 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
   <button class="tbtn active" data-tab="setup"><span class="ic">📋</span>Weekly Setup</button>
   <button class="tbtn" data-tab="payout"><span class="ic">📄</span>Payout Sheet</button>
   <hr class="sdiv">
+  <div class="nav-sec">Admin</div>
+  <button class="tbtn" data-tab="balances"><span class="ic">🏦</span>Opening Balances</button>
+  <hr class="sdiv">
   <div class="nav-sec">Season</div>
   <button class="tbtn" data-tab="season"><span class="ic">🏆</span>Leaderboard</button>
   <button class="tbtn" data-tab="pots"><span class="ic">💰</span>Pot History</button>
@@ -481,6 +484,37 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
   </div>
 </div>
 
+<!-- ══ OPENING BALANCES ══════════════════════════════════════════ -->
+<div id="panel-balances" class="panel hidden">
+  <div class="g2">
+
+    <div class="card">
+      <h2>Skins — Opening Balances <em>holes 1,2,5–9,11–14,16,18</em></h2>
+      <div class="cb">
+        <p style="font-size:12px;color:var(--mut);margin-bottom:12px;">Enter the carried pot balance for each hole at the start of the season (or after a manual correction). Leave as 0 if no carryover.</p>
+        <table class="gt">
+          <thead><tr><th>Hole</th><th>Current Balance</th><th>Set Opening Balance ($)</th></tr></thead>
+          <tbody id="ob-skins-tbody"></tbody>
+        </table>
+        <button class="sbtn sbtn-gold" id="btn-save-skins-ob" style="margin-top:12px;width:auto;padding:9px 20px;">Save Skins Balances</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Pots of Gold — Opening Balances <em>holes 3,4,10,15,17</em></h2>
+      <div class="cb">
+        <p style="font-size:12px;color:var(--mut);margin-bottom:12px;">Enter the carried pot balance for each POG hole. Each player contributes $1/hole per week going forward.</p>
+        <table class="gt">
+          <thead><tr><th>Hole</th><th>Current Balance</th><th>Set Opening Balance ($)</th></tr></thead>
+          <tbody id="ob-pog-tbody"></tbody>
+        </table>
+        <button class="sbtn sbtn-gold" id="btn-save-pog-ob" style="margin-top:12px;width:auto;padding:9px 20px;">Save POG Balances</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 </main>
 </div><!-- /shell -->
 
@@ -690,7 +724,7 @@ function refreshHistPanel(){
 
 // ── Tab switching ─────────────────────────────────────────────────────────────
 function showTab(tab){
-  ['setup','payout','season','pots'].forEach(t=>{
+  ['setup','payout','season','pots','balances'].forEach(t=>{
     document.getElementById(`panel-${t}`).classList.toggle('hidden',t!==tab);
   });
   document.querySelectorAll('.tbtn').forEach(b=>{
@@ -698,6 +732,7 @@ function showTab(tab){
   });
   if(tab==='pots') refreshHistPanel();
   if(tab==='season') renderLeaderboard(Object.entries(seasonData).map(([id,v])=>({id,...v})));
+  if(tab==='balances') buildOpeningBalanceTables();
 }
 
 // ── Season leaderboard ────────────────────────────────────────────────────────
@@ -1180,7 +1215,9 @@ document.addEventListener('click',function(e){
     case 'btn-reset-season':  resetSeason();     break;
     case 'btn-refresh-lb':    renderLeaderboard(Object.entries(seasonData).map(([id,v])=>({id,...v}))); break;
     case 'btn-export-pots':   exportPotsCSV();   break;
-    case 'btn-export-weeks':  exportWeeksCSV();  break;
+    case 'btn-export-weeks':      exportWeeksCSV();           break;
+    case 'btn-save-skins-ob':     saveSkinsOpeningBalances(); break;
+    case 'btn-save-pog-ob':       savePOGOpeningBalances();   break;
   }
 });
 
@@ -1195,6 +1232,56 @@ document.addEventListener('input',function(e){
 document.addEventListener('change',function(e){
   if(e.target.id==='lb-filter') filterLeaderboard(document.getElementById('lb-search')?.value||'',e.target.value);
 });
+
+// ── Opening Balances ──────────────────────────────────────────────────────────
+function buildOpeningBalanceTables(){
+  // Skins
+  const st=document.getElementById('ob-skins-tbody');
+  if(st) st.innerHTML=SKINS_HOLES.map(h=>{
+    const cur=(skinsPots[h]?.pot)||0;
+    return `<tr>
+      <td style="font-weight:600;">${h}</td>
+      <td style="color:var(--gm);font-weight:600;">$${cur.toFixed(2)}</td>
+      <td><input type="number" id="ob-sk-${h}" value="${cur.toFixed(2)}" min="0" step="0.01" style="width:100px;"></td>
+    </tr>`;
+  }).join('');
+  // POG
+  const pt=document.getElementById('ob-pog-tbody');
+  if(pt) pt.innerHTML=POG_HOLES.map(h=>{
+    const cur=(pogPots[h]?.pot)||0;
+    return `<tr>
+      <td style="font-weight:600;"><span class="pog-dot"></span>${h}</td>
+      <td style="color:var(--gm);font-weight:600;">$${cur.toFixed(2)}</td>
+      <td><input type="number" id="ob-pg-${h}" value="${cur.toFixed(2)}" min="0" step="0.01" style="width:100px;"></td>
+    </tr>`;
+  }).join('');
+}
+
+function saveSkinsOpeningBalances(){
+  let changed=0;
+  SKINS_HOLES.forEach(h=>{
+    const val=parseFloat(document.getElementById(`ob-sk-${h}`)?.value)||0;
+    skinsPots[h]={pot:val,updatedAt:new Date().toISOString()};
+    saveSkinsHole(h);
+    changed++;
+  });
+  refreshSkinsPotDisplayAll();
+  buildOpeningBalanceTables();
+  alert(`Skins opening balances saved for ${changed} holes.`);
+}
+
+function savePOGOpeningBalances(){
+  let changed=0;
+  POG_HOLES.forEach(h=>{
+    const val=parseFloat(document.getElementById(`ob-pg-${h}`)?.value)||0;
+    pogPots[h]={pot:val,updatedAt:new Date().toISOString()};
+    savePOGHole(h);
+    changed++;
+  });
+  refreshPOGPotDisplayAll();
+  buildOpeningBalanceTables();
+  alert(`POG opening balances saved for ${changed} holes.`);
+}
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 function init(){
