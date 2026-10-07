@@ -486,6 +486,20 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
 
 <!-- ══ OPENING BALANCES ══════════════════════════════════════════ -->
 <div id="panel-balances" class="panel hidden">
+
+  <!-- GitHub Token Setup -->
+  <div class="card s2" style="margin-bottom:14px;">
+    <h2>GitHub Token <em>required to publish results to public page</em></h2>
+    <div class="cb">
+      <p style="font-size:12px;color:var(--mut);margin-bottom:10px;">Your Personal Access Token is stored only on this device. It allows the app to automatically publish payout results to the public results page after each Generate &amp; Commit.</p>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <input type="password" id="gh-token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" style="width:340px;font-family:monospace;">
+        <button class="sbtn sbtn-gold" id="btn-save-token" style="width:auto;padding:9px 20px;">Save Token</button>
+        <span id="gh-token-status" style="font-size:12px;color:var(--gm);"></span>
+      </div>
+    </div>
+  </div>
+
   <div class="g2">
 
     <div class="card">
@@ -732,7 +746,15 @@ function showTab(tab){
   });
   if(tab==='pots') refreshHistPanel();
   if(tab==='season') renderLeaderboard(Object.entries(seasonData).map(([id,v])=>({id,...v})));
-  if(tab==='balances') buildOpeningBalanceTables();
+  if(tab==='balances'){
+    buildOpeningBalanceTables();
+    const t=getGHToken();
+    const inp=document.getElementById('gh-token-input');
+    const st=document.getElementById('gh-token-status');
+    if(inp) inp.value=t?'••••••••••••••••••••••••':'';
+    if(st) st.textContent=t?'✓ Token saved':'No token saved yet';
+    if(st) st.style.color=t?'var(--gm)':'var(--mut)';
+  }
 }
 
 // ── Season leaderboard ────────────────────────────────────────────────────────
@@ -994,6 +1016,10 @@ function generatePayout(previewOnly=false){
     }
     saveSeason();
     refreshSkinsPotDisplayAll(); refreshPOGPotDisplayAll();
+
+    // Publish to GitHub for public results page
+    publishToGitHub(weekKey, name, date, notes, cancelled, total, gnPool, skPool, pgPool,
+      fdata, netData, skinsData, pogData, skillData, meatData, ffWinner, ffAmount, ffPref, mwList);
   }
 
   // Totals
@@ -1218,6 +1244,14 @@ document.addEventListener('click',function(e){
     case 'btn-export-weeks':      exportWeeksCSV();           break;
     case 'btn-save-skins-ob':     saveSkinsOpeningBalances(); break;
     case 'btn-save-pog-ob':       savePOGOpeningBalances();   break;
+    case 'btn-save-token': {
+      const t = document.getElementById('gh-token-input')?.value?.trim();
+      if(!t){ alert('Please enter your GitHub token.'); break; }
+      setGHToken(t);
+      const st = document.getElementById('gh-token-status');
+      if(st) st.textContent = '✓ Token saved';
+      break;
+    }
   }
 });
 
@@ -1232,6 +1266,117 @@ document.addEventListener('input',function(e){
 document.addEventListener('change',function(e){
   if(e.target.id==='lb-filter') filterLeaderboard(document.getElementById('lb-search')?.value||'',e.target.value);
 });
+
+// ── GitHub publish ────────────────────────────────────────────────────────────
+const GH_OWNER = 'pyeman1952';
+const GH_REPO  = 'mensclub2';
+const GH_FILE  = 'payout-data.json';
+
+function getGHToken(){ try{ return localStorage.getItem('gh_token')||''; }catch(e){return '';} }
+function setGHToken(t){ try{ localStorage.setItem('gh_token',t); }catch(e){} }
+
+async function publishToGitHub(weekKey, name, date, notes, cancelled, total,
+  gnPool, skPool, pgPool, fdata, netData, skinsData, pogData, skillData,
+  meatData, ffWinner, ffAmount, ffPref, mwList){
+
+  const token = getGHToken();
+  if(!token){
+    console.warn('No GitHub token — results not published to public page.');
+    showGHStatus('⚠ No GitHub token set — results not published. Add your token in Settings.', true);
+    return;
+  }
+
+  try {
+    // Get current file SHA (needed for update)
+    const headers = {
+      'Authorization': `token ${token}`,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    };
+    const apiUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+
+    let sha = null;
+    let existingData = { weeks:[], season:{}, pots:{} };
+    try {
+      const cur = await fetch(apiUrl, {headers});
+      if(cur.ok){
+        const j = await cur.json();
+        sha = j.sha;
+        const decoded = atob(j.content.replace(/\n/g,''));
+        existingData = JSON.parse(decoded);
+      }
+    } catch(e){ /* file doesn't exist yet */ }
+
+    // Build week record
+    const weekRecord = {
+      id:weekKey, name, date, notes, cancelled,
+      players:parseInt(total)||0,
+      gnPool, skinsPool:skPool, pogPool:pgPool,
+      recordedAt: new Date().toISOString(),
+      flights: fdata,
+      flightNames: {A:document.getElementById('f-a-name')?.value||'Flight A', B:document.getElementById('f-b-name')?.value||'Flight B', C:document.getElementById('f-c-name')?.value||'Flight C', D:document.getElementById('f-d-name')?.value||'Flight D'},
+      flightRanges: {A:document.getElementById('f-a-range')?.value||'0–5', B:document.getElementById('f-b-range')?.value||'6–11', C:document.getElementById('f-c-range')?.value||'12–17', D:document.getElementById('f-d-range')?.value||'18+'},
+      net: netData,
+      skins: skinsData,
+      pog: pogData,
+      skill: skillData,
+      meat: meatData,
+      ff: ffWinner ? {winner:ffWinner, amount:ffAmount, pref:ffPref} : null,
+      moneyWinners: mwList,
+      totals: {
+        gross: FLIGHTS.reduce((s,f)=>(fdata[f]||[]).reduce((ss,r)=>ss+(parseFloat(r.prize)||0),s),0),
+        net:   netData.reduce((s,r)=>s+(parseFloat(r.prize)||0),0),
+        skins: skinsData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runPot,0),
+        pog:   pogData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runPot,0),
+        draw:  ffAmount||0
+      }
+    };
+
+    // Merge weeks (replace if same id, else add)
+    const weeks = (existingData.weeks||[]).filter(w=>w.id!==weekKey);
+    weeks.push(weekRecord);
+    // Keep last 26 weeks
+    weeks.sort((a,b)=>new Date(b.recordedAt)-new Date(a.recordedAt));
+    if(weeks.length>26) weeks.length=26;
+
+    // Build pots snapshot
+    const pots = {};
+    SKINS_HOLES.forEach(h=>{ pots[`sk_${h}`]=skinsPots[h]||{pot:0}; });
+    POG_HOLES.forEach(h=>{ pots[`pg_${h}`]=pogPots[h]||{pot:0}; });
+
+    const newData = { weeks, season:seasonData, pots };
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(newData, null, 2))));
+
+    const body = { message:`Payout update: ${name} ${date}`, content };
+    if(sha) body.sha = sha;
+
+    const res = await fetch(apiUrl, { method:'PUT', headers, body: JSON.stringify(body) });
+    if(res.ok){
+      showGHStatus('✓ Results published to public page', false);
+    } else {
+      const err = await res.json();
+      showGHStatus(`⚠ Publish failed: ${err.message}`, true);
+    }
+  } catch(e){
+    showGHStatus(`⚠ Publish error: ${e.message}`, true);
+  }
+}
+
+function showGHStatus(msg, isError){
+  let bar = document.getElementById('gh-status');
+  if(!bar){
+    bar = document.createElement('div');
+    bar.id = 'gh-status';
+    bar.style.cssText = 'position:fixed;bottom:16px;right:16px;padding:10px 16px;border-radius:6px;font-size:12px;font-weight:600;z-index:999;max-width:320px;box-shadow:0 2px 8px rgba(0,0,0,.2);';
+    document.body.appendChild(bar);
+  }
+  bar.textContent = msg;
+  bar.style.background = isError ? '#FFF3CD' : '#D8F3DC';
+  bar.style.color = isError ? '#856404' : '#1B4332';
+  bar.style.border = isError ? '1px solid #FFCA2C' : '1px solid #95D5B2';
+  clearTimeout(bar._timer);
+  bar._timer = setTimeout(()=>bar.remove(), 6000);
+}
 
 // ── Opening Balances ──────────────────────────────────────────────────────────
 function buildOpeningBalanceTables(){
