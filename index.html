@@ -8,634 +8,401 @@
 <meta name="apple-mobile-web-app-title" content="Club Payout">
 <title>Men's Club · Payout Sheet</title>
 <style>
-  :root {
-    --green-deep:  #1B4332;
-    --green-mid:   #2D6A4F;
-    --green-light: #D8F3DC;
-    --gold:        #C9A84C;
-    --gold-light:  #FDF6E3;
-    --surface:     #F4F6F8;
-    --border:      #DEE2E6;
-    --text:        #1A1A1A;
-    --muted:       #6C757D;
-    --white:       #FFFFFF;
-    --carry-bg:    #FFF3CD;
-    --carry-bdr:   #FFCA2C;
-    --red:         #DC3545;
-    --radius:      6px;
-    --sidebar-w:   200px;
-    --header-h:    54px;
-    --safe-top:    env(safe-area-inset-top, 0px);
-    --safe-bot:    env(safe-area-inset-bottom, 0px);
-    --safe-left:   env(safe-area-inset-left, 0px);
-    --safe-right:  env(safe-area-inset-right, 0px);
-  }
+:root {
+  --gd:#1B4332; --gm:#2D6A4F; --gl:#D8F3DC;
+  --gold:#C9A84C; --gold-l:#FDF6E3;
+  --surf:#F4F6F8; --bdr:#DEE2E6;
+  --txt:#1A1A1A; --mut:#6C757D;
+  --wh:#FFFFFF; --carry:#FFF3CD; --carry-b:#FFCA2C;
+  --red:#DC3545; --blue:#0D47A1; --purple:#6300CC;
+  --rad:6px; --sw:210px; --hh:54px;
+  --st:env(safe-area-inset-top,0px); --sb:env(safe-area-inset-bottom,0px);
+  --sl:env(safe-area-inset-left,0px); --sr:env(safe-area-inset-right,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;width:100%;font-family:system-ui,-apple-system,sans-serif;font-size:14px;color:var(--txt);background:var(--surf);overflow:hidden;}
 
-  * { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+/* ── Shell ── */
+.shell{display:grid;grid-template-rows:calc(var(--hh) + var(--st)) 1fr;grid-template-columns:calc(var(--sw) + var(--sl)) 1fr;height:100%;width:100%;}
+.hdr{grid-column:1/-1;background:var(--gd);color:#fff;display:flex;align-items:flex-end;padding:var(--st) 16px 10px calc(16px + var(--sl));gap:10px;}
+.hdr h1{font-family:Georgia,serif;font-size:17px;font-weight:normal;letter-spacing:.03em;}
+.hdr .sub{font-size:11px;color:rgba(255,255,255,.5);}
+.hdr .pill{margin-left:auto;display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.55);padding-right:var(--sr);}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--mut);display:inline-block;flex-shrink:0;}
+.dot.live{background:#52B788;}
 
-  html, body {
-    height:100%; width:100%;
-    font-family:system-ui,-apple-system,sans-serif;
-    font-size:14px; color:var(--text);
-    background:var(--surface);
-    overflow:hidden;
-  }
+/* ── Sidebar ── */
+.sidebar{background:var(--gd);display:flex;flex-direction:column;padding:12px 0 calc(12px + var(--sb)) var(--sl);overflow-y:auto;border-right:1px solid rgba(255,255,255,.08);}
+.nav-sec{font-size:9px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.35);text-transform:uppercase;padding:12px 14px 5px;}
+.tbtn{display:flex;align-items:center;gap:9px;padding:11px 14px;border:none;background:transparent;color:rgba(255,255,255,.65);cursor:pointer;font-size:13px;text-align:left;width:100%;}
+.tbtn .ic{font-size:15px;width:20px;text-align:center;flex-shrink:0;}
+.tbtn.active{background:rgba(255,255,255,.12);color:#fff;font-weight:600;border-left:3px solid var(--gold);padding-left:11px;}
+.sdiv{border:none;border-top:1px solid rgba(255,255,255,.1);margin:6px 14px;}
+.sact{padding:10px 10px calc(6px + var(--sb));display:flex;flex-direction:column;gap:7px;margin-top:auto;}
+.sbtn{display:block;width:100%;padding:10px 10px;border-radius:var(--rad);font-size:12px;font-weight:600;cursor:pointer;border:none;text-align:center;}
+.sbtn-gold{background:var(--gold);color:#1A1A1A;}
+.sbtn-purple{background:rgba(99,0,204,.7);color:#fff;}
+.sbtn-ghost{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.2);}
+.sbtn-danger{background:transparent;color:#FF6B6B;border:1px solid rgba(255,107,107,.4);}
+.sbtn-blue{background:rgba(13,71,161,.6);color:#fff;}
 
-  /* ── App shell: header + sidebar + content ── */
-  .app-shell {
-    display:grid;
-    grid-template-rows: calc(var(--header-h) + var(--safe-top)) 1fr;
-    grid-template-columns: calc(var(--sidebar-w) + var(--safe-left)) 1fr;
-    height:100%;
-    width:100%;
-  }
+/* ── Content ── */
+.content{overflow-y:auto;overflow-x:hidden;padding:16px 16px calc(16px + var(--sb));-webkit-overflow-scrolling:touch;background:var(--surf);}
+.hidden{display:none!important;}
+.panel{width:100%;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.s2{grid-column:1/-1;}
 
-  /* Header spans full width */
-  .app-header {
-    grid-column: 1 / -1;
-    background:var(--green-deep);
-    color:#fff;
-    display:flex;
-    align-items:flex-end;
-    padding: var(--safe-top) 20px 10px calc(20px + var(--safe-left));
-    gap:12px;
-    z-index:10;
-  }
-  .app-header h1 { font-family:Georgia,serif; font-size:18px; font-weight:normal; letter-spacing:.03em; }
-  .app-header .sub { font-size:11px; color:rgba(255,255,255,.5); }
-  .app-header .db-pill {
-    margin-left:auto;
-    display:flex; align-items:center; gap:6px;
-    font-size:11px; color:rgba(255,255,255,.6);
-    padding-right: var(--safe-right);
-  }
-  .dot { width:8px; height:8px; border-radius:50%; background:var(--muted); display:inline-block; flex-shrink:0; }
-  .dot.live { background:#52B788; }
+/* ── Info bar ── */
+.ibar{background:var(--gl);border:1px solid #95D5B2;border-radius:var(--rad);padding:7px 12px;font-size:12px;color:var(--gd);margin-bottom:12px;display:flex;gap:16px;flex-wrap:wrap;}
 
-  /* Sidebar */
-  .sidebar {
-    background:var(--green-deep);
-    display:flex;
-    flex-direction:column;
-    padding: 16px 0 calc(16px + var(--safe-bot)) calc(var(--safe-left));
-    overflow-y:auto;
-    border-right:1px solid rgba(255,255,255,.08);
-  }
-  .nav-section {
-    font-size:9px; font-weight:700; letter-spacing:.1em;
-    color:rgba(255,255,255,.35); text-transform:uppercase;
-    padding:14px 16px 6px;
-  }
-  .tab-btn {
-    display:flex; align-items:center; gap:10px;
-    padding:12px 16px;
-    border:none; background:transparent;
-    color:rgba(255,255,255,.65);
-    cursor:pointer; font-size:13px; text-align:left;
-    width:100%; transition:background .12s;
-    -webkit-user-select:none;
-  }
-  .tab-btn .icon { font-size:16px; width:22px; text-align:center; flex-shrink:0; }
-  .tab-btn:active { background:rgba(255,255,255,.08); }
-  .tab-btn.active {
-    background:rgba(255,255,255,.12);
-    color:#fff; font-weight:600;
-    border-left:3px solid var(--gold);
-    padding-left:13px;
-  }
-  .sidebar-divider { border:none; border-top:1px solid rgba(255,255,255,.1); margin:8px 16px; }
+/* ── Pot summary bar ── */
+.pot-bar{background:var(--gold-l);border:1px solid #E8D5A3;border-radius:var(--rad);padding:8px 14px;margin-bottom:12px;display:flex;gap:20px;flex-wrap:wrap;font-size:12px;}
+.pot-bar .pb-item strong{font-size:15px;color:var(--gm);display:block;}
+.pot-bar .pb-item span{color:var(--mut);}
 
-  /* Action buttons in sidebar */
-  .sidebar-actions { padding:12px 12px calc(8px + var(--safe-bot)); display:flex; flex-direction:column; gap:8px; margin-top:auto; }
-  .sbtn {
-    display:block; width:100%; padding:11px 12px;
-    border-radius:var(--radius); font-size:12px; font-weight:600;
-    cursor:pointer; border:none; text-align:center;
-    -webkit-user-select:none;
-  }
-  .sbtn-primary { background:var(--gold); color:#1A1A1A; }
-  .sbtn-primary:active { background:#B8963F; }
-  .sbtn-purple { background:rgba(99,0,204,.7); color:#fff; }
-  .sbtn-purple:active { background:rgba(99,0,204,.9); }
-  .sbtn-ghost { background:rgba(255,255,255,.08); color:rgba(255,255,255,.7); border:1px solid rgba(255,255,255,.2); }
-  .sbtn-ghost:active { background:rgba(255,255,255,.15); }
-  .sbtn-danger { background:transparent; color:#FF6B6B; border:1px solid rgba(255,107,107,.4); }
-  .sbtn-danger:active { background:rgba(255,107,107,.1); }
+/* ── Cards ── */
+.card{background:var(--wh);border:1px solid var(--bdr);border-radius:var(--rad);overflow:hidden;margin-bottom:0;}
+.card h2{font-family:Georgia,serif;font-size:13px;font-weight:normal;background:var(--gm);color:#fff;padding:8px 12px;letter-spacing:.04em;}
+.card h2 em{font-family:system-ui,sans-serif;font-size:10px;color:rgba(255,255,255,.6);font-style:normal;margin-left:8px;}
+.cb{padding:12px;}
 
-  /* Content area */
-  .content {
-    overflow-y:auto;
-    overflow-x:hidden;
-    padding: 20px 20px calc(20px + var(--safe-bot)) 20px;
-    -webkit-overflow-scrolling:touch;
-    background:var(--surface);
-  }
+/* ── Form ── */
+.frow{display:grid;grid-template-columns:150px 1fr;gap:8px;margin-bottom:8px;align-items:center;}
+.flbl{font-size:12px;color:var(--mut);white-space:nowrap;}
+input[type=text],input[type=number],select,textarea{width:100%;padding:7px 9px;border:1px solid var(--bdr);border-radius:var(--rad);font-size:13px;color:var(--txt);background:var(--wh);-webkit-appearance:none;appearance:none;}
+input[type=number]{text-align:right;}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--gm);outline-offset:1px;border-color:var(--gm);}
+input[type=checkbox]{width:20px;height:20px;cursor:pointer;accent-color:var(--gm);}
+textarea{resize:vertical;min-height:60px;font-size:13px;}
 
-  /* ── Common content styles ── */
-  .hidden { display:none !important; }
-  .panel { width:100%; }
-  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-  .span2 { grid-column:1/-1; }
+/* ── Flight editor ── */
+.flight-editor{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px;}
+.fe-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--rad);padding:8px;}
+.fe-card label{font-size:10px;font-weight:700;color:var(--mut);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em;}
 
-  /* Info bar */
-  .info-bar {
-    background:var(--green-light); border:1px solid #95D5B2;
-    border-radius:var(--radius); padding:8px 14px;
-    font-size:12px; color:var(--green-deep);
-    margin-bottom:14px; display:flex; gap:20px; flex-wrap:wrap;
-  }
+/* ── Tables ── */
+table.gt{width:100%;border-collapse:collapse;font-size:13px;}
+table.gt th{background:var(--surf);padding:6px 7px;text-align:left;font-size:10px;font-weight:700;color:var(--mut);border-bottom:2px solid var(--bdr);white-space:nowrap;text-transform:uppercase;letter-spacing:.03em;}
+table.gt td{padding:6px 7px;border-bottom:1px solid #F0F0F0;vertical-align:middle;}
+table.gt tr:hover td{background:#FAFCFA;}
+table.gt td input[type=text]{font-size:13px;padding:5px 7px;}
+table.gt td input[type=number]{font-size:13px;padding:5px 7px;}
+table.gt td select{font-size:12px;padding:5px 5px;}
+.thr{text-align:right!important;} .tdr{text-align:right;} .tdc{text-align:center;}
 
-  /* Pool summary */
-  #pool-summary { font-size:12px; color:var(--green-mid); line-height:2; }
+/* Badges */
+.fb{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;color:#fff;}
+.fA{background:#1B4332;} .fB{background:#2D6A4F;} .fC{background:#52B788;color:#1B4332;} .fD{background:#95D5B2;color:#1B4332;}
+.cbadge{display:inline-block;padding:1px 5px;background:var(--carry-b);border-radius:3px;font-size:10px;font-weight:700;color:#5C3D00;}
+.pog-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);margin-right:3px;}
+.countback-badge{display:inline-block;padding:1px 6px;background:#E3F2FD;border:1px solid #90CAF9;border-radius:3px;font-size:10px;font-weight:700;color:#0D47A1;}
+.pref-bar{display:inline-block;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700;background:#DCF5FF;color:#0969A2;}
+.pref-pro{background:#EDE7FF;color:#6300CC;}
+.pref-cash{background:#D4EDDA;color:#155724;}
+.pot-display{font-weight:700;color:var(--gold);font-size:13px;}
 
-  /* Cards */
-  .card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
-  .card h2 {
-    font-family:Georgia,serif; font-size:13px; font-weight:normal;
-    background:var(--green-mid); color:#fff;
-    padding:9px 14px; letter-spacing:.04em;
-  }
-  .card h2 em { font-family:system-ui,sans-serif; font-size:10px; color:rgba(255,255,255,.6); font-style:normal; margin-left:8px; }
-  .card-body { padding:14px; }
+/* Cancelled banner */
+.cancelled-banner{background:#FFF3CD;border:2px solid var(--carry-b);border-radius:var(--rad);padding:12px;text-align:center;font-weight:700;font-size:15px;color:#856404;margin-bottom:12px;display:none;}
 
-  /* Form rows */
-  .row2 { display:grid; grid-template-columns:140px 1fr; gap:8px; margin-bottom:9px; align-items:center; }
-  label.lbl { font-size:12px; color:var(--muted); white-space:nowrap; }
+/* ── PIN overlay ── */
+#pin-overlay{position:fixed;inset:0;z-index:9999;background:var(--gd);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:var(--st) var(--sr) var(--sb) var(--sl);}
+#pin-overlay.unlocked{display:none;}
+.pin-logo{font-family:Georgia,serif;font-size:24px;color:#fff;letter-spacing:.06em;text-align:center;}
+.pin-logo small{display:block;font-family:system-ui,sans-serif;font-size:12px;color:rgba(255,255,255,.5);margin-top:4px;}
+.pin-dots{display:flex;gap:14px;}
+.pin-dot{width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,.4);background:transparent;transition:background .15s;}
+.pin-dot.filled{background:#fff;border-color:#fff;}
+.pin-error{color:#FF6B6B;font-size:13px;min-height:18px;text-align:center;}
+.pin-keypad{display:grid;grid-template-columns:repeat(3,70px);gap:10px;}
+.pin-key{height:62px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:22px;font-weight:300;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.pin-key:active{background:rgba(255,255,255,.25);}
+.pin-key.empty{background:transparent;border:none;cursor:default;}
+.pin-admin-link{font-size:11px;color:rgba(255,255,255,.35);cursor:pointer;text-decoration:underline;}
 
-  /* Inputs — iPad-friendly touch targets */
-  input[type=text], input[type=number], select {
-    width:100%; padding:8px 10px;
-    border:1px solid var(--border); border-radius:var(--radius);
-    font-size:14px; color:var(--text); background:var(--white);
-    -webkit-appearance:none; appearance:none;
-  }
-  input[type=number] { text-align:right; }
-  input:focus, select:focus { outline:2px solid var(--green-mid); outline-offset:1px; border-color:var(--green-mid); }
-  input[type=checkbox] { width:20px; height:20px; cursor:pointer; accent-color:var(--green-mid); }
+/* PIN modal */
+#pin-modal{display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.6);align-items:center;justify-content:center;}
+#pin-modal.open{display:flex;}
+.pmbox{background:var(--wh);border-radius:12px;padding:24px 20px;width:300px;display:flex;flex-direction:column;gap:12px;}
+.pmbox h3{font-family:Georgia,serif;font-size:15px;color:var(--gd);}
+.pmbox label{font-size:11px;color:var(--mut);display:block;margin-bottom:3px;}
+.pmbox input{width:100%;padding:9px;border:1px solid var(--bdr);border-radius:var(--rad);font-size:16px;letter-spacing:.2em;}
+.pmact{display:flex;gap:8px;justify-content:flex-end;}
+.pmbtn{padding:8px 18px;border-radius:var(--rad);font-size:13px;font-weight:600;cursor:pointer;border:none;}
+.pmsave{background:var(--gd);color:#fff;} .pmcancel{background:var(--surf);color:var(--txt);}
 
-  /* Tables */
-  table.gt { width:100%; border-collapse:collapse; font-size:13px; }
-  table.gt th { background:var(--surface); padding:7px 8px; text-align:left; font-size:10px; font-weight:700; color:var(--muted); border-bottom:2px solid var(--border); white-space:nowrap; letter-spacing:.04em; text-transform:uppercase; }
-  table.gt td { padding:7px 8px; border-bottom:1px solid #F0F0F0; vertical-align:middle; }
-  table.gt tr:hover td { background:#FAFCFA; }
-  table.gt td input[type=text]   { font-size:13px; padding:6px 8px; }
-  table.gt td input[type=number] { font-size:13px; padding:6px 8px; }
-  table.gt td select { font-size:12px; padding:6px 6px; }
-  .th-r { text-align:right !important; }
-  .td-r { text-align:right; }
-  .td-c { text-align:center; }
+/* ── Payout sheet ── */
+.pw{width:100%;}
+.sheet{background:var(--wh);border:1px solid var(--bdr);border-radius:var(--rad);padding:24px 28px;font-family:Georgia,serif;}
+.masthead{text-align:center;border-bottom:3px double var(--gd);padding-bottom:12px;margin-bottom:16px;}
+.masthead h1{font-size:20px;color:var(--gd);font-weight:normal;letter-spacing:.06em;}
+.masthead .meta{font-family:system-ui,sans-serif;font-size:11px;color:var(--mut);margin-top:3px;}
+.masthead .ts{font-family:system-ui,sans-serif;font-size:10px;color:var(--mut);margin-top:2px;}
+.psec{margin-bottom:16px;}
+.ptitle{font-family:system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;color:#fff;background:var(--gd);padding:4px 10px;text-transform:uppercase;}
+table.pt{width:100%;border-collapse:collapse;font-size:12px;}
+table.pt th{font-family:system-ui,sans-serif;font-size:10px;font-weight:600;color:var(--mut);text-align:left;padding:4px 9px;background:var(--surf);border-bottom:1px solid var(--bdr);}
+table.pt th.r{text-align:right;}
+table.pt td{padding:5px 9px;border-bottom:1px solid var(--surf);vertical-align:top;}
+table.pt td.r{text-align:right;}
+table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
+.money{font-family:system-ui,sans-serif;font-size:12px;font-weight:700;color:var(--gold);}
+.pbadge{display:inline-block;width:18px;height:18px;line-height:18px;text-align:center;border-radius:50%;font-family:system-ui,sans-serif;font-size:9px;font-weight:700;margin-right:2px;}
+.p1b{background:#C9A84C;color:#fff;} .p2b{background:#9E9E9E;color:#fff;} .p3b{background:#8B6914;color:#fff;} .pnb{background:var(--surf);color:var(--mut);}
+.fhdr td{background:var(--gl);font-family:system-ui,sans-serif;font-size:10px;font-weight:700;color:var(--gd);padding:3px 9px;border-top:1px solid #95D5B2;}
+.tbar{display:flex;gap:16px;flex-wrap:wrap;border-top:2px solid var(--gd);padding-top:10px;margin-top:6px;font-family:system-ui,sans-serif;font-size:11px;}
+.ti strong{font-size:13px;color:var(--gd);display:block;} .ti span{color:var(--mut);}
+.mw-total-row td{font-weight:700;background:var(--gl);font-family:system-ui,sans-serif;}
 
-  /* Flight badges */
-  .fb { display:inline-block; padding:3px 9px; border-radius:12px; font-size:11px; font-weight:700; color:#fff; }
-  .fA { background:#1B4332; } .fB { background:#2D6A4F; }
-  .fC { background:#52B788; color:#1B4332; } .fD { background:#95D5B2; color:#1B4332; }
+/* Leaderboard */
+.lb-table{width:100%;border-collapse:collapse;font-size:13px;}
+.lb-table th{background:var(--gd);color:#fff;padding:7px 9px;text-align:left;font-size:11px;font-weight:600;}
+.lb-table th.r{text-align:right;}
+.lb-table td{padding:7px 9px;border-bottom:1px solid var(--bdr);}
+.lb-table td.r{text-align:right;}
+.lb-table tr:nth-child(even) td{background:var(--surf);}
+.lbr{display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;font-weight:700;font-size:11px;}
+.lb1{background:#C9A84C;color:#fff;} .lb2{background:#9E9E9E;color:#fff;} .lb3{background:#8B6914;color:#fff;} .lbn{background:var(--surf);color:var(--mut);}
+.lbc{display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap;}
+.lbs{padding:7px 10px;border:1px solid var(--bdr);border-radius:var(--rad);font-size:13px;width:220px;}
+.lbf{padding:7px 9px;border:1px solid var(--bdr);border-radius:var(--rad);font-size:13px;}
+.btn{padding:7px 14px;border-radius:var(--rad);font-size:12px;font-weight:600;cursor:pointer;border:none;}
+.btn-o{background:var(--wh);color:var(--gd);border:1px solid var(--gd);}
+.btn-d{background:var(--wh);color:var(--red);border:1px solid var(--red);}
 
-  /* Pot display */
-  .pot-display { font-weight:700; color:var(--gold); font-size:13px; }
-  .cbadge { display:inline-block; padding:2px 7px; background:var(--carry-bdr); border-radius:3px; font-size:10px; font-weight:700; color:#5C3D00; }
-  .pog-dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--gold); margin-right:3px; }
+/* History */
+.hlist{max-height:240px;overflow-y:auto;}
+.hitem{display:flex;justify-content:space-between;align-items:center;padding:7px 9px;border-bottom:1px solid var(--surf);font-size:12px;}
+.hitem:hover{background:var(--surf);}
 
-  /* Pref badges */
-  .pref-bar  { display:inline-block; padding:3px 8px; border-radius:3px; font-size:11px; font-weight:700; background:#DCF5FF; color:#0969A2; }
-  .pref-pro  { background:#EDE7FF; color:#6300CC; }
-  .pref-cash { background:#D4EDDA; color:#155724; }
+/* Pot carryover display */
+.pot-carry-detail{font-size:11px;color:var(--mut);margin-top:2px;}
+.pot-carry-detail span{color:var(--gm);font-weight:600;}
 
-  /* Status bar (in content area) */
-  .status-bar { font-size:12px; color:var(--muted); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
-
-  /* ── Payout sheet ── */
-  .payout-wrap { width:100%; }
-  .sheet { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:28px 32px; font-family:Georgia,serif; }
-  .masthead { text-align:center; border-bottom:3px double var(--green-deep); padding-bottom:14px; margin-bottom:18px; }
-  .masthead h1 { font-size:22px; color:var(--green-deep); font-weight:normal; letter-spacing:.06em; }
-  .masthead .meta { font-family:system-ui,sans-serif; font-size:12px; color:var(--muted); margin-top:4px; }
-  .psec { margin-bottom:20px; }
-  .psec-title { font-family:system-ui,sans-serif; font-size:10px; font-weight:700; letter-spacing:.08em; color:#fff; background:var(--green-deep); padding:5px 12px; text-transform:uppercase; }
-  table.pt { width:100%; border-collapse:collapse; font-size:13px; }
-  table.pt th { font-family:system-ui,sans-serif; font-size:10px; font-weight:600; color:var(--muted); text-align:left; padding:5px 10px; background:var(--surface); border-bottom:1px solid var(--border); }
-  table.pt th.r { text-align:right; }
-  table.pt td { padding:6px 10px; border-bottom:1px solid var(--surface); vertical-align:top; }
-  table.pt td.r { text-align:right; }
-  table.pt tr:last-child td { border-bottom:1px solid var(--border); }
-  .money { font-family:system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--gold); }
-  .pbadge { display:inline-block; width:20px; height:20px; line-height:20px; text-align:center; border-radius:50%; font-family:system-ui,sans-serif; font-size:10px; font-weight:700; margin-right:3px; }
-  .p1b{background:#C9A84C;color:#fff;} .p2b{background:#9E9E9E;color:#fff;}
-  .p3b{background:#8B6914;color:#fff;} .pnb{background:var(--surface);color:var(--muted);}
-  .fhdr td { background:var(--green-light); font-family:system-ui,sans-serif; font-size:11px; font-weight:700; color:var(--green-deep); padding:4px 10px; border-top:1px solid #95D5B2; }
-  .totals-bar { display:flex; gap:20px; flex-wrap:wrap; border-top:2px solid var(--green-deep); padding-top:12px; margin-top:8px; font-family:system-ui,sans-serif; font-size:12px; }
-  .ti strong { font-size:15px; color:var(--green-deep); display:block; }
-  .ti span { color:var(--muted); }
-  .mw-total-row td { font-weight:700; background:var(--green-light); font-family:system-ui,sans-serif; }
-
-  /* ── Season leaderboard ── */
-  .lb-table { width:100%; border-collapse:collapse; font-size:13px; }
-  .lb-table th { background:var(--green-deep); color:#fff; padding:8px 10px; text-align:left; font-size:11px; font-weight:600; }
-  .lb-table th.r { text-align:right; }
-  .lb-table td { padding:8px 10px; border-bottom:1px solid var(--border); }
-  .lb-table td.r { text-align:right; }
-  .lb-table tr:nth-child(even) td { background:var(--surface); }
-  .lb-rank { display:inline-block; width:26px; height:26px; line-height:26px; text-align:center; border-radius:50%; font-weight:700; font-size:12px; }
-  .lb-1{background:#C9A84C;color:#fff;} .lb-2{background:#9E9E9E;color:#fff;}
-  .lb-3{background:#8B6914;color:#fff;} .lb-n{background:var(--surface);color:var(--muted);}
-  .lb-controls { display:flex; gap:10px; align-items:center; margin-bottom:14px; flex-wrap:wrap; }
-  .lb-search { padding:8px 12px; border:1px solid var(--border); border-radius:var(--radius); font-size:14px; width:240px; }
-  .lb-filter { padding:8px 10px; border:1px solid var(--border); border-radius:var(--radius); font-size:14px; }
-  .btn { padding:8px 16px; border-radius:var(--radius); font-size:13px; font-weight:600; cursor:pointer; border:none; }
-  .btn-outline { background:var(--white); color:var(--green-deep); border:1px solid var(--green-deep); }
-  .btn-outline:active { background:var(--green-light); }
-  .btn-danger { background:var(--white); color:var(--red); border:1px solid var(--red); }
-
-  /* ── Pot history ── */
-  .history-list { max-height:260px; overflow-y:auto; }
-  .history-item { display:flex; justify-content:space-between; align-items:center; padding:8px 10px; border-bottom:1px solid var(--surface); font-size:13px; }
-  .history-item:hover { background:var(--surface); }
-
-  /* ── Print ── */
-  @media print {
-    html, body { overflow:visible; height:auto; }
-    .app-shell { display:block; }
-    .app-header, .sidebar { display:none !important; }
-    .content { overflow:visible; padding:0; }
-    .panel { display:block !important; }
-    #panel-setup, #panel-season, #panel-pots { display:none !important; }
-    #panel-payout { display:block !important; }
-    .payout-wrap { padding:0; }
-    .sheet { border:none; border-radius:0; padding:12px; }
-    .psec { page-break-inside:avoid; }
-    .no-print { display:none !important; }
-  }
+@media print{
+  html,body{overflow:visible;height:auto;}
+  .shell{display:block;}
+  .hdr,.sidebar{display:none!important;}
+  .content{overflow:visible;padding:0;}
+  .panel{display:block!important;}
+  #panel-setup,#panel-season,#panel-pots{display:none!important;}
+  #panel-payout{display:block!important;}
+  .pw{padding:0;}
+  .sheet{border:none;border-radius:0;padding:10px;}
+  .psec{page-break-inside:avoid;}
+  .no-print{display:none!important;}
+}
 </style>
 </head>
 <body>
 
-<div class="app-shell">
+<!-- PIN OVERLAY -->
+<div id="pin-overlay">
+  <div class="pin-logo">⛳ Men's Club<small>Payout Administration</small></div>
+  <div class="pin-dots">
+    <div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div>
+    <div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div>
+  </div>
+  <div class="pin-error" id="pin-error"></div>
+  <div class="pin-keypad">
+    <button class="pin-key" data-digit="1">1</button><button class="pin-key" data-digit="2">2</button><button class="pin-key" data-digit="3">3</button>
+    <button class="pin-key" data-digit="4">4</button><button class="pin-key" data-digit="5">5</button><button class="pin-key" data-digit="6">6</button>
+    <button class="pin-key" data-digit="7">7</button><button class="pin-key" data-digit="8">8</button><button class="pin-key" data-digit="9">9</button>
+    <button class="pin-key empty"></button><button class="pin-key" data-digit="0">0</button><button class="pin-key" data-digit="del">⌫</button>
+  </div>
+  <span class="pin-admin-link" id="pin-change-link">Change PIN</span>
+</div>
 
-<!-- ── Header ── -->
-<div class="app-header">
-  <h1>Men's Club · Payout Sheet</h1>
-  <span class="sub">Weekly Prize Administration</span>
-  <div class="db-pill">
-    <span class="dot" id="db-dot"></span>
-    <span id="db-msg">Connecting…</span>
+<!-- PIN MODAL -->
+<div id="pin-modal">
+  <div class="pmbox">
+    <h3>Change Club PIN</h3>
+    <div><label>Current PIN</label><input type="password" id="pm-cur" maxlength="4" inputmode="numeric" placeholder="••••"></div>
+    <div><label>New PIN (4 digits)</label><input type="password" id="pm-new" maxlength="4" inputmode="numeric" placeholder="••••"></div>
+    <div><label>Confirm New PIN</label><input type="password" id="pm-con" maxlength="4" inputmode="numeric" placeholder="••••"></div>
+    <div class="pin-error" id="pm-error"></div>
+    <div class="pmact"><button class="pmbtn pmcancel" id="pm-cancel">Cancel</button><button class="pmbtn pmsave" id="pm-save">Save PIN</button></div>
   </div>
 </div>
 
-<!-- ── Sidebar ── -->
+<!-- APP SHELL -->
+<div class="shell">
+
+<!-- Header -->
+<div class="hdr">
+  <h1>Men's Club · Payout Sheet</h1>
+  <span class="sub">Weekly Prize Administration</span>
+  <div class="pill"><span class="dot" id="db-dot"></span><span id="db-msg">Ready</span></div>
+</div>
+
+<!-- Sidebar -->
 <nav class="sidebar">
-  <div class="nav-section">Entry</div>
-  <button class="tab-btn active" data-action="nav-setup">
-    <span class="icon">📋</span> Weekly Setup
-  </button>
-  <button class="tab-btn" data-action="nav-payout">
-    <span class="icon">📄</span> Payout Sheet
-  </button>
-  <hr class="sidebar-divider">
-  <div class="nav-section">Season</div>
-  <button class="tab-btn" data-action="nav-season">
-    <span class="icon">🏆</span> Leaderboard
-  </button>
-  <button class="tab-btn" data-action="nav-pots">
-    <span class="icon">💰</span> Pot History
-  </button>
-  <div class="sidebar-actions">
-    <button class="sbtn sbtn-primary" data-action="commit">Generate &amp; Commit</button>
-    <button class="sbtn sbtn-purple" data-action="preview">Preview Only</button>
-    <button class="sbtn sbtn-ghost no-print" id="btn-print" style="display:none" data-action="print">Print / Save PDF</button>
-    <button class="sbtn sbtn-danger no-print" data-action="clear">Clear Entries</button>
+  <div class="nav-sec">Entry</div>
+  <button class="tbtn active" data-tab="setup"><span class="ic">📋</span>Weekly Setup</button>
+  <button class="tbtn" data-tab="payout"><span class="ic">📄</span>Payout Sheet</button>
+  <hr class="sdiv">
+  <div class="nav-sec">Season</div>
+  <button class="tbtn" data-tab="season"><span class="ic">🏆</span>Leaderboard</button>
+  <button class="tbtn" data-tab="pots"><span class="ic">💰</span>Pot History</button>
+  <div class="sact">
+    <button class="sbtn sbtn-gold" id="btn-commit">Generate &amp; Commit</button>
+    <button class="sbtn sbtn-purple" id="btn-preview">Preview Only</button>
+    <button class="sbtn sbtn-ghost no-print" id="btn-print" style="display:none">Print / Save PDF</button>
+    <button class="sbtn sbtn-danger" id="btn-clear">Clear Entries</button>
+    <hr class="sdiv" style="margin:2px 0;">
+    <button class="sbtn sbtn-blue" id="btn-reset-pots">Reset All Pots</button>
+    <button class="sbtn sbtn-ghost" id="btn-change-pin">🔒 Change PIN</button>
   </div>
 </nav>
 
-<!-- ── Content ── -->
+<!-- Content -->
 <main class="content">
 
-<!-- ══ SETUP ══════════════════════════════════════════════════════════════ -->
+<!-- ══ SETUP ══════════════════════════════════════════════════════ -->
 <div id="panel-setup" class="panel">
 
-  <div class="info-bar">
-    <span>Flights: <strong>A 0–5 · B 6–11 · C 12–17 · D 18+</strong></span>
+  <div class="ibar">
     <span>Gross/Net: <strong>$10/player</strong></span>
     <span>Skins: <strong>$5/player ÷ 13 holes</strong></span>
     <span>POG: <strong>$1/player/hole · holes 3,4,10,15,17</strong></span>
   </div>
 
+  <!-- Running pot totals bar -->
+  <div class="pot-bar" id="pot-summary-bar">
+    <div class="pb-item"><strong id="psb-skins">$0.00</strong><span>Total skins in play</span></div>
+    <div class="pb-item"><strong id="psb-pog">$0.00</strong><span>Total POG in play</span></div>
+    <div class="pb-item" id="psb-pool-wrap"><strong id="psb-pool">$0.00</strong><span>Gross/Net pool this week</span></div>
+  </div>
 
-  <div class="grid2">
+  <div class="g2">
 
-    <!-- Tournament Details — full width strip -->
-    <div class="card span2">
+    <!-- Tournament Details -->
+    <div class="card s2">
       <h2>Tournament Details</h2>
-      <div class="card-body">
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;gap:12px;align-items:end;">
-          <div>
-            <label class="lbl" style="display:block;margin-bottom:4px;">Week #</label>
-            <input type="text" id="t-week" placeholder="e.g. 22">
+      <div class="cb">
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-items:end;">
+          <div><label class="flbl" style="display:block;margin-bottom:3px;">Week #</label><input type="text" id="t-week" placeholder="e.g. 1"></div>
+          <div><label class="flbl" style="display:block;margin-bottom:3px;">Tournament Name</label><input type="text" id="t-name" placeholder="e.g. Winter Opener"></div>
+          <div><label class="flbl" style="display:block;margin-bottom:3px;">Date</label><input type="text" id="t-date" placeholder="e.g. Oct 5, 2025"></div>
+          <div><label class="flbl" style="display:block;margin-bottom:3px;">Total Players</label><input type="number" id="t-total" value="40" min="1"></div>
+          <div><label class="flbl" style="display:block;margin-bottom:3px;">Gross/Net Buy-ins</label><input type="number" id="t-gn" value="38" min="0"></div>
+          <div><label class="flbl" style="display:block;margin-bottom:3px;">Skins Buy-ins</label><input type="number" id="t-skins" value="30" min="0"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-items:end;margin-top:10px;">
+          <div><label class="flbl" style="display:block;margin-bottom:3px;">POG Buy-ins</label><input type="number" id="t-pog" value="25" min="0"></div>
+          <div style="display:flex;align-items:center;gap:8px;padding-top:20px;">
+            <input type="checkbox" id="t-cancelled" style="width:18px;height:18px;">
+            <label class="flbl" for="t-cancelled">Rained Out / Cancelled</label>
           </div>
-          <div>
-            <label class="lbl" style="display:block;margin-bottom:4px;">Tournament Name</label>
-            <input type="text" id="t-name" placeholder="e.g. Fall Classic">
-          </div>
-          <div>
-            <label class="lbl" style="display:block;margin-bottom:4px;">Date</label>
-            <input type="text" id="t-date" placeholder="e.g. Oct 5, 2025">
-          </div>
-          <div>
-            <label class="lbl" style="display:block;margin-bottom:4px;">Total Players</label>
-            <input type="number" id="t-total" value="40" min="1">
-          </div>
-          <div>
-            <label class="lbl" style="display:block;margin-bottom:4px;">Gross/Net Buy-ins</label>
-            <input type="number" id="t-gn" value="38" min="0" id="t-gn">
-          </div>
-          <div>
-            <label class="lbl" style="display:block;margin-bottom:4px;">Skins Buy-ins</label>
-            <input type="number" id="t-skins" value="30" min="0">
+          <div style="grid-column:3/7;">
+            <label class="flbl" style="display:block;margin-bottom:3px;">Notes</label>
+            <input type="text" id="t-notes" placeholder="e.g. Shotgun start, 9 holes only">
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 5fr;gap:12px;align-items:end;margin-top:10px;">
-          <div>
-            <label class="lbl" style="display:block;margin-bottom:4px;">POG Buy-ins</label>
-            <input type="number" id="t-pog" value="25" min="0">
+        <div id="pool-summary" style="font-size:12px;color:var(--gm);line-height:2;margin-top:8px;"></div>
+      </div>
+    </div>
+
+    <!-- Flight Editor -->
+    <div class="card s2">
+      <h2>Flight Handicap Ranges <em>edit as needed</em></h2>
+      <div class="cb">
+        <div class="flight-editor">
+          <div class="fe-card">
+            <label>Flight A</label>
+            <input type="text" id="f-a-name" value="Flight A" style="margin-bottom:4px;">
+            <input type="text" id="f-a-range" value="0–5" placeholder="e.g. 0–5">
           </div>
-          <div id="pool-summary" style="font-size:12px;color:var(--green-mid);line-height:2;padding:6px 0 0 8px;"></div>
+          <div class="fe-card">
+            <label>Flight B</label>
+            <input type="text" id="f-b-name" value="Flight B" style="margin-bottom:4px;">
+            <input type="text" id="f-b-range" value="6–11" placeholder="e.g. 6–11">
+          </div>
+          <div class="fe-card">
+            <label>Flight C</label>
+            <input type="text" id="f-c-name" value="Flight C" style="margin-bottom:4px;">
+            <input type="text" id="f-c-range" value="12–17" placeholder="e.g. 12–17">
+          </div>
+          <div class="fe-card">
+            <label>Flight D</label>
+            <input type="text" id="f-d-name" value="Flight D" style="margin-bottom:4px;">
+            <input type="text" id="f-d-range" value="18+" placeholder="e.g. 18+">
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Gross Winners -->
-    <div class="card span2">
-      <h2>Gross Winners <em>top 2 per flight minimum</em></h2>
-      <div class="card-body">
+    <div class="card s2">
+      <h2>Gross Winners <em>top 2 per flight minimum — check Countback if applicable</em></h2>
+      <div class="cb">
         <table class="gt">
-          <thead><tr><th>Flt</th><th>Pl</th><th>GS ID</th><th>Player Name</th><th>Score</th><th>Prize ($)</th><th>Payout</th></tr></thead>
-          <tbody id="gross-tbody"><tr data-flight="A" data-place="1">
-          <td><span class="fb fA">Flt A</span><br><small style="color:var(--muted);font-size:9px;">0–5</small></td>
-          <td style="color:var(--muted);font-size:11px;">1st</td>
-          <td><input type="text" id="gr-gsid-A1" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="gr-name-A1" placeholder="Player name" style="width:100%;min-width:100px;"></td>
-          <td><input type="number" id="gr-score-A1" placeholder="score" style="width:58px;"></td>
-          <td><input type="number" id="gr-prize-A1" placeholder="$" style="width:58px;"></td>
-          <td><select id="gr-pref-A1" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-        </tr><tr data-flight="A" data-place="2">
-          <td></td>
-          <td style="color:var(--muted);font-size:11px;">2nd</td>
-          <td><input type="text" id="gr-gsid-A2" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="gr-name-A2" placeholder="Player name" style="width:100%;min-width:100px;"></td>
-          <td><input type="number" id="gr-score-A2" placeholder="score" style="width:58px;"></td>
-          <td><input type="number" id="gr-prize-A2" placeholder="$" style="width:58px;"></td>
-          <td><select id="gr-pref-A2" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-        </tr><tr data-flight="B" data-place="1">
-          <td><span class="fb fB">Flt B</span><br><small style="color:var(--muted);font-size:9px;">6–11</small></td>
-          <td style="color:var(--muted);font-size:11px;">1st</td>
-          <td><input type="text" id="gr-gsid-B1" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="gr-name-B1" placeholder="Player name" style="width:100%;min-width:100px;"></td>
-          <td><input type="number" id="gr-score-B1" placeholder="score" style="width:58px;"></td>
-          <td><input type="number" id="gr-prize-B1" placeholder="$" style="width:58px;"></td>
-          <td><select id="gr-pref-B1" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-        </tr><tr data-flight="B" data-place="2">
-          <td></td>
-          <td style="color:var(--muted);font-size:11px;">2nd</td>
-          <td><input type="text" id="gr-gsid-B2" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="gr-name-B2" placeholder="Player name" style="width:100%;min-width:100px;"></td>
-          <td><input type="number" id="gr-score-B2" placeholder="score" style="width:58px;"></td>
-          <td><input type="number" id="gr-prize-B2" placeholder="$" style="width:58px;"></td>
-          <td><select id="gr-pref-B2" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-        </tr><tr data-flight="C" data-place="1">
-          <td><span class="fb fC">Flt C</span><br><small style="color:var(--muted);font-size:9px;">12–17</small></td>
-          <td style="color:var(--muted);font-size:11px;">1st</td>
-          <td><input type="text" id="gr-gsid-C1" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="gr-name-C1" placeholder="Player name" style="width:100%;min-width:100px;"></td>
-          <td><input type="number" id="gr-score-C1" placeholder="score" style="width:58px;"></td>
-          <td><input type="number" id="gr-prize-C1" placeholder="$" style="width:58px;"></td>
-          <td><select id="gr-pref-C1" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-        </tr><tr data-flight="C" data-place="2">
-          <td></td>
-          <td style="color:var(--muted);font-size:11px;">2nd</td>
-          <td><input type="text" id="gr-gsid-C2" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="gr-name-C2" placeholder="Player name" style="width:100%;min-width:100px;"></td>
-          <td><input type="number" id="gr-score-C2" placeholder="score" style="width:58px;"></td>
-          <td><input type="number" id="gr-prize-C2" placeholder="$" style="width:58px;"></td>
-          <td><select id="gr-pref-C2" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-        </tr><tr data-flight="D" data-place="1">
-          <td><span class="fb fD">Flt D</span><br><small style="color:var(--muted);font-size:9px;">18+</small></td>
-          <td style="color:var(--muted);font-size:11px;">1st</td>
-          <td><input type="text" id="gr-gsid-D1" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="gr-name-D1" placeholder="Player name" style="width:100%;min-width:100px;"></td>
-          <td><input type="number" id="gr-score-D1" placeholder="score" style="width:58px;"></td>
-          <td><input type="number" id="gr-prize-D1" placeholder="$" style="width:58px;"></td>
-          <td><select id="gr-pref-D1" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-        </tr><tr data-flight="D" data-place="2">
-          <td></td>
-          <td style="color:var(--muted);font-size:11px;">2nd</td>
-          <td><input type="text" id="gr-gsid-D2" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="gr-name-D2" placeholder="Player name" style="width:100%;min-width:100px;"></td>
-          <td><input type="number" id="gr-score-D2" placeholder="score" style="width:58px;"></td>
-          <td><input type="number" id="gr-prize-D2" placeholder="$" style="width:58px;"></td>
-          <td><select id="gr-pref-D2" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-        </tr></tbody>
+          <thead><tr><th>Flight</th><th>Place</th><th>Player Name</th><th>Score</th><th>CB</th><th>Prize ($)</th><th>Payout</th></tr></thead>
+          <tbody id="gross-tbody">
+            <tr data-flight="A" data-place="1"><td><span class="fb fA" id="lbl-A">Flight A</span><br><small id="rng-A" style="color:var(--mut);font-size:9px;">0–5</small></td><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="gr-name-A1" placeholder="Player name"></td><td><input type="number" id="gr-score-A1" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-A1" title="Countback"></td><td><input type="number" id="gr-prize-A1" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-A1"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
+            <tr data-flight="A" data-place="2"><td></td><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="gr-name-A2" placeholder="Player name"></td><td><input type="number" id="gr-score-A2" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-A2" title="Countback"></td><td><input type="number" id="gr-prize-A2" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-A2"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
+            <tr data-flight="B" data-place="1"><td><span class="fb fB" id="lbl-B">Flight B</span><br><small id="rng-B" style="color:var(--mut);font-size:9px;">6–11</small></td><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="gr-name-B1" placeholder="Player name"></td><td><input type="number" id="gr-score-B1" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-B1" title="Countback"></td><td><input type="number" id="gr-prize-B1" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-B1"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
+            <tr data-flight="B" data-place="2"><td></td><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="gr-name-B2" placeholder="Player name"></td><td><input type="number" id="gr-score-B2" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-B2" title="Countback"></td><td><input type="number" id="gr-prize-B2" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-B2"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
+            <tr data-flight="C" data-place="1"><td><span class="fb fC" id="lbl-C">Flight C</span><br><small id="rng-C" style="color:var(--mut);font-size:9px;">12–17</small></td><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="gr-name-C1" placeholder="Player name"></td><td><input type="number" id="gr-score-C1" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-C1" title="Countback"></td><td><input type="number" id="gr-prize-C1" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-C1"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
+            <tr data-flight="C" data-place="2"><td></td><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="gr-name-C2" placeholder="Player name"></td><td><input type="number" id="gr-score-C2" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-C2" title="Countback"></td><td><input type="number" id="gr-prize-C2" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-C2"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
+            <tr data-flight="D" data-place="1"><td><span class="fb fD" id="lbl-D">Flight D</span><br><small id="rng-D" style="color:var(--mut);font-size:9px;">18+</small></td><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="gr-name-D1" placeholder="Player name"></td><td><input type="number" id="gr-score-D1" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-D1" title="Countback"></td><td><input type="number" id="gr-prize-D1" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-D1"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
+            <tr data-flight="D" data-place="2"><td></td><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="gr-name-D2" placeholder="Player name"></td><td><input type="number" id="gr-score-D2" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-D2" title="Countback"></td><td><input type="number" id="gr-prize-D2" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-D2"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
+          </tbody>
         </table>
-        <button data-action="add-gross" style="margin-top:8px;font-size:11px;padding:3px 9px;border:1px solid var(--green-mid);background:var(--green-light);color:var(--green-deep);border-radius:3px;cursor:pointer;">+ Add place</button>
+        <button id="btn-add-gross" style="margin-top:8px;font-size:11px;padding:4px 10px;border:1px solid var(--gm);background:var(--gl);color:var(--gd);border-radius:3px;cursor:pointer;">+ Add place</button>
       </div>
     </div>
 
     <!-- Net Winners -->
-    <div class="card span2">
-      <h2>Net Winners <em>overall — up to 15 places</em></h2>
-      <div class="card-body">
+    <div class="card s2">
+      <h2>Net Winners <em>overall — up to 15 places — CB = countback</em></h2>
+      <div class="cb">
         <table class="gt">
-          <thead><tr><th>#</th><th>GS ID</th><th>Player Name</th><th>Net</th><th>Prize ($)</th><th>Payout Pref</th>
-                     <th>#</th><th>GS ID</th><th>Player Name</th><th>Net</th><th>Prize ($)</th><th>Payout Pref</th>
-                     <th>#</th><th>GS ID</th><th>Player Name</th><th>Net</th><th>Prize ($)</th><th>Payout Pref</th></tr></thead>
-          <tbody id="net-tbody"><tr><td style="color:var(--muted);font-size:10px;width:22px;">1st</td>
-          <td><input type="text" id="ng-1" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="nn-1" placeholder="Name" style="width:100%;min-width:90px;"></td>
-          <td><input type="number" id="ns-1" placeholder="net" style="width:52px;"></td>
-          <td><input type="number" id="np-1" placeholder="$" style="width:58px;"></td>
-          <td><select id="npref-1" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td><td style="color:var(--muted);font-size:10px;width:22px;">6th</td>
-          <td><input type="text" id="ng-6" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="nn-6" placeholder="Name" style="width:100%;min-width:90px;"></td>
-          <td><input type="number" id="ns-6" placeholder="net" style="width:52px;"></td>
-          <td><input type="number" id="np-6" placeholder="$" style="width:58px;"></td>
-          <td><select id="npref-6" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td><td style="color:var(--muted);font-size:10px;width:22px;">11th</td>
-          <td><input type="text" id="ng-11" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="nn-11" placeholder="Name" style="width:100%;min-width:90px;"></td>
-          <td><input type="number" id="ns-11" placeholder="net" style="width:52px;"></td>
-          <td><input type="number" id="np-11" placeholder="$" style="width:58px;"></td>
-          <td><select id="npref-11" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr><tr><td style="color:var(--muted);font-size:10px;width:22px;">2nd</td>
-          <td><input type="text" id="ng-2" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="nn-2" placeholder="Name" style="width:100%;min-width:90px;"></td>
-          <td><input type="number" id="ns-2" placeholder="net" style="width:52px;"></td>
-          <td><input type="number" id="np-2" placeholder="$" style="width:58px;"></td>
-          <td><select id="npref-2" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td><td style="color:var(--muted);font-size:10px;width:22px;">7th</td>
-          <td><input type="text" id="ng-7" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="nn-7" placeholder="Name" style="width:100%;min-width:90px;"></td>
-          <td><input type="number" id="ns-7" placeholder="net" style="width:52px;"></td>
-          <td><input type="number" id="np-7" placeholder="$" style="width:58px;"></td>
-          <td><select id="npref-7" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td><td style="color:var(--muted);font-size:10px;width:22px;">12th</td>
-          <td><input type="text" id="ng-12" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="nn-12" placeholder="Name" style="width:100%;min-width:90px;"></td>
-          <td><input type="number" id="ns-12" placeholder="net" style="width:52px;"></td>
-          <td><input type="number" id="np-12" placeholder="$" style="width:58px;"></td>
-          <td><select id="npref-12" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr><tr><td style="color:var(--muted);font-size:10px;width:22px;">3rd</td>
-          <td><input type="text" id="ng-3" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="nn-3" placeholder="Name" style="width:100%;min-width:90px;"></td>
-          <td><input type="number" id="ns-3" placeholder="net" style="width:52px;"></td>
-          <td><input type="number" id="np-3" placeholder="$" style="width:58px;"></td>
-          <td><select id="npref-3" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td><td style="color:var(--muted);font-size:10px;width:22px;">8th</td>
-          <td><input type="text" id="ng-8" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="nn-8" placeholder="Name" style="width:100%;min-width:90px;"></td>
-          <td><input type="number" id="ns-8" placeholder="net" style="width:52px;"></td>
-          <td><input type="number" id="np-8" placeholder="$" style="width:58px;"></td>
-          <td><select id="npref-8" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td><td style="color:var(--muted);font-size:10px;width:22px;">13th</td>
-          <td><input type="text" id="ng-13" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="nn-13" placeholder="Name" style="width:100%;min-width:90px;"></td>
-          <td><input type="number" id="ns-13" placeholder="net" style="width:52px;"></td>
-          <td><input type="number" id="np-13" placeholder="$" style="width:58px;"></td>
-          <td><select id="npref-13" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr><tr><td style="color:var(--muted);font-size:10px;width:22px;">4th</td>
-          <td><input type="text" id="ng-4" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="nn-4" placeholder="Name" style="width:100%;min-width:90px;"></td>
-          <td><input type="number" id="ns-4" placeholder="net" style="width:52px;"></td>
-          <td><input type="number" id="np-4" placeholder="$" style="width:58px;"></td>
-          <td><select id="npref-4" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td><td style="color:var(--muted);font-size:10px;width:22px;">9th</td>
-          <td><input type="text" id="ng-9" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="nn-9" placeholder="Name" style="width:100%;min-width:90px;"></td>
-          <td><input type="number" id="ns-9" placeholder="net" style="width:52px;"></td>
-          <td><input type="number" id="np-9" placeholder="$" style="width:58px;"></td>
-          <td><select id="npref-9" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td><td style="color:var(--muted);font-size:10px;width:22px;">14th</td>
-          <td><input type="text" id="ng-14" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="nn-14" placeholder="Name" style="width:100%;min-width:90px;"></td>
-          <td><input type="number" id="ns-14" placeholder="net" style="width:52px;"></td>
-          <td><input type="number" id="np-14" placeholder="$" style="width:58px;"></td>
-          <td><select id="npref-14" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr><tr><td style="color:var(--muted);font-size:10px;width:22px;">5th</td>
-          <td><input type="text" id="ng-5" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="nn-5" placeholder="Name" style="width:100%;min-width:90px;"></td>
-          <td><input type="number" id="ns-5" placeholder="net" style="width:52px;"></td>
-          <td><input type="number" id="np-5" placeholder="$" style="width:58px;"></td>
-          <td><select id="npref-5" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td><td style="color:var(--muted);font-size:10px;width:22px;">10th</td>
-          <td><input type="text" id="ng-10" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="nn-10" placeholder="Name" style="width:100%;min-width:90px;"></td>
-          <td><input type="number" id="ns-10" placeholder="net" style="width:52px;"></td>
-          <td><input type="number" id="np-10" placeholder="$" style="width:58px;"></td>
-          <td><select id="npref-10" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td><td style="color:var(--muted);font-size:10px;width:22px;">15th</td>
-          <td><input type="text" id="ng-15" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="nn-15" placeholder="Name" style="width:100%;min-width:90px;"></td>
-          <td><input type="number" id="ns-15" placeholder="net" style="width:52px;"></td>
-          <td><input type="number" id="np-15" placeholder="$" style="width:58px;"></td>
-          <td><select id="npref-15" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr></tbody>
+          <thead><tr>
+            <th>#</th><th>Player</th><th>Net</th><th>CB</th><th>Prize ($)</th><th>Payout</th>
+            <th>#</th><th>Player</th><th>Net</th><th>CB</th><th>Prize ($)</th><th>Payout</th>
+            <th>#</th><th>Player</th><th>Net</th><th>CB</th><th>Prize ($)</th><th>Payout</th>
+          </tr></thead>
+          <tbody id="net-tbody"></tbody>
         </table>
+      </div>
+    </div>
+
+    <!-- Draw Winners -->
+    <div class="card">
+      <h2>Draw Winners</h2>
+      <div class="cb">
+        <div style="margin-bottom:10px;">
+          <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;">🥩 Meat Draw</div>
+          <table class="gt">
+            <thead><tr><th>Draw #</th><th>Winner</th><th>Prize</th><th>Payout</th></tr></thead>
+            <tbody>
+              <tr><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="meat-1" placeholder="Player name"></td><td><input type="text" id="meat-prize-1" placeholder="e.g. Roast"></td><td><select id="meat-pref-1"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
+              <tr><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="meat-2" placeholder="Player name"></td><td><input type="text" id="meat-prize-2" placeholder="e.g. Steaks"></td><td><select id="meat-pref-2"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
+              <tr><td style="color:var(--mut);font-size:11px;">3rd</td><td><input type="text" id="meat-3" placeholder="Player name"></td><td><input type="text" id="meat-prize-3" placeholder="e.g. Sausages"></td><td><select id="meat-pref-3"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;">💵 50/50 Draw</div>
+          <table class="gt">
+            <thead><tr><th>Winner</th><th>Amount ($)</th><th>Payout</th></tr></thead>
+            <tbody>
+              <tr><td><input type="text" id="ff-winner" placeholder="Player name"></td><td><input type="number" id="ff-amount" placeholder="$" style="width:80px;"></td><td><select id="ff-pref"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
     <!-- Skins -->
     <div class="card">
       <h2>Skins <em>holes 1,2,5–9,11–14,16,18 · lowest net</em></h2>
-      <div class="card-body">
+      <div class="cb">
         <table class="gt">
-          <thead><tr><th>Hole</th><th>GS ID</th><th>Winner</th><th>Net</th><th class="th-r">Running Pot</th><th>Paid?</th><th>Payout</th></tr></thead>
-          <tbody id="skins-tbody"><tr id="sk-row-1">
-      <td style="font-weight:600;">1</td>
-      <td><input type="text" id="sk-gsid-1" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="sk-name-1" placeholder="Winner or blank" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="sk-score-1" placeholder="net" style="width:52px;"></td>
-      <td class="td-r"><span id="sk-pot-display-1" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="sk-paid-1"></td>
-      <td><select id="sk-pref-1" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="sk-row-2">
-      <td style="font-weight:600;">2</td>
-      <td><input type="text" id="sk-gsid-2" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="sk-name-2" placeholder="Winner or blank" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="sk-score-2" placeholder="net" style="width:52px;"></td>
-      <td class="td-r"><span id="sk-pot-display-2" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="sk-paid-2"></td>
-      <td><select id="sk-pref-2" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="sk-row-5">
-      <td style="font-weight:600;">5</td>
-      <td><input type="text" id="sk-gsid-5" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="sk-name-5" placeholder="Winner or blank" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="sk-score-5" placeholder="net" style="width:52px;"></td>
-      <td class="td-r"><span id="sk-pot-display-5" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="sk-paid-5"></td>
-      <td><select id="sk-pref-5" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="sk-row-6">
-      <td style="font-weight:600;">6</td>
-      <td><input type="text" id="sk-gsid-6" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="sk-name-6" placeholder="Winner or blank" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="sk-score-6" placeholder="net" style="width:52px;"></td>
-      <td class="td-r"><span id="sk-pot-display-6" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="sk-paid-6"></td>
-      <td><select id="sk-pref-6" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="sk-row-7">
-      <td style="font-weight:600;">7</td>
-      <td><input type="text" id="sk-gsid-7" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="sk-name-7" placeholder="Winner or blank" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="sk-score-7" placeholder="net" style="width:52px;"></td>
-      <td class="td-r"><span id="sk-pot-display-7" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="sk-paid-7"></td>
-      <td><select id="sk-pref-7" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="sk-row-8">
-      <td style="font-weight:600;">8</td>
-      <td><input type="text" id="sk-gsid-8" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="sk-name-8" placeholder="Winner or blank" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="sk-score-8" placeholder="net" style="width:52px;"></td>
-      <td class="td-r"><span id="sk-pot-display-8" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="sk-paid-8"></td>
-      <td><select id="sk-pref-8" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="sk-row-9">
-      <td style="font-weight:600;">9</td>
-      <td><input type="text" id="sk-gsid-9" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="sk-name-9" placeholder="Winner or blank" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="sk-score-9" placeholder="net" style="width:52px;"></td>
-      <td class="td-r"><span id="sk-pot-display-9" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="sk-paid-9"></td>
-      <td><select id="sk-pref-9" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="sk-row-11">
-      <td style="font-weight:600;">11</td>
-      <td><input type="text" id="sk-gsid-11" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="sk-name-11" placeholder="Winner or blank" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="sk-score-11" placeholder="net" style="width:52px;"></td>
-      <td class="td-r"><span id="sk-pot-display-11" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="sk-paid-11"></td>
-      <td><select id="sk-pref-11" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="sk-row-12">
-      <td style="font-weight:600;">12</td>
-      <td><input type="text" id="sk-gsid-12" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="sk-name-12" placeholder="Winner or blank" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="sk-score-12" placeholder="net" style="width:52px;"></td>
-      <td class="td-r"><span id="sk-pot-display-12" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="sk-paid-12"></td>
-      <td><select id="sk-pref-12" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="sk-row-13">
-      <td style="font-weight:600;">13</td>
-      <td><input type="text" id="sk-gsid-13" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="sk-name-13" placeholder="Winner or blank" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="sk-score-13" placeholder="net" style="width:52px;"></td>
-      <td class="td-r"><span id="sk-pot-display-13" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="sk-paid-13"></td>
-      <td><select id="sk-pref-13" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="sk-row-14">
-      <td style="font-weight:600;">14</td>
-      <td><input type="text" id="sk-gsid-14" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="sk-name-14" placeholder="Winner or blank" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="sk-score-14" placeholder="net" style="width:52px;"></td>
-      <td class="td-r"><span id="sk-pot-display-14" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="sk-paid-14"></td>
-      <td><select id="sk-pref-14" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="sk-row-16">
-      <td style="font-weight:600;">16</td>
-      <td><input type="text" id="sk-gsid-16" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="sk-name-16" placeholder="Winner or blank" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="sk-score-16" placeholder="net" style="width:52px;"></td>
-      <td class="td-r"><span id="sk-pot-display-16" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="sk-paid-16"></td>
-      <td><select id="sk-pref-16" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="sk-row-18">
-      <td style="font-weight:600;">18</td>
-      <td><input type="text" id="sk-gsid-18" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="sk-name-18" placeholder="Winner or blank" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="sk-score-18" placeholder="net" style="width:52px;"></td>
-      <td class="td-r"><span id="sk-pot-display-18" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="sk-paid-18"></td>
-      <td><select id="sk-pref-18" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr></tbody>
+          <thead><tr><th>Hole</th><th>Winner</th><th>Net</th><th class="thr">Prev Pot</th><th class="thr">+This Wk</th><th class="thr">Total Pot</th><th>Paid?</th><th>Payout</th></tr></thead>
+          <tbody id="skins-tbody"></tbody>
         </table>
       </div>
     </div>
@@ -643,115 +410,21 @@
     <!-- POG -->
     <div class="card">
       <h2>Pots of Gold <em>holes 3,4,10,15,17 · unique gross birdie</em></h2>
-      <div class="card-body">
+      <div class="cb">
         <table class="gt">
-          <thead><tr><th>Hole</th><th>GS ID</th><th>Winner</th><th>Gross</th><th class="th-r">Running Pot</th><th>Paid?</th><th>Payout</th></tr></thead>
-          <tbody id="pog-tbody"><tr id="pog-row-3">
-      <td style="font-weight:600;"><span class="pog-dot"></span>3</td>
-      <td><input type="text" id="pog-gsid-3" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="pog-name-3" placeholder="Unique birdie winner" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="pog-score-3" placeholder="gross" style="width:52px;"></td>
-      <td class="td-r"><span id="pog-pot-display-3" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="pog-paid-3"></td>
-      <td><select id="pog-pref-3" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="pog-row-4">
-      <td style="font-weight:600;"><span class="pog-dot"></span>4</td>
-      <td><input type="text" id="pog-gsid-4" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="pog-name-4" placeholder="Unique birdie winner" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="pog-score-4" placeholder="gross" style="width:52px;"></td>
-      <td class="td-r"><span id="pog-pot-display-4" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="pog-paid-4"></td>
-      <td><select id="pog-pref-4" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="pog-row-10">
-      <td style="font-weight:600;"><span class="pog-dot"></span>10</td>
-      <td><input type="text" id="pog-gsid-10" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="pog-name-10" placeholder="Unique birdie winner" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="pog-score-10" placeholder="gross" style="width:52px;"></td>
-      <td class="td-r"><span id="pog-pot-display-10" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="pog-paid-10"></td>
-      <td><select id="pog-pref-10" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="pog-row-15">
-      <td style="font-weight:600;"><span class="pog-dot"></span>15</td>
-      <td><input type="text" id="pog-gsid-15" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="pog-name-15" placeholder="Unique birdie winner" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="pog-score-15" placeholder="gross" style="width:52px;"></td>
-      <td class="td-r"><span id="pog-pot-display-15" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="pog-paid-15"></td>
-      <td><select id="pog-pref-15" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr><tr id="pog-row-17">
-      <td style="font-weight:600;"><span class="pog-dot"></span>17</td>
-      <td><input type="text" id="pog-gsid-17" placeholder="GS ID" style="width:70px;"></td>
-      <td><input type="text" id="pog-name-17" placeholder="Unique birdie winner" style="width:100%;min-width:90px;"></td>
-      <td><input type="number" id="pog-score-17" placeholder="gross" style="width:52px;"></td>
-      <td class="td-r"><span id="pog-pot-display-17" class="pot-display">—</span></td>
-      <td class="td-c"><input type="checkbox" id="pog-paid-17"></td>
-      <td><select id="pog-pref-17" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td>
-    </tr></tbody>
+          <thead><tr><th>Hole</th><th>Winner</th><th>Gross</th><th class="thr">Prev Pot</th><th class="thr">+This Wk</th><th class="thr">Total Pot</th><th>Paid?</th><th>Payout</th></tr></thead>
+          <tbody id="pog-tbody"></tbody>
         </table>
       </div>
     </div>
 
     <!-- Skill Prizes -->
-    <div class="card span2">
-      <h2>Skill Prizes <em>one per hole — sponsor-provided</em></h2>
-      <div class="card-body">
+    <div class="card s2">
+      <h2>Skill Prizes <em>one per hole — sponsor provided</em></h2>
+      <div class="cb">
         <table class="gt">
-          <thead><tr><th>H</th><th>GS ID</th><th>Winner</th><th>Prize</th><th>H</th><th>GS ID</th><th>Winner</th><th>Prize</th><th>H</th><th>GS ID</th><th>Winner</th><th>Prize</th></tr></thead>
-          <tbody id="skill-tbody"><tr><td style="font-weight:600;width:18px;">1</td>
-          <td><input type="text" id="sp-gsid-1" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-1" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-1" placeholder="Prize description" style="width:100%;min-width:120px;"></td><td style="font-weight:600;width:18px;">2</td>
-          <td><input type="text" id="sp-gsid-2" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-2" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-2" placeholder="Prize description" style="width:100%;min-width:120px;"></td><td style="font-weight:600;width:18px;">3</td>
-          <td><input type="text" id="sp-gsid-3" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-3" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-3" placeholder="Prize description" style="width:100%;min-width:120px;"></td></tr><tr><td style="font-weight:600;width:18px;">4</td>
-          <td><input type="text" id="sp-gsid-4" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-4" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-4" placeholder="Prize description" style="width:100%;min-width:120px;"></td><td style="font-weight:600;width:18px;">5</td>
-          <td><input type="text" id="sp-gsid-5" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-5" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-5" placeholder="Prize description" style="width:100%;min-width:120px;"></td><td style="font-weight:600;width:18px;">6</td>
-          <td><input type="text" id="sp-gsid-6" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-6" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-6" placeholder="Prize description" style="width:100%;min-width:120px;"></td></tr><tr><td style="font-weight:600;width:18px;">7</td>
-          <td><input type="text" id="sp-gsid-7" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-7" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-7" placeholder="Prize description" style="width:100%;min-width:120px;"></td><td style="font-weight:600;width:18px;">8</td>
-          <td><input type="text" id="sp-gsid-8" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-8" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-8" placeholder="Prize description" style="width:100%;min-width:120px;"></td><td style="font-weight:600;width:18px;">9</td>
-          <td><input type="text" id="sp-gsid-9" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-9" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-9" placeholder="Prize description" style="width:100%;min-width:120px;"></td></tr><tr><td style="font-weight:600;width:18px;">10</td>
-          <td><input type="text" id="sp-gsid-10" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-10" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-10" placeholder="Prize description" style="width:100%;min-width:120px;"></td><td style="font-weight:600;width:18px;">11</td>
-          <td><input type="text" id="sp-gsid-11" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-11" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-11" placeholder="Prize description" style="width:100%;min-width:120px;"></td><td style="font-weight:600;width:18px;">12</td>
-          <td><input type="text" id="sp-gsid-12" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-12" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-12" placeholder="Prize description" style="width:100%;min-width:120px;"></td></tr><tr><td style="font-weight:600;width:18px;">13</td>
-          <td><input type="text" id="sp-gsid-13" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-13" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-13" placeholder="Prize description" style="width:100%;min-width:120px;"></td><td style="font-weight:600;width:18px;">14</td>
-          <td><input type="text" id="sp-gsid-14" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-14" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-14" placeholder="Prize description" style="width:100%;min-width:120px;"></td><td style="font-weight:600;width:18px;">15</td>
-          <td><input type="text" id="sp-gsid-15" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-15" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-15" placeholder="Prize description" style="width:100%;min-width:120px;"></td></tr><tr><td style="font-weight:600;width:18px;">16</td>
-          <td><input type="text" id="sp-gsid-16" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-16" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-16" placeholder="Prize description" style="width:100%;min-width:120px;"></td><td style="font-weight:600;width:18px;">17</td>
-          <td><input type="text" id="sp-gsid-17" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-17" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-17" placeholder="Prize description" style="width:100%;min-width:120px;"></td><td style="font-weight:600;width:18px;">18</td>
-          <td><input type="text" id="sp-gsid-18" placeholder="GS ID" style="width:70px;"></td>
-          <td><input type="text" id="sp-name-18" placeholder="Winner" style="width:100%;min-width:80px;"></td>
-          <td><input type="text" id="sp-prize-18" placeholder="Prize description" style="width:100%;min-width:120px;"></td></tr></tbody>
+          <thead><tr><th>H</th><th>Winner</th><th>Prize</th><th>H</th><th>Winner</th><th>Prize</th><th>H</th><th>Winner</th><th>Prize</th></tr></thead>
+          <tbody id="skill-tbody"></tbody>
         </table>
       </div>
     </div>
@@ -759,188 +432,260 @@
   </div>
 </div><!-- /panel-setup -->
 
-
-
-<!-- ══ PAYOUT SHEET ══════════════════════════════════════════════════════════ -->
-<div id="panel-payout" class="payout-wrap hidden">
-  <div class="sheet" id="payout-sheet"></div>
+<!-- ══ PAYOUT ════════════════════════════════════════════════════ -->
+<div id="panel-payout" class="panel hidden">
+  <div class="pw"><div class="sheet" id="payout-sheet"></div></div>
 </div>
 
-<!-- ══ SEASON LEADERBOARD ═══════════════════════════════════════════════════ -->
+<!-- ══ SEASON ════════════════════════════════════════════════════ -->
 <div id="panel-season" class="panel hidden">
-  <div class="card span2">
-    <h2>Season Money Leaders <em id="season-subtitle"></em></h2>
-    <div class="card-body">
-      <div class="lb-controls">
-        <input class="lb-search" type="text" placeholder="Search player name or GS ID…" data-action="filter-lb-search">
-        <select class="lb-filter" data-action="filter-lb-pref">
-          <option value="">All payout types</option>
-          <option value="Bar">Bar credit</option>
-          <option value="Pro Shop">Pro Shop credit</option>
-          <option value="Cash">Cash</option>
-        </select>
-        <button class="btn btn-outline" style="font-size:12px;padding:5px 12px;" data-action="refresh-lb">↻ Refresh</button>
-        <button class="btn btn-outline" style="font-size:12px;padding:5px 12px;border-color:#0D47A1;color:#0D47A1;" data-action="export-season">⬇ Export Season CSV</button>
-        <button class="btn btn-danger" style="font-size:12px;padding:5px 12px;" data-action="reset-season">Reset season</button>
+  <div class="card">
+    <h2>Season Money Leaders <em id="season-sub"></em></h2>
+    <div class="cb">
+      <div class="lbc">
+        <input class="lbs" type="text" id="lb-search" placeholder="Search player…">
+        <select class="lbf" id="lb-filter"><option value="">All payout types</option><option>Bar</option><option>Pro Shop</option><option>Cash</option></select>
+        <button class="btn btn-o" id="btn-refresh-lb">↻ Refresh</button>
+        <button class="btn btn-o" id="btn-export-season" style="border-color:#0D47A1;color:#0D47A1;">⬇ Export CSV</button>
+        <button class="btn btn-d" id="btn-reset-season">Reset Season</button>
       </div>
-      <table class="lb-table" id="lb-table">
-        <thead><tr>
-          <th style="width:40px;">Rank</th>
-          <th>GS ID</th>
-          <th>Player Name</th>
-          <th class="r">Gross</th>
-          <th class="r">Net</th>
-          <th class="r">Skins</th>
-          <th class="r">POG</th>
-          <th class="r">Skill</th>
-          <th class="r">Season Total</th>
-          <th>Payout Pref</th>
-          <th>Weeks Won</th>
-        </tr></thead>
-        <tbody id="lb-tbody"><tr><td colspan="11" style="color:var(--muted);padding:12px;">Loading…</td></tr></tbody>
+      <table class="lb-table">
+        <thead><tr><th>Rank</th><th>Player</th><th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th><th class="r">Draw</th><th class="r">Total</th><th>Payout</th><th>Weeks</th></tr></thead>
+        <tbody id="lb-tbody"><tr><td colspan="10" style="color:var(--mut);padding:12px;">No data yet.</td></tr></tbody>
       </table>
     </div>
   </div>
 </div>
 
-<!-- ══ POT HISTORY ═══════════════════════════════════════════════════════════ -->
+<!-- ══ POTS ══════════════════════════════════════════════════════ -->
 <div id="panel-pots" class="panel hidden">
-  <div class="grid2">
+  <div class="g2">
     <div class="card">
       <h2>Skins — Running Pot by Hole</h2>
-      <div class="card-body"><table class="gt"><thead><tr><th>Hole</th><th class="th-r">Current Pot</th><th>Last Updated</th></tr></thead><tbody id="hist-skins"></tbody></table></div>
+      <div class="cb"><table class="gt"><thead><tr><th>Hole</th><th class="thr">Prev Balance</th><th class="thr">+This Week</th><th class="thr">Running Total</th><th>Updated</th></tr></thead><tbody id="hist-skins"></tbody></table></div>
     </div>
     <div class="card">
       <h2>Pots of Gold — Running Pot by Hole</h2>
-      <div class="card-body"><table class="gt"><thead><tr><th>Hole</th><th class="th-r">Current Pot</th><th>Last Updated</th></tr></thead><tbody id="hist-pog"></tbody></table></div>
+      <div class="cb"><table class="gt"><thead><tr><th>Hole</th><th class="thr">Prev Balance</th><th class="thr">+This Week</th><th class="thr">Running Total</th><th>Updated</th></tr></thead><tbody id="hist-pog"></tbody></table></div>
     </div>
-    <div class="card span2">
+    <div class="card s2">
       <h2>Recent Weeks</h2>
-      <div class="card-body">
-        <div style="margin-bottom:10px;display:flex;gap:8px;flex-wrap:wrap;">
-          <button class="btn btn-outline" style="font-size:12px;padding:5px 12px;border-color:#0D47A1;color:#0D47A1;" data-action="export-pots">⬇ Export Pot Balances CSV</button>
-          <button class="btn btn-outline" style="font-size:12px;padding:5px 12px;border-color:#0D47A1;color:#0D47A1;" data-action="export-weeks">⬇ Export Week History CSV</button>
+      <div class="cb">
+        <div style="margin-bottom:8px;display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn btn-o" id="btn-export-pots" style="border-color:#0D47A1;color:#0D47A1;">⬇ Export Pot Balances</button>
+          <button class="btn btn-o" id="btn-export-weeks" style="border-color:#0D47A1;color:#0D47A1;">⬇ Export Week History</button>
         </div>
-        <div class="history-list" id="hist-weeks"></div>
+        <div class="hlist" id="hist-weeks"></div>
       </div>
     </div>
   </div>
 </div>
 
-</main><!-- /content -->
-</div><!-- /app-shell -->
+</main>
+</div><!-- /shell -->
 
 <script>
 // ── Constants ─────────────────────────────────────────────────────────────────
-const FLIGHTS     = [{id:'A',range:'0–5'},{id:'B',range:'6–11'},{id:'C',range:'12–17'},{id:'D',range:'18+'}];
 const SKINS_HOLES = [1,2,5,6,7,8,9,11,12,13,14,16,18];
 const POG_HOLES   = [3,4,10,15,17];
 const PREF_OPTS   = ['Bar','Pro Shop','Cash'];
+const FLIGHTS     = ['A','B','C','D'];
 
-// ── State (localStorage-backed) ───────────────────────────────────────────────
-let skinsPots = {};
-let pogPots   = {};
-let seasonData = {};
-let weeksLog   = [];
-
+// ── localStorage helpers ──────────────────────────────────────────────────────
 const LS = {
-  get: (k, def={}) => { try { return JSON.parse(localStorage.getItem(k)) ?? def; } catch(e){ return def; } },
-  set: (k, v)      => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+  get:(k,d={})=>{ try{ const v=localStorage.getItem(k); return v!=null?JSON.parse(v):d; }catch(e){return d;} },
+  set:(k,v)=>{ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
 };
 
-function initDB() {
-  // Load all persisted data from localStorage
-  SKINS_HOLES.forEach(h => {
-    skinsPots[h] = LS.get(`skins_${h}`, {pot:0, updatedAt:null});
-    refreshSkinsPotDisplay(h);
-  });
-  POG_HOLES.forEach(h => {
-    pogPots[h] = LS.get(`pog_${h}`, {pot:0, updatedAt:null});
-    refreshPOGPotDisplay(h);
-  });
-  seasonData = LS.get('season', {});
-  weeksLog   = LS.get('weeks', []);
-  renderWeeksHistory(weeksLog.slice().reverse().slice(0,20));
-  renderLeaderboard(Object.entries(seasonData).map(([id,v])=>({id,...v})));
-  setDbStatus(true, 'Saved on this device (localStorage)');
-  refreshHistPanel();
-}
+// ── State ─────────────────────────────────────────────────────────────────────
+let skinsPots={}, pogPots={}, seasonData={}, weeksLog=[];
 
-function saveSkinsHole(h) {
-  LS.set(`skins_${h}`, skinsPots[h]);
+function loadState(){
+  SKINS_HOLES.forEach(h=>{ skinsPots[h]=LS.get(`sk_${h}`,{pot:0,updatedAt:null}); });
+  POG_HOLES.forEach(h=>{ pogPots[h]=LS.get(`pg_${h}`,{pot:0,updatedAt:null}); });
+  seasonData=LS.get('season',{});
+  weeksLog=LS.get('weeks',[]);
 }
-function savePOGHole(h) {
-  LS.set(`pog_${h}`, pogPots[h]);
-}
-function saveSeason() {
-  LS.set('season', seasonData);
-}
-function saveWeek(entry) {
-  weeksLog.push(entry);
-  LS.set('weeks', weeksLog);
-  renderWeeksHistory(weeksLog.slice().reverse().slice(0,20));
-}
-
-function setDbStatus(live,msg){
-  document.getElementById('db-dot').className='dot'+(live?' live':'');
-  document.getElementById('db-msg').textContent=msg;
-}
+function saveSkinsHole(h){ LS.set(`sk_${h}`,skinsPots[h]); }
+function savePOGHole(h){ LS.set(`pg_${h}`,pogPots[h]); }
+function saveSeason(){ LS.set('season',seasonData); }
+function saveWeek(w){ weeksLog.push(w); LS.set('weeks',weeksLog); }
 
 // ── Pool calc ─────────────────────────────────────────────────────────────────
+const skPerHole=()=>(parseFloat(document.getElementById('t-skins').value)||0)*5/13;
+const pgPerHole=()=>parseFloat(document.getElementById('t-pog').value)||0;
+
 function recalcPools(){
   const gn=parseFloat(document.getElementById('t-gn').value)||0;
   const sk=parseFloat(document.getElementById('t-skins').value)||0;
   const pg=parseFloat(document.getElementById('t-pog').value)||0;
-  const skPerHole=sk>0?(sk*5/13).toFixed(2):'0.00';
   document.getElementById('pool-summary').innerHTML=
     `Gross/Net pool: <strong>$${(gn*10).toFixed(0)}</strong> &nbsp;·&nbsp; `+
-    `Skins pool: <strong>$${(sk*5).toFixed(0)}</strong> ($${skPerHole}/hole) &nbsp;·&nbsp; `+
+    `Skins pool: <strong>$${(sk*5).toFixed(0)}</strong> ($${(sk>0?sk*5/13:0).toFixed(2)}/hole) &nbsp;·&nbsp; `+
     `POG pool: <strong>$${(pg*5).toFixed(0)}</strong> ($${pg}/hole)`;
-  SKINS_HOLES.forEach(h=>refreshSkinsPotDisplay(h));
-  POG_HOLES.forEach(h=>refreshPOGPotDisplay(h));
+  updatePotBar();
+  refreshSkinsPotDisplayAll();
+  refreshPOGPotDisplayAll();
 }
-const weeklySkinsPerHole = ()=>(parseFloat(document.getElementById('t-skins').value)||0)*5/13;
-const weeklyPOGPerHole   = ()=> parseFloat(document.getElementById('t-pog').value)||0;
 
-// ── Pref select helper ────────────────────────────────────────────────────────
-function prefSelect(id){
-  return `<select id="${id}" style="font-size:13px;padding:6px 4px;width:100%;min-width:80px;">
-    ${PREF_OPTS.map(o=>`<option>${o}</option>`).join('')}
-  </select>`;
+function updatePotBar(){
+  const skTotal=SKINS_HOLES.reduce((s,h)=>(skinsPots[h]?.pot||0)+skPerHole()+s,0);
+  const pgTotal=POG_HOLES.reduce((s,h)=>(pogPots[h]?.pot||0)+pgPerHole()+s,0);
+  const gn=parseFloat(document.getElementById('t-gn').value)||0;
+  document.getElementById('psb-skins').textContent='$'+skTotal.toFixed(2);
+  document.getElementById('psb-pog').textContent='$'+pgTotal.toFixed(2);
+  document.getElementById('psb-pool').textContent='$'+(gn*10).toFixed(0);
 }
-function getVal(id){ const el=document.getElementById(id); return el?el.value:''; }
 
-// ── Build UI ──────────────────────────────────────────────────────────────────
+// ── Flight label refresh ──────────────────────────────────────────────────────
+function refreshFlightLabels(){
+  FLIGHTS.forEach(f=>{
+    const name=document.getElementById(`f-${f.toLowerCase()}-name`)?.value||`Flight ${f}`;
+    const range=document.getElementById(`f-${f.toLowerCase()}-range`)?.value||'';
+    const lbl=document.getElementById(`lbl-${f}`);
+    const rng=document.getElementById(`rng-${f}`);
+    if(lbl) lbl.textContent=name;
+    if(rng) rng.textContent=range;
+  });
+}
+
+// ── Build net tbody ───────────────────────────────────────────────────────────
+function buildNet(){
+  const tbody=document.getElementById('net-tbody');
+  const psel=id=>`<select id="${id}">${PREF_OPTS.map(o=>`<option>${o}</option>`).join('')}</select>`;
+  for(let r=0;r<5;r++){
+    const tr=document.createElement('tr');
+    let html='';
+    for(let c=0;c<3;c++){
+      const p=r+c*5+1;
+      const sfx=p===1?'st':p===2?'nd':p===3?'rd':'th';
+      html+=`<td style="color:var(--mut);font-size:10px;width:22px;">${p}${sfx}</td>
+        <td><input type="text" id="nn-${p}" placeholder="Name"></td>
+        <td><input type="number" id="ns-${p}" placeholder="net" style="width:52px;"></td>
+        <td class="tdc"><input type="checkbox" id="nc-${p}" title="Countback"></td>
+        <td><input type="number" id="np-${p}" placeholder="$" style="width:58px;"></td>
+        <td>${psel(`npref-${p}`)}</td>`;
+    }
+    tr.innerHTML=html; tbody.appendChild(tr);
+  }
+}
+
+// ── Build skins tbody ─────────────────────────────────────────────────────────
+function buildSkins(){
+  const tbody=document.getElementById('skins-tbody');
+  const psel=id=>`<select id="${id}">${PREF_OPTS.map(o=>`<option>${o}</option>`).join('')}</select>`;
+  SKINS_HOLES.forEach(h=>{
+    const tr=document.createElement('tr'); tr.id=`sk-row-${h}`;
+    tr.innerHTML=`
+      <td style="font-weight:600;">${h}</td>
+      <td><input type="text" id="sk-name-${h}" placeholder="Winner or blank"></td>
+      <td><input type="number" id="sk-score-${h}" placeholder="net" style="width:52px;"></td>
+      <td class="tdr"><span id="sk-prev-${h}" style="color:var(--mut);font-size:12px;">$0.00</span></td>
+      <td class="tdr"><span id="sk-add-${h}" style="color:var(--gm);font-size:12px;">+$0.00</span></td>
+      <td class="tdr"><span id="sk-pot-${h}" class="pot-display">$0.00</span></td>
+      <td class="tdc"><input type="checkbox" id="sk-paid-${h}"></td>
+      <td>${psel(`sk-pref-${h}`)}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+// ── Build POG tbody ───────────────────────────────────────────────────────────
+function buildPOG(){
+  const tbody=document.getElementById('pog-tbody');
+  const psel=id=>`<select id="${id}">${PREF_OPTS.map(o=>`<option>${o}</option>`).join('')}</select>`;
+  POG_HOLES.forEach(h=>{
+    const tr=document.createElement('tr'); tr.id=`pog-row-${h}`;
+    tr.innerHTML=`
+      <td style="font-weight:600;"><span class="pog-dot"></span>${h}</td>
+      <td><input type="text" id="pog-name-${h}" placeholder="Unique birdie winner"></td>
+      <td><input type="number" id="pog-score-${h}" placeholder="gross" style="width:52px;"></td>
+      <td class="tdr"><span id="pog-prev-${h}" style="color:var(--mut);font-size:12px;">$0.00</span></td>
+      <td class="tdr"><span id="pog-add-${h}" style="color:var(--gm);font-size:12px;">+$0.00</span></td>
+      <td class="tdr"><span id="pog-pot-${h}" class="pot-display">$0.00</span></td>
+      <td class="tdc"><input type="checkbox" id="pog-paid-${h}"></td>
+      <td>${psel(`pog-pref-${h}`)}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+// ── Build skill tbody ─────────────────────────────────────────────────────────
+function buildSkill(){
+  const tbody=document.getElementById('skill-tbody');
+  for(let r=0;r<6;r++){
+    const tr=document.createElement('tr'); let html='';
+    for(let c=0;c<3;c++){
+      const h=r*3+c+1;
+      html+=`<td style="font-weight:600;width:18px;">${h}</td>
+        <td><input type="text" id="sp-name-${h}" placeholder="Winner"></td>
+        <td><input type="text" id="sp-prize-${h}" placeholder="Prize description"></td>`;
+    }
+    tr.innerHTML=html; tbody.appendChild(tr);
+  }
+}
+
+// ── Add gross row ─────────────────────────────────────────────────────────────
 function addGrossRow(){
+  const psel=`<select>${PREF_OPTS.map(o=>`<option>${o}</option>`).join('')}</select>`;
   const tr=document.createElement('tr');
-  const uid=Date.now();
   tr.innerHTML=`
-    <td><select style="font-size:11px;padding:2px;">${FLIGHTS.map(f=>`<option value="${f.id}">Flt ${f.id}</option>`).join('')}</select></td>
-    <td><input type="number" placeholder="#" style="width:36px;"></td>
-    <td><input type="text" placeholder="GS ID" style="width:70px;"></td>
-    <td><input type="text" placeholder="Player name" style="width:100%;min-width:100px;"></td>
-    <td><input type="number" placeholder="score" style="width:50px;"></td>
-    <td><input type="number" placeholder="$" style="width:52px;"></td>
-    <td>${prefSelect(`gr-pref-dyn-${uid}`)}</td>`;
+    <td><select>${FLIGHTS.map(f=>`<option value="${f}">Flt ${f}</option>`).join('')}</select></td>
+    <td><input type="number" placeholder="#" style="width:40px;"></td>
+    <td><input type="text" placeholder="Player name"></td>
+    <td><input type="number" placeholder="score" style="width:60px;"></td>
+    <td class="tdc"><input type="checkbox" title="Countback"></td>
+    <td><input type="number" placeholder="$" style="width:60px;"></td>
+    <td>${psel}</td>`;
   document.getElementById('gross-tbody').appendChild(tr);
 }
 
-// ── Pot displays ──────────────────────────────────────────────────────────────
+// ── Pot display refresh ───────────────────────────────────────────────────────
+function refreshSkinsPotDisplayAll(){ SKINS_HOLES.forEach(refreshSkinsPotDisplay); updatePotBar(); }
+function refreshPOGPotDisplayAll(){ POG_HOLES.forEach(refreshPOGPotDisplay); updatePotBar(); }
+
 function refreshSkinsPotDisplay(h){
-  const el=document.getElementById(`sk-pot-display-${h}`); if(!el)return;
   const stored=(skinsPots[h]?.pot)||0;
-  const total=stored+weeklySkinsPerHole();
-  el.textContent=`$${total.toFixed(2)}`;
+  const weekly=skPerHole();
+  const total=stored+weekly;
+  const ep=document.getElementById(`sk-prev-${h}`); if(ep) ep.textContent='$'+stored.toFixed(2);
+  const ea=document.getElementById(`sk-add-${h}`);  if(ea) ea.textContent='+$'+weekly.toFixed(2);
+  const et=document.getElementById(`sk-pot-${h}`);  if(et) et.textContent='$'+total.toFixed(2);
   const row=document.getElementById(`sk-row-${h}`);
-  if(row) row.style.background=stored>0?'var(--carry-bg)':'';
+  if(row) row.style.background=stored>0?'var(--carry)':'';
 }
 function refreshPOGPotDisplay(h){
-  const el=document.getElementById(`pog-pot-display-${h}`); if(!el)return;
   const stored=(pogPots[h]?.pot)||0;
-  const total=stored+weeklyPOGPerHole();
-  el.textContent=`$${total.toFixed(2)}`;
+  const weekly=pgPerHole();
+  const total=stored+weekly;
+  const ep=document.getElementById(`pog-prev-${h}`); if(ep) ep.textContent='$'+stored.toFixed(2);
+  const ea=document.getElementById(`pog-add-${h}`);  if(ea) ea.textContent='+$'+weekly.toFixed(2);
+  const et=document.getElementById(`pog-pot-${h}`);  if(et) et.textContent='$'+total.toFixed(2);
   const row=document.getElementById(`pog-row-${h}`);
-  if(row) row.style.background=stored>0?'var(--carry-bg)':'';
+  if(row) row.style.background=stored>0?'var(--carry)':'';
+}
+
+// ── Pot history panel ─────────────────────────────────────────────────────────
+function refreshHistPanel(){
+  const sk=document.getElementById('hist-skins');
+  if(sk) sk.innerHTML=SKINS_HOLES.map(h=>{
+    const d=skinsPots[h]||{pot:0,updatedAt:null};
+    const w=skPerHole();
+    return `<tr><td>${h}</td><td class="tdr" style="color:var(--mut);">$${(d.pot||0).toFixed(2)}</td><td class="tdr" style="color:var(--gm);">+$${w.toFixed(2)}</td><td class="tdr pot-display">$${((d.pot||0)+w).toFixed(2)}</td><td style="color:var(--mut);font-size:11px;">${d.updatedAt?new Date(d.updatedAt).toLocaleDateString():'—'}</td></tr>`;
+  }).join('');
+  const pg=document.getElementById('hist-pog');
+  if(pg) pg.innerHTML=POG_HOLES.map(h=>{
+    const d=pogPots[h]||{pot:0,updatedAt:null};
+    const w=pgPerHole();
+    return `<tr><td><span class="pog-dot"></span>${h}</td><td class="tdr" style="color:var(--mut);">$${(d.pot||0).toFixed(2)}</td><td class="tdr" style="color:var(--gm);">+$${w.toFixed(2)}</td><td class="tdr pot-display">$${((d.pot||0)+w).toFixed(2)}</td><td style="color:var(--mut);font-size:11px;">${d.updatedAt?new Date(d.updatedAt).toLocaleDateString():'—'}</td></tr>`;
+  }).join('');
+  const hw=document.getElementById('hist-weeks');
+  if(hw){
+    const recent=[...weeksLog].reverse().slice(0,20);
+    if(!recent.length){hw.innerHTML='<p style="color:var(--mut);font-size:12px;padding:8px;">No weeks recorded yet.</p>';return;}
+    hw.innerHTML=recent.map(w=>`<div class="hitem">
+      <span><strong>${w.name||w.id}</strong> &nbsp; ${w.date||''} ${w.cancelled?'<span class="cbadge">CANCELLED</span>':''}</span>
+      <span style="color:var(--mut);">${w.players||''} players &nbsp;·&nbsp; G/N $${w.gnPool||0} · Skins $${w.skinsPool||0} · POG $${w.pogPool||0}</span>
+    </div>`).join('');
+  }
 }
 
 // ── Tab switching ─────────────────────────────────────────────────────────────
@@ -948,406 +693,416 @@ function showTab(tab){
   ['setup','payout','season','pots'].forEach(t=>{
     document.getElementById(`panel-${t}`).classList.toggle('hidden',t!==tab);
   });
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
-    b.classList.toggle('active',['setup','payout','season','pots'][i]===tab);
+  document.querySelectorAll('.tbtn').forEach(b=>{
+    b.classList.toggle('active',b.dataset.tab===tab);
   });
   if(tab==='pots') refreshHistPanel();
-  if(tab==='season') loadLeaderboard();
+  if(tab==='season') renderLeaderboard(Object.entries(seasonData).map(([id,v])=>({id,...v})));
 }
 
 // ── Season leaderboard ────────────────────────────────────────────────────────
-let _lbAll = [];
-function loadLeaderboard(){
-  renderLeaderboard(Object.entries(seasonData).map(([id,v])=>({id,...v})));
-}
-
+let _lbAll=[];
 function renderLeaderboard(rows){
-  _lbAll = rows.sort((a,b)=>(b.total||0)-(a.total||0));
-  const q = document.querySelector('.lb-search')?.value||'';
-  const pf = document.querySelector('.lb-filter')?.value||'';
-  filterLeaderboard(q, pf);
-  const subtitle = document.getElementById('season-subtitle');
-  if(subtitle) subtitle.textContent = `${_lbAll.length} players · season total $${_lbAll.reduce((s,r)=>s+(r.total||0),0).toFixed(2)}`;
+  _lbAll=rows.sort((a,b)=>(b.total||0)-(a.total||0));
+  const sub=document.getElementById('season-sub');
+  if(sub) sub.textContent=`${_lbAll.length} players · $${_lbAll.reduce((s,r)=>s+(r.total||0),0).toFixed(2)} paid`;
+  filterLeaderboard(document.getElementById('lb-search')?.value||'',document.getElementById('lb-filter')?.value||'');
 }
-
-function filterLeaderboard(q='', pref=''){
-  q = q.toLowerCase();
-  const filtered = _lbAll.filter(r=>{
-    const nameMatch = !q || (r.name||'').toLowerCase().includes(q) || (r.gsId||'').toLowerCase().includes(q);
-    const prefMatch = !pref || r.pref===pref;
-    return nameMatch && prefMatch;
-  });
-  const tbody = document.getElementById('lb-tbody');
-  if(!filtered.length){ tbody.innerHTML=`<tr><td colspan="11" style="color:var(--muted);padding:12px;">No results.</td></tr>`; return; }
-  tbody.innerHTML = filtered.map((r,i)=>{
-    const rank=i+1;
-    const rc=rank===1?'lb-1':rank===2?'lb-2':rank===3?'lb-3':'lb-n';
-    const prefClass=r.pref==='Bar'?'pref-bar':r.pref==='Pro Shop'?'pref-pro':'pref-cash';
-    return `<tr>
-      <td><span class="lb-rank ${rc}">${rank}</span></td>
-      <td style="color:var(--muted);font-size:12px;">${r.gsId||'—'}</td>
-      <td><strong>${r.name||'—'}</strong></td>
-      <td class="r money">$${(r.gross||0).toFixed(2)}</td>
-      <td class="r money">$${(r.net||0).toFixed(2)}</td>
-      <td class="r money">$${(r.skins||0).toFixed(2)}</td>
-      <td class="r money">$${(r.pog||0).toFixed(2)}</td>
-      <td class="r" style="color:var(--muted);font-size:12px;">${r.skill||0} prize${r.skill!==1?'s':''}</td>
-      <td class="r"><strong class="money">$${(r.total||0).toFixed(2)}</strong></td>
-      <td><span class="pref-bar ${prefClass}">${r.pref||'—'}</span></td>
-      <td style="color:var(--muted);font-size:12px;">${r.weeks||0}</td>
-    </tr>`;
+function filterLeaderboard(q='',pref=''){
+  q=q.toLowerCase();
+  const f=_lbAll.filter(r=>(!q||(r.name||'').toLowerCase().includes(q))&&(!pref||r.pref===pref));
+  const tbody=document.getElementById('lb-tbody');
+  if(!f.length){tbody.innerHTML=`<tr><td colspan="10" style="color:var(--mut);padding:12px;">No results.</td></tr>`;return;}
+  tbody.innerHTML=f.map((r,i)=>{
+    const rk=i+1; const rc=rk===1?'lb1':rk===2?'lb2':rk===3?'lb3':'lbn';
+    const pc=r.pref==='Bar'?'pref-bar':r.pref==='Pro Shop'?'pref-pro':'pref-cash';
+    return `<tr><td><span class="lbr ${rc}">${rk}</span></td><td><strong>${r.name||'—'}</strong></td>
+      <td class="r money">$${(r.gross||0).toFixed(2)}</td><td class="r money">$${(r.net||0).toFixed(2)}</td>
+      <td class="r money">$${(r.skins||0).toFixed(2)}</td><td class="r money">$${(r.pog||0).toFixed(2)}</td>
+      <td class="r money">$${(r.draw||0).toFixed(2)}</td><td class="r"><strong class="money">$${(r.total||0).toFixed(2)}</strong></td>
+      <td><span class="pref-bar ${pc}">${r.pref||'—'}</span></td><td style="color:var(--mut);font-size:12px;">${r.weeks||0}</td></tr>`;
   }).join('');
 }
 
-function confirmResetSeason(){
+// ── CSV exports ───────────────────────────────────────────────────────────────
+function dlCSV(fname,rows){
+  const csv=rows.map(r=>r.map(c=>{const s=String(c==null?'':c);return s.includes(',')||s.includes('"')?'"'+s.replace(/"/g,'""')+'"':s;}).join(',')).join('\r\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download=fname; a.click();
+}
+function exportSeasonCSV(){
+  if(!_lbAll.length){alert('No season data.');return;}
+  const now=new Date().toISOString().slice(0,10);
+  dlCSV(`mens-club-season-${now}.csv`,[
+    ['Rank','Player','Gross($)','Net($)','Skins($)','POG($)','Draw($)','Total($)','Payout','Weeks'],
+    ..._lbAll.map((r,i)=>[i+1,r.name||'',(r.gross||0).toFixed(2),(r.net||0).toFixed(2),(r.skins||0).toFixed(2),(r.pog||0).toFixed(2),(r.draw||0).toFixed(2),(r.total||0).toFixed(2),r.pref||'',r.weeks||0])
+  ]);
+}
+function exportPotsCSV(){
+  const now=new Date().toISOString().slice(0,10);
+  dlCSV(`mens-club-pots-${now}.csv`,[
+    ['Type','Hole','Stored Balance($)','This Week($)','Running Total($)','Last Updated'],
+    ...SKINS_HOLES.map(h=>{const d=skinsPots[h]||{pot:0};const w=skPerHole();return['Skins',h,(d.pot||0).toFixed(2),w.toFixed(2),((d.pot||0)+w).toFixed(2),d.updatedAt?new Date(d.updatedAt).toLocaleDateString():''];} ),
+    ...POG_HOLES.map(h=>{const d=pogPots[h]||{pot:0};const w=pgPerHole();return['POG',h,(d.pot||0).toFixed(2),w.toFixed(2),((d.pot||0)+w).toFixed(2),d.updatedAt?new Date(d.updatedAt).toLocaleDateString():''];})
+  ]);
+}
+function exportWeeksCSV(){
+  const now=new Date().toISOString().slice(0,10);
+  const wks=[...weeksLog].reverse();
+  if(!wks.length){alert('No weeks recorded.');return;}
+  dlCSV(`mens-club-weeks-${now}.csv`,[
+    ['Name','Date','Players','G/N Pool($)','Skins Pool($)','POG Pool($)','Cancelled','Notes','Recorded'],
+    ...wks.map(w=>[w.name||'',w.date||'',w.players||0,(w.gnPool||0).toFixed(2),(w.skinsPool||0).toFixed(2),(w.pogPool||0).toFixed(2),w.cancelled?'Yes':'No',w.notes||'',w.recordedAt?new Date(w.recordedAt).toLocaleString():''])
+  ]);
+}
+
+// ── Reset pots ────────────────────────────────────────────────────────────────
+function resetAllPots(){
+  if(!confirm('Reset ALL skins and POG pot balances to zero?\n\nThis cannot be undone. Use this only when starting a new season or correcting an error.')) return;
+  if(!confirm('Are you absolutely sure? All carryover balances will be cleared.')) return;
+  SKINS_HOLES.forEach(h=>{ skinsPots[h]={pot:0,updatedAt:new Date().toISOString()}; saveSkinsHole(h); });
+  POG_HOLES.forEach(h=>{ pogPots[h]={pot:0,updatedAt:new Date().toISOString()}; savePOGHole(h); });
+  refreshSkinsPotDisplayAll(); refreshPOGPotDisplayAll(); refreshHistPanel();
+  alert('All pot balances reset to zero.');
+}
+
+// ── Reset season ──────────────────────────────────────────────────────────────
+function resetSeason(){
   if(!confirm('Reset ALL season earnings? This cannot be undone.')) return;
-  seasonData={};
-  saveSeason();
+  seasonData={}; saveSeason();
   renderLeaderboard([]);
 }
 
-// ── Pot history ───────────────────────────────────────────────────────────────
-function refreshHistPanel(){
-  const st=document.getElementById('hist-skins');
-  if(st) st.innerHTML=SKINS_HOLES.map(h=>{
-    const d=skinsPots[h]||{pot:0,updatedAt:null};
-    const total=d.pot+weeklySkinsPerHole();
-    return `<tr><td>${h}</td><td class="td-r pot-display">$${total.toFixed(2)}</td>
-      <td style="color:var(--muted);font-size:11px;">${d.updatedAt?new Date(d.updatedAt).toLocaleDateString():'—'}</td></tr>`;
-  }).join('');
-  const pt=document.getElementById('hist-pog');
-  if(pt) pt.innerHTML=POG_HOLES.map(h=>{
-    const d=pogPots[h]||{pot:0,updatedAt:null};
-    const total=d.pot+weeklyPOGPerHole();
-    return `<tr><td><span class="pog-dot"></span>${h}</td><td class="td-r pot-display">$${total.toFixed(2)}</td>
-      <td style="color:var(--muted);font-size:11px;">${d.updatedAt?new Date(d.updatedAt).toLocaleDateString():'—'}</td></tr>`;
-  }).join('');
-}
-
-function renderWeeksHistory(weeks){
-  const el=document.getElementById('hist-weeks'); if(!el)return;
-  if(!weeks.length){el.innerHTML='<p style="color:var(--muted);font-size:12px;padding:8px;">No weeks recorded yet.</p>';return;}
-  el.innerHTML=weeks.map(w=>`<div class="history-item">
-    <span><strong>${w.name||w.id}</strong>&nbsp; ${w.date||''}</span>
-    <span style="color:var(--muted);">${w.players||''} players &nbsp;·&nbsp; G/N $${w.gnPool||0} · Skins $${w.skinsPool||0} · POG $${w.pogPool||0}</span>
-  </div>`).join('');
+// ── Clear weekly entries ──────────────────────────────────────────────────────
+function clearEntries(){
+  if(!confirm('Clear all weekly entries? Pot balances and season totals are not affected.')) return;
+  ['t-week','t-name','t-date','t-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('t-total').value='40';
+  document.getElementById('t-gn').value='38';
+  document.getElementById('t-skins').value='30';
+  document.getElementById('t-pog').value='25';
+  document.getElementById('t-cancelled').checked=false;
+  FLIGHTS.forEach(f=>[1,2].forEach(p=>{
+    ['gr-name','gr-score','gr-prize'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${f}${p}`);if(el)el.value='';});
+    const cb=document.getElementById(`gr-cb-${f}${p}`);if(cb)cb.checked=false;
+    const pr=document.getElementById(`gr-pref-${f}${p}`);if(pr)pr.selectedIndex=0;
+  }));
+  for(let p=1;p<=15;p++){
+    ['nn','ns','np'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${p}`);if(el)el.value='';});
+    const cb=document.getElementById(`nc-${p}`);if(cb)cb.checked=false;
+    const pr=document.getElementById(`npref-${p}`);if(pr)pr.selectedIndex=0;
+  }
+  SKINS_HOLES.forEach(h=>{
+    const n=document.getElementById(`sk-name-${h}`);if(n)n.value='';
+    const s=document.getElementById(`sk-score-${h}`);if(s)s.value='';
+    const c=document.getElementById(`sk-paid-${h}`);if(c)c.checked=false;
+    const pr=document.getElementById(`sk-pref-${h}`);if(pr)pr.selectedIndex=0;
+  });
+  POG_HOLES.forEach(h=>{
+    const n=document.getElementById(`pog-name-${h}`);if(n)n.value='';
+    const s=document.getElementById(`pog-score-${h}`);if(s)s.value='';
+    const c=document.getElementById(`pog-paid-${h}`);if(c)c.checked=false;
+    const pr=document.getElementById(`pog-pref-${h}`);if(pr)pr.selectedIndex=0;
+  });
+  for(let h=1;h<=18;h++){
+    ['sp-name','sp-prize'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${h}`);if(el)el.value='';});
+  }
+  ['meat-1','meat-2','meat-3','meat-prize-1','meat-prize-2','meat-prize-3','ff-winner','ff-amount'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  ['meat-pref-1','meat-pref-2','meat-pref-3','ff-pref'].forEach(id=>{const el=document.getElementById(id);if(el)el.selectedIndex=0;});
+  recalcPools();
 }
 
 // ── Generate payout ───────────────────────────────────────────────────────────
-async function generatePayout(previewOnly=false){
-  const date  =document.getElementById('t-date').value||'—';
-  const week  =document.getElementById('t-week')?.value||'';
-  const tname =document.getElementById('t-name')?.value||'';
-  const name  =(week&&tname)?`Week ${week} — ${tname}`:week?`Week ${week}`:tname||'—';
+function generatePayout(previewOnly=false){
+  const week   =document.getElementById('t-week')?.value||'';
+  const tname  =document.getElementById('t-name')?.value||'';
+  const date   =document.getElementById('t-date').value||'—';
+  const notes  =document.getElementById('t-notes')?.value||'';
+  const total  =document.getElementById('t-total').value||'?';
+  const cancelled=document.getElementById('t-cancelled')?.checked||false;
+  const name   =(week&&tname)?`Week ${week} — ${tname}`:week?`Week ${week}`:tname||'—';
+  const weekKey=`${date}|${name}`.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_|]/g,'-');
+  const gnPly  =parseFloat(document.getElementById('t-gn').value)||0;
+  const skPly  =parseFloat(document.getElementById('t-skins').value)||0;
+  const pgPly  =parseFloat(document.getElementById('t-pog').value)||0;
+  const gnPool =gnPly*10, skPool=skPly*5, pgPool=pgPly*5;
+  const skph=skPool/13, pgph=pgPly;
 
-  // Prevent duplicate commits — key on date+name combination
-  const weekKey = `${date}|${name}`.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_|]/g,'-');
-  if (!previewOnly) {
-    const alreadyCommitted = weeksLog.some(w => w.id === weekKey);
-    if (alreadyCommitted) {
-      const confirmed = confirm(
-        `A payout for "${name}" on ${date} has already been committed.\n\n` +
-        `Committing again will double-count earnings.\n\n` +
-        `Click OK only if you are correcting a genuine error.\n` +
-        `Click Cancel to preview without saving.`
-      );
-      if (!confirmed) { previewOnly = true; }
+  if(!previewOnly){
+    const already=weeksLog.some(w=>w.id===weekKey);
+    if(already&&!confirm(`A payout for "${name}" on ${date} already exists.\n\nCommit again will double-count earnings.\nOK to overwrite, Cancel to preview only.`)){
+      previewOnly=true;
     }
   }
-  const total =document.getElementById('t-total').value||'?';
-  const gnPly =parseFloat(document.getElementById('t-gn').value)||0;
-  const skPly =parseFloat(document.getElementById('t-skins').value)||0;
-  const pgPly =parseFloat(document.getElementById('t-pog').value)||0;
-  const gnPool=gnPly*10, skPool=skPly*5, pgPool=pgPly*5;
-  const skPerHole=skPool/13, pgPerHole=pgPly;
 
-  // ── Collect gross ──
-  const flightData={A:[],B:[],C:[],D:[]};
+  const fmt=n=>'$'+Number(n||0).toFixed(2);
+  const prefBadge=p=>{const cl=p==='Bar'?'pref-bar':p==='Pro Shop'?'pref-pro':'pref-cash';return`<span class="pref-bar ${cl}" style="font-size:10px;">${p}</span>`;};
+
+  // Collect gross
+  const fdata={A:[],B:[],C:[],D:[]};
   document.querySelectorAll('#gross-tbody tr').forEach(tr=>{
     const cells=tr.querySelectorAll('td');
-    let flt,place,gsId,pname,score,prize,pref;
+    let flt,place,pname,score,cb,prize,pref;
     if(tr.dataset.flight){
       flt=tr.dataset.flight; place=parseInt(tr.dataset.place);
-      gsId =cells[2].querySelector('input').value.trim();
-      pname=cells[3].querySelector('input').value.trim();
-      score=cells[4].querySelector('input').value;
+      pname=cells[2].querySelector('input').value.trim();
+      score=cells[3].querySelector('input').value;
+      cb   =cells[4].querySelector('input')?.checked;
       prize=cells[5].querySelector('input').value;
       pref =cells[6].querySelector('select').value;
     } else {
       flt  =cells[0].querySelector('select').value;
       place=parseInt(cells[1].querySelector('input').value)||0;
-      gsId =cells[2].querySelector('input').value.trim();
-      pname=cells[3].querySelector('input').value.trim();
-      score=cells[4].querySelector('input').value;
+      pname=cells[2].querySelector('input').value.trim();
+      score=cells[3].querySelector('input').value;
+      cb   =cells[4].querySelector('input')?.checked;
       prize=cells[5].querySelector('input').value;
       pref =cells[6].querySelector('select').value;
     }
-    if(pname||prize) flightData[flt].push({place,gsId,pname,score,prize,pref});
+    if(pname||prize) fdata[flt].push({place,pname,score,cb,prize,pref});
   });
 
-  // ── Collect net ──
+  // Collect net
   const netData=[];
   for(let p=1;p<=15;p++){
-    const gsId=(getVal(`ng-${p}`)||'').trim();
-    const n=(getVal(`nn-${p}`)||'').trim();
-    const s=getVal(`ns-${p}`);
-    const pr=getVal(`np-${p}`);
-    const pref=getVal(`npref-${p}`);
-    if(n||pr) netData.push({place:p,gsId,pname:n,score:s,prize:pr,pref});
+    const n=(document.getElementById(`nn-${p}`)?.value||'').trim();
+    const s=document.getElementById(`ns-${p}`)?.value||'';
+    const cb=document.getElementById(`nc-${p}`)?.checked;
+    const pr=document.getElementById(`np-${p}`)?.value||'';
+    const pref=document.getElementById(`npref-${p}`)?.value||'Bar';
+    if(n||pr) netData.push({place:p,pname:n,score:s,cb,prize:pr,pref});
   }
 
-  // ── Collect skins + commit pots ──
+  // Collect skins
   const skinsData=[];
   for(const h of SKINS_HOLES){
-    const gsId =(document.getElementById(`sk-gsid-${h}`)?.value||'').trim();
     const winner=(document.getElementById(`sk-name-${h}`)?.value||'').trim();
     const score =document.getElementById(`sk-score-${h}`)?.value||'';
     const paid  =document.getElementById(`sk-paid-${h}`)?.checked;
     const pref  =document.getElementById(`sk-pref-${h}`)?.value||'Bar';
     const stored=(skinsPots[h]?.pot)||0;
-    const runningPot=stored+skPerHole;
-    skinsData.push({hole:h,gsId,winner,score,runningPot,paid,pref});
+    const runPot=stored+skph;
+    skinsData.push({hole:h,winner,score,runPot,stored,weekly:skph,paid,pref});
     if(!previewOnly){
-      const newPot=paid?0:runningPot;
+      const newPot=paid?0:runPot;
       skinsPots[h]={pot:newPot,updatedAt:new Date().toISOString(),lastWinner:paid?winner:null};
       saveSkinsHole(h);
     }
   }
 
-  // ── Collect POG + commit pots ──
+  // Collect POG
   const pogData=[];
   for(const h of POG_HOLES){
-    const gsId =(document.getElementById(`pog-gsid-${h}`)?.value||'').trim();
     const winner=(document.getElementById(`pog-name-${h}`)?.value||'').trim();
     const score =document.getElementById(`pog-score-${h}`)?.value||'';
     const paid  =document.getElementById(`pog-paid-${h}`)?.checked;
     const pref  =document.getElementById(`pog-pref-${h}`)?.value||'Bar';
     const stored=(pogPots[h]?.pot)||0;
-    const runningPot=stored+pgPerHole;
-    pogData.push({hole:h,gsId,winner,score,runningPot,paid,pref});
+    const runPot=stored+pgph;
+    pogData.push({hole:h,winner,score,runPot,stored,weekly:pgph,paid,pref});
     if(!previewOnly){
-      const newPot=paid?0:runningPot;
+      const newPot=paid?0:runPot;
       pogPots[h]={pot:newPot,updatedAt:new Date().toISOString(),lastWinner:paid?winner:null};
       savePOGHole(h);
     }
   }
 
-  // ── Collect skill ──
+  // Collect skill
   const skillData=[];
   for(let h=1;h<=18;h++){
-    const gsId =(document.getElementById(`sp-gsid-${h}`)?.value||'').trim();
-    const n    =(document.getElementById(`sp-name-${h}`)?.value||'').trim();
-    const pr   =(document.getElementById(`sp-prize-${h}`)?.value||'').trim();
-    skillData.push({hole:h,gsId,winner:n,prize:pr});
+    const n=(document.getElementById(`sp-name-${h}`)?.value||'').trim();
+    const pr=(document.getElementById(`sp-prize-${h}`)?.value||'').trim();
+    skillData.push({hole:h,winner:n,prize:pr});
   }
 
-  // ── Build money winners map (keyed by gsId||name) ──
-  const mwMap = {};   // key -> {gsId,name,pref,gross,net,skins,pog,skill,total}
-  const mwKey = (gsId,name)=>gsId||name||null;
+  // Collect draws
+  const meatData=[1,2,3].map(i=>({
+    draw:i,
+    winner:(document.getElementById(`meat-${i}`)?.value||'').trim(),
+    prize:(document.getElementById(`meat-prize-${i}`)?.value||'').trim(),
+    pref:document.getElementById(`meat-pref-${i}`)?.value||'Bar'
+  })).filter(r=>r.winner);
+  const ffWinner=(document.getElementById('ff-winner')?.value||'').trim();
+  const ffAmount=parseFloat(document.getElementById('ff-amount')?.value)||0;
+  const ffPref  =document.getElementById('ff-pref')?.value||'Bar';
 
-  const addMW = (gsId,name,pref,cat,amount)=>{
-    const k=mwKey(gsId,name); if(!k||!amount) return;
-    if(!mwMap[k]) mwMap[k]={gsId,name,pref,gross:0,net:0,skins:0,pog:0,skill:0,total:0,weeks:1};
+  // Money winners map
+  const mwMap={};
+  const mwKey=(name)=>name||null;
+  const addMW=(name,pref,cat,amount)=>{
+    const k=mwKey(name); if(!k||!amount) return;
+    if(!mwMap[k]) mwMap[k]={name,pref,gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:1};
     mwMap[k][cat]+=(parseFloat(amount)||0);
-    mwMap[k].total=(mwMap[k].gross+mwMap[k].net+mwMap[k].skins+mwMap[k].pog);
-    mwMap[k].pref=pref; // last pref wins if same player appears multiple categories
+    mwMap[k].total=mwMap[k].gross+mwMap[k].net+mwMap[k].skins+mwMap[k].pog+mwMap[k].draw;
+    mwMap[k].pref=pref;
   };
-
-  FLIGHTS.forEach(f=>flightData[f.id].forEach(r=>addMW(r.gsId,r.pname,r.pref,'gross',r.prize)));
-  netData.forEach(r=>addMW(r.gsId,r.pname,r.pref,'net',r.prize));
-  skinsData.filter(r=>r.paid&&r.winner).forEach(r=>addMW(r.gsId,r.winner,r.pref,'skins',r.runningPot));
-  pogData.filter(r=>r.paid&&r.winner).forEach(r=>addMW(r.gsId,r.winner,r.pref,'pog',r.runningPot));
-  skillData.filter(r=>r.winner).forEach(r=>{ const k=mwKey(r.gsId,r.winner); if(!k)return; if(!mwMap[k])mwMap[k]={gsId:r.gsId,name:r.winner,pref:'Bar',gross:0,net:0,skins:0,pog:0,skill:0,total:0,weeks:1}; mwMap[k].skill++; });
-
+  FLIGHTS.forEach(f=>fdata[f].forEach(r=>addMW(r.pname,r.pref,'gross',r.prize)));
+  netData.forEach(r=>addMW(r.pname,r.pref,'net',r.prize));
+  skinsData.filter(r=>r.paid&&r.winner).forEach(r=>addMW(r.winner,r.pref,'skins',r.runPot));
+  pogData.filter(r=>r.paid&&r.winner).forEach(r=>addMW(r.winner,r.pref,'pog',r.runPot));
+  meatData.forEach(r=>addMW(r.winner,'Bar','draw',0)); // meat is non-cash
+  if(ffWinner&&ffAmount) addMW(ffWinner,ffPref,'draw',ffAmount);
   const mwList=Object.values(mwMap).sort((a,b)=>b.total-a.total);
 
-  // ── Commit season totals to localStorage (skipped in preview mode) ──
+  // Commit season
   if(!previewOnly){
-    saveWeek({id:weekKey,name,date,players:parseInt(total)||0,gnPool,skinsPool:skPool,pogPool:pgPool,recordedAt:new Date().toISOString()});
+    saveWeek({id:weekKey,name,date,players:parseInt(total)||0,gnPool,skinsPool:skPool,pogPool:pgPool,cancelled,notes,recordedAt:new Date().toISOString()});
     for(const mw of mwList){
-      const k=mwKey(mw.gsId,mw.name); if(!k) continue;
-      const existing=seasonData[k]||{gross:0,net:0,skins:0,pog:0,skill:0,total:0,weeks:0};
-      seasonData[k]={
-        gsId:mw.gsId||existing.gsId||'',
-        name:mw.name||existing.name||'',
-        pref:mw.pref||existing.pref||'Bar',
-        gross:(existing.gross||0)+(mw.gross||0),
-        net:(existing.net||0)+(mw.net||0),
-        skins:(existing.skins||0)+(mw.skins||0),
-        pog:(existing.pog||0)+(mw.pog||0),
-        skill:(existing.skill||0)+(mw.skill||0),
-        total:(existing.total||0)+(mw.total||0),
-        weeks:(existing.weeks||0)+1,
-        lastUpdated:new Date().toISOString()
-      };
+      const k=mwKey(mw.name); if(!k) continue;
+      const ex=seasonData[k]||{gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:0};
+      seasonData[k]={name:mw.name,pref:mw.pref,
+        gross:(ex.gross||0)+(mw.gross||0),net:(ex.net||0)+(mw.net||0),
+        skins:(ex.skins||0)+(mw.skins||0),pog:(ex.pog||0)+(mw.pog||0),
+        draw:(ex.draw||0)+(mw.draw||0),total:(ex.total||0)+(mw.total||0),
+        weeks:(ex.weeks||0)+1,lastUpdated:new Date().toISOString()};
     }
     saveSeason();
-    renderLeaderboard(Object.entries(seasonData).map(([id,v])=>({id,...v})));
+    refreshSkinsPotDisplayAll(); refreshPOGPotDisplayAll();
   }
 
-  // ── Totals ──
-  const fmt=n=>'$'+Number(n||0).toFixed(2);
-  let grossPaid=0;
-  FLIGHTS.forEach(f=>flightData[f.id].forEach(r=>grossPaid+=parseFloat(r.prize)||0));
-  const netPaid   =netData.reduce((s,r)=>s+(parseFloat(r.prize)||0),0);
-  const skinsPaid =skinsData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runningPot,0);
-  const pogPaid   =pogData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runningPot,0);
+  // Totals
+  let grossPaid=0; FLIGHTS.forEach(f=>fdata[f].forEach(r=>grossPaid+=parseFloat(r.prize)||0));
+  const netPaid  =netData.reduce((s,r)=>s+(parseFloat(r.prize)||0),0);
+  const skinsPaid=skinsData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runPot,0);
+  const pogPaid  =pogData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runPot,0);
 
-  // ── Pref badge helper ──
-  const prefBadge=p=>{
-    const cls=p==='Bar'?'pref-bar':p==='Pro Shop'?'pref-pro':'pref-cash';
-    return `<span class="pref-bar ${cls}" style="font-family:system-ui;font-size:10px;">${p}</span>`;
-  };
+  // Flight labels
+  const getFL=f=>document.getElementById(`f-${f.toLowerCase()}-name`)?.value||`Flight ${f}`;
+  const getFR=f=>document.getElementById(`f-${f.toLowerCase()}-range`)?.value||'';
 
-  // ── Render ────────────────────────────────────────────────────────────────
+  // ── Render payout sheet ───────────────────────────────────────────────────
+  const ts=new Date().toLocaleString();
   let html=`
-    ${previewOnly ? `<div style="background:#6300CC;color:#fff;font-family:system-ui;font-size:12px;font-weight:700;text-align:center;padding:6px;letter-spacing:.05em;margin-bottom:12px;">⚠ PREVIEW ONLY — No data has been saved to the database</div>` : ''}
+    ${previewOnly?`<div style="background:#6300CC;color:#fff;font-family:system-ui;font-size:12px;font-weight:700;text-align:center;padding:5px;margin-bottom:10px;border-radius:4px;">⚠ PREVIEW ONLY — Nothing saved to database</div>`:''}
+    ${cancelled?`<div style="background:#FFF3CD;border:2px solid #FFCA2C;border-radius:4px;padding:10px;text-align:center;font-weight:700;font-size:15px;color:#856404;margin-bottom:10px;">🌧 TOURNAMENT CANCELLED / RAINED OUT — No payouts this week</div>`:''}
     <div class="masthead">
       <h1>${name!=='—'?name:'Weekly Payout Sheet'}</h1>
-      <div class="meta">${date} &nbsp;·&nbsp; ${total} players &nbsp;·&nbsp;
-        G/N pool: ${fmt(gnPool)} &nbsp;·&nbsp; Skins pool: ${fmt(skPool)} &nbsp;·&nbsp; POG pool: ${fmt(pgPool)}</div>
+      <div class="meta">${date}${notes?' &nbsp;·&nbsp; '+notes:''} &nbsp;·&nbsp; ${total} players</div>
+      <div class="meta">G/N pool: ${fmt(gnPool)} &nbsp;·&nbsp; Skins pool: ${fmt(skPool)} &nbsp;·&nbsp; POG pool: ${fmt(pgPool)}</div>
+      <div class="ts">Generated: ${ts}</div>
     </div>`;
 
-  // GROSS
-  html+=`<div class="psec"><div class="psec-title">Gross Winners — Flight Results</div>
-    <table class="pt"><thead><tr><th>Flt</th><th>Place</th><th>GS ID</th><th>Player</th><th>Gross</th><th class="r">Prize</th><th>Payout</th></tr></thead><tbody>`;
-  FLIGHTS.forEach(f=>{
-    html+=`<tr class="fhdr"><td colspan="7">Flight ${f.id} &nbsp; ${f.range} handicap</td></tr>`;
-    if(!flightData[f.id].length){
-      html+=`<tr><td colspan="7" style="color:var(--muted);font-size:11px;padding:6px 9px;">No entries</td></tr>`;
+  if(!cancelled){
+    // GROSS
+    html+=`<div class="psec"><div class="ptitle">Gross Winners — Flight Results</div>
+      <table class="pt"><thead><tr><th>Flight</th><th>Place</th><th>Player</th><th>Score</th><th class="r">Prize</th><th>Payout</th></tr></thead><tbody>`;
+    FLIGHTS.forEach(f=>{
+      html+=`<tr class="fhdr"><td colspan="6">${getFL(f)} &nbsp; ${getFR(f)} handicap</td></tr>`;
+      if(!fdata[f].length){
+        html+=`<tr><td colspan="6" style="color:var(--mut);font-size:11px;padding:6px 9px;">No entries</td></tr>`;
+      } else {
+        fdata[f].forEach(r=>{
+          const sfx=r.place===1?'st':r.place===2?'nd':r.place===3?'rd':'th';
+          const bc=r.place<=3?`p${r.place}b`:'pnb';
+          html+=`<tr><td></td><td><span class="pbadge ${bc}">${r.place}</span>${r.place}${sfx}${r.cb?' <span class="countback-badge">CB</span>':''}</td>
+            <td>${r.pname||'—'}</td><td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
+            <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td><td>${prefBadge(r.pref)}</td></tr>`;
+        });
+      }
+    });
+    html+=`</tbody></table></div>`;
+
+    // NET
+    html+=`<div class="psec"><div class="ptitle">Net Winners — Overall</div>
+      <table class="pt"><thead><tr><th>Place</th><th>Player</th><th>Net</th><th class="r">Prize</th><th>Payout</th></tr></thead><tbody>`;
+    if(!netData.length){
+      html+=`<tr><td colspan="5" style="color:var(--mut);padding:8px 9px;">No entries</td></tr>`;
     } else {
-      flightData[f.id].forEach(r=>{
+      netData.forEach(r=>{
         const sfx=r.place===1?'st':r.place===2?'nd':r.place===3?'rd':'th';
         const bc=r.place<=3?`p${r.place}b`:'pnb';
-        html+=`<tr><td></td><td><span class="pbadge ${bc}">${r.place}</span>${r.place}${sfx}</td>
-          <td style="color:var(--muted);font-size:11px;">${r.gsId||'—'}</td>
-          <td>${r.pname||'—'}</td>
-          <td style="color:var(--muted);font-size:11px;">${r.score||'—'}</td>
-          <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td>
-          <td>${prefBadge(r.pref)}</td></tr>`;
+        html+=`<tr><td><span class="pbadge ${bc}">${r.place}</span>${r.place}${sfx}${r.cb?' <span class="countback-badge">CB</span>':''}</td>
+          <td>${r.pname||'—'}</td><td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
+          <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td><td>${prefBadge(r.pref)}</td></tr>`;
       });
     }
-  });
-  html+=`</tbody></table></div>`;
+    html+=`</tbody></table></div>`;
 
-  // NET
-  html+=`<div class="psec"><div class="psec-title">Net Winners — Overall</div>
-    <table class="pt"><thead><tr><th>Place</th><th>GS ID</th><th>Player</th><th>Net</th><th class="r">Prize</th><th>Payout</th></tr></thead><tbody>`;
-  if(!netData.length){
-    html+=`<tr><td colspan="6" style="color:var(--muted);padding:8px 9px;">No entries</td></tr>`;
-  } else {
-    netData.forEach(r=>{
-      const sfx=r.place===1?'st':r.place===2?'nd':r.place===3?'rd':'th';
-      const bc=r.place<=3?`p${r.place}b`:'pnb';
-      html+=`<tr><td><span class="pbadge ${bc}">${r.place}</span>${r.place}${sfx}</td>
-        <td style="color:var(--muted);font-size:11px;">${r.gsId||'—'}</td>
-        <td>${r.pname||'—'}</td>
-        <td style="color:var(--muted);font-size:11px;">${r.score||'—'}</td>
-        <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td>
-        <td>${prefBadge(r.pref)}</td></tr>`;
+    // SKINS
+    html+=`<div class="psec"><div class="ptitle">Skins — Lowest Net Score per Hole</div>
+      <table class="pt"><thead><tr><th>Hole</th><th>Winner</th><th>Net</th><th class="r">Prev</th><th class="r">+This Wk</th><th class="r">Pot</th><th class="r">Status</th><th>Payout</th></tr></thead><tbody>`;
+    skinsData.forEach(r=>{
+      const carry=!r.paid||!r.winner;
+      html+=`<tr style="${carry?'background:var(--carry);':'background:#F0FFF4;'}">
+        <td style="font-weight:600;">${r.hole}</td>
+        <td>${r.winner||'<em style="color:var(--mut)">No winner</em>'}</td>
+        <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
+        <td class="r" style="color:var(--mut);font-size:11px;">${fmt(r.stored)}</td>
+        <td class="r" style="color:var(--gm);font-size:11px;">+${fmt(r.weekly)}</td>
+        <td class="r"><span class="money">${fmt(r.runPot)}</span></td>
+        <td class="r">${carry?'<span class="cbadge">CARRY</span>':'<span style="color:var(--gm);font-weight:700;font-family:system-ui;font-size:11px;">PAID</span>'}</td>
+        <td>${carry?'':prefBadge(r.pref)}</td></tr>`;
     });
-  }
-  html+=`</tbody></table></div>`;
+    html+=`</tbody></table></div>`;
 
-  // SKINS
-  html+=`<div class="psec"><div class="psec-title">Skins — Lowest Net Score per Hole</div>
-    <table class="pt"><thead><tr><th>Hole</th><th>GS ID</th><th>Winner</th><th>Net</th><th class="r">Pot</th><th class="r">Status</th><th>Payout</th></tr></thead><tbody>`;
-  skinsData.forEach(r=>{
-    const carry=!r.paid||!r.winner;
-    html+=`<tr style="${carry?'background:var(--carry-bg);':'background:#F0FFF4;'}">
-      <td style="font-weight:600;">${r.hole}</td>
-      <td style="color:var(--muted);font-size:11px;">${r.gsId||'—'}</td>
-      <td>${r.winner||'<em style="color:var(--muted)">No winner</em>'}</td>
-      <td style="color:var(--muted);font-size:11px;">${r.score||'—'}</td>
-      <td class="r"><span class="money">${fmt(r.runningPot)}</span></td>
-      <td class="r">${carry?'<span class="cbadge">CARRY</span>':'<span style="color:var(--green-mid);font-weight:700;font-family:system-ui;font-size:11px;">PAID</span>'}</td>
-      <td>${carry?'':prefBadge(r.pref)}</td></tr>`;
-  });
-  html+=`</tbody></table></div>`;
-
-  // POG
-  html+=`<div class="psec"><div class="psec-title">Pots of Gold — Unique Gross Birdie Required</div>
-    <table class="pt"><thead><tr><th>Hole</th><th>GS ID</th><th>Winner</th><th>Gross</th><th class="r">Pot</th><th class="r">Status</th><th>Payout</th></tr></thead><tbody>`;
-  pogData.forEach(r=>{
-    const carry=!r.paid||!r.winner;
-    html+=`<tr style="${carry?'background:var(--carry-bg);':'background:var(--gold-light);'}">
-      <td style="font-weight:600;"><span class="pog-dot"></span>${r.hole}</td>
-      <td style="color:var(--muted);font-size:11px;">${r.gsId||'—'}</td>
-      <td>${r.winner||'<em style="color:var(--muted)">No unique birdie</em>'}</td>
-      <td style="color:var(--muted);font-size:11px;">${r.score||'—'}</td>
-      <td class="r"><span class="money">${fmt(r.runningPot)}</span></td>
-      <td class="r">${carry?'<span class="cbadge">CARRY</span>':'<span style="color:var(--green-mid);font-weight:700;font-family:system-ui;font-size:11px;">PAID</span>'}</td>
-      <td>${carry?'':prefBadge(r.pref)}</td></tr>`;
-  });
-  html+=`</tbody></table></div>`;
-
-  // SKILL
-  const filledSkill=skillData.filter(r=>r.winner||r.prize);
-  html+=`<div class="psec"><div class="psec-title">Skill Prizes — Sponsor Awards</div>
-    <table class="pt"><thead><tr><th>Hole</th><th>GS ID</th><th>Winner</th><th>Prize</th></tr></thead><tbody>`;
-  if(!filledSkill.length){
-    html+=`<tr><td colspan="4" style="color:var(--muted);padding:8px 9px;">No entries</td></tr>`;
-  } else {
-    filledSkill.forEach(r=>{
-      html+=`<tr><td style="font-weight:600;">${r.hole}</td>
-        <td style="color:var(--muted);font-size:11px;">${r.gsId||'—'}</td>
-        <td>${r.winner||'—'}</td><td style="color:var(--muted);">${r.prize||'—'}</td></tr>`;
+    // POG
+    html+=`<div class="psec"><div class="ptitle">Pots of Gold — Unique Gross Birdie Required</div>
+      <table class="pt"><thead><tr><th>Hole</th><th>Winner</th><th>Gross</th><th class="r">Prev</th><th class="r">+This Wk</th><th class="r">Pot</th><th class="r">Status</th><th>Payout</th></tr></thead><tbody>`;
+    pogData.forEach(r=>{
+      const carry=!r.paid||!r.winner;
+      html+=`<tr style="${carry?'background:var(--carry);':'background:var(--gold-l);'}">
+        <td style="font-weight:600;"><span class="pog-dot"></span>${r.hole}</td>
+        <td>${r.winner||'<em style="color:var(--mut)">No unique birdie</em>'}</td>
+        <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
+        <td class="r" style="color:var(--mut);font-size:11px;">${fmt(r.stored)}</td>
+        <td class="r" style="color:var(--gm);font-size:11px;">+${fmt(r.weekly)}</td>
+        <td class="r"><span class="money">${fmt(r.runPot)}</span></td>
+        <td class="r">${carry?'<span class="cbadge">CARRY</span>':'<span style="color:var(--gm);font-weight:700;font-family:system-ui;font-size:11px;">PAID</span>'}</td>
+        <td>${carry?'':prefBadge(r.pref)}</td></tr>`;
     });
-  }
-  html+=`</tbody></table></div>`;
+    html+=`</tbody></table></div>`;
 
-  // ── WEEKLY MONEY WINNERS ──
-  html+=`<div class="psec"><div class="psec-title" style="background:#0D47A1;">Weekly Money Winners — All Categories</div>
-    <table class="pt"><thead><tr>
-      <th>Rank</th><th>GS ID</th><th>Player</th>
-      <th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th>
-      <th class="r">Total</th><th>Payout</th>
-    </tr></thead><tbody>`;
-  if(!mwList.length){
-    html+=`<tr><td colspan="9" style="color:var(--muted);padding:8px 9px;">No monetary winners this week.</td></tr>`;
-  } else {
-    let weekTotal=0;
-    mwList.forEach((r,i)=>{
-      const rank=i+1;
-      const bc=rank<=3?`p${rank}b`:'pnb';
-      weekTotal+=r.total||0;
-      const prefCls=r.pref==='Bar'?'pref-bar':r.pref==='Pro Shop'?'pref-pro':'pref-cash';
-      html+=`<tr>
-        <td><span class="pbadge ${bc}">${rank}</span></td>
-        <td style="color:var(--muted);font-size:11px;">${r.gsId||'—'}</td>
-        <td><strong>${r.name||'—'}</strong></td>
-        <td class="r">${r.gross?fmt(r.gross):'—'}</td>
-        <td class="r">${r.net?fmt(r.net):'—'}</td>
-        <td class="r">${r.skins?fmt(r.skins):'—'}</td>
-        <td class="r">${r.pog?fmt(r.pog):'—'}</td>
-        <td class="r"><span class="money">${fmt(r.total)}</span></td>
-        <td><span class="pref-bar ${prefCls}" style="font-family:system-ui;font-size:10px;">${r.pref}</span></td>
-      </tr>`;
-    });
-    html+=`<tr class="mw-total-row">
-      <td colspan="7" style="text-align:right;padding:5px 9px;">Total paid out this week:</td>
-      <td class="r"><span class="money">${fmt(weekTotal)}</span></td><td></td>
-    </tr>`;
+    // SKILL
+    const fs=skillData.filter(r=>r.winner||r.prize);
+    html+=`<div class="psec"><div class="ptitle">Skill Prizes — Sponsor Awards</div>
+      <table class="pt"><thead><tr><th>Hole</th><th>Winner</th><th>Prize</th></tr></thead><tbody>`;
+    if(!fs.length){html+=`<tr><td colspan="3" style="color:var(--mut);padding:8px 9px;">No entries</td></tr>`;}
+    else fs.forEach(r=>{html+=`<tr><td style="font-weight:600;">${r.hole}</td><td>${r.winner||'—'}</td><td style="color:var(--mut);">${r.prize||'—'}</td></tr>`;});
+    html+=`</tbody></table></div>`;
 
-    // Payout summary by preference
-    const byPref={Bar:0,'Pro Shop':0,Cash:0};
-    mwList.forEach(r=>{if(byPref[r.pref]!==undefined)byPref[r.pref]+=r.total||0;});
-    html+=`<tr><td colspan="9" style="padding:6px 9px;font-family:system-ui;font-size:11px;color:var(--muted);">
-      Breakdown: &nbsp;
-      <span class="pref-bar">Bar</span> ${fmt(byPref['Bar'])} &nbsp;&nbsp;
-      <span class="pref-bar pref-pro">Pro Shop</span> ${fmt(byPref['Pro Shop'])} &nbsp;&nbsp;
-      <span class="pref-bar pref-cash">Cash</span> ${fmt(byPref['Cash'])}
-    </td></tr>`;
+    // DRAWS
+    html+=`<div class="psec"><div class="ptitle" style="background:#5C3D00;">Draw Winners</div>
+      <table class="pt"><thead><tr><th>Draw</th><th>Winner</th><th>Prize / Amount</th><th>Payout</th></tr></thead><tbody>`;
+    if(!meatData.length&&!ffWinner){html+=`<tr><td colspan="4" style="color:var(--mut);padding:8px 9px;">No entries</td></tr>`;}
+    meatData.forEach((r,i)=>{html+=`<tr><td>🥩 Meat Draw ${i+1}</td><td>${r.winner}</td><td style="color:var(--mut);">${r.prize||'—'}</td><td><span class="pref-bar">Bar</span></td></tr>`;});
+    if(ffWinner) html+=`<tr style="background:var(--gold-l);"><td>💵 50/50</td><td>${ffWinner}</td><td><span class="money">${fmt(ffAmount)}</span></td><td>${prefBadge(ffPref)}</td></tr>`;
+    html+=`</tbody></table></div>`;
+
+    // MONEY WINNERS
+    html+=`<div class="psec"><div class="ptitle" style="background:#0D47A1;">Weekly Money Winners</div>
+      <table class="pt"><thead><tr><th>Rank</th><th>Player</th><th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th><th class="r">Draw</th><th class="r">Total</th><th>Payout</th></tr></thead><tbody>`;
+    if(!mwList.length){html+=`<tr><td colspan="9" style="color:var(--mut);padding:8px 9px;">No monetary winners this week.</td></tr>`;}
+    else{
+      let wkTotal=0;
+      mwList.forEach((r,i)=>{
+        const rk=i+1; const bc=rk<=3?`p${rk}b`:'pnb'; wkTotal+=r.total||0;
+        const pc=r.pref==='Bar'?'pref-bar':r.pref==='Pro Shop'?'pref-pro':'pref-cash';
+        html+=`<tr><td><span class="pbadge ${bc}">${rk}</span></td><td><strong>${r.name||'—'}</strong></td>
+          <td class="r">${r.gross?fmt(r.gross):'—'}</td><td class="r">${r.net?fmt(r.net):'—'}</td>
+          <td class="r">${r.skins?fmt(r.skins):'—'}</td><td class="r">${r.pog?fmt(r.pog):'—'}</td>
+          <td class="r">${r.draw?fmt(r.draw):'—'}</td>
+          <td class="r"><span class="money">${fmt(r.total)}</span></td>
+          <td><span class="pref-bar ${pc}" style="font-size:10px;">${r.pref}</span></td></tr>`;
+      });
+      html+=`<tr class="mw-total-row"><td colspan="7" style="text-align:right;padding:5px 9px;">Total paid out:</td><td class="r"><span class="money">${fmt(wkTotal)}</span></td><td></td></tr>`;
+      const byPref={Bar:0,'Pro Shop':0,Cash:0};
+      mwList.forEach(r=>{if(byPref[r.pref]!==undefined)byPref[r.pref]+=r.total||0;});
+      html+=`<tr><td colspan="9" style="padding:5px 9px;font-family:system-ui;font-size:11px;color:var(--mut);">
+        <span class="pref-bar">Bar</span> ${fmt(byPref['Bar'])} &nbsp;
+        <span class="pref-bar pref-pro">Pro Shop</span> ${fmt(byPref['Pro Shop'])} &nbsp;
+        <span class="pref-bar pref-cash">Cash</span> ${fmt(byPref['Cash'])}</td></tr>`;
+    }
+    html+=`</tbody></table></div>`;
   }
-  html+=`</tbody></table></div>`;
 
   // TOTALS
-  html+=`<div class="totals-bar">
+  html+=`<div class="tbar">
     <div class="ti"><strong>${fmt(grossPaid)}</strong><span>Gross paid</span></div>
     <div class="ti"><strong>${fmt(netPaid)}</strong><span>Net paid</span></div>
-    <div class="ti"><strong>${fmt(grossPaid+netPaid)}</strong><span>G/N total (pool ${fmt(gnPool)})</span></div>
     <div class="ti"><strong>${fmt(skinsPaid)}</strong><span>Skins paid (pool ${fmt(skPool)})</span></div>
     <div class="ti"><strong>${fmt(pogPaid)}</strong><span>POG paid (pool ${fmt(pgPool)})</span></div>
+    ${ffAmount?`<div class="ti"><strong>${fmt(ffAmount)}</strong><span>50/50 paid</span></div>`:''}
   </div>`;
 
   document.getElementById('payout-sheet').innerHTML=html;
@@ -1355,145 +1110,102 @@ async function generatePayout(previewOnly=false){
   document.getElementById('btn-print').style.display='block';
 }
 
-// ── Clear weekly entries ──────────────────────────────────────────────────────
-function confirmReset(){
-  if(!confirm('Clear all weekly entries? Pot carryovers and season totals are NOT affected.')) return;
-  document.querySelectorAll('#gross-tbody input').forEach(i=>i.value='');
-  for(let p=1;p<=15;p++){
-    ['ng','nn','ns','np'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${p}`);if(el)el.value='';});
-    const ps=document.getElementById(`npref-${p}`);if(ps)ps.selectedIndex=0;
+// ── PIN logic ─────────────────────────────────────────────────────────────────
+let pinEntry='';
+const getPIN=()=>{ try{return localStorage.getItem('club_pin')||'1234';}catch(e){return'1234';} };
+const setPIN=p=>{ try{localStorage.setItem('club_pin',p);}catch(e){} };
+const markSession=()=>{ try{localStorage.setItem('pin_session',new Date().toDateString());}catch(e){} };
+const sessionOK=()=>{ try{return localStorage.getItem('pin_session')===new Date().toDateString();}catch(e){return false;} };
+
+function updatePinDots(){
+  for(let i=0;i<4;i++) document.getElementById(`pd${i}`).classList.toggle('filled',i<pinEntry.length);
+}
+function pinDigit(d){
+  if(d==='del'){pinEntry=pinEntry.slice(0,-1);updatePinDots();document.getElementById('pin-error').textContent='';return;}
+  if(pinEntry.length>=4) return;
+  pinEntry+=d; updatePinDots();
+  if(pinEntry.length===4){
+    if(pinEntry===getPIN()){
+      document.getElementById('pin-overlay').classList.add('unlocked');
+      markSession(); pinEntry=''; updatePinDots();
+    } else {
+      document.getElementById('pin-error').textContent='Incorrect PIN — try again';
+      const dots=document.querySelector('.pin-dots');
+      ['-8px','8px','-4px','0'].forEach((v,i)=>setTimeout(()=>dots.style.transform=`translateX(${v})`,i*80));
+      setTimeout(()=>{pinEntry='';updatePinDots();},500);
+    }
   }
-  SKINS_HOLES.forEach(h=>{
-    ['sk-gsid','sk-name','sk-score'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${h}`);if(el)el.value='';});
-    const cb=document.getElementById(`sk-paid-${h}`);if(cb)cb.checked=false;
-    const ps=document.getElementById(`sk-pref-${h}`);if(ps)ps.selectedIndex=0;
-  });
-  POG_HOLES.forEach(h=>{
-    ['pog-gsid','pog-name','pog-score'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${h}`);if(el)el.value='';});
-    const cb=document.getElementById(`pog-paid-${h}`);if(cb)cb.checked=false;
-    const ps=document.getElementById(`pog-pref-${h}`);if(ps)ps.selectedIndex=0;
-  });
-  for(let h=1;h<=18;h++){
-    ['sp-gsid','sp-name','sp-prize'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${h}`);if(el)el.value='';});
-  }
+}
+function showPinModal(){
+  ['pm-cur','pm-new','pm-con'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('pm-error').textContent='';
+  document.getElementById('pin-modal').classList.add('open');
+}
+function savePIN(){
+  const cur=document.getElementById('pm-cur').value;
+  const nw =document.getElementById('pm-new').value;
+  const con=document.getElementById('pm-con').value;
+  const err=document.getElementById('pm-error');
+  if(cur!==getPIN()){err.textContent='Current PIN incorrect';return;}
+  if(!/^\d{4}$/.test(nw)){err.textContent='New PIN must be exactly 4 digits';return;}
+  if(nw!==con){err.textContent='PINs do not match';return;}
+  setPIN(nw); document.getElementById('pin-modal').classList.remove('open');
+  alert('PIN updated successfully.');
 }
 
-// ── CSV export helpers ────────────────────────────────────────────────────────
-function downloadCSV(filename, rows) {
-  const csv = rows.map(r => r.map(cell => {
-    const s = String(cell == null ? '' : cell);
-    return s.includes(',') || s.includes('"') || s.includes('\n')
-      ? '"' + s.replace(/"/g, '""') + '"' : s;
-  }).join(',')).join('\r\n');
-  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href = url; a.download = filename; a.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
+// ── Event listeners ───────────────────────────────────────────────────────────
+document.addEventListener('click',function(e){
+  // PIN keypad
+  const key=e.target.closest('.pin-key');
+  if(key){pinDigit(key.dataset.digit);return;}
 
-function exportSeasonCSV() {
-  if (!_lbAll.length) { alert('No season data to export.'); return; }
-  const now = new Date().toISOString().slice(0,10);
-  const rows = [
-    ['Rank','GS ID','Player Name','Gross ($)','Net ($)','Skins ($)','POG ($)','Skill Prizes','Season Total ($)','Payout Preference','Weeks Won'],
-    ..._lbAll.map((r,i) => [
-      i+1, r.gsId||'', r.name||'',
-      (r.gross||0).toFixed(2), (r.net||0).toFixed(2),
-      (r.skins||0).toFixed(2), (r.pog||0).toFixed(2),
-      r.skill||0, (r.total||0).toFixed(2),
-      r.pref||'', r.weeks||0
-    ])
-  ];
-  downloadCSV(`mens-club-season-${now}.csv`, rows);
-}
+  // Sidebar nav tabs
+  const tbtn=e.target.closest('.tbtn[data-tab]');
+  if(tbtn){showTab(tbtn.dataset.tab);return;}
 
-function exportPotsCSV() {
-  const now = new Date().toISOString().slice(0,10);
-  const skPerHole = weeklySkinsPerHole();
-  const pgPerHole = weeklyPOGPerHole();
-  const rows = [
-    ['Type','Hole','Carried Balance ($)','This Week Contribution ($)','Running Total ($)','Last Updated'],
-    ...SKINS_HOLES.map(h => {
-      const d = skinsPots[h] || {pot:0, updatedAt:null};
-      return ['Skins', h, (d.pot||0).toFixed(2), skPerHole.toFixed(2), (d.pot+skPerHole).toFixed(2), d.updatedAt ? new Date(d.updatedAt).toLocaleDateString() : ''];
-    }),
-    ...POG_HOLES.map(h => {
-      const d = pogPots[h] || {pot:0, updatedAt:null};
-      return ['POG', h, (d.pot||0).toFixed(2), pgPerHole.toFixed(2), (d.pot+pgPerHole).toFixed(2), d.updatedAt ? new Date(d.updatedAt).toLocaleDateString() : ''];
-    })
-  ];
-  downloadCSV(`mens-club-pots-${now}.csv`, rows);
-}
-
-function exportWeeksCSV() {
-  const now = new Date().toISOString().slice(0,10);
-  const weeks = weeksLog.slice().reverse();
-  if (!weeks.length) { alert('No week history to export.'); return; }
-  const rows = [
-    ['Tournament Name','Date','Total Players','G/N Pool ($)','Skins Pool ($)','POG Pool ($)','Recorded At'],
-    ...weeks.map(w => [
-      w.name||'', w.date||'', w.players||0,
-      (w.gnPool||0).toFixed(2), (w.skinsPool||0).toFixed(2), (w.pogPool||0).toFixed(2),
-      w.recordedAt ? new Date(w.recordedAt).toLocaleString() : ''
-    ])
-  ];
-  downloadCSV(`mens-club-weeks-${now}.csv`, rows);
-}
-
-
-// ── Event delegation — replaces all onclick/oninput/onchange ─────────────────
-document.addEventListener('click', function(e) {
-  const btn = e.target.closest('[data-action]');
-  if (!btn) return;
-  const action = btn.getAttribute('data-action');
-  switch(action) {
-    case 'nav-setup':   showTab('setup');   break;
-    case 'nav-payout':  showTab('payout');  break;
-    case 'nav-season':  showTab('season');  break;
-    case 'nav-pots':    showTab('pots');    break;
-    case 'commit':      generatePayout(false); break;
-    case 'preview':     generatePayout(true);  break;
-    case 'print':       window.print();    break;
-    case 'clear':       confirmReset();    break;
-    case 'add-gross':   addGrossRow();     break;
-    case 'export-season': exportSeasonCSV(); break;
-    case 'reset-season':  confirmResetSeason(); break;
-    case 'refresh-lb':    loadLeaderboard(); break;
-    case 'export-pots':   exportPotsCSV();  break;
-    case 'export-weeks':  exportWeeksCSV(); break;
+  // Named buttons
+  const id=e.target.id||e.target.closest('button')?.id;
+  switch(id){
+    case 'btn-commit':   generatePayout(false); break;
+    case 'btn-preview':  generatePayout(true);  break;
+    case 'btn-print':    window.print();         break;
+    case 'btn-clear':    clearEntries();         break;
+    case 'btn-reset-pots': resetAllPots();       break;
+    case 'btn-change-pin':
+    case 'pin-change-link': showPinModal();      break;
+    case 'pm-cancel':    document.getElementById('pin-modal').classList.remove('open'); break;
+    case 'pm-save':      savePIN();              break;
+    case 'btn-add-gross':addGrossRow();          break;
+    case 'btn-export-season': exportSeasonCSV(); break;
+    case 'btn-reset-season':  resetSeason();     break;
+    case 'btn-refresh-lb':    renderLeaderboard(Object.entries(seasonData).map(([id,v])=>({id,...v}))); break;
+    case 'btn-export-pots':   exportPotsCSV();   break;
+    case 'btn-export-weeks':  exportWeeksCSV();  break;
   }
 });
 
-document.addEventListener('input', function(e) {
-  const el = e.target;
-  if (el.getAttribute('data-action') === 'recalc' ||
-      el.id === 't-gn' || el.id === 't-skins' || el.id === 't-pog') {
-    recalcPools();
-  }
-  if (el.getAttribute('data-action') === 'filter-lb-search') {
-    const pref = document.querySelector('[data-action="filter-lb-pref"]')?.value || '';
-    filterLeaderboard(el.value, pref);
-  }
+document.addEventListener('input',function(e){
+  const id=e.target.id;
+  if(['t-gn','t-skins','t-pog','t-total'].includes(id)) recalcPools();
+  if(id==='lb-search') filterLeaderboard(e.target.value,document.getElementById('lb-filter')?.value||'');
+  // Flight label updates
+  if(id&&id.startsWith('f-')) refreshFlightLabels();
 });
 
-document.addEventListener('change', function(e) {
-  const el = e.target;
-  if (el.getAttribute('data-action') === 'filter-lb-pref') {
-    const q = document.querySelector('[data-action="filter-lb-search"]')?.value || '';
-    filterLeaderboard(q, el.value);
-  }
+document.addEventListener('change',function(e){
+  if(e.target.id==='lb-filter') filterLeaderboard(document.getElementById('lb-search')?.value||'',e.target.value);
 });
 
 // ── Init ──────────────────────────────────────────────────────────────────────
-function init() {
-  recalcPools(); initDB();
+function init(){
+  loadState();
+  buildNet(); buildSkins(); buildPOG(); buildSkill();
+  recalcPools();
+  if(sessionOK()) document.getElementById('pin-overlay').classList.add('unlocked');
+  document.getElementById('db-dot').className='dot live';
+  document.getElementById('db-msg').textContent='Saved on this device';
 }
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
 </script>
 </body>
 </html>
