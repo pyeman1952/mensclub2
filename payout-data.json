@@ -10,7 +10,7 @@
       "gnPool": 490,
       "skinsPool": 235,
       "pogPool": 240,
-      "recordedAt": "2026-10-13T01:16:47.619Z",
+      "recordedAt": "2026-10-13T01:18:23.559Z",
       "flights": {
         "A": [
           {
@@ -209,8 +209,8 @@
           "hole": 2,
           "winner": "",
           "score": "",
-          "runPot": 56.15384615384616,
-          "stored": 38.07692307692308,
+          "runPot": 74.23076923076924,
+          "stored": 56.15384615384616,
           "weekly": 18.076923076923077,
           "paid": false,
           "pref": "Bar"
@@ -219,8 +219,8 @@
           "hole": 5,
           "winner": "",
           "score": "",
-          "runPot": 56.15384615384616,
-          "stored": 38.07692307692308,
+          "runPot": 74.23076923076924,
+          "stored": 56.15384615384616,
           "weekly": 18.076923076923077,
           "paid": false,
           "pref": "Bar"
@@ -259,8 +259,8 @@
           "hole": 9,
           "winner": "",
           "score": "",
-          "runPot": 56.15384615384616,
-          "stored": 38.07692307692308,
+          "runPot": 74.23076923076924,
+          "stored": 56.15384615384616,
           "weekly": 18.076923076923077,
           "paid": false,
           "pref": "Bar"
@@ -279,8 +279,8 @@
           "hole": 12,
           "winner": "",
           "score": "",
-          "runPot": 56.15384615384616,
-          "stored": 38.07692307692308,
+          "runPot": 74.23076923076924,
+          "stored": 56.15384615384616,
           "weekly": 18.076923076923077,
           "paid": false,
           "pref": "Bar"
@@ -289,8 +289,8 @@
           "hole": 13,
           "winner": "",
           "score": "",
-          "runPot": 56.15384615384616,
-          "stored": 38.07692307692308,
+          "runPot": 74.23076923076924,
+          "stored": 56.15384615384616,
           "weekly": 18.076923076923077,
           "paid": false,
           "pref": "Bar"
@@ -299,8 +299,8 @@
           "hole": 14,
           "winner": "",
           "score": "",
-          "runPot": 56.15384615384616,
-          "stored": 38.07692307692308,
+          "runPot": 74.23076923076924,
+          "stored": 56.15384615384616,
           "weekly": 18.076923076923077,
           "paid": false,
           "pref": "Bar"
@@ -331,8 +331,8 @@
           "hole": 3,
           "winner": "",
           "score": "",
-          "runPot": 146,
-          "stored": 98,
+          "runPot": 194,
+          "stored": 146,
           "weekly": 48,
           "paid": false,
           "pref": "Bar"
@@ -351,8 +351,8 @@
           "hole": 10,
           "winner": "",
           "score": "",
-          "runPot": 146,
-          "stored": 98,
+          "runPot": 194,
+          "stored": 146,
           "weekly": 48,
           "paid": false,
           "pref": "Bar"
@@ -371,8 +371,8 @@
           "hole": 17,
           "winner": "",
           "score": "",
-          "runPot": 146,
-          "stored": 98,
+          "runPot": 194,
+          "stored": 146,
           "weekly": 48,
           "paid": false,
           "pref": "Bar"
@@ -858,7 +858,7 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0â10",
+        "A": "0Ã¢ÂÂ10",
         "B": "11-15",
         "C": "16+",
         "D": "18+"
@@ -1523,14 +1523,14 @@
     "Greg Koster": {
       "name": "Greg Koster",
       "pref": "Cash",
-      "gross": 80,
+      "gross": 120,
       "net": 0,
       "skins": 0,
-      "pog": 146,
+      "pog": 194,
       "draw": 0,
-      "total": 226,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 314,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Corey Nickerson": {
       "name": "Corey Nickerson",
@@ -1538,366 +1538,366 @@
       "gross": 0,
       "net": 0,
       "skins": 0,
-      "pog": 146,
+      "pog": 194,
       "draw": 0,
-      "total": 146,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 194,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Jim Green": {
       "name": "Jim Green",
       "pref": "Pro Shop",
-      "gross": 80,
+      "gross": 120,
       "net": 0,
-      "skins": 56.15384615384616,
+      "skins": 74.23076923076924,
       "pog": 0,
       "draw": 0,
-      "total": 136.15384615384616,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 194.23076923076923,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Mike Matheson": {
       "name": "Mike Matheson",
       "pref": "Pro Shop",
       "gross": 0,
-      "net": 80,
-      "skins": 56.15384615384616,
+      "net": 120,
+      "skins": 74.23076923076924,
       "pog": 0,
       "draw": 0,
-      "total": 136.15384615384616,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 194.23076923076923,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Randy Bennett": {
       "name": "Randy Bennett",
       "pref": "Bar",
       "gross": 0,
-      "net": 70,
-      "skins": 56.15384615384616,
+      "net": 105,
+      "skins": 74.23076923076924,
       "pog": 0,
       "draw": 0,
-      "total": 126.15384615384616,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 179.23076923076923,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Gord Bohmer": {
       "name": "Gord Bohmer",
       "pref": "Pro Shop",
       "gross": 0,
-      "net": 30,
-      "skins": 56.15384615384616,
+      "net": 45,
+      "skins": 74.23076923076924,
       "pog": 0,
       "draw": 0,
-      "total": 86.15384615384616,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 119.23076923076924,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Keith Allan": {
       "name": "Keith Allan",
       "pref": "Bar",
-      "gross": 80,
+      "gross": 120,
       "net": 0,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 80,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 120,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Doug Rushton": {
       "name": "Doug Rushton",
       "pref": "Pro Shop",
       "gross": 0,
       "net": 0,
-      "skins": 56.15384615384616,
+      "skins": 74.23076923076924,
       "pog": 0,
       "draw": 0,
-      "total": 56.15384615384616,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 74.23076923076924,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Yvonne Stewart": {
       "name": "Yvonne Stewart",
       "pref": "Pro Shop",
       "gross": 0,
       "net": 0,
-      "skins": 56.15384615384616,
+      "skins": 74.23076923076924,
       "pog": 0,
       "draw": 0,
-      "total": 56.15384615384616,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 74.23076923076924,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Kevin Riordan": {
       "name": "Kevin Riordan",
       "pref": "Bar",
       "gross": 0,
       "net": 0,
-      "skins": 56.15384615384616,
+      "skins": 74.23076923076924,
       "pog": 0,
       "draw": 0,
-      "total": 56.15384615384616,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 74.23076923076924,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Craig Follis": {
       "name": "Craig Follis",
       "pref": "Bar",
-      "gross": 60,
+      "gross": 90,
       "net": 0,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 60,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 90,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Rick Dawson": {
       "name": "Rick Dawson",
       "pref": "Bar",
-      "gross": 60,
+      "gross": 90,
       "net": 0,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 60,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 90,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Mike Schwarz": {
       "name": "Mike Schwarz",
       "pref": "Pro Shop",
-      "gross": 60,
+      "gross": 90,
       "net": 0,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 60,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 90,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Matt Noble": {
       "name": "Matt Noble",
       "pref": "Pro Shop",
       "gross": 0,
-      "net": 50,
+      "net": 75,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 50,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 75,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Brian Phelan": {
       "name": "Brian Phelan",
       "pref": "Pro Shop",
       "gross": 0,
-      "net": 50,
+      "net": 75,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 50,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 75,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Bob Tarbuck": {
       "name": "Bob Tarbuck",
       "pref": "Bar",
       "gross": 0,
-      "net": 50,
+      "net": 75,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 50,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 75,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Mitch Carr-Hilton": {
       "name": "Mitch Carr-Hilton",
       "pref": "Pro Shop",
-      "gross": 40,
+      "gross": 60,
       "net": 0,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 40,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 60,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Larry Hunt": {
       "name": "Larry Hunt",
       "pref": "Bar",
-      "gross": 40,
+      "gross": 60,
       "net": 0,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 40,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 60,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Gord Lund": {
       "name": "Gord Lund",
       "pref": "Pro Shop",
-      "gross": 40,
+      "gross": 60,
       "net": 0,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 40,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 60,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Scott Murray": {
       "name": "Scott Murray",
       "pref": "Bar",
       "gross": 0,
-      "net": 40,
+      "net": 60,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 40,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 60,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Steve Dewitt": {
       "name": "Steve Dewitt",
       "pref": "Pro Shop",
       "gross": 0,
-      "net": 40,
+      "net": 60,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 40,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 60,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Dennis Lychak": {
       "name": "Dennis Lychak",
       "pref": "Pro Shop",
       "gross": 0,
-      "net": 30,
+      "net": 45,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 30,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 45,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Trent Skinner": {
       "name": "Trent Skinner",
       "pref": "Pro Shop",
       "gross": 0,
-      "net": 30,
+      "net": 45,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 30,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 45,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     },
     "Silvio Alberti": {
       "name": "Silvio Alberti",
       "pref": "Bar",
       "gross": 0,
-      "net": 30,
+      "net": 45,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 30,
-      "weeks": 2,
-      "lastUpdated": "2026-10-13T01:16:47.100Z"
+      "total": 45,
+      "weeks": 3,
+      "lastUpdated": "2026-10-13T01:18:22.969Z"
     }
   },
   "pots": {
     "sk_1": {
       "pot": 0,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "updatedAt": "2026-10-13T01:18:22.968Z",
       "lastWinner": "Gord Bohmer"
     },
     "sk_2": {
-      "pot": 56.15384615384616,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "pot": 74.23076923076924,
+      "updatedAt": "2026-10-13T01:18:22.968Z",
       "lastWinner": null
     },
     "sk_5": {
-      "pot": 56.15384615384616,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "pot": 74.23076923076924,
+      "updatedAt": "2026-10-13T01:18:22.968Z",
       "lastWinner": null
     },
     "sk_6": {
       "pot": 0,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "updatedAt": "2026-10-13T01:18:22.968Z",
       "lastWinner": "Randy Bennett"
     },
     "sk_7": {
       "pot": 0,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "updatedAt": "2026-10-13T01:18:22.969Z",
       "lastWinner": "Doug Rushton"
     },
     "sk_8": {
       "pot": 0,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "updatedAt": "2026-10-13T01:18:22.969Z",
       "lastWinner": "Yvonne Stewart"
     },
     "sk_9": {
-      "pot": 56.15384615384616,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "pot": 74.23076923076924,
+      "updatedAt": "2026-10-13T01:18:22.969Z",
       "lastWinner": null
     },
     "sk_11": {
       "pot": 0,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "updatedAt": "2026-10-13T01:18:22.969Z",
       "lastWinner": "Kevin Riordan"
     },
     "sk_12": {
-      "pot": 56.15384615384616,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "pot": 74.23076923076924,
+      "updatedAt": "2026-10-13T01:18:22.969Z",
       "lastWinner": null
     },
     "sk_13": {
-      "pot": 56.15384615384616,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "pot": 74.23076923076924,
+      "updatedAt": "2026-10-13T01:18:22.969Z",
       "lastWinner": null
     },
     "sk_14": {
-      "pot": 56.15384615384616,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "pot": 74.23076923076924,
+      "updatedAt": "2026-10-13T01:18:22.969Z",
       "lastWinner": null
     },
     "sk_16": {
       "pot": 0,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "updatedAt": "2026-10-13T01:18:22.969Z",
       "lastWinner": "Jim Green"
     },
     "sk_18": {
       "pot": 0,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "updatedAt": "2026-10-13T01:18:22.969Z",
       "lastWinner": "Mike Matheson"
     },
     "pg_3": {
-      "pot": 146,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "pot": 194,
+      "updatedAt": "2026-10-13T01:18:22.969Z",
       "lastWinner": null
     },
     "pg_4": {
       "pot": 0,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "updatedAt": "2026-10-13T01:18:22.969Z",
       "lastWinner": "Corey Nickerson"
     },
     "pg_10": {
-      "pot": 146,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "pot": 194,
+      "updatedAt": "2026-10-13T01:18:22.969Z",
       "lastWinner": null
     },
     "pg_15": {
       "pot": 0,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "updatedAt": "2026-10-13T01:18:22.969Z",
       "lastWinner": "Greg Koster"
     },
     "pg_17": {
-      "pot": 146,
-      "updatedAt": "2026-10-13T01:16:47.100Z",
+      "pot": 194,
+      "updatedAt": "2026-10-13T01:18:22.969Z",
       "lastWinner": null
     }
   }
