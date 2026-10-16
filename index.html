@@ -39,11 +39,13 @@ html,body{height:100%;width:100%;font-family:system-ui,-apple-system,sans-serif;
 .tbtn.active{background:rgba(255,255,255,.12);color:#fff;font-weight:600;border-left:3px solid var(--gold);padding-left:11px;}
 .sdiv{border:none;border-top:1px solid rgba(255,255,255,.1);margin:6px 14px;}
 .sact{padding:10px 10px calc(6px + var(--sb));display:flex;flex-direction:column;gap:7px;margin-top:auto;}
-.sbtn{display:block;width:100%;padding:10px 10px;border-radius:var(--rad);font-size:12px;font-weight:600;cursor:pointer;border:none;text-align:center;}
+.sbtn{display:block;width:100%;padding:10px 10px;border-radius:var(--rad);font-size:12px;font-weight:600;cursor:pointer;border:none;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,.25),0 1px 2px rgba(0,0,0,.15);transition:box-shadow .15s,filter .15s;}
+.sbtn:hover{filter:brightness(1.1);box-shadow:0 3px 8px rgba(0,0,0,.35),0 1px 3px rgba(0,0,0,.2);}
+.sbtn:active{box-shadow:0 1px 2px rgba(0,0,0,.2);filter:brightness(.95);}
 .sbtn-gold{background:var(--gold);color:#1A1A1A;}
 .sbtn-purple{background:rgba(99,0,204,.7);color:#fff;}
 .sbtn-ghost{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.2);}
-.sbtn-danger{background:transparent;color:#FF6B6B;border:1px solid rgba(255,107,107,.4);}
+.sbtn-danger{background:rgba(255,107,107,.1);color:#FF6B6B;border:1px solid rgba(255,107,107,.4);}
 .sbtn-blue{background:rgba(13,71,161,.6);color:#fff;}
 
 /* ── Content ── */
@@ -341,16 +343,16 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
       <h2>Gross Winners <em>top 2 per flight minimum — check Countback if applicable</em></h2>
       <div class="cb">
         <table class="gt">
-          <thead><tr><th>Flight</th><th>Place</th><th>Player Name</th><th>Score</th><th>CB</th><th>Prize ($)</th><th>Payout</th></tr></thead>
+          <thead><tr><th>Flight</th><th>Place</th><th>Player Name</th><th>Score</th><th>CB</th><th>Prize ($)</th></tr></thead>
           <tbody id="gross-tbody">
-            <tr data-flight="A" data-place="1"><td><span class="fb fA" id="lbl-A">Flight A</span><br><small id="rng-A" style="color:var(--mut);font-size:9px;">0–5</small></td><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="gr-name-A1" placeholder="Player name"></td><td><input type="number" id="gr-score-A1" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-A1" title="Countback"></td><td><input type="number" id="gr-prize-A1" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-A1"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
-            <tr data-flight="A" data-place="2"><td></td><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="gr-name-A2" placeholder="Player name"></td><td><input type="number" id="gr-score-A2" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-A2" title="Countback"></td><td><input type="number" id="gr-prize-A2" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-A2"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
-            <tr data-flight="B" data-place="1"><td><span class="fb fB" id="lbl-B">Flight B</span><br><small id="rng-B" style="color:var(--mut);font-size:9px;">6–11</small></td><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="gr-name-B1" placeholder="Player name"></td><td><input type="number" id="gr-score-B1" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-B1" title="Countback"></td><td><input type="number" id="gr-prize-B1" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-B1"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
-            <tr data-flight="B" data-place="2"><td></td><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="gr-name-B2" placeholder="Player name"></td><td><input type="number" id="gr-score-B2" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-B2" title="Countback"></td><td><input type="number" id="gr-prize-B2" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-B2"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
-            <tr data-flight="C" data-place="1"><td><span class="fb fC" id="lbl-C">Flight C</span><br><small id="rng-C" style="color:var(--mut);font-size:9px;">12–17</small></td><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="gr-name-C1" placeholder="Player name"></td><td><input type="number" id="gr-score-C1" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-C1" title="Countback"></td><td><input type="number" id="gr-prize-C1" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-C1"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
-            <tr data-flight="C" data-place="2"><td></td><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="gr-name-C2" placeholder="Player name"></td><td><input type="number" id="gr-score-C2" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-C2" title="Countback"></td><td><input type="number" id="gr-prize-C2" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-C2"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
-            <tr data-flight="D" data-place="1"><td><span class="fb fD" id="lbl-D">Flight D</span><br><small id="rng-D" style="color:var(--mut);font-size:9px;">18+</small></td><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="gr-name-D1" placeholder="Player name"></td><td><input type="number" id="gr-score-D1" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-D1" title="Countback"></td><td><input type="number" id="gr-prize-D1" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-D1"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
-            <tr data-flight="D" data-place="2"><td></td><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="gr-name-D2" placeholder="Player name"></td><td><input type="number" id="gr-score-D2" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-D2" title="Countback"></td><td><input type="number" id="gr-prize-D2" placeholder="$" style="width:60px;"></td><td><select id="gr-pref-D2"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
+            <tr data-flight="A" data-place="1"><td><span class="fb fA" id="lbl-A">Flight A</span><br><small id="rng-A" style="color:var(--mut);font-size:9px;">0–5</small></td><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="gr-name-A1" placeholder="Player name"></td><td><input type="number" id="gr-score-A1" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-A1" title="Countback"></td><td><input type="number" id="gr-prize-A1" placeholder="$" style="width:60px;"></td></tr>
+            <tr data-flight="A" data-place="2"><td></td><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="gr-name-A2" placeholder="Player name"></td><td><input type="number" id="gr-score-A2" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-A2" title="Countback"></td><td><input type="number" id="gr-prize-A2" placeholder="$" style="width:60px;"></td></tr>
+            <tr data-flight="B" data-place="1"><td><span class="fb fB" id="lbl-B">Flight B</span><br><small id="rng-B" style="color:var(--mut);font-size:9px;">6–11</small></td><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="gr-name-B1" placeholder="Player name"></td><td><input type="number" id="gr-score-B1" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-B1" title="Countback"></td><td><input type="number" id="gr-prize-B1" placeholder="$" style="width:60px;"></td></tr>
+            <tr data-flight="B" data-place="2"><td></td><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="gr-name-B2" placeholder="Player name"></td><td><input type="number" id="gr-score-B2" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-B2" title="Countback"></td><td><input type="number" id="gr-prize-B2" placeholder="$" style="width:60px;"></td></tr>
+            <tr data-flight="C" data-place="1"><td><span class="fb fC" id="lbl-C">Flight C</span><br><small id="rng-C" style="color:var(--mut);font-size:9px;">12–17</small></td><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="gr-name-C1" placeholder="Player name"></td><td><input type="number" id="gr-score-C1" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-C1" title="Countback"></td><td><input type="number" id="gr-prize-C1" placeholder="$" style="width:60px;"></td></tr>
+            <tr data-flight="C" data-place="2"><td></td><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="gr-name-C2" placeholder="Player name"></td><td><input type="number" id="gr-score-C2" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-C2" title="Countback"></td><td><input type="number" id="gr-prize-C2" placeholder="$" style="width:60px;"></td></tr>
+            <tr data-flight="D" data-place="1"><td><span class="fb fD" id="lbl-D">Flight D</span><br><small id="rng-D" style="color:var(--mut);font-size:9px;">18+</small></td><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="gr-name-D1" placeholder="Player name"></td><td><input type="number" id="gr-score-D1" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-D1" title="Countback"></td><td><input type="number" id="gr-prize-D1" placeholder="$" style="width:60px;"></td></tr>
+            <tr data-flight="D" data-place="2"><td></td><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="gr-name-D2" placeholder="Player name"></td><td><input type="number" id="gr-score-D2" placeholder="score" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-D2" title="Countback"></td><td><input type="number" id="gr-prize-D2" placeholder="$" style="width:60px;"></td></tr>
           </tbody>
         </table>
         <button id="btn-add-gross" style="margin-top:8px;font-size:11px;padding:4px 10px;border:1px solid var(--gm);background:var(--gl);color:var(--gd);border-radius:3px;cursor:pointer;">+ Add place</button>
@@ -363,9 +365,9 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
       <div class="cb">
         <table class="gt">
           <thead><tr>
-            <th>#</th><th>Player</th><th>Net</th><th>CB</th><th>Prize ($)</th><th>Payout</th>
-            <th>#</th><th>Player</th><th>Net</th><th>CB</th><th>Prize ($)</th><th>Payout</th>
-            <th>#</th><th>Player</th><th>Net</th><th>CB</th><th>Prize ($)</th><th>Payout</th>
+            <th>#</th><th>Player</th><th>Gross</th><th>Net</th><th>Hcp</th><th>CB</th><th>Prize ($)</th>
+            <th>#</th><th>Player</th><th>Gross</th><th>Net</th><th>Hcp</th><th>CB</th><th>Prize ($)</th>
+            <th>#</th><th>Player</th><th>Gross</th><th>Net</th><th>Hcp</th><th>CB</th><th>Prize ($)</th>
           </tr></thead>
           <tbody id="net-tbody"></tbody>
         </table>
@@ -404,7 +406,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
       <h2>Skins <em>holes 1,2,5–9,11–14,16,18 · lowest net</em></h2>
       <div class="cb">
         <table class="gt">
-          <thead><tr><th>Hole</th><th>Winner</th><th>Net</th><th class="thr">Prev Pot</th><th class="thr">+This Wk</th><th class="thr">Total Pot</th><th>Paid?</th><th>Payout</th></tr></thead>
+          <thead><tr><th>Hole</th><th>Winner</th><th>Net</th><th>Gross</th><th class="thr">Prev Pot</th><th class="thr">+This Wk</th><th class="thr">Total Pot</th><th>Paid?</th></tr></thead>
           <tbody id="skins-tbody"></tbody>
         </table>
       </div>
@@ -415,7 +417,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
       <h2>Pots of Gold <em>holes 3,4,10,15,17 · unique gross birdie</em></h2>
       <div class="cb">
         <table class="gt">
-          <thead><tr><th>Hole</th><th>Winner</th><th>Gross</th><th class="thr">Prev Pot</th><th class="thr">+This Wk</th><th class="thr">Total Pot</th><th>Paid?</th><th>Payout</th></tr></thead>
+          <thead><tr><th>Hole</th><th>Winner</th><th class="thr">Prev Pot</th><th class="thr">+This Wk</th><th class="thr">Total Pot</th><th>Paid?</th></tr></thead>
           <tbody id="pog-tbody"></tbody>
         </table>
       </div>
@@ -557,7 +559,11 @@ function loadState(){
 function saveSkinsHole(h){ LS.set(`sk_${h}`,skinsPots[h]); }
 function savePOGHole(h){ LS.set(`pg_${h}`,pogPots[h]); }
 function saveSeason(){ LS.set('season',seasonData); }
-function saveWeek(w){ weeksLog.push(w); LS.set('weeks',weeksLog); }
+function saveWeek(w){
+  const idx=weeksLog.findIndex(x=>x.id===w.id);
+  if(idx>=0) weeksLog[idx]=w; else weeksLog.push(w);
+  LS.set('weeks',weeksLog);
+}
 
 // ── Pool calc ─────────────────────────────────────────────────────────────────
 const skPerHole=()=>(parseFloat(document.getElementById('t-skins').value)||0)*5/13;
@@ -569,7 +575,7 @@ function recalcPools(){
   const pg=parseFloat(document.getElementById('t-pog').value)||0;
   document.getElementById('pool-summary').innerHTML=
     `Gross/Net pool: <strong>$${(gn*10).toFixed(0)}</strong> &nbsp;·&nbsp; `+
-    `Skins pool: <strong>$${(sk*5).toFixed(0)}</strong> ($${(sk>0?sk*5/13:0).toFixed(2)}/hole) &nbsp;·&nbsp; `+
+    `Skins pool: <strong>$${(sk*5).toFixed(0)}</strong> ($${(sk>0?Math.floor((sk*5/13)*100)/100:0).toFixed(2)}/hole) &nbsp;·&nbsp; `+
     `POG pool: <strong>$${(pg*5).toFixed(0)}</strong> ($${pg}/hole)`;
   updatePotBar();
   refreshSkinsPotDisplayAll();
@@ -600,7 +606,6 @@ function refreshFlightLabels(){
 // ── Build net tbody ───────────────────────────────────────────────────────────
 function buildNet(){
   const tbody=document.getElementById('net-tbody');
-  const psel=id=>`<select id="${id}">${PREF_OPTS.map(o=>`<option>${o}</option>`).join('')}</select>`;
   for(let r=0;r<5;r++){
     const tr=document.createElement('tr');
     let html='';
@@ -609,10 +614,11 @@ function buildNet(){
       const sfx=p===1?'st':p===2?'nd':p===3?'rd':'th';
       html+=`<td style="color:var(--mut);font-size:10px;width:22px;">${p}${sfx}</td>
         <td><input type="text" id="nn-${p}" placeholder="Name"></td>
+        <td><input type="number" id="ng-${p}" placeholder="gross" style="width:52px;"></td>
         <td><input type="number" id="ns-${p}" placeholder="net" style="width:52px;"></td>
+        <td><input type="number" id="nh-${p}" placeholder="hcp" style="width:45px;"></td>
         <td class="tdc"><input type="checkbox" id="nc-${p}" title="Countback"></td>
-        <td><input type="number" id="np-${p}" placeholder="$" style="width:58px;"></td>
-        <td>${psel(`npref-${p}`)}</td>`;
+        <td><input type="number" id="np-${p}" placeholder="$" style="width:58px;"></td>`;
     }
     tr.innerHTML=html; tbody.appendChild(tr);
   }
@@ -621,18 +627,17 @@ function buildNet(){
 // ── Build skins tbody ─────────────────────────────────────────────────────────
 function buildSkins(){
   const tbody=document.getElementById('skins-tbody');
-  const psel=id=>`<select id="${id}">${PREF_OPTS.map(o=>`<option>${o}</option>`).join('')}</select>`;
   SKINS_HOLES.forEach(h=>{
     const tr=document.createElement('tr'); tr.id=`sk-row-${h}`;
     tr.innerHTML=`
       <td style="font-weight:600;">${h}</td>
       <td><input type="text" id="sk-name-${h}" placeholder="Winner or blank"></td>
       <td><input type="number" id="sk-score-${h}" placeholder="net" style="width:52px;"></td>
+      <td><input type="number" id="sk-gross-${h}" placeholder="gross" style="width:52px;"></td>
       <td class="tdr"><span id="sk-prev-${h}" style="color:var(--mut);font-size:12px;">$0.00</span></td>
       <td class="tdr"><span id="sk-add-${h}" style="color:var(--gm);font-size:12px;">+$0.00</span></td>
       <td class="tdr"><span id="sk-pot-${h}" class="pot-display">$0.00</span></td>
-      <td class="tdc"><input type="checkbox" id="sk-paid-${h}"></td>
-      <td>${psel(`sk-pref-${h}`)}</td>`;
+      <td class="tdc"><input type="checkbox" id="sk-paid-${h}"></td>`;
     tbody.appendChild(tr);
   });
 }
@@ -640,18 +645,15 @@ function buildSkins(){
 // ── Build POG tbody ───────────────────────────────────────────────────────────
 function buildPOG(){
   const tbody=document.getElementById('pog-tbody');
-  const psel=id=>`<select id="${id}">${PREF_OPTS.map(o=>`<option>${o}</option>`).join('')}</select>`;
   POG_HOLES.forEach(h=>{
     const tr=document.createElement('tr'); tr.id=`pog-row-${h}`;
     tr.innerHTML=`
       <td style="font-weight:600;"><span class="pog-dot"></span>${h}</td>
       <td><input type="text" id="pog-name-${h}" placeholder="Unique birdie winner"></td>
-      <td><input type="number" id="pog-score-${h}" placeholder="gross" style="width:52px;"></td>
       <td class="tdr"><span id="pog-prev-${h}" style="color:var(--mut);font-size:12px;">$0.00</span></td>
       <td class="tdr"><span id="pog-add-${h}" style="color:var(--gm);font-size:12px;">+$0.00</span></td>
       <td class="tdr"><span id="pog-pot-${h}" class="pot-display">$0.00</span></td>
-      <td class="tdc"><input type="checkbox" id="pog-paid-${h}"></td>
-      <td>${psel(`pog-pref-${h}`)}</td>`;
+      <td class="tdc"><input type="checkbox" id="pog-paid-${h}"></td>`;
     tbody.appendChild(tr);
   });
 }
@@ -673,7 +675,6 @@ function buildSkill(){
 
 // ── Add gross row ─────────────────────────────────────────────────────────────
 function addGrossRow(){
-  const psel=`<select>${PREF_OPTS.map(o=>`<option>${o}</option>`).join('')}</select>`;
   const tr=document.createElement('tr');
   tr.innerHTML=`
     <td><select>${FLIGHTS.map(f=>`<option value="${f}">Flt ${f}</option>`).join('')}</select></td>
@@ -681,8 +682,7 @@ function addGrossRow(){
     <td><input type="text" placeholder="Player name"></td>
     <td><input type="number" placeholder="score" style="width:60px;"></td>
     <td class="tdc"><input type="checkbox" title="Countback"></td>
-    <td><input type="number" placeholder="$" style="width:60px;"></td>
-    <td>${psel}</td>`;
+    <td><input type="number" placeholder="$" style="width:60px;"></td>`;
   document.getElementById('gross-tbody').appendChild(tr);
 }
 
@@ -843,24 +843,20 @@ function clearEntries(){
   FLIGHTS.forEach(f=>[1,2].forEach(p=>{
     ['gr-name','gr-score','gr-prize'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${f}${p}`);if(el)el.value='';});
     const cb=document.getElementById(`gr-cb-${f}${p}`);if(cb)cb.checked=false;
-    const pr=document.getElementById(`gr-pref-${f}${p}`);if(pr)pr.selectedIndex=0;
   }));
   for(let p=1;p<=15;p++){
-    ['nn','ns','np'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${p}`);if(el)el.value='';});
+    ['nn','ng','ns','nh','np'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${p}`);if(el)el.value='';});
     const cb=document.getElementById(`nc-${p}`);if(cb)cb.checked=false;
-    const pr=document.getElementById(`npref-${p}`);if(pr)pr.selectedIndex=0;
   }
   SKINS_HOLES.forEach(h=>{
     const n=document.getElementById(`sk-name-${h}`);if(n)n.value='';
     const s=document.getElementById(`sk-score-${h}`);if(s)s.value='';
+    const g=document.getElementById(`sk-gross-${h}`);if(g)g.value='';
     const c=document.getElementById(`sk-paid-${h}`);if(c)c.checked=false;
-    const pr=document.getElementById(`sk-pref-${h}`);if(pr)pr.selectedIndex=0;
   });
   POG_HOLES.forEach(h=>{
     const n=document.getElementById(`pog-name-${h}`);if(n)n.value='';
-    const s=document.getElementById(`pog-score-${h}`);if(s)s.value='';
     const c=document.getElementById(`pog-paid-${h}`);if(c)c.checked=false;
-    const pr=document.getElementById(`pog-pref-${h}`);if(pr)pr.selectedIndex=0;
   });
   for(let h=1;h<=18;h++){
     ['sp-name','sp-prize'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${h}`);if(el)el.value='';});
@@ -879,17 +875,22 @@ function generatePayout(previewOnly=false){
   const total  =document.getElementById('t-total').value||'?';
   const cancelled=document.getElementById('t-cancelled')?.checked||false;
   const name   =(week&&tname)?`Week ${week} — ${tname}`:week?`Week ${week}`:tname||'—';
-  const weekKey=`${date}|${name}`.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_|]/g,'-');
+  const weekKey=date.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'-');
   const gnPly  =parseFloat(document.getElementById('t-gn').value)||0;
   const skPly  =parseFloat(document.getElementById('t-skins').value)||0;
   const pgPly  =parseFloat(document.getElementById('t-pog').value)||0;
   const gnPool =gnPly*10, skPool=skPly*5, pgPool=pgPly*5;
-  const skph=skPool/13, pgph=pgPly;
+  const skph=Math.floor((skPool/13)*100)/100, pgph=pgPly;
 
+  let isOverwrite=false;
   if(!previewOnly){
     const already=weeksLog.some(w=>w.id===weekKey);
-    if(already&&!confirm(`A payout for "${name}" on ${date} already exists.\n\nCommit again will double-count earnings.\nOK to overwrite, Cancel to preview only.`)){
-      previewOnly=true;
+    if(already){
+      if(!confirm(`A payout for ${date} already exists.\n\nPress OK to overwrite (pots will NOT be re-applied).\nPress Cancel to preview only.`)){
+        previewOnly=true;
+      } else {
+        isOverwrite=true;
+      }
     }
   }
 
@@ -900,14 +901,13 @@ function generatePayout(previewOnly=false){
   const fdata={A:[],B:[],C:[],D:[]};
   document.querySelectorAll('#gross-tbody tr').forEach(tr=>{
     const cells=tr.querySelectorAll('td');
-    let flt,place,pname,score,cb,prize,pref;
+    let flt,place,pname,score,cb,prize;
     if(tr.dataset.flight){
       flt=tr.dataset.flight; place=parseInt(tr.dataset.place);
       pname=cells[2].querySelector('input').value.trim();
       score=cells[3].querySelector('input').value;
       cb   =cells[4].querySelector('input')?.checked;
       prize=cells[5].querySelector('input').value;
-      pref =cells[6].querySelector('select').value;
     } else {
       flt  =cells[0].querySelector('select').value;
       place=parseInt(cells[1].querySelector('input').value)||0;
@@ -915,20 +915,20 @@ function generatePayout(previewOnly=false){
       score=cells[3].querySelector('input').value;
       cb   =cells[4].querySelector('input')?.checked;
       prize=cells[5].querySelector('input').value;
-      pref =cells[6].querySelector('select').value;
     }
-    if(pname||prize) fdata[flt].push({place,pname,score,cb,prize,pref});
+    if(pname||prize) fdata[flt].push({place,pname,score,cb,prize});
   });
 
   // Collect net
   const netData=[];
   for(let p=1;p<=15;p++){
     const n=(document.getElementById(`nn-${p}`)?.value||'').trim();
+    const g=document.getElementById(`ng-${p}`)?.value||'';
     const s=document.getElementById(`ns-${p}`)?.value||'';
+    const h=document.getElementById(`nh-${p}`)?.value||'';
     const cb=document.getElementById(`nc-${p}`)?.checked;
     const pr=document.getElementById(`np-${p}`)?.value||'';
-    const pref=document.getElementById(`npref-${p}`)?.value||'Bar';
-    if(n||pr) netData.push({place:p,pname:n,score:s,cb,prize:pr,pref});
+    if(n||pr) netData.push({place:p,pname:n,gross:g,score:s,hcp:h,cb,prize:pr});
   }
 
   // Collect skins
@@ -937,14 +937,20 @@ function generatePayout(previewOnly=false){
     const winner=(document.getElementById(`sk-name-${h}`)?.value||'').trim();
     const score =document.getElementById(`sk-score-${h}`)?.value||'';
     const paid  =document.getElementById(`sk-paid-${h}`)?.checked;
-    const pref  =document.getElementById(`sk-pref-${h}`)?.value||'Bar';
     const stored=(skinsPots[h]?.pot)||0;
     const runPot=stored+skph;
-    skinsData.push({hole:h,winner,score,runPot,stored,weekly:skph,paid,pref});
-    if(!previewOnly){
+    const gross=document.getElementById(`sk-gross-${h}`)?.value||'';
+    skinsData.push({hole:h,winner,score,gross,runPot,stored,weekly:skph,paid});
+    if(!previewOnly&&!isOverwrite){
       const newPot=paid?0:runPot;
       skinsPots[h]={pot:newPot,updatedAt:new Date().toISOString(),lastWinner:paid?winner:null};
       saveSkinsHole(h);
+    } else if(!previewOnly&&isOverwrite){
+      // On overwrite keep stored pot, only update if paid
+      if(paid){
+        skinsPots[h]={pot:0,updatedAt:new Date().toISOString(),lastWinner:winner||null};
+        saveSkinsHole(h);
+      }
     }
   }
 
@@ -952,16 +958,19 @@ function generatePayout(previewOnly=false){
   const pogData=[];
   for(const h of POG_HOLES){
     const winner=(document.getElementById(`pog-name-${h}`)?.value||'').trim();
-    const score =document.getElementById(`pog-score-${h}`)?.value||'';
     const paid  =document.getElementById(`pog-paid-${h}`)?.checked;
-    const pref  =document.getElementById(`pog-pref-${h}`)?.value||'Bar';
     const stored=(pogPots[h]?.pot)||0;
     const runPot=stored+pgph;
-    pogData.push({hole:h,winner,score,runPot,stored,weekly:pgph,paid,pref});
-    if(!previewOnly){
+    pogData.push({hole:h,winner,runPot,stored,weekly:pgph,paid});
+    if(!previewOnly&&!isOverwrite){
       const newPot=paid?0:runPot;
       pogPots[h]={pot:newPot,updatedAt:new Date().toISOString(),lastWinner:paid?winner:null};
       savePOGHole(h);
+    } else if(!previewOnly&&isOverwrite){
+      if(paid){
+        pogPots[h]={pot:0,updatedAt:new Date().toISOString(),lastWinner:winner||null};
+        savePOGHole(h);
+      }
     }
   }
 
@@ -984,42 +993,29 @@ function generatePayout(previewOnly=false){
   const ffAmount=parseFloat(document.getElementById('ff-amount')?.value)||0;
   const ffPref  =document.getElementById('ff-pref')?.value||'Bar';
 
-  // Money winners map
+  // Money winners map — pref is set per-winner in the Weekly Money Winners table
   const mwMap={};
   const mwKey=(name)=>name||null;
-  const addMW=(name,pref,cat,amount)=>{
+  const addMW=(name,cat,amount)=>{
     const k=mwKey(name); if(!k||!amount) return;
-    if(!mwMap[k]) mwMap[k]={name,pref,gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:1};
+    if(!mwMap[k]) mwMap[k]={name,pref:'Bar',gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:1};
     mwMap[k][cat]+=(parseFloat(amount)||0);
     mwMap[k].total=mwMap[k].gross+mwMap[k].net+mwMap[k].skins+mwMap[k].pog+mwMap[k].draw;
-    mwMap[k].pref=pref;
   };
-  FLIGHTS.forEach(f=>fdata[f].forEach(r=>addMW(r.pname,r.pref,'gross',r.prize)));
-  netData.forEach(r=>addMW(r.pname,r.pref,'net',r.prize));
-  skinsData.filter(r=>r.paid&&r.winner).forEach(r=>addMW(r.winner,r.pref,'skins',r.runPot));
-  pogData.filter(r=>r.paid&&r.winner).forEach(r=>addMW(r.winner,r.pref,'pog',r.runPot));
-  meatData.forEach(r=>addMW(r.winner,'Bar','draw',0)); // meat is non-cash
-  if(ffWinner&&ffAmount) addMW(ffWinner,ffPref,'draw',ffAmount);
+  FLIGHTS.forEach(f=>fdata[f].forEach(r=>addMW(r.pname,'gross',r.prize)));
+  netData.forEach(r=>addMW(r.pname,'net',r.prize));
+  skinsData.filter(r=>r.paid&&r.winner).forEach(r=>addMW(r.winner,'skins',r.runPot));
+  pogData.filter(r=>r.paid&&r.winner).forEach(r=>addMW(r.winner,'pog',r.runPot));
+  meatData.forEach(r=>addMW(r.winner,'draw',0)); // meat is non-cash
+  if(ffWinner&&ffAmount) addMW(ffWinner,'draw',ffAmount);
   const mwList=Object.values(mwMap).sort((a,b)=>b.total-a.total);
 
-  // Commit season
+  // Commit season — pref is read from mw-pref-N selects after render (see confirmCommit)
   if(!previewOnly){
-    saveWeek({id:weekKey,name,date,players:parseInt(total)||0,gnPool,skinsPool:skPool,pogPool:pgPool,cancelled,notes,recordedAt:new Date().toISOString()});
-    for(const mw of mwList){
-      const k=mwKey(mw.name); if(!k) continue;
-      const ex=seasonData[k]||{gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:0};
-      seasonData[k]={name:mw.name,pref:mw.pref,
-        gross:(ex.gross||0)+(mw.gross||0),net:(ex.net||0)+(mw.net||0),
-        skins:(ex.skins||0)+(mw.skins||0),pog:(ex.pog||0)+(mw.pog||0),
-        draw:(ex.draw||0)+(mw.draw||0),total:(ex.total||0)+(mw.total||0),
-        weeks:(ex.weeks||0)+1,lastUpdated:new Date().toISOString()};
-    }
-    saveSeason();
+    // Store pending commit data for confirmCommit() to finalize
+    window._pendingCommit={weekKey,name,date,notes,cancelled,total,gnPool,skPool,pgPool,
+      fdata,netData,skinsData,pogData,skillData,meatData,ffWinner,ffAmount,ffPref,mwList,isOverwrite};
     refreshSkinsPotDisplayAll(); refreshPOGPotDisplayAll();
-
-    // Publish to GitHub for public results page
-    publishToGitHub(weekKey, name, date, notes, cancelled, total, gnPool, skPool, pgPool,
-      fdata, netData, skinsData, pogData, skillData, meatData, ffWinner, ffAmount, ffPref, mwList);
   }
 
   // Totals
@@ -1047,18 +1043,18 @@ function generatePayout(previewOnly=false){
   if(!cancelled){
     // GROSS
     html+=`<div class="psec"><div class="ptitle">Gross Winners — Flight Results</div>
-      <table class="pt"><thead><tr><th>Flight</th><th>Place</th><th>Player</th><th>Score</th><th class="r">Prize</th><th>Payout</th></tr></thead><tbody>`;
+      <table class="pt"><thead><tr><th>Flight</th><th>Place</th><th>Player</th><th>Score</th><th class="r">Prize</th></tr></thead><tbody>`;
     FLIGHTS.forEach(f=>{
-      html+=`<tr class="fhdr"><td colspan="6">${getFL(f)} &nbsp; ${getFR(f)} handicap</td></tr>`;
+      html+=`<tr class="fhdr"><td colspan="5">${getFL(f)} &nbsp; ${getFR(f)} handicap</td></tr>`;
       if(!fdata[f].length){
-        html+=`<tr><td colspan="6" style="color:var(--mut);font-size:11px;padding:6px 9px;">No entries</td></tr>`;
+        html+=`<tr><td colspan="5" style="color:var(--mut);font-size:11px;padding:6px 9px;">No entries</td></tr>`;
       } else {
         fdata[f].forEach(r=>{
           const sfx=r.place===1?'st':r.place===2?'nd':r.place===3?'rd':'th';
           const bc=r.place<=3?`p${r.place}b`:'pnb';
           html+=`<tr><td></td><td><span class="pbadge ${bc}">${r.place}</span>${r.place}${sfx}${r.cb?' <span class="countback-badge">CB</span>':''}</td>
             <td>${r.pname||'—'}</td><td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
-            <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td><td>${prefBadge(r.pref)}</td></tr>`;
+            <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td></tr>`;
         });
       }
     });
@@ -1066,51 +1062,52 @@ function generatePayout(previewOnly=false){
 
     // NET
     html+=`<div class="psec"><div class="ptitle">Net Winners — Overall</div>
-      <table class="pt"><thead><tr><th>Place</th><th>Player</th><th>Net</th><th class="r">Prize</th><th>Payout</th></tr></thead><tbody>`;
+      <table class="pt"><thead><tr><th>Place</th><th>Player</th><th>Gross</th><th>Net</th><th>Hcp</th><th class="r">Prize</th></tr></thead><tbody>`;
     if(!netData.length){
-      html+=`<tr><td colspan="5" style="color:var(--mut);padding:8px 9px;">No entries</td></tr>`;
+      html+=`<tr><td colspan="6" style="color:var(--mut);padding:8px 9px;">No entries</td></tr>`;
     } else {
       netData.forEach(r=>{
         const sfx=r.place===1?'st':r.place===2?'nd':r.place===3?'rd':'th';
         const bc=r.place<=3?`p${r.place}b`:'pnb';
         html+=`<tr><td><span class="pbadge ${bc}">${r.place}</span>${r.place}${sfx}${r.cb?' <span class="countback-badge">CB</span>':''}</td>
-          <td>${r.pname||'—'}</td><td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
-          <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td><td>${prefBadge(r.pref)}</td></tr>`;
+          <td>${r.pname||'—'}</td>
+          <td style="color:var(--mut);font-size:11px;">${r.gross||'—'}</td>
+          <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
+          <td style="color:var(--mut);font-size:11px;">${r.hcp||'—'}</td>
+          <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td></tr>`;
       });
     }
     html+=`</tbody></table></div>`;
 
     // SKINS
-    html+=`<div class="psec"><div class="ptitle">Skins — Lowest Net Score per Hole</div>
-      <table class="pt"><thead><tr><th>Hole</th><th>Winner</th><th>Net</th><th class="r">Prev</th><th class="r">+This Wk</th><th class="r">Pot</th><th class="r">Status</th><th>Payout</th></tr></thead><tbody>`;
+    html+=`<div class="psec"><div class="ptitle">Skins — Lowest Score per Hole</div>
+      <table class="pt"><thead><tr><th>Hole</th><th>Winner</th><th>Net</th><th>Gross</th><th class="r">Prev</th><th class="r">+This Wk</th><th class="r">Pot</th><th class="r">Status</th></tr></thead><tbody>`;
     skinsData.forEach(r=>{
       const carry=!r.paid||!r.winner;
       html+=`<tr style="${carry?'background:var(--carry);':'background:#F0FFF4;'}">
         <td style="font-weight:600;">${r.hole}</td>
         <td>${r.winner||'<em style="color:var(--mut)">No winner</em>'}</td>
         <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
+        <td style="color:var(--mut);font-size:11px;">${r.gross||'—'}</td>
         <td class="r" style="color:var(--mut);font-size:11px;">${fmt(r.stored)}</td>
         <td class="r" style="color:var(--gm);font-size:11px;">+${fmt(r.weekly)}</td>
         <td class="r"><span class="money">${fmt(r.runPot)}</span></td>
-        <td class="r">${carry?'<span class="cbadge">CARRY</span>':'<span style="color:var(--gm);font-weight:700;font-family:system-ui;font-size:11px;">PAID</span>'}</td>
-        <td>${carry?'':prefBadge(r.pref)}</td></tr>`;
+        <td class="r">${carry?'<span class="cbadge">CARRY</span>':'<span style="color:var(--gm);font-weight:700;font-family:system-ui;font-size:11px;">PAID</span>'}</td></tr>`;
     });
     html+=`</tbody></table></div>`;
 
     // POG
     html+=`<div class="psec"><div class="ptitle">Pots of Gold — Unique Gross Birdie Required</div>
-      <table class="pt"><thead><tr><th>Hole</th><th>Winner</th><th>Gross</th><th class="r">Prev</th><th class="r">+This Wk</th><th class="r">Pot</th><th class="r">Status</th><th>Payout</th></tr></thead><tbody>`;
+      <table class="pt"><thead><tr><th>Hole</th><th>Winner</th><th class="r">Prev</th><th class="r">+This Wk</th><th class="r">Pot</th><th class="r">Status</th></tr></thead><tbody>`;
     pogData.forEach(r=>{
       const carry=!r.paid||!r.winner;
       html+=`<tr style="${carry?'background:var(--carry);':'background:var(--gold-l);'}">
         <td style="font-weight:600;"><span class="pog-dot"></span>${r.hole}</td>
         <td>${r.winner||'<em style="color:var(--mut)">No unique birdie</em>'}</td>
-        <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
         <td class="r" style="color:var(--mut);font-size:11px;">${fmt(r.stored)}</td>
         <td class="r" style="color:var(--gm);font-size:11px;">+${fmt(r.weekly)}</td>
         <td class="r"><span class="money">${fmt(r.runPot)}</span></td>
-        <td class="r">${carry?'<span class="cbadge">CARRY</span>':'<span style="color:var(--gm);font-weight:700;font-family:system-ui;font-size:11px;">PAID</span>'}</td>
-        <td>${carry?'':prefBadge(r.pref)}</td></tr>`;
+        <td class="r">${carry?'<span class="cbadge">CARRY</span>':'<span style="color:var(--gm);font-weight:700;font-family:system-ui;font-size:11px;">PAID</span>'}</td></tr>`;
     });
     html+=`</tbody></table></div>`;
 
@@ -1131,30 +1128,41 @@ function generatePayout(previewOnly=false){
     html+=`</tbody></table></div>`;
 
     // MONEY WINNERS
-    html+=`<div class="psec"><div class="ptitle" style="background:#0D47A1;">Weekly Money Winners</div>
-      <table class="pt"><thead><tr><th>Rank</th><th>Player</th><th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th><th class="r">Draw</th><th class="r">Total</th><th>Payout</th></tr></thead><tbody>`;
+    const isCommitting=!previewOnly;
+    html+=`<div class="psec"><div class="ptitle" style="background:#0D47A1;">Weekly Money Winners${isCommitting?' — Set payout preference per player below':''}</div>
+      <table class="pt"><thead><tr><th>Rank</th><th>Player</th><th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th><th class="r">Draw</th><th class="r">Total</th><th>Payout Pref</th></tr></thead><tbody>`;
     if(!mwList.length){html+=`<tr><td colspan="9" style="color:var(--mut);padding:8px 9px;">No monetary winners this week.</td></tr>`;}
     else{
       let wkTotal=0;
       mwList.forEach((r,i)=>{
         const rk=i+1; const bc=rk<=3?`p${rk}b`:'pnb'; wkTotal+=r.total||0;
-        const pc=r.pref==='Bar'?'pref-bar':r.pref==='Pro Shop'?'pref-pro':'pref-cash';
-        html+=`<tr><td><span class="pbadge ${bc}">${rk}</span></td><td><strong>${r.name||'—'}</strong></td>
-          <td class="r">${r.gross?fmt(r.gross):'—'}</td><td class="r">${r.net?fmt(r.net):'—'}</td>
-          <td class="r">${r.skins?fmt(r.skins):'—'}</td><td class="r">${r.pog?fmt(r.pog):'—'}</td>
-          <td class="r">${r.draw?fmt(r.draw):'—'}</td>
-          <td class="r"><span class="money">${fmt(r.total)}</span></td>
-          <td><span class="pref-bar ${pc}" style="font-size:10px;">${r.pref}</span></td></tr>`;
+        if(isCommitting){
+          html+=`<tr><td><span class="pbadge ${bc}">${rk}</span></td><td><strong>${r.name||'—'}</strong></td>
+            <td class="r">${r.gross?fmt(r.gross):'—'}</td><td class="r">${r.net?fmt(r.net):'—'}</td>
+            <td class="r">${r.skins?fmt(r.skins):'—'}</td><td class="r">${r.pog?fmt(r.pog):'—'}</td>
+            <td class="r">${r.draw?fmt(r.draw):'—'}</td>
+            <td class="r"><span class="money">${fmt(r.total)}</span></td>
+            <td><select id="mw-pref-${i}" style="font-size:12px;padding:3px 5px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>`;
+        } else {
+          const pc=r.pref==='Bar'?'pref-bar':r.pref==='Pro Shop'?'pref-pro':'pref-cash';
+          html+=`<tr><td><span class="pbadge ${bc}">${rk}</span></td><td><strong>${r.name||'—'}</strong></td>
+            <td class="r">${r.gross?fmt(r.gross):'—'}</td><td class="r">${r.net?fmt(r.net):'—'}</td>
+            <td class="r">${r.skins?fmt(r.skins):'—'}</td><td class="r">${r.pog?fmt(r.pog):'—'}</td>
+            <td class="r">${r.draw?fmt(r.draw):'—'}</td>
+            <td class="r"><span class="money">${fmt(r.total)}</span></td>
+            <td><span class="pref-bar ${pc}" style="font-size:10px;">${r.pref}</span></td></tr>`;
+        }
       });
       html+=`<tr class="mw-total-row"><td colspan="7" style="text-align:right;padding:5px 9px;">Total paid out:</td><td class="r"><span class="money">${fmt(wkTotal)}</span></td><td></td></tr>`;
-      const byPref={Bar:0,'Pro Shop':0,Cash:0};
-      mwList.forEach(r=>{if(byPref[r.pref]!==undefined)byPref[r.pref]+=r.total||0;});
-      html+=`<tr><td colspan="9" style="padding:5px 9px;font-family:system-ui;font-size:11px;color:var(--mut);">
-        <span class="pref-bar">Bar</span> ${fmt(byPref['Bar'])} &nbsp;
-        <span class="pref-bar pref-pro">Pro Shop</span> ${fmt(byPref['Pro Shop'])} &nbsp;
-        <span class="pref-bar pref-cash">Cash</span> ${fmt(byPref['Cash'])}</td></tr>`;
     }
-    html+=`</tbody></table></div>`;
+    html+=`</tbody></table>`;
+    if(isCommitting&&mwList.length){
+      html+=`<div style="margin-top:10px;padding:10px;background:#EDE7FF;border-radius:4px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-size:12px;font-weight:700;color:#6300CC;">✓ Set payout preferences above, then confirm to save.</span>
+        <button id="btn-confirm-commit" style="padding:8px 20px;background:#6300CC;color:#fff;border:none;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;">Confirm &amp; Save</button>
+      </div>`;
+    }
+    html+=`</div>`;
   }
 
   // TOTALS
@@ -1169,6 +1177,71 @@ function generatePayout(previewOnly=false){
   document.getElementById('payout-sheet').innerHTML=html;
   showTab('payout');
   document.getElementById('btn-print').style.display='block';
+}
+
+// ── Confirm commit (reads MW pref selects then saves) ─────────────────────────
+function confirmCommit(){
+  const pc=window._pendingCommit;
+  if(!pc){alert('Nothing to commit.');return;}
+  // Read pref from rendered selects
+  pc.mwList.forEach((r,i)=>{
+    const sel=document.getElementById(`mw-pref-${i}`);
+    if(sel) r.pref=sel.value;
+  });
+  // Save week (replace if overwrite)
+  if(pc.isOverwrite){
+    const idx=weeksLog.findIndex(w=>w.id===pc.weekKey);
+    const rec={id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString()};
+    if(idx>=0) weeksLog[idx]=rec; else weeksLog.push(rec);
+  } else {
+    saveWeek({id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString()});
+  }
+  LS.set('weeks',weeksLog);
+  // Update season
+  for(const mw of pc.mwList){
+    const k=mwKey(mw.name); if(!k) continue;
+    if(pc.isOverwrite){
+      // Replace this week's contribution: subtract old entry if exists, add new
+      // Simplest: just update pref on existing season record without re-adding amounts
+      if(seasonData[k]) seasonData[k].pref=mw.pref;
+    } else {
+      const ex=seasonData[k]||{gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:0};
+      seasonData[k]={name:mw.name,pref:mw.pref,
+        gross:(ex.gross||0)+(mw.gross||0),net:(ex.net||0)+(mw.net||0),
+        skins:(ex.skins||0)+(mw.skins||0),pog:(ex.pog||0)+(mw.pog||0),
+        draw:(ex.draw||0)+(mw.draw||0),total:(ex.total||0)+(mw.total||0),
+        weeks:(ex.weeks||0)+1,lastUpdated:new Date().toISOString()};
+    }
+  }
+  saveSeason();
+  // Re-render MW section without selects (swap confirm button with summary)
+  const confirmArea=document.getElementById('btn-confirm-commit')?.closest('div');
+  if(confirmArea){
+    const byPref={Bar:0,'Pro Shop':0,Cash:0};
+    pc.mwList.forEach(r=>{if(byPref[r.pref]!==undefined)byPref[r.pref]+=r.total||0;});
+    const fmt=n=>'$'+Number(n||0).toFixed(2);
+    confirmArea.innerHTML=`<span style="font-size:12px;color:var(--gm);font-weight:700;">✓ Saved!</span>
+      &nbsp;
+      <span style="font-family:system-ui;font-size:11px;color:var(--mut);">
+        <span class="pref-bar">Bar</span> ${fmt(byPref['Bar'])} &nbsp;
+        <span class="pref-bar pref-pro">Pro Shop</span> ${fmt(byPref['Pro Shop'])} &nbsp;
+        <span class="pref-bar pref-cash">Cash</span> ${fmt(byPref['Cash'])}
+      </span>`;
+    // Replace pref selects with badges
+    pc.mwList.forEach((r,i)=>{
+      const sel=document.getElementById(`mw-pref-${i}`);
+      if(sel){
+        const pc2=r.pref==='Bar'?'pref-bar':r.pref==='Pro Shop'?'pref-pro':'pref-cash';
+        const span=document.createElement('span');
+        span.className=`pref-bar ${pc2}`; span.style.fontSize='10px'; span.textContent=r.pref;
+        sel.parentNode.replaceChild(span,sel);
+      }
+    });
+  }
+  // Publish to GitHub
+  publishToGitHub(pc.weekKey,pc.name,pc.date,pc.notes,pc.cancelled,pc.total,pc.gnPool,pc.skPool,pc.pgPool,
+    pc.fdata,pc.netData,pc.skinsData,pc.pogData,pc.skillData,pc.meatData,pc.ffWinner,pc.ffAmount,pc.ffPref,pc.mwList);
+  window._pendingCommit=null;
 }
 
 // ── PIN logic ─────────────────────────────────────────────────────────────────
@@ -1229,6 +1302,7 @@ document.addEventListener('click',function(e){
   switch(id){
     case 'btn-commit':   generatePayout(false); break;
     case 'btn-preview':  generatePayout(true);  break;
+    case 'btn-confirm-commit': confirmCommit(); break;
     case 'btn-print':    window.print();         break;
     case 'btn-clear':    clearEntries();         break;
     case 'btn-reset-pots': resetAllPots();       break;
