@@ -488,6 +488,16 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
 <!-- ══ OPENING BALANCES ══════════════════════════════════════════ -->
 <div id="panel-balances" class="panel hidden">
 
+  <!-- Data Repair -->
+  <div class="card s2" style="margin-bottom:14px;border:2px solid var(--red);">
+    <h2 style="color:var(--red);">Data Repair</h2>
+    <div class="cb">
+      <p style="font-size:12px;color:var(--mut);margin-bottom:10px;">If season totals or pot history show duplicate weeks, use this to wipe all recorded weeks, season earnings, and pot running totals back to zero (opening balances are kept). You will need to re-enter any weeks that were committed. This cannot be undone.</p>
+      <button class="sbtn sbtn-danger" id="btn-repair-data" style="width:auto;padding:9px 20px;">Reset Weeks, Season &amp; Pot Totals</button>
+      <span id="repair-status" style="font-size:12px;color:var(--gm);margin-left:12px;"></span>
+    </div>
+  </div>
+
   <!-- GitHub Token Setup -->
   <div class="card s2" style="margin-bottom:14px;">
     <h2>GitHub Token <em>required to publish results to public page</em></h2>
@@ -845,7 +855,35 @@ function resetAllPots(){
 function resetSeason(){
   if(!confirm('Reset ALL season earnings? This cannot be undone.')) return;
   seasonData={}; saveSeason();
+  weeksLog=[]; LS.set('weeks',weeksLog);
   renderLeaderboard([]);
+}
+
+// ── Data repair — wipe weeks/season/pot running totals, keep opening balances ─
+function repairData(){
+  if(!confirm('This will erase all recorded weeks, season earnings, and pot running totals.\n\nOpening balances are kept.\n\nYou will need to re-enter any committed weeks.\n\nContinue?')) return;
+  // Clear weeks log
+  weeksLog=[]; LS.set('weeks',weeksLog);
+  // Clear season
+  seasonData={}; saveSeason();
+  // Reset pot running totals to opening balance values (read from input fields if visible, else 0)
+  SKINS_HOLES.forEach(h=>{
+    const obEl=document.getElementById(`ob-sk-${h}`);
+    const obVal=obEl ? (parseFloat(obEl.value)||0) : 0;
+    skinsPots[h]={pot:obVal, updatedAt:null};
+    saveSkinsHole(h);
+  });
+  POG_HOLES.forEach(h=>{
+    const obEl=document.getElementById(`ob-pg-${h}`);
+    const obVal=obEl ? (parseFloat(obEl.value)||0) : 0;
+    pogPots[h]={pot:obVal, updatedAt:null};
+    savePOGHole(h);
+  });
+  renderLeaderboard([]);
+  refreshHistPanel();
+  refreshSkinsPotDisplayAll(); refreshPOGPotDisplayAll();
+  const st=document.getElementById('repair-status');
+  if(st){st.textContent='Done — all cleared. Re-enter your weeks.'; setTimeout(()=>{st.textContent='';},6000);}
 }
 
 // ── Clear weekly entries ──────────────────────────────────────────────────────
@@ -1332,6 +1370,7 @@ document.addEventListener('click',function(e){
     case 'btn-add-gross':addGrossRow();          break;
     case 'btn-export-season': exportSeasonCSV(); break;
     case 'btn-reset-season':  resetSeason();     break;
+    case 'btn-repair-data':   repairData();      break;
     case 'btn-refresh-lb':    renderLeaderboard(Object.entries(seasonData).map(([id,v])=>({id,...v}))); break;
     case 'btn-export-pots':   exportPotsCSV();   break;
     case 'btn-export-weeks':      exportWeeksCSV();           break;
