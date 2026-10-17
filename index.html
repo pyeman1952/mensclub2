@@ -290,11 +290,11 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
           <div><label class="flbl" style="display:block;margin-bottom:3px;">Week #</label><input type="text" id="t-week" placeholder="e.g. 1"></div>
           <div><label class="flbl" style="display:block;margin-bottom:3px;">Tournament Name</label><input type="text" id="t-name" placeholder="e.g. Winter Opener"></div>
           <div><label class="flbl" style="display:block;margin-bottom:3px;">Date</label><input type="text" id="t-date" placeholder="e.g. Oct 5, 2025"></div>
-          <div><label class="flbl" style="display:block;margin-bottom:3px;">Total Players</label><input type="number" id="t-total" placeholder="e.g. 40" min="1"></div>
-          <div><label class="flbl" style="display:block;margin-bottom:3px;">Skins Buy-ins</label><input type="number" id="t-skins" placeholder="e.g. 30" min="0"></div>
+          <div><label class="flbl" style="display:block;margin-bottom:3px;">Total Players</label><input type="number" id="t-total" placeholder="0" min="1"></div>
+          <div><label class="flbl" style="display:block;margin-bottom:3px;">Skins Buy-ins</label><input type="number" id="t-skins" placeholder="0" min="0"></div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:end;margin-top:10px;">
-          <div><label class="flbl" style="display:block;margin-bottom:3px;">POG Buy-ins</label><input type="number" id="t-pog" placeholder="e.g. 25" min="0"></div>
+          <div><label class="flbl" style="display:block;margin-bottom:3px;">POG Buy-ins</label><input type="number" id="t-pog" placeholder="0" min="0"></div>
           <div style="display:flex;align-items:center;gap:8px;padding-top:20px;">
             <input type="checkbox" id="t-cancelled" style="width:18px;height:18px;">
             <label class="flbl" for="t-cancelled">Rained Out / Cancelled</label>
@@ -454,7 +454,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
         <button class="btn btn-d" id="btn-reset-season">Reset Season</button>
       </div>
       <table class="lb-table">
-        <thead><tr><th>Rank</th><th>Player</th><th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th><th class="r">Draw</th><th class="r">Total</th><th>Payout</th><th>Weeks</th></tr></thead>
+        <thead><tr><th>Rank</th><th>Player</th><th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th><th class="r">Draw</th><th class="r">Total</th><th>Payout</th><th>Won</th></tr></thead>
         <tbody id="lb-tbody"><tr><td colspan="10" style="color:var(--mut);padding:12px;">No data yet.</td></tr></tbody>
       </table>
     </div>
@@ -554,7 +554,23 @@ function loadState(){
   SKINS_HOLES.forEach(h=>{ skinsPots[h]=LS.get(`sk_${h}`,{pot:0,updatedAt:null}); });
   POG_HOLES.forEach(h=>{ pogPots[h]=LS.get(`pg_${h}`,{pot:0,updatedAt:null}); });
   seasonData=LS.get('season',{});
-  weeksLog=LS.get('weeks',[]);
+  // Deduplicate weeksLog — keep last entry per id (fixes triple-week from prior bug)
+  const rawWeeks=LS.get('weeks',[]);
+  const seenIds={};
+  rawWeeks.forEach(w=>{ if(w&&w.id) seenIds[w.id]=w; });
+  weeksLog=Object.values(seenIds);
+  LS.set('weeks',weeksLog); // persist the deduped list
+  // Recompute season weeks counts from deduplicated log so they match reality
+  const weekCountByPlayer={};
+  weeksLog.forEach(w=>{
+    // weeksLog doesn't track per-player weeks; season.weeks is incremented per winner per week
+    // Leave season winnings alone — only fix if weeks count looks wrong (> weeksLog.length)
+  });
+  const totalWeekCount=weeksLog.length;
+  Object.keys(seasonData).forEach(k=>{
+    if(seasonData[k].weeks>totalWeekCount) seasonData[k].weeks=totalWeekCount;
+  });
+  LS.set('season',seasonData);
 }
 function saveSkinsHole(h){ LS.set(`sk_${h}`,skinsPots[h]); }
 function savePOGHole(h){ LS.set(`pg_${h}`,pogPots[h]); }
@@ -763,7 +779,7 @@ let _lbAll=[];
 function renderLeaderboard(rows){
   _lbAll=rows.sort((a,b)=>(b.total||0)-(a.total||0));
   const sub=document.getElementById('season-sub');
-  if(sub) sub.textContent=`${_lbAll.length} players · $${_lbAll.reduce((s,r)=>s+(r.total||0),0).toFixed(2)} paid`;
+  if(sub) sub.textContent=`${weeksLog.length} weeks played · ${_lbAll.length} players · $${_lbAll.reduce((s,r)=>s+(r.total||0),0).toFixed(2)} paid`;
   filterLeaderboard(document.getElementById('lb-search')?.value||'',document.getElementById('lb-filter')?.value||'');
 }
 function filterLeaderboard(q='',pref=''){
@@ -778,7 +794,7 @@ function filterLeaderboard(q='',pref=''){
       <td class="r money">$${(r.gross||0).toFixed(2)}</td><td class="r money">$${(r.net||0).toFixed(2)}</td>
       <td class="r money">$${(r.skins||0).toFixed(2)}</td><td class="r money">$${(r.pog||0).toFixed(2)}</td>
       <td class="r money">$${(r.draw||0).toFixed(2)}</td><td class="r"><strong class="money">$${(r.total||0).toFixed(2)}</strong></td>
-      <td><span class="pref-bar ${pc}">${r.pref||'—'}</span></td><td style="color:var(--mut);font-size:12px;">${r.weeks||0}</td></tr>`;
+      <td><span class="pref-bar ${pc}">${r.pref||'—'}</span></td><td style="color:var(--mut);font-size:12px;text-align:center;">${r.weeks||0}</td></tr>`;
   }).join('');
 }
 
@@ -1205,20 +1221,18 @@ function confirmCommit(){
     saveWeek({id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString()});
   }
   LS.set('weeks',weeksLog);
-  // Update season
+  // Update season — winner entries
   for(const mw of pc.mwList){
     const k=mwKey(mw.name); if(!k) continue;
     if(pc.isOverwrite){
-      // Replace this week's contribution: subtract old entry if exists, add new
-      // Simplest: just update pref on existing season record without re-adding amounts
       if(seasonData[k]) seasonData[k].pref=mw.pref;
     } else {
-      const ex=seasonData[k]||{gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:0};
+      const ex=seasonData[k]||{gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:0,played:0};
       seasonData[k]={name:mw.name,pref:mw.pref,
         gross:(ex.gross||0)+(mw.gross||0),net:(ex.net||0)+(mw.net||0),
         skins:(ex.skins||0)+(mw.skins||0),pog:(ex.pog||0)+(mw.pog||0),
         draw:(ex.draw||0)+(mw.draw||0),total:(ex.total||0)+(mw.total||0),
-        weeks:(ex.weeks||0)+1,lastUpdated:new Date().toISOString()};
+        weeks:(ex.weeks||0)+1,played:(ex.played||0),lastUpdated:new Date().toISOString()};
     }
   }
   saveSeason();
