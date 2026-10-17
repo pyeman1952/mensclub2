@@ -255,7 +255,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
   <div class="nav-sec">Tools</div>
   <button class="tbtn" id="btn-commit">Generate &amp; Commit</button>
   <button class="tbtn" id="btn-preview">Preview Payout</button>
-  <button class="tbtn no-print" id="btn-print" style="display:none">Print / Save PDF</button>
+  <button class="tbtn no-print" id="btn-print">Print / Save PDF</button>
   <div class="sact">
     <button class="sbtn sbtn-danger" id="btn-clear">Clear Entries</button>
   </div>
@@ -268,7 +268,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
 <div id="panel-setup" class="panel">
 
   <div class="ibar">
-    <span>Gross/Net: <strong>$10/player</strong></span>
+    <span>Gross/Net: <strong>$10/player (all players)</strong></span>
     <span>Skins: <strong>$5/player ÷ 13 holes</strong></span>
     <span>POG: <strong>$1/player/hole · holes 3,4,10,15,17</strong></span>
   </div>
@@ -286,21 +286,20 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
     <div class="card s2">
       <h2>Tournament Details</h2>
       <div class="cb">
-        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-items:end;">
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:end;">
           <div><label class="flbl" style="display:block;margin-bottom:3px;">Week #</label><input type="text" id="t-week" placeholder="e.g. 1"></div>
           <div><label class="flbl" style="display:block;margin-bottom:3px;">Tournament Name</label><input type="text" id="t-name" placeholder="e.g. Winter Opener"></div>
           <div><label class="flbl" style="display:block;margin-bottom:3px;">Date</label><input type="text" id="t-date" placeholder="e.g. Oct 5, 2025"></div>
-          <div><label class="flbl" style="display:block;margin-bottom:3px;">Total Players</label><input type="number" id="t-total" value="40" min="1"></div>
-          <div><label class="flbl" style="display:block;margin-bottom:3px;">Gross/Net Buy-ins</label><input type="number" id="t-gn" value="38" min="0"></div>
-          <div><label class="flbl" style="display:block;margin-bottom:3px;">Skins Buy-ins</label><input type="number" id="t-skins" value="30" min="0"></div>
+          <div><label class="flbl" style="display:block;margin-bottom:3px;">Total Players</label><input type="number" id="t-total" placeholder="e.g. 40" min="1"></div>
+          <div><label class="flbl" style="display:block;margin-bottom:3px;">Skins Buy-ins</label><input type="number" id="t-skins" placeholder="e.g. 30" min="0"></div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-items:end;margin-top:10px;">
-          <div><label class="flbl" style="display:block;margin-bottom:3px;">POG Buy-ins</label><input type="number" id="t-pog" value="25" min="0"></div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:end;margin-top:10px;">
+          <div><label class="flbl" style="display:block;margin-bottom:3px;">POG Buy-ins</label><input type="number" id="t-pog" placeholder="e.g. 25" min="0"></div>
           <div style="display:flex;align-items:center;gap:8px;padding-top:20px;">
             <input type="checkbox" id="t-cancelled" style="width:18px;height:18px;">
             <label class="flbl" for="t-cancelled">Rained Out / Cancelled</label>
           </div>
-          <div style="grid-column:3/7;">
+          <div style="grid-column:3/6;">
             <label class="flbl" style="display:block;margin-bottom:3px;">Notes</label>
             <input type="text" id="t-notes" placeholder="e.g. Shotgun start, 9 holes only">
           </div>
@@ -394,7 +393,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
           <table class="gt">
             <thead><tr><th>Winner</th><th>Amount ($)</th><th>Payout</th></tr></thead>
             <tbody>
-              <tr><td><input type="text" id="ff-winner" placeholder="Player name"></td><td><input type="number" id="ff-amount" placeholder="$" style="width:80px;"></td><td><select id="ff-pref"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>
+              <tr><td><input type="text" id="ff-winner" placeholder="Player name"></td><td><input type="number" id="ff-amount" placeholder="$" style="width:80px;"></td><td><span class="pref-bar pref-cash" style="font-size:11px;">Cash</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -571,11 +570,11 @@ const skPerHole=()=>(parseFloat(document.getElementById('t-skins').value)||0)*5/
 const pgPerHole=()=>parseFloat(document.getElementById('t-pog').value)||0;
 
 function recalcPools(){
-  const gn=parseFloat(document.getElementById('t-gn').value)||0;
+  const total=parseFloat(document.getElementById('t-total').value)||0;
   const sk=parseFloat(document.getElementById('t-skins').value)||0;
   const pg=parseFloat(document.getElementById('t-pog').value)||0;
   document.getElementById('pool-summary').innerHTML=
-    `Gross/Net pool: <strong>$${(gn*10).toFixed(0)}</strong> &nbsp;·&nbsp; `+
+    `Gross/Net pool: <strong>$${(total*10).toFixed(0)}</strong> &nbsp;·&nbsp; `+
     `Skins pool: <strong>$${(sk*5).toFixed(0)}</strong> ($${(sk>0?Math.floor((sk*5/13)*100)/100:0).toFixed(2)}/hole) &nbsp;·&nbsp; `+
     `POG pool: <strong>$${(pg*5).toFixed(0)}</strong> ($${pg}/hole)`;
   updatePotBar();
@@ -586,10 +585,10 @@ function recalcPools(){
 function updatePotBar(){
   const skTotal=SKINS_HOLES.reduce((s,h)=>(skinsPots[h]?.pot||0)+skPerHole()+s,0);
   const pgTotal=POG_HOLES.reduce((s,h)=>(pogPots[h]?.pot||0)+pgPerHole()+s,0);
-  const gn=parseFloat(document.getElementById('t-gn').value)||0;
+  const total=parseFloat(document.getElementById('t-total').value)||0;
   document.getElementById('psb-skins').textContent='$'+skTotal.toFixed(2);
   document.getElementById('psb-pog').textContent='$'+pgTotal.toFixed(2);
-  document.getElementById('psb-pool').textContent='$'+(gn*10).toFixed(0);
+  document.getElementById('psb-pool').textContent='$'+(total*10).toFixed(0);
 }
 
 // ── Flight label refresh ──────────────────────────────────────────────────────
@@ -837,10 +836,9 @@ function resetSeason(){
 function clearEntries(){
   if(!confirm('Clear all weekly entries? Pot balances and season totals are not affected.')) return;
   ['t-week','t-name','t-date','t-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  document.getElementById('t-total').value='40';
-  document.getElementById('t-gn').value='38';
-  document.getElementById('t-skins').value='30';
-  document.getElementById('t-pog').value='25';
+  document.getElementById('t-total').value='';
+  document.getElementById('t-skins').value='';
+  document.getElementById('t-pog').value='';
   document.getElementById('t-cancelled').checked=false;
   FLIGHTS.forEach(f=>[1,2].forEach(p=>{
     ['gr-name','gr-score','gr-prize'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${f}${p}`);if(el)el.value='';});
@@ -864,7 +862,7 @@ function clearEntries(){
     ['sp-name','sp-prize'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${h}`);if(el)el.value='';});
   }
   ['meat-1','meat-2','meat-3','meat-prize-1','meat-prize-2','meat-prize-3','ff-winner','ff-amount'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  ['meat-pref-1','meat-pref-2','meat-pref-3','ff-pref'].forEach(id=>{const el=document.getElementById(id);if(el)el.selectedIndex=0;});
+  ['meat-pref-1','meat-pref-2','meat-pref-3'].forEach(id=>{const el=document.getElementById(id);if(el)el.selectedIndex=0;});
   recalcPools();
 }
 
@@ -878,10 +876,10 @@ function generatePayout(previewOnly=false){
   const cancelled=document.getElementById('t-cancelled')?.checked||false;
   const name   =(week&&tname)?`Week ${week} — ${tname}`:week?`Week ${week}`:tname||'—';
   const weekKey=date.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'-');
-  const gnPly  =parseFloat(document.getElementById('t-gn').value)||0;
+  const totalPly=parseFloat(document.getElementById('t-total').value)||0;
   const skPly  =parseFloat(document.getElementById('t-skins').value)||0;
   const pgPly  =parseFloat(document.getElementById('t-pog').value)||0;
-  const gnPool =gnPly*10, skPool=skPly*5, pgPool=pgPly*5;
+  const gnPool =totalPly*10, skPool=skPly*5, pgPool=pgPly*5;
   const skph=Math.floor((skPool/13)*100)/100, pgph=pgPly;
 
   let isOverwrite=false;
@@ -993,7 +991,7 @@ function generatePayout(previewOnly=false){
   })).filter(r=>r.winner);
   const ffWinner=(document.getElementById('ff-winner')?.value||'').trim();
   const ffAmount=parseFloat(document.getElementById('ff-amount')?.value)||0;
-  const ffPref  =document.getElementById('ff-pref')?.value||'Bar';
+  const ffPref  ='Cash';
 
   // Money winners map — pref is set per-winner in the Weekly Money Winners table
   const mwMap={};
@@ -1183,7 +1181,6 @@ function generatePayout(previewOnly=false){
 
   document.getElementById('payout-sheet').innerHTML=html;
   showTab('payout');
-  document.getElementById('btn-print').style.display='block';
 }
 
 // ── Confirm commit (reads MW pref selects then saves) ─────────────────────────
@@ -1191,6 +1188,9 @@ function confirmCommit(){
   const pc=window._pendingCommit;
   if(!pc){alert('Nothing to commit.');return;}
   window._pendingCommit=null; // clear immediately to prevent double-fire
+  // Re-sync from localStorage to avoid stale in-memory state
+  weeksLog=LS.get('weeks',[]);
+  seasonData=LS.get('season',{});
   // Read pref from rendered selects
   pc.mwList.forEach((r,i)=>{
     const sel=document.getElementById(`mw-pref-${i}`);
@@ -1336,7 +1336,7 @@ document.addEventListener('click',function(e){
 
 document.addEventListener('input',function(e){
   const id=e.target.id;
-  if(['t-gn','t-skins','t-pog','t-total'].includes(id)) recalcPools();
+  if(['t-skins','t-pog','t-total'].includes(id)) recalcPools();
   if(id==='lb-search') filterLeaderboard(e.target.value,document.getElementById('lb-filter')?.value||'');
   // Flight label updates
   if(id&&id.startsWith('f-')) refreshFlightLabels();
