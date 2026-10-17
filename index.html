@@ -241,23 +241,23 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
 <!-- Sidebar -->
 <nav class="sidebar">
   <div class="nav-sec">Entry</div>
-  <button class="tbtn active" data-tab="setup"><span class="ic">📋</span>Weekly Setup</button>
-  <button class="tbtn" data-tab="payout"><span class="ic">📄</span>Payout Sheet</button>
+  <button class="tbtn active" data-tab="setup">Weekly Setup</button>
+  <button class="tbtn" data-tab="payout">Payout Sheet</button>
   <hr class="sdiv">
   <div class="nav-sec">Admin</div>
-  <button class="tbtn" data-tab="balances"><span class="ic">🏦</span>Opening Balances</button>
+  <button class="tbtn" data-tab="balances">Edit POG &amp; Skins Balances</button>
+  <button class="tbtn" data-tab="change-pin">Change PIN</button>
   <hr class="sdiv">
   <div class="nav-sec">Season</div>
-  <button class="tbtn" data-tab="season"><span class="ic">🏆</span>Leaderboard</button>
-  <button class="tbtn" data-tab="pots"><span class="ic">💰</span>Pot History</button>
+  <button class="tbtn" data-tab="season">Leaderboard</button>
+  <button class="tbtn" data-tab="pots">Pot History</button>
+  <hr class="sdiv">
+  <div class="nav-sec">Tools</div>
+  <button class="tbtn" id="btn-commit">Generate &amp; Commit</button>
+  <button class="tbtn" id="btn-preview">Preview Payout</button>
+  <button class="tbtn no-print" id="btn-print" style="display:none">Print / Save PDF</button>
   <div class="sact">
-    <button class="sbtn sbtn-gold" id="btn-commit">Generate &amp; Commit</button>
-    <button class="sbtn sbtn-purple" id="btn-preview">Preview Only</button>
-    <button class="sbtn sbtn-ghost no-print" id="btn-print" style="display:none">Print / Save PDF</button>
     <button class="sbtn sbtn-danger" id="btn-clear">Clear Entries</button>
-    <hr class="sdiv" style="margin:2px 0;">
-    <button class="sbtn sbtn-blue" id="btn-reset-pots">Reset All Pots</button>
-    <button class="sbtn sbtn-ghost" id="btn-change-pin">🔒 Change PIN</button>
   </div>
 </nav>
 
@@ -365,9 +365,9 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
       <div class="cb">
         <table class="gt">
           <thead><tr>
-            <th>#</th><th>Player</th><th>Gross</th><th>Net</th><th>Hcp</th><th>CB</th><th>Prize ($)</th>
-            <th>#</th><th>Player</th><th>Gross</th><th>Net</th><th>Hcp</th><th>CB</th><th>Prize ($)</th>
-            <th>#</th><th>Player</th><th>Gross</th><th>Net</th><th>Hcp</th><th>CB</th><th>Prize ($)</th>
+            <th>#</th><th>Player</th><th>Gross</th><th>Hcp</th><th>Net</th><th>CB</th><th>Prize ($)</th>
+            <th>#</th><th>Player</th><th>Gross</th><th>Hcp</th><th>Net</th><th>CB</th><th>Prize ($)</th>
+            <th>#</th><th>Player</th><th>Gross</th><th>Hcp</th><th>Net</th><th>CB</th><th>Prize ($)</th>
           </tr></thead>
           <tbody id="net-tbody"></tbody>
         </table>
@@ -549,6 +549,7 @@ const LS = {
 
 // ── State ─────────────────────────────────────────────────────────────────────
 let skinsPots={}, pogPots={}, seasonData={}, weeksLog=[];
+const mwKey=(name)=>name||null;
 
 function loadState(){
   SKINS_HOLES.forEach(h=>{ skinsPots[h]=LS.get(`sk_${h}`,{pot:0,updatedAt:null}); });
@@ -615,8 +616,8 @@ function buildNet(){
       html+=`<td style="color:var(--mut);font-size:10px;width:22px;">${p}${sfx}</td>
         <td><input type="text" id="nn-${p}" placeholder="Name"></td>
         <td><input type="number" id="ng-${p}" placeholder="gross" style="width:52px;"></td>
-        <td><input type="number" id="ns-${p}" placeholder="net" style="width:52px;"></td>
         <td><input type="number" id="nh-${p}" placeholder="hcp" style="width:45px;"></td>
+        <td><input type="number" id="ns-${p}" placeholder="net" style="width:52px;"></td>
         <td class="tdc"><input type="checkbox" id="nc-${p}" title="Countback"></td>
         <td><input type="number" id="np-${p}" placeholder="$" style="width:58px;"></td>`;
     }
@@ -738,10 +739,11 @@ function refreshHistPanel(){
 
 // ── Tab switching ─────────────────────────────────────────────────────────────
 function showTab(tab){
+  if(tab==='change-pin'){showPinModal();return;}
   ['setup','payout','season','pots','balances'].forEach(t=>{
     document.getElementById(`panel-${t}`).classList.toggle('hidden',t!==tab);
   });
-  document.querySelectorAll('.tbtn').forEach(b=>{
+  document.querySelectorAll('.tbtn[data-tab]').forEach(b=>{
     b.classList.toggle('active',b.dataset.tab===tab);
   });
   if(tab==='pots') refreshHistPanel();
@@ -995,7 +997,6 @@ function generatePayout(previewOnly=false){
 
   // Money winners map — pref is set per-winner in the Weekly Money Winners table
   const mwMap={};
-  const mwKey=(name)=>name||null;
   const addMW=(name,cat,amount)=>{
     const k=mwKey(name); if(!k||!amount) return;
     if(!mwMap[k]) mwMap[k]={name,pref:'Bar',gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:1};
@@ -1008,7 +1009,13 @@ function generatePayout(previewOnly=false){
   pogData.filter(r=>r.paid&&r.winner).forEach(r=>addMW(r.winner,'pog',r.runPot));
   meatData.forEach(r=>addMW(r.winner,'draw',0)); // meat is non-cash
   if(ffWinner&&ffAmount) addMW(ffWinner,'draw',ffAmount);
-  const mwList=Object.values(mwMap).sort((a,b)=>b.total-a.total);
+  // Sort by last name alphabetically (last word of name), then first name
+  const lastName=n=>{ const p=(n||'').trim().split(/\s+/); return p.length>1?p[p.length-1]:p[0]||''; };
+  const mwList=Object.values(mwMap).sort((a,b)=>{
+    const la=lastName(a.name).toLowerCase(), lb=lastName(b.name).toLowerCase();
+    if(la!==lb) return la<lb?-1:1;
+    return (a.name||'').toLowerCase()<(b.name||'').toLowerCase()?-1:1;
+  });
 
   // Commit season — pref is read from mw-pref-N selects after render (see confirmCommit)
   if(!previewOnly){
@@ -1062,7 +1069,7 @@ function generatePayout(previewOnly=false){
 
     // NET
     html+=`<div class="psec"><div class="ptitle">Net Winners — Overall</div>
-      <table class="pt"><thead><tr><th>Place</th><th>Player</th><th>Gross</th><th>Net</th><th>Hcp</th><th class="r">Prize</th></tr></thead><tbody>`;
+      <table class="pt"><thead><tr><th>Place</th><th>Player</th><th>Gross</th><th>Hcp</th><th>Net</th><th class="r">Prize</th></tr></thead><tbody>`;
     if(!netData.length){
       html+=`<tr><td colspan="6" style="color:var(--mut);padding:8px 9px;">No entries</td></tr>`;
     } else {
@@ -1072,8 +1079,8 @@ function generatePayout(previewOnly=false){
         html+=`<tr><td><span class="pbadge ${bc}">${r.place}</span>${r.place}${sfx}${r.cb?' <span class="countback-badge">CB</span>':''}</td>
           <td>${r.pname||'—'}</td>
           <td style="color:var(--mut);font-size:11px;">${r.gross||'—'}</td>
-          <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
           <td style="color:var(--mut);font-size:11px;">${r.hcp||'—'}</td>
+          <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
           <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td></tr>`;
       });
     }
@@ -1183,6 +1190,7 @@ function generatePayout(previewOnly=false){
 function confirmCommit(){
   const pc=window._pendingCommit;
   if(!pc){alert('Nothing to commit.');return;}
+  window._pendingCommit=null; // clear immediately to prevent double-fire
   // Read pref from rendered selects
   pc.mwList.forEach((r,i)=>{
     const sel=document.getElementById(`mw-pref-${i}`);
@@ -1241,7 +1249,6 @@ function confirmCommit(){
   // Publish to GitHub
   publishToGitHub(pc.weekKey,pc.name,pc.date,pc.notes,pc.cancelled,pc.total,pc.gnPool,pc.skPool,pc.pgPool,
     pc.fdata,pc.netData,pc.skinsData,pc.pogData,pc.skillData,pc.meatData,pc.ffWinner,pc.ffAmount,pc.ffPref,pc.mwList);
-  window._pendingCommit=null;
 }
 
 // ── PIN logic ─────────────────────────────────────────────────────────────────
@@ -1305,8 +1312,6 @@ document.addEventListener('click',function(e){
     case 'btn-confirm-commit': confirmCommit(); break;
     case 'btn-print':    window.print();         break;
     case 'btn-clear':    clearEntries();         break;
-    case 'btn-reset-pots': resetAllPots();       break;
-    case 'btn-change-pin':
     case 'pin-change-link': showPinModal();      break;
     case 'pm-cancel':    document.getElementById('pin-modal').classList.remove('open'); break;
     case 'pm-save':      savePIN();              break;
