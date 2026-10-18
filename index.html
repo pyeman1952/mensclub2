@@ -257,6 +257,8 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
   <button class="tbtn" id="btn-preview">Preview Payout</button>
   <button class="tbtn no-print" id="btn-print">Print / Save PDF</button>
   <div class="sact">
+    <button class="sbtn sbtn-blue" id="btn-save-draft">💾 Save Draft</button>
+    <button class="sbtn sbtn-ghost" id="btn-load-draft">📂 Load Draft</button>
     <button class="sbtn sbtn-danger" id="btn-clear">Clear Entries</button>
   </div>
 </nav>
@@ -920,6 +922,173 @@ function clearEntries(){
   recalcPools();
 }
 
+// ── Save / Load Draft ─────────────────────────────────────────────────────────
+function saveDraft(){
+  const d={};
+  // Header fields
+  ['t-week','t-name','t-date','t-notes','t-total','t-skins','t-pog'].forEach(id=>{
+    const el=document.getElementById(id); if(el) d[id]=el.value;
+  });
+  d['t-cancelled']=document.getElementById('t-cancelled')?.checked||false;
+  // Gross rows
+  const grossRows=[];
+  document.querySelectorAll('#gross-tbody tr').forEach(tr=>{
+    const cells=tr.querySelectorAll('td');
+    const row={};
+    if(tr.dataset.flight){
+      row.flt=tr.dataset.flight; row.place=tr.dataset.place;
+      row.name=cells[2].querySelector('input')?.value||'';
+      row.score=cells[3].querySelector('input')?.value||'';
+      row.cb=cells[4].querySelector('input')?.checked||false;
+      row.prize=cells[5].querySelector('input')?.value||'';
+    } else {
+      row.flt=cells[0].querySelector('select')?.value||'A';
+      row.place=cells[1].querySelector('input')?.value||'';
+      row.name=cells[2].querySelector('input')?.value||'';
+      row.score=cells[3].querySelector('input')?.value||'';
+      row.cb=cells[4].querySelector('input')?.checked||false;
+      row.prize=cells[5].querySelector('input')?.value||'';
+      row.extra=true;
+    }
+    grossRows.push(row);
+  });
+  d.grossRows=grossRows;
+  // Net rows
+  const netRows=[];
+  for(let p=1;p<=15;p++){
+    netRows.push({
+      n:document.getElementById(`nn-${p}`)?.value||'',
+      g:document.getElementById(`ng-${p}`)?.value||'',
+      s:document.getElementById(`ns-${p}`)?.value||'',
+      h:document.getElementById(`nh-${p}`)?.value||'',
+      cb:document.getElementById(`nc-${p}`)?.checked||false,
+      pr:document.getElementById(`np-${p}`)?.value||''
+    });
+  }
+  d.netRows=netRows;
+  // Skins
+  const skRows={};
+  SKINS_HOLES.forEach(h=>{
+    skRows[h]={
+      name:document.getElementById(`sk-name-${h}`)?.value||'',
+      score:document.getElementById(`sk-score-${h}`)?.value||'',
+      gross:document.getElementById(`sk-gross-${h}`)?.value||'',
+      paid:document.getElementById(`sk-paid-${h}`)?.checked||false
+    };
+  });
+  d.skRows=skRows;
+  // POG
+  const pgRows={};
+  POG_HOLES.forEach(h=>{
+    pgRows[h]={
+      name:document.getElementById(`pog-name-${h}`)?.value||'',
+      paid:document.getElementById(`pog-paid-${h}`)?.checked||false
+    };
+  });
+  d.pgRows=pgRows;
+  // Skill shots
+  const spRows={};
+  for(let h=1;h<=18;h++){
+    spRows[h]={
+      name:document.getElementById(`sp-name-${h}`)?.value||'',
+      prize:document.getElementById(`sp-prize-${h}`)?.value||''
+    };
+  }
+  d.spRows=spRows;
+  // Draws
+  d.meat=[1,2,3].map(i=>({
+    winner:document.getElementById(`meat-${i}`)?.value||'',
+    prize:document.getElementById(`meat-prize-${i}`)?.value||'',
+    pref:document.getElementById(`meat-pref-${i}`)?.value||'Bar'
+  }));
+  d.ffWinner=document.getElementById('ff-winner')?.value||'';
+  d.ffAmount=document.getElementById('ff-amount')?.value||'';
+  d.savedAt=new Date().toISOString();
+  LS.set('draft_week',d);
+  alert(`Draft saved at ${new Date().toLocaleTimeString()}.\n\nYou can reload this any time with Load Draft.`);
+}
+
+function loadDraft(){
+  const d=LS.get('draft_week',null);
+  if(!d||typeof d!=='object'||!d.savedAt){alert('No draft found. Use Save Draft first.');return;}
+  const saved=new Date(d.savedAt).toLocaleString();
+  if(!confirm(`Load draft saved on ${saved}?\n\nThis will overwrite any current entries.`)) return;
+  // Header
+  ['t-week','t-name','t-date','t-notes','t-total','t-skins','t-pog'].forEach(id=>{
+    const el=document.getElementById(id); if(el&&d[id]!=null) el.value=d[id];
+  });
+  const canc=document.getElementById('t-cancelled'); if(canc) canc.checked=!!d['t-cancelled'];
+  // Gross — restore existing rows first, add extras
+  if(d.grossRows){
+    const fixedRows=d.grossRows.filter(r=>!r.extra);
+    const extraRows=d.grossRows.filter(r=>r.extra);
+    // Restore existing rows by position
+    const trs=[...document.querySelectorAll('#gross-tbody tr[data-flight]')];
+    fixedRows.forEach((row,i)=>{
+      const tr=trs[i]; if(!tr) return;
+      const cells=tr.querySelectorAll('td');
+      const ni=cells[2].querySelector('input'); if(ni) ni.value=row.name;
+      const si=cells[3].querySelector('input'); if(si) si.value=row.score;
+      const ci=cells[4].querySelector('input'); if(ci) ci.checked=!!row.cb;
+      const pi=cells[5].querySelector('input'); if(pi) pi.value=row.prize;
+    });
+    // Re-add extra rows
+    extraRows.forEach(row=>{
+      addGrossRow();
+      const addedTrs=[...document.querySelectorAll('#gross-tbody tr:not([data-flight])')];
+      const tr=addedTrs[addedTrs.length-1]; if(!tr) return;
+      const cells=tr.querySelectorAll('td');
+      const fs=cells[0].querySelector('select'); if(fs) fs.value=row.flt;
+      const pl=cells[1].querySelector('input'); if(pl) pl.value=row.place;
+      const ni=cells[2].querySelector('input'); if(ni) ni.value=row.name;
+      const si=cells[3].querySelector('input'); if(si) si.value=row.score;
+      const ci=cells[4].querySelector('input'); if(ci) ci.checked=!!row.cb;
+      const pi=cells[5].querySelector('input'); if(pi) pi.value=row.prize;
+    });
+  }
+  // Net
+  if(d.netRows) d.netRows.forEach((row,i)=>{
+    const p=i+1;
+    const nn=document.getElementById(`nn-${p}`); if(nn) nn.value=row.n;
+    const ng=document.getElementById(`ng-${p}`); if(ng) ng.value=row.g;
+    const ns=document.getElementById(`ns-${p}`); if(ns) ns.value=row.s;
+    const nh=document.getElementById(`nh-${p}`); if(nh) nh.value=row.h;
+    const nc=document.getElementById(`nc-${p}`); if(nc) nc.checked=!!row.cb;
+    const np=document.getElementById(`np-${p}`); if(np) np.value=row.pr;
+  });
+  // Skins
+  if(d.skRows) SKINS_HOLES.forEach(h=>{
+    const r=d.skRows[h]; if(!r) return;
+    const n=document.getElementById(`sk-name-${h}`); if(n) n.value=r.name;
+    const s=document.getElementById(`sk-score-${h}`); if(s) s.value=r.score;
+    const g=document.getElementById(`sk-gross-${h}`); if(g) g.value=r.gross;
+    const c=document.getElementById(`sk-paid-${h}`); if(c) c.checked=!!r.paid;
+  });
+  // POG
+  if(d.pgRows) POG_HOLES.forEach(h=>{
+    const r=d.pgRows[h]; if(!r) return;
+    const n=document.getElementById(`pog-name-${h}`); if(n) n.value=r.name;
+    const c=document.getElementById(`pog-paid-${h}`); if(c) c.checked=!!r.paid;
+  });
+  // Skill shots
+  if(d.spRows) for(let h=1;h<=18;h++){
+    const r=d.spRows[h]; if(!r) continue;
+    const n=document.getElementById(`sp-name-${h}`); if(n) n.value=r.name;
+    const p=document.getElementById(`sp-prize-${h}`); if(p) p.value=r.prize;
+  }
+  // Draws
+  if(d.meat) d.meat.forEach((row,i)=>{
+    const idx=i+1;
+    const w=document.getElementById(`meat-${idx}`); if(w) w.value=row.winner;
+    const pr=document.getElementById(`meat-prize-${idx}`); if(pr) pr.value=row.prize;
+    const pf=document.getElementById(`meat-pref-${idx}`); if(pf) pf.value=row.pref;
+  });
+  const ffw=document.getElementById('ff-winner'); if(ffw) ffw.value=d.ffWinner||'';
+  const ffa=document.getElementById('ff-amount'); if(ffa) ffa.value=d.ffAmount||'';
+  recalcPools();
+  alert('Draft loaded. Review entries then Generate & Commit when ready.');
+}
+
 // ── Generate payout ───────────────────────────────────────────────────────────
 function generatePayout(previewOnly=false){
   const week   =document.getElementById('t-week')?.value||'';
@@ -1363,7 +1532,9 @@ document.addEventListener('click',function(e){
     case 'btn-preview':  generatePayout(true);  break;
     case 'btn-confirm-commit': confirmCommit(); break;
     case 'btn-print':    window.print();         break;
-    case 'btn-clear':    clearEntries();         break;
+    case 'btn-clear':      clearEntries();   break;
+    case 'btn-save-draft': saveDraft();      break;
+    case 'btn-load-draft': loadDraft();      break;
     case 'pin-change-link': showPinModal();      break;
     case 'pm-cancel':    document.getElementById('pin-modal').classList.remove('open'); break;
     case 'pm-save':      savePIN();              break;
