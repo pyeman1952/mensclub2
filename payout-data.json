@@ -2,7 +2,7 @@
   "weeks": [
     {
       "id": "Oct_5-_2026",
-      "name": "Week 1 â Winter opener",
+      "name": "Week 1 - Winter opener",
       "date": "Oct 5, 2026",
       "notes": "",
       "cancelled": false,
@@ -90,9 +90,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0â5",
-        "B": "6â11",
-        "C": "12â17",
+        "A": "0-10",
+        "B": "11-15",
+        "C": "16+",
         "D": "18+"
       },
       "net": [
