@@ -594,7 +594,7 @@ function saveWeek(w){
 }
 
 // ── Pool calc ─────────────────────────────────────────────────────────────────
-const skPerHole=()=>Math.floor(((parseFloat(document.getElementById('t-skins').value)||0)*5/13)*100)/100;
+const skPerHole=()=>Math.floor((parseFloat(document.getElementById('t-skins').value)||0)*5/13);
 const pgPerHole=()=>parseFloat(document.getElementById('t-pog').value)||0;
 
 function recalcPools(){
@@ -1103,7 +1103,7 @@ function generatePayout(previewOnly=false){
   const skPly  =parseFloat(document.getElementById('t-skins').value)||0;
   const pgPly  =parseFloat(document.getElementById('t-pog').value)||0;
   const gnPool =totalPly*10, skPool=skPly*5, pgPool=pgPly*5;
-  const skph=Math.floor((skPool/13)*100)/100, pgph=pgPly;
+  const skph=Math.floor(skPool/13), pgph=pgPly;
 
   let isOverwrite=false;
   if(!previewOnly){
