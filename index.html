@@ -868,16 +868,16 @@ function repairData(){
   weeksLog=[]; LS.set('weeks',weeksLog);
   // Clear season
   seasonData={}; saveSeason();
-  // Reset pot running totals to opening balance values (read from input fields if visible, else 0)
+  // Reset pot running totals to opening balance values (from saved snapshot, fallback to DOM)
+  const obSkins=LS.get('ob_skins',{});
+  const obPog=LS.get('ob_pog',{});
   SKINS_HOLES.forEach(h=>{
-    const obEl=document.getElementById(`ob-sk-${h}`);
-    const obVal=obEl ? (parseFloat(obEl.value)||0) : 0;
+    const obVal= obSkins[h]!=null ? obSkins[h] : (parseFloat(document.getElementById(`ob-sk-${h}`)?.value)||0);
     skinsPots[h]={pot:obVal, updatedAt:null};
     saveSkinsHole(h);
   });
   POG_HOLES.forEach(h=>{
-    const obEl=document.getElementById(`ob-pg-${h}`);
-    const obVal=obEl ? (parseFloat(obEl.value)||0) : 0;
+    const obVal= obPog[h]!=null ? obPog[h] : (parseFloat(document.getElementById(`ob-pg-${h}`)?.value)||0);
     pogPots[h]={pot:obVal, updatedAt:null};
     savePOGHole(h);
   });
@@ -1707,12 +1707,15 @@ function buildOpeningBalanceTables(){
 
 function saveSkinsOpeningBalances(){
   let changed=0;
+  const ob={};
   SKINS_HOLES.forEach(h=>{
     const val=parseFloat(document.getElementById(`ob-sk-${h}`)?.value)||0;
     skinsPots[h]={pot:val,updatedAt:new Date().toISOString()};
     saveSkinsHole(h);
+    ob[h]=val;
     changed++;
   });
+  LS.set('ob_skins',ob); // persist snapshot for Data Repair
   refreshSkinsPotDisplayAll();
   buildOpeningBalanceTables();
   alert(`Skins opening balances saved for ${changed} holes.`);
@@ -1720,12 +1723,15 @@ function saveSkinsOpeningBalances(){
 
 function savePOGOpeningBalances(){
   let changed=0;
+  const ob={};
   POG_HOLES.forEach(h=>{
     const val=parseFloat(document.getElementById(`ob-pg-${h}`)?.value)||0;
     pogPots[h]={pot:val,updatedAt:new Date().toISOString()};
     savePOGHole(h);
+    ob[h]=val;
     changed++;
   });
+  LS.set('ob_pog',ob); // persist snapshot for Data Repair
   refreshPOGPotDisplayAll();
   buildOpeningBalanceTables();
   alert(`POG opening balances saved for ${changed} holes.`);
