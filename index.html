@@ -259,6 +259,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
   <div class="sact">
     <button class="sbtn sbtn-blue" id="btn-save-draft">💾 Save Draft</button>
     <button class="sbtn sbtn-ghost" id="btn-load-draft">📂 Load Draft</button>
+    <button class="sbtn sbtn-ghost" id="btn-fix-public" style="background:rgba(220,53,69,.15);color:#ff8080;border:1px solid rgba(220,53,69,.4);">🔧 Fix Public Page</button>
     <button class="sbtn sbtn-danger" id="btn-clear">Clear Entries</button>
   </div>
 </nav>
@@ -1535,6 +1536,7 @@ document.addEventListener('click',function(e){
     case 'btn-clear':      clearEntries();   break;
     case 'btn-save-draft': saveDraft();      break;
     case 'btn-load-draft': loadDraft();      break;
+    case 'btn-fix-public': fixPublicPage();  break;
     case 'pin-change-link': showPinModal();      break;
     case 'pm-cancel':    document.getElementById('pin-modal').classList.remove('open'); break;
     case 'pm-save':      savePIN();              break;
@@ -1662,6 +1664,56 @@ async function publishToGitHub(weekKey, name, date, notes, cancelled, total,
     }
   } catch(e){
     showGHStatus(`⚠ Publish error: ${e.message}`, true);
+  }
+}
+
+// ── Fix Public Page — strip malformed entries, republish clean JSON ────────────
+async function fixPublicPage(){
+  const token = getGHToken();
+  if(!token){
+    alert('No GitHub token set. Add your token in the Opening Balances → Settings section first.');
+    return;
+  }
+  if(!confirm('This will remove any duplicate or malformed entries from the public results page (entries with bad IDs from old commits), keeping only valid weekly records.\n\nProceed?')) return;
+
+  const headers = {
+    'Authorization': `token ${token}`,
+    'Accept': 'application/vnd.github.v3+json',
+    'Content-Type': 'application/json'
+  };
+  const apiUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+
+  try {
+    showGHStatus('⏳ Fetching current public data…', false);
+    const cur = await fetch(apiUrl, {headers});
+    if(!cur.ok){ showGHStatus('⚠ Could not read public file: '+cur.status, true); return; }
+    const j = await cur.json();
+    const sha = j.sha;
+    const decoded = atob(j.content.replace(/\n/g,''));
+    const data = JSON.parse(decoded);
+
+    const before = (data.weeks||[]).length;
+    // Keep only entries whose ID contains no pipe character (|) and is non-empty
+    const cleanWeeks = (data.weeks||[]).filter(w => w.id && !w.id.includes('|'));
+    const removed = before - cleanWeeks.length;
+
+    if(removed === 0){
+      showGHStatus('✓ No bad entries found — public page data is already clean.', false);
+      return;
+    }
+
+    data.weeks = cleanWeeks;
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    const body = { message:`Fix: remove ${removed} malformed week entr${removed===1?'y':'ies'}`, content, sha };
+    const res = await fetch(apiUrl, { method:'PUT', headers, body: JSON.stringify(body) });
+    if(res.ok){
+      showGHStatus(`✓ Fixed! Removed ${removed} bad entr${removed===1?'y':'ies'} from public page. Refresh results in ~30 sec.`, false);
+    } else {
+      const err = await res.json();
+      showGHStatus(`⚠ Fix failed: ${err.message}`, true);
+    }
+  } catch(e){
+    showGHStatus(`⚠ Fix error: ${e.message}`, true);
   }
 }
 
