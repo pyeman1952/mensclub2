@@ -594,7 +594,7 @@ function saveWeek(w){
 }
 
 // ── Pool calc ─────────────────────────────────────────────────────────────────
-const skPerHole=()=>(parseFloat(document.getElementById('t-skins').value)||0)*5/13;
+const skPerHole=()=>Math.floor(((parseFloat(document.getElementById('t-skins').value)||0)*5/13)*100)/100;
 const pgPerHole=()=>parseFloat(document.getElementById('t-pog').value)||0;
 
 function recalcPools(){
