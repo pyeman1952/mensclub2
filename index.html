@@ -749,7 +749,8 @@ function addGrossRow(){
     <td><input type="text" placeholder="Player name"></td>
     <td><input type="number" placeholder="score" style="width:60px;"></td>
     <td><input type="number" placeholder="$" style="width:60px;"></td>
-    <td class="tdc"><input type="checkbox" title="Countback"></td>`;
+    <td class="tdc"><input type="checkbox" title="Countback"></td>
+    <td><button type="button" title="Remove row" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:15px;padding:0 4px;" onclick="this.closest('tr').remove()">×</button></td>`;
   document.getElementById('gross-tbody').appendChild(tr);
 }
 
@@ -1139,6 +1140,8 @@ function loadDraft(){
       const ci=cells[4].querySelector('input'); if(ci) ci.checked=!!row.cb;
       const pi=cells[5].querySelector('input'); if(pi) pi.value=row.prize;
     });
+    // Clear any previously added extra rows before re-adding
+    document.querySelectorAll('#gross-tbody tr:not([data-flight])').forEach(r=>r.remove());
     // Re-add extra rows
     extraRows.forEach(row=>{
       addGrossRow();
