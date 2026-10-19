@@ -251,6 +251,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
   <div class="nav-sec">Season</div>
   <button class="tbtn" data-tab="season">Leaderboard</button>
   <button class="tbtn" data-tab="pots">Pot History</button>
+  <button class="tbtn" data-tab="flights">Flight Report</button>
   <hr class="sdiv">
   <div class="nav-sec">Tools</div>
   <button class="tbtn" id="btn-commit">Generate &amp; Commit</button>
@@ -368,7 +369,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
       <div class="cb">
         <table class="gt">
           <thead><tr>
-            <th>#</th><th>Player</th><th>Gross</th><th>Hcp</th><th>Net</th><th>Prize ($)</th><th>CB</th>
+            <th>#</th><th>Player</th><th>Flt</th><th>Gross</th><th>Hcp</th><th>Net</th><th>Prize ($)</th><th>CB</th>
           </tr></thead>
           <tbody id="net-tbody"></tbody>
         </table>
@@ -410,7 +411,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
       <h2>Skins <em>holes 1,2,5-9,11-14,16,18</em></h2>
       <div class="cb">
         <table class="gt">
-          <thead><tr><th>Hole</th><th>Winner</th><th>Net</th><th>Gross</th><th class="thr">Prev Pot</th><th class="thr">+This Wk</th><th class="thr">Total Pot</th><th>Paid?</th></tr></thead>
+          <thead><tr><th>Hole</th><th>Winner</th><th>Flt</th><th>Net</th><th>Gross</th><th class="thr">Prev Pot</th><th class="thr">+This Wk</th><th class="thr">Total Pot</th><th>Paid?</th></tr></thead>
           <tbody id="skins-tbody"></tbody>
         </table>
       </div>
@@ -421,7 +422,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
       <h2>Pots of Gold <em>holes 3,4,10,15,17</em></h2>
       <div class="cb">
         <table class="gt">
-          <thead><tr><th>Hole</th><th>Winner</th><th class="thr">Prev Pot</th><th class="thr">+This Wk</th><th class="thr">Total Pot</th><th>Paid?</th></tr></thead>
+          <thead><tr><th>Hole</th><th>Winner</th><th>Flt</th><th class="thr">Prev Pot</th><th class="thr">+This Wk</th><th class="thr">Total Pot</th><th>Paid?</th></tr></thead>
           <tbody id="pog-tbody"></tbody>
         </table>
       </div>
@@ -488,6 +489,30 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
         </div>
         <div class="hlist" id="hist-weeks"></div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FLIGHT REPORT ══════════════════════════════════════════════════════════ -->
+<div id="panel-flights" class="panel hidden">
+  <div class="card s2">
+    <h2>Flight Winnings Report <em id="flight-sub">season to date</em></h2>
+    <div class="cb">
+      <p style="font-size:12px;color:var(--mut);margin-bottom:14px;">Totals based on committed weeks. Weeks committed before flight columns were added will show as unassigned.</p>
+      <table class="gt" style="margin-bottom:20px;">
+        <thead><tr>
+          <th>Flight</th>
+          <th class="thr">Net ($)</th>
+          <th class="thr">Skins ($)</th>
+          <th class="thr">POG ($)</th>
+          <th class="thr">Total ($)</th>
+        </tr></thead>
+        <tbody id="flight-tbody"></tbody>
+      </table>
+      <div style="margin-bottom:6px;display:flex;gap:8px;">
+        <button class="btn btn-o" id="btn-refresh-flights" style="border-color:#0D47A1;color:#0D47A1;">↻ Refresh</button>
+      </div>
+      <div id="flight-weeks-summary" style="font-size:11px;color:var(--mut);"></div>
     </div>
   </div>
 </div>
@@ -637,6 +662,7 @@ function refreshFlightLabels(){
 }
 
 // ── Build net tbody ───────────────────────────────────────────────────────────
+const FLIGHT_OPTS=['A','B','C'].map(f=>`<option value="${f}">${f}</option>`).join('');
 function buildNet(){
   const tbody=document.getElementById('net-tbody');
   for(let p=1;p<=15;p++){
@@ -644,6 +670,7 @@ function buildNet(){
     const tr=document.createElement('tr');
     tr.innerHTML=`<td style="color:var(--mut);font-size:10px;width:26px;">${p}${sfx}</td>
       <td><input type="text" id="nn-${p}" placeholder="Name"></td>
+      <td><select id="nf-${p}" style="font-size:12px;padding:4px 3px;width:54px;"><option value="">--</option>${FLIGHT_OPTS}</select></td>
       <td><input type="number" id="ng-${p}" placeholder="gross" style="width:58px;"></td>
       <td><input type="number" id="nh-${p}" placeholder="hcp" style="width:50px;"></td>
       <td><input type="number" id="ns-${p}" placeholder="net" style="width:58px;"></td>
@@ -670,6 +697,7 @@ function buildSkins(){
     tr.innerHTML=`
       <td style="font-weight:600;">${h}</td>
       <td><input type="text" id="sk-name-${h}" placeholder="Winner or blank"></td>
+      <td><select id="sk-flt-${h}" style="font-size:12px;padding:4px 3px;width:54px;"><option value="">--</option>${FLIGHT_OPTS}</select></td>
       <td><input type="number" id="sk-score-${h}" placeholder="net" style="width:52px;"></td>
       <td><input type="number" id="sk-gross-${h}" placeholder="gross" style="width:52px;"></td>
       <td class="tdr"><span id="sk-prev-${h}" style="color:var(--mut);font-size:12px;">$0.00</span></td>
@@ -688,6 +716,7 @@ function buildPOG(){
     tr.innerHTML=`
       <td style="font-weight:600;"><span class="pog-dot"></span>${h}</td>
       <td><input type="text" id="pog-name-${h}" placeholder="Unique birdie winner"></td>
+      <td><select id="pog-flt-${h}" style="font-size:12px;padding:4px 3px;width:54px;"><option value="">--</option>${FLIGHT_OPTS}</select></td>
       <td class="tdr"><span id="pog-prev-${h}" style="color:var(--mut);font-size:12px;">$0.00</span></td>
       <td class="tdr"><span id="pog-add-${h}" style="color:var(--gm);font-size:12px;">+$0.00</span></td>
       <td class="tdr"><span id="pog-pot-${h}" class="pot-display">$0.00</span></td>
@@ -777,7 +806,7 @@ function refreshHistPanel(){
 // ── Tab switching ─────────────────────────────────────────────────────────────
 function showTab(tab){
   if(tab==='change-pin'){showPinModal();return;}
-  ['setup','payout','season','pots','balances'].forEach(t=>{
+  ['setup','payout','season','pots','balances','flights'].forEach(t=>{
     document.getElementById(`panel-${t}`).classList.toggle('hidden',t!==tab);
   });
   document.querySelectorAll('.tbtn[data-tab]').forEach(b=>{
@@ -785,6 +814,7 @@ function showTab(tab){
   });
   if(tab==='pots') refreshHistPanel();
   if(tab==='season') renderLeaderboard(Object.entries(seasonData).map(([id,v])=>({id,...v})));
+  if(tab==='flights') renderFlightReport();
   if(tab==='balances'){
     buildOpeningBalanceTables();
     const t=getGHToken();
@@ -794,6 +824,70 @@ function showTab(tab){
     if(st) st.textContent=t?'✓ Token saved':'No token saved yet';
     if(st) st.style.color=t?'var(--gm)':'var(--mut)';
   }
+}
+
+// ── Flight Report ─────────────────────────────────────────────────────────────
+function renderFlightReport(){
+  const tbody=document.getElementById('flight-tbody');
+  const sub=document.getElementById('flight-sub');
+  const summary=document.getElementById('flight-weeks-summary');
+  if(!tbody) return;
+  // Aggregate by flight
+  const flights=['A','B','C'];
+  const totals={};
+  flights.forEach(f=>totals[f]={net:0,skins:0,pog:0});
+  totals['?']={net:0,skins:0,pog:0}; // unassigned
+  let weeksWithData=0;
+  weeksLog.forEach(wk=>{
+    let had=false;
+    (wk.netData||[]).forEach(r=>{
+      const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
+      totals[f].net+=(parseFloat(r.prize)||0);
+      had=true;
+    });
+    (wk.skinsData||[]).forEach(r=>{
+      const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
+      // use weekly payout per hole (stored field)
+      totals[f].skins+=(parseFloat(r.weekly)||0);
+      had=true;
+    });
+    (wk.pogData||[]).forEach(r=>{
+      const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
+      totals[f].pog+=(parseFloat(r.weekly)||0);
+      had=true;
+    });
+    if(had) weeksWithData++;
+  });
+  // Build rows
+  tbody.innerHTML='';
+  let gNet=0,gSkins=0,gPOG=0;
+  const allKeys=[...flights,'?'];
+  allKeys.forEach(f=>{
+    const t=totals[f];
+    if(!t) return;
+    const row=t.net+t.skins+t.pog;
+    gNet+=t.net; gSkins+=t.skins; gPOG+=t.pog;
+    const label=f==='?'?'Unassigned':`Flight ${f}`;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${label}</td>
+      <td class="thr">$${t.net.toFixed(2)}</td>
+      <td class="thr">$${t.skins.toFixed(2)}</td>
+      <td class="thr">$${t.pog.toFixed(2)}</td>
+      <td class="thr" style="font-weight:600;">$${row.toFixed(2)}</td>`;
+    tbody.appendChild(tr);
+  });
+  // Grand total row
+  const grand=gNet+gSkins+gPOG;
+  const tf=document.createElement('tr');
+  tf.style.borderTop='2px solid var(--bdr)';
+  tf.innerHTML=`<td style="font-weight:700;">Total</td>
+    <td class="thr" style="font-weight:700;">$${gNet.toFixed(2)}</td>
+    <td class="thr" style="font-weight:700;">$${gSkins.toFixed(2)}</td>
+    <td class="thr" style="font-weight:700;">$${gPOG.toFixed(2)}</td>
+    <td class="thr" style="font-weight:700;">$${grand.toFixed(2)}</td>`;
+  tbody.appendChild(tf);
+  if(sub) sub.textContent=`season to date`;
+  if(summary) summary.textContent=`Based on ${weeksLog.length} committed week${weeksLog.length!==1?'s':''} (${weeksWithData} with flight data).`;
 }
 
 // ── Season leaderboard ────────────────────────────────────────────────────────
@@ -972,7 +1066,8 @@ function saveDraft(){
       s:document.getElementById(`ns-${p}`)?.value||'',
       h:document.getElementById(`nh-${p}`)?.value||'',
       cb:document.getElementById(`nc-${p}`)?.checked||false,
-      pr:document.getElementById(`np-${p}`)?.value||''
+      pr:document.getElementById(`np-${p}`)?.value||'',
+      flt:document.getElementById(`nf-${p}`)?.value||''
     });
   }
   d.netRows=netRows;
@@ -983,7 +1078,8 @@ function saveDraft(){
       name:document.getElementById(`sk-name-${h}`)?.value||'',
       score:document.getElementById(`sk-score-${h}`)?.value||'',
       gross:document.getElementById(`sk-gross-${h}`)?.value||'',
-      paid:document.getElementById(`sk-paid-${h}`)?.checked||false
+      paid:document.getElementById(`sk-paid-${h}`)?.checked||false,
+      flt:document.getElementById(`sk-flt-${h}`)?.value||''
     };
   });
   d.skRows=skRows;
@@ -992,7 +1088,8 @@ function saveDraft(){
   POG_HOLES.forEach(h=>{
     pgRows[h]={
       name:document.getElementById(`pog-name-${h}`)?.value||'',
-      paid:document.getElementById(`pog-paid-${h}`)?.checked||false
+      paid:document.getElementById(`pog-paid-${h}`)?.checked||false,
+      flt:document.getElementById(`pog-flt-${h}`)?.value||''
     };
   });
   d.pgRows=pgRows;
@@ -1065,6 +1162,7 @@ function loadDraft(){
     const nh=document.getElementById(`nh-${p}`); if(nh) nh.value=row.h;
     const nc=document.getElementById(`nc-${p}`); if(nc) nc.checked=!!row.cb;
     const np=document.getElementById(`np-${p}`); if(np) np.value=row.pr;
+    const nf=document.getElementById(`nf-${p}`); if(nf) nf.value=row.flt||'';
   });
   // Skins
   if(d.skRows) SKINS_HOLES.forEach(h=>{
@@ -1073,12 +1171,14 @@ function loadDraft(){
     const s=document.getElementById(`sk-score-${h}`); if(s) s.value=r.score;
     const g=document.getElementById(`sk-gross-${h}`); if(g) g.value=r.gross;
     const c=document.getElementById(`sk-paid-${h}`); if(c) c.checked=!!r.paid;
+    const f=document.getElementById(`sk-flt-${h}`); if(f) f.value=r.flt||'';
   });
   // POG
   if(d.pgRows) POG_HOLES.forEach(h=>{
     const r=d.pgRows[h]; if(!r) return;
     const n=document.getElementById(`pog-name-${h}`); if(n) n.value=r.name;
     const c=document.getElementById(`pog-paid-${h}`); if(c) c.checked=!!r.paid;
+    const f=document.getElementById(`pog-flt-${h}`); if(f) f.value=r.flt||'';
   });
   // Skill shots
   if(d.spRows) for(let h=1;h<=18;h++){
@@ -1161,7 +1261,8 @@ function generatePayout(previewOnly=false){
     const h=document.getElementById(`nh-${p}`)?.value||'';
     const cb=document.getElementById(`nc-${p}`)?.checked;
     const pr=document.getElementById(`np-${p}`)?.value||'';
-    if(n||pr) netData.push({place:p,pname:n,gross:g,score:s,hcp:h,cb,prize:pr});
+    const flt=document.getElementById(`nf-${p}`)?.value||'';
+    if(n||pr) netData.push({place:p,pname:n,gross:g,score:s,hcp:h,cb,prize:pr,flt});
   }
 
   // Collect skins
@@ -1173,7 +1274,8 @@ function generatePayout(previewOnly=false){
     const stored=(skinsPots[h]?.pot)||0;
     const runPot=stored+skph;
     const gross=document.getElementById(`sk-gross-${h}`)?.value||'';
-    skinsData.push({hole:h,winner,score,gross,runPot,stored,weekly:skph,paid});
+    const flt  =document.getElementById(`sk-flt-${h}`)?.value||'';
+    skinsData.push({hole:h,winner,score,gross,runPot,stored,weekly:skph,paid,flt});
     if(!previewOnly&&!isOverwrite){
       const newPot=paid?0:runPot;
       skinsPots[h]={pot:newPot,updatedAt:new Date().toISOString(),lastWinner:paid?winner:null};
@@ -1194,7 +1296,8 @@ function generatePayout(previewOnly=false){
     const paid  =document.getElementById(`pog-paid-${h}`)?.checked;
     const stored=(pogPots[h]?.pot)||0;
     const runPot=stored+pgph;
-    pogData.push({hole:h,winner,runPot,stored,weekly:pgph,paid});
+    const flt   =document.getElementById(`pog-flt-${h}`)?.value||'';
+    pogData.push({hole:h,winner,runPot,stored,weekly:pgph,paid,flt});
     if(!previewOnly&&!isOverwrite){
       const newPot=paid?0:runPot;
       pogPots[h]={pot:newPot,updatedAt:new Date().toISOString(),lastWinner:paid?winner:null};
@@ -1432,10 +1535,10 @@ function confirmCommit(){
   // Save week (replace if overwrite)
   if(pc.isOverwrite){
     const idx=weeksLog.findIndex(w=>w.id===pc.weekKey);
-    const rec={id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString()};
+    const rec={id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData};
     if(idx>=0) weeksLog[idx]=rec; else weeksLog.push(rec);
   } else {
-    saveWeek({id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString()});
+    saveWeek({id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData});
   }
   LS.set('weeks',weeksLog);
   // Update season — winner entries
@@ -1553,7 +1656,8 @@ document.addEventListener('click',function(e){
     case 'btn-export-season': exportSeasonCSV(); break;
     case 'btn-reset-season':  resetSeason();     break;
     case 'btn-repair-data':   repairData();      break;
-    case 'btn-refresh-lb':    renderLeaderboard(Object.entries(seasonData).map(([id,v])=>({id,...v}))); break;
+    case 'btn-refresh-lb':      renderLeaderboard(Object.entries(seasonData).map(([id,v])=>({id,...v}))); break;
+    case 'btn-refresh-flights': renderFlightReport(); break;
     case 'btn-export-pots':   exportPotsCSV();   break;
     case 'btn-export-weeks':      exportWeeksCSV();           break;
     case 'btn-save-skins-ob':     saveSkinsOpeningBalances(); break;
