@@ -2,7 +2,7 @@
   "weeks": [
     {
       "id": "Oct_5-_2026",
-      "name": "Week 1 - Winter opener",
+      "name": "Week 1 — Winter opener",
       "date": "Oct 5, 2026",
       "notes": "",
       "cancelled": false,
@@ -10,7 +10,7 @@
       "gnPool": 490,
       "skinsPool": 235,
       "pogPool": 240,
-      "recordedAt": "2026-10-18T03:25:41.970Z",
+      "recordedAt": "2026-10-20T00:38:45.408Z",
       "flights": {
         "A": [
           {
@@ -53,7 +53,7 @@
           {
             "place": 3,
             "pname": "Larry Hunt",
-            "score": "85",
+            "score": "87",
             "cb": false,
             "prize": "20"
           }
@@ -103,7 +103,8 @@
           "score": "62",
           "hcp": "31",
           "cb": false,
-          "prize": "40"
+          "prize": "40",
+          "flt": "C"
         },
         {
           "place": 2,
@@ -112,7 +113,8 @@
           "score": "69",
           "hcp": "23",
           "cb": false,
-          "prize": "35"
+          "prize": "35",
+          "flt": "C"
         },
         {
           "place": 3,
@@ -121,7 +123,8 @@
           "score": "70",
           "hcp": "27",
           "cb": false,
-          "prize": "25"
+          "prize": "25",
+          "flt": "C"
         },
         {
           "place": 4,
@@ -130,7 +133,8 @@
           "score": "70",
           "hcp": "8",
           "cb": false,
-          "prize": "25"
+          "prize": "25",
+          "flt": "A"
         },
         {
           "place": 5,
@@ -139,7 +143,8 @@
           "score": "72",
           "hcp": "17",
           "cb": true,
-          "prize": "25"
+          "prize": "25",
+          "flt": "C"
         },
         {
           "place": 6,
@@ -148,7 +153,8 @@
           "score": "72",
           "hcp": "13",
           "cb": false,
-          "prize": "20"
+          "prize": "20",
+          "flt": "B"
         },
         {
           "place": 7,
@@ -157,7 +163,8 @@
           "score": "72",
           "hcp": "26",
           "cb": false,
-          "prize": "20"
+          "prize": "20",
+          "flt": "C"
         },
         {
           "place": 8,
@@ -166,7 +173,8 @@
           "score": "73",
           "hcp": "20",
           "cb": false,
-          "prize": "20"
+          "prize": "20",
+          "flt": "C"
         },
         {
           "place": 9,
@@ -175,7 +183,8 @@
           "score": "73",
           "hcp": "9",
           "cb": false,
-          "prize": "15"
+          "prize": "15",
+          "flt": "A"
         },
         {
           "place": 10,
@@ -184,7 +193,8 @@
           "score": "73",
           "hcp": "9",
           "cb": false,
-          "prize": "15"
+          "prize": "15",
+          "flt": "A"
         },
         {
           "place": 11,
@@ -193,7 +203,8 @@
           "score": "73",
           "hcp": "9",
           "cb": true,
-          "prize": "15"
+          "prize": "15",
+          "flt": "A"
         }
       ],
       "skins": [
@@ -205,7 +216,8 @@
           "runPot": 38,
           "stored": 20,
           "weekly": 18,
-          "paid": true
+          "paid": true,
+          "flt": "A"
         },
         {
           "hole": 2,
@@ -215,7 +227,8 @@
           "runPot": 38,
           "stored": 20,
           "weekly": 18,
-          "paid": false
+          "paid": false,
+          "flt": ""
         },
         {
           "hole": 5,
@@ -225,7 +238,8 @@
           "runPot": 38,
           "stored": 20,
           "weekly": 18,
-          "paid": false
+          "paid": false,
+          "flt": ""
         },
         {
           "hole": 6,
@@ -235,7 +249,8 @@
           "runPot": 38,
           "stored": 20,
           "weekly": 18,
-          "paid": true
+          "paid": true,
+          "flt": "C"
         },
         {
           "hole": 7,
@@ -245,7 +260,8 @@
           "runPot": 38,
           "stored": 20,
           "weekly": 18,
-          "paid": true
+          "paid": true,
+          "flt": "B"
         },
         {
           "hole": 8,
@@ -255,7 +271,8 @@
           "runPot": 38,
           "stored": 20,
           "weekly": 18,
-          "paid": true
+          "paid": true,
+          "flt": ""
         },
         {
           "hole": 9,
@@ -265,7 +282,8 @@
           "runPot": 38,
           "stored": 20,
           "weekly": 18,
-          "paid": false
+          "paid": false,
+          "flt": ""
         },
         {
           "hole": 11,
@@ -275,7 +293,8 @@
           "runPot": 38,
           "stored": 20,
           "weekly": 18,
-          "paid": true
+          "paid": true,
+          "flt": "B"
         },
         {
           "hole": 12,
@@ -285,7 +304,8 @@
           "runPot": 38,
           "stored": 20,
           "weekly": 18,
-          "paid": false
+          "paid": false,
+          "flt": ""
         },
         {
           "hole": 13,
@@ -295,7 +315,8 @@
           "runPot": 38,
           "stored": 20,
           "weekly": 18,
-          "paid": true
+          "paid": true,
+          "flt": "C"
         },
         {
           "hole": 14,
@@ -305,7 +326,8 @@
           "runPot": 38,
           "stored": 20,
           "weekly": 18,
-          "paid": false
+          "paid": false,
+          "flt": ""
         },
         {
           "hole": 16,
@@ -315,7 +337,8 @@
           "runPot": 38,
           "stored": 20,
           "weekly": 18,
-          "paid": true
+          "paid": true,
+          "flt": "B"
         },
         {
           "hole": 18,
@@ -325,7 +348,8 @@
           "runPot": 38,
           "stored": 20,
           "weekly": 18,
-          "paid": true
+          "paid": true,
+          "flt": "C"
         }
       ],
       "pog": [
@@ -335,7 +359,8 @@
           "runPot": 98,
           "stored": 50,
           "weekly": 48,
-          "paid": false
+          "paid": false,
+          "flt": ""
         },
         {
           "hole": 4,
@@ -343,7 +368,8 @@
           "runPot": 98,
           "stored": 50,
           "weekly": 48,
-          "paid": true
+          "paid": true,
+          "flt": "B"
         },
         {
           "hole": 10,
@@ -351,7 +377,8 @@
           "runPot": 98,
           "stored": 50,
           "weekly": 48,
-          "paid": false
+          "paid": false,
+          "flt": ""
         },
         {
           "hole": 15,
@@ -359,7 +386,8 @@
           "runPot": 98,
           "stored": 50,
           "weekly": 48,
-          "paid": true
+          "paid": true,
+          "flt": "A"
         },
         {
           "hole": 17,
@@ -367,7 +395,8 @@
           "runPot": 98,
           "stored": 50,
           "weekly": 48,
-          "paid": false
+          "paid": false,
+          "flt": ""
         }
       ],
       "skill": [
@@ -775,7 +804,7 @@
       "total": 15,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Keith Allen": {
       "name": "Keith Allen",
@@ -788,7 +817,7 @@
       "total": 40,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Ted Baker": {
       "name": "Ted Baker",
@@ -801,7 +830,7 @@
       "total": 38,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Randy Bennett": {
       "name": "Randy Bennett",
@@ -814,7 +843,7 @@
       "total": 73,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Gord Bohmer": {
       "name": "Gord Bohmer",
@@ -827,7 +856,7 @@
       "total": 53,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Mitch Carr-Hilton": {
       "name": "Mitch Carr-Hilton",
@@ -840,7 +869,7 @@
       "total": 20,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Rick Dawson": {
       "name": "Rick Dawson",
@@ -853,7 +882,7 @@
       "total": 30,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Steve Dewitt": {
       "name": "Steve Dewitt",
@@ -866,7 +895,7 @@
       "total": 20,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Craig Follis": {
       "name": "Craig Follis",
@@ -879,7 +908,7 @@
       "total": 30,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Jim Green": {
       "name": "Jim Green",
@@ -892,7 +921,7 @@
       "total": 78,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Larry Hunt": {
       "name": "Larry Hunt",
@@ -905,7 +934,7 @@
       "total": 20,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Greg Koster": {
       "name": "Greg Koster",
@@ -918,7 +947,7 @@
       "total": 138,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Gord Lund": {
       "name": "Gord Lund",
@@ -931,7 +960,7 @@
       "total": 20,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Dennis Lychak": {
       "name": "Dennis Lychak",
@@ -944,7 +973,7 @@
       "total": 20,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Mike Matheson": {
       "name": "Mike Matheson",
@@ -957,7 +986,7 @@
       "total": 78,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Scott Murray": {
       "name": "Scott Murray",
@@ -970,7 +999,7 @@
       "total": 20,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Corey Nickerson": {
       "name": "Corey Nickerson",
@@ -983,7 +1012,7 @@
       "total": 98,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Matt Noble": {
       "name": "Matt Noble",
@@ -996,7 +1025,7 @@
       "total": 25,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Bryan Phelan": {
       "name": "Bryan Phelan",
@@ -1009,7 +1038,7 @@
       "total": 25,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Kevin Riordan": {
       "name": "Kevin Riordan",
@@ -1022,7 +1051,7 @@
       "total": 38,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Doug Rushton": {
       "name": "Doug Rushton",
@@ -1035,7 +1064,7 @@
       "total": 38,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Mike Schwarz": {
       "name": "Mike Schwarz",
@@ -1048,7 +1077,7 @@
       "total": 30,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Trent Skinner": {
       "name": "Trent Skinner",
@@ -1061,7 +1090,7 @@
       "total": 15,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Yvonne Stewart": {
       "name": "Yvonne Stewart",
@@ -1074,7 +1103,7 @@
       "total": 38,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     },
     "Bob Tarbuck": {
       "name": "Bob Tarbuck",
@@ -1087,98 +1116,98 @@
       "total": 25,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-18T03:25:41.293Z"
+      "lastUpdated": "2026-10-20T00:38:44.814Z"
     }
   },
   "pots": {
     "sk_1": {
       "pot": 0,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": "Gord Bohmer"
     },
     "sk_2": {
       "pot": 38,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": null
     },
     "sk_5": {
       "pot": 38,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": null
     },
     "sk_6": {
       "pot": 0,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": "Randy Bennett"
     },
     "sk_7": {
       "pot": 0,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": "Doug Rushton"
     },
     "sk_8": {
       "pot": 0,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": "Yvonne Stewart"
     },
     "sk_9": {
       "pot": 38,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": null
     },
     "sk_11": {
       "pot": 0,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": "Kevin Riordan"
     },
     "sk_12": {
       "pot": 38,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": null
     },
     "sk_13": {
       "pot": 0,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": "Ted Baker"
     },
     "sk_14": {
       "pot": 38,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": null
     },
     "sk_16": {
       "pot": 0,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": "Jim Green"
     },
     "sk_18": {
       "pot": 0,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": "Mike Matheson"
     },
     "pg_3": {
       "pot": 98,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": null
     },
     "pg_4": {
       "pot": 0,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": "Corey Nickerson"
     },
     "pg_10": {
       "pot": 98,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": null
     },
     "pg_15": {
       "pot": 0,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": "Greg Koster"
     },
     "pg_17": {
       "pot": 98,
-      "updatedAt": "2026-10-18T03:22:48.383Z",
+      "updatedAt": "2026-10-20T00:36:40.472Z",
       "lastWinner": null
     }
   }
