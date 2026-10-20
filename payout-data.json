@@ -1,8 +1,756 @@
 {
   "weeks": [
     {
+      "id": "October_18-_2026",
+      "name": "Week 2 — Winter Week 2",
+      "date": "October 18, 2026",
+      "notes": "Another beautiful day, hard fairways with Lift clean and place",
+      "cancelled": false,
+      "players": 54,
+      "gnPool": 540,
+      "skinsPool": 255,
+      "pogPool": 255,
+      "recordedAt": "2026-10-20T03:25:01.775Z",
+      "flights": {
+        "A": [
+          {
+            "place": 1,
+            "pname": "Greg Koster",
+            "score": "69",
+            "cb": false,
+            "prize": "40"
+          },
+          {
+            "place": 2,
+            "pname": "Mitch Carr-Hilton",
+            "score": "72",
+            "cb": false,
+            "prize": "30"
+          },
+          {
+            "place": 3,
+            "pname": "Iain Haigh",
+            "score": "74",
+            "cb": false,
+            "prize": "20"
+          }
+        ],
+        "B": [
+          {
+            "place": 1,
+            "pname": "Brian Slater",
+            "score": "83",
+            "cb": false,
+            "prize": "40"
+          },
+          {
+            "place": 2,
+            "pname": "Rick Smith",
+            "score": "84",
+            "cb": true,
+            "prize": "30"
+          },
+          {
+            "place": 3,
+            "pname": "Carl Webber",
+            "score": "84",
+            "cb": false,
+            "prize": "20"
+          }
+        ],
+        "C": [
+          {
+            "place": 1,
+            "pname": "Thyssen De Goede",
+            "score": "82",
+            "cb": false,
+            "prize": "40"
+          },
+          {
+            "place": 2,
+            "pname": "Keith Allan",
+            "score": "87",
+            "cb": false,
+            "prize": "30"
+          },
+          {
+            "place": 3,
+            "pname": "Randy Bennett",
+            "score": "92",
+            "cb": false,
+            "prize": "20"
+          }
+        ],
+        "D": []
+      },
+      "flightNames": {
+        "A": "Flight A",
+        "B": "Flight B",
+        "C": "Flight C",
+        "D": "Flight D"
+      },
+      "flightRanges": {
+        "A": "0-10",
+        "B": "11-15",
+        "C": "16+",
+        "D": "18+"
+      },
+      "net": [
+        {
+          "place": 1,
+          "pname": "Randy Arduini",
+          "gross": "91",
+          "score": "65",
+          "hcp": "26",
+          "cb": false,
+          "prize": "40",
+          "flt": "C"
+        },
+        {
+          "place": 2,
+          "pname": "Ted Baker",
+          "gross": "97",
+          "score": "69",
+          "hcp": "28",
+          "cb": false,
+          "prize": "30",
+          "flt": "C"
+        },
+        {
+          "place": 3,
+          "pname": "Kevin Riordan",
+          "gross": "86",
+          "score": "70",
+          "hcp": "16",
+          "cb": false,
+          "prize": "20",
+          "flt": "B"
+        },
+        {
+          "place": 4,
+          "pname": "Ian Mclean",
+          "gross": "79",
+          "score": "71",
+          "hcp": "8",
+          "cb": false,
+          "prize": "20",
+          "flt": "A"
+        },
+        {
+          "place": 5,
+          "pname": "Rod Gray",
+          "gross": "82",
+          "score": "71",
+          "hcp": "11",
+          "cb": false,
+          "prize": "20",
+          "flt": "A"
+        },
+        {
+          "place": 6,
+          "pname": "Kelly Mullock",
+          "gross": "87",
+          "score": "71",
+          "hcp": "16",
+          "cb": false,
+          "prize": "20",
+          "flt": "B"
+        },
+        {
+          "place": 7,
+          "pname": "Doug Rushton",
+          "gross": "85",
+          "score": "72",
+          "hcp": "13",
+          "cb": false,
+          "prize": "15",
+          "flt": "B"
+        },
+        {
+          "place": 8,
+          "pname": "Bob Tarbuck",
+          "gross": "88",
+          "score": "72",
+          "hcp": "16",
+          "cb": false,
+          "prize": "15",
+          "flt": "B"
+        },
+        {
+          "place": 9,
+          "pname": "Trent Skinner",
+          "gross": "81",
+          "score": "72",
+          "hcp": "9",
+          "cb": false,
+          "prize": "15",
+          "flt": "A"
+        },
+        {
+          "place": 10,
+          "pname": "Gary Houg",
+          "gross": "87",
+          "score": "72",
+          "hcp": "15",
+          "cb": false,
+          "prize": "15",
+          "flt": "B"
+        }
+      ],
+      "skins": [
+        {
+          "hole": 1,
+          "winner": "Mandy Johns",
+          "score": "2",
+          "gross": "",
+          "runPot": 19,
+          "stored": 0,
+          "weekly": 19,
+          "paid": true,
+          "flt": "C"
+        },
+        {
+          "hole": 2,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 57,
+          "stored": 38,
+          "weekly": 19,
+          "paid": false,
+          "flt": ""
+        },
+        {
+          "hole": 5,
+          "winner": "Scott Parsons",
+          "score": "2",
+          "gross": "",
+          "runPot": 57,
+          "stored": 38,
+          "weekly": 19,
+          "paid": true,
+          "flt": "B"
+        },
+        {
+          "hole": 6,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 19,
+          "stored": 0,
+          "weekly": 19,
+          "paid": false,
+          "flt": ""
+        },
+        {
+          "hole": 7,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 19,
+          "stored": 0,
+          "weekly": 19,
+          "paid": false,
+          "flt": ""
+        },
+        {
+          "hole": 8,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 19,
+          "stored": 0,
+          "weekly": 19,
+          "paid": false,
+          "flt": ""
+        },
+        {
+          "hole": 9,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 57,
+          "stored": 38,
+          "weekly": 19,
+          "paid": false,
+          "flt": ""
+        },
+        {
+          "hole": 11,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 19,
+          "stored": 0,
+          "weekly": 19,
+          "paid": false,
+          "flt": ""
+        },
+        {
+          "hole": 12,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 57,
+          "stored": 38,
+          "weekly": 19,
+          "paid": false,
+          "flt": ""
+        },
+        {
+          "hole": 13,
+          "winner": "Keith Allan",
+          "score": "2",
+          "gross": "",
+          "runPot": 19,
+          "stored": 0,
+          "weekly": 19,
+          "paid": true,
+          "flt": "C"
+        },
+        {
+          "hole": 14,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 57,
+          "stored": 38,
+          "weekly": 19,
+          "paid": false,
+          "flt": ""
+        },
+        {
+          "hole": 16,
+          "winner": "Dan Haaf",
+          "score": "3",
+          "gross": "",
+          "runPot": 19,
+          "stored": 0,
+          "weekly": 19,
+          "paid": true,
+          "flt": "B"
+        },
+        {
+          "hole": 18,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 19,
+          "stored": 0,
+          "weekly": 19,
+          "paid": false,
+          "flt": ""
+        }
+      ],
+      "pog": [
+        {
+          "hole": 3,
+          "winner": "",
+          "runPot": 149,
+          "stored": 98,
+          "weekly": 51,
+          "paid": false,
+          "flt": ""
+        },
+        {
+          "hole": 4,
+          "winner": "",
+          "runPot": 51,
+          "stored": 0,
+          "weekly": 51,
+          "paid": false,
+          "flt": ""
+        },
+        {
+          "hole": 10,
+          "winner": "",
+          "runPot": 149,
+          "stored": 98,
+          "weekly": 51,
+          "paid": false,
+          "flt": ""
+        },
+        {
+          "hole": 15,
+          "winner": "",
+          "runPot": 51,
+          "stored": 0,
+          "weekly": 51,
+          "paid": false,
+          "flt": ""
+        },
+        {
+          "hole": 17,
+          "winner": "",
+          "runPot": 149,
+          "stored": 98,
+          "weekly": 51,
+          "paid": false,
+          "flt": ""
+        }
+      ],
+      "skill": [
+        {
+          "hole": 1,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 2,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 3,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 4,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 5,
+          "winner": "Rick Smith",
+          "prize": "KP 14+ 2nd shot sponsor Speer Golf"
+        },
+        {
+          "hole": 6,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 7,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 8,
+          "winner": "Kevin Riordan",
+          "prize": "LP #9 Sponsor Speer Golf"
+        },
+        {
+          "hole": 9,
+          "winner": "Jordan Rallison",
+          "prize": "KP #9  2nd shot A flight Sponsor Speer Golf"
+        },
+        {
+          "hole": 10,
+          "winner": "Jason Cox",
+          "prize": "KP Sponsor Subway"
+        },
+        {
+          "hole": 11,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 12,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 13,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 14,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 15,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 16,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 17,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 18,
+          "winner": "",
+          "prize": ""
+        }
+      ],
+      "meat": [
+        {
+          "draw": 1,
+          "winner": "Murray Erikson",
+          "prize": "",
+          "pref": "Bar"
+        },
+        {
+          "draw": 2,
+          "winner": "Paul VanVelzen",
+          "prize": "",
+          "pref": "Bar"
+        }
+      ],
+      "ff": null,
+      "moneyWinners": [
+        {
+          "name": "Keith Allan",
+          "pref": "Bar",
+          "gross": 30,
+          "net": 0,
+          "skins": 19,
+          "pog": 0,
+          "draw": 0,
+          "total": 49,
+          "weeks": 1
+        },
+        {
+          "name": "Randy Arduini",
+          "pref": "Bar",
+          "gross": 0,
+          "net": 40,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 40,
+          "weeks": 1
+        },
+        {
+          "name": "Ted Baker",
+          "pref": "Pro Shop",
+          "gross": 0,
+          "net": 30,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 30,
+          "weeks": 1
+        },
+        {
+          "name": "Randy Bennett",
+          "pref": "Bar",
+          "gross": 20,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1
+        },
+        {
+          "name": "Mitch Carr-Hilton",
+          "pref": "Pro Shop",
+          "gross": 30,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 30,
+          "weeks": 1
+        },
+        {
+          "name": "Thyssen De Goede",
+          "pref": "Pro Shop",
+          "gross": 40,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 40,
+          "weeks": 1
+        },
+        {
+          "name": "Rod Gray",
+          "pref": "Bar",
+          "gross": 0,
+          "net": 20,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1
+        },
+        {
+          "name": "Dan Haaf",
+          "pref": "Pro Shop",
+          "gross": 0,
+          "net": 0,
+          "skins": 19,
+          "pog": 0,
+          "draw": 0,
+          "total": 19,
+          "weeks": 1
+        },
+        {
+          "name": "Iain Haigh",
+          "pref": "Pro Shop",
+          "gross": 20,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1
+        },
+        {
+          "name": "Gary Houg",
+          "pref": "Pro Shop",
+          "gross": 0,
+          "net": 15,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 15,
+          "weeks": 1
+        },
+        {
+          "name": "Mandy Johns",
+          "pref": "Bar",
+          "gross": 0,
+          "net": 0,
+          "skins": 19,
+          "pog": 0,
+          "draw": 0,
+          "total": 19,
+          "weeks": 1
+        },
+        {
+          "name": "Greg Koster",
+          "pref": "Pro Shop",
+          "gross": 40,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 40,
+          "weeks": 1
+        },
+        {
+          "name": "Ian Mclean",
+          "pref": "Bar",
+          "gross": 0,
+          "net": 20,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1
+        },
+        {
+          "name": "Kelly Mullock",
+          "pref": "Bar",
+          "gross": 0,
+          "net": 20,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1
+        },
+        {
+          "name": "Scott Parsons",
+          "pref": "Pro Shop",
+          "gross": 0,
+          "net": 0,
+          "skins": 57,
+          "pog": 0,
+          "draw": 0,
+          "total": 57,
+          "weeks": 1
+        },
+        {
+          "name": "Kevin Riordan",
+          "pref": "Bar",
+          "gross": 0,
+          "net": 20,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1
+        },
+        {
+          "name": "Doug Rushton",
+          "pref": "Pro Shop",
+          "gross": 0,
+          "net": 15,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 15,
+          "weeks": 1
+        },
+        {
+          "name": "Trent Skinner",
+          "pref": "Pro Shop",
+          "gross": 0,
+          "net": 15,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 15,
+          "weeks": 1
+        },
+        {
+          "name": "Brian Slater",
+          "pref": "Bar",
+          "gross": 40,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 40,
+          "weeks": 1
+        },
+        {
+          "name": "Rick Smith",
+          "pref": "Pro Shop",
+          "gross": 30,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 30,
+          "weeks": 1
+        },
+        {
+          "name": "Bob Tarbuck",
+          "pref": "Bar",
+          "gross": 0,
+          "net": 15,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 15,
+          "weeks": 1
+        },
+        {
+          "name": "Carl Webber",
+          "pref": "Pro Shop",
+          "gross": 20,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1
+        }
+      ],
+      "totals": {
+        "gross": 270,
+        "net": 210,
+        "skins": 114,
+        "pog": 0,
+        "draw": 0
+      }
+    },
+    {
       "id": "Oct_5-_2026",
-      "name": "Week 1 — Winter opener",
+      "name": "Week 1 â Winter opener",
       "date": "Oct 5, 2026",
       "notes": "",
       "cancelled": false,
@@ -823,27 +1571,27 @@
       "name": "Ted Baker",
       "pref": "Pro Shop",
       "gross": 0,
-      "net": 0,
+      "net": 30,
       "skins": 38,
       "pog": 0,
       "draw": 0,
-      "total": 38,
-      "weeks": 1,
+      "total": 68,
+      "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
     },
     "Randy Bennett": {
       "name": "Randy Bennett",
       "pref": "Bar",
-      "gross": 0,
+      "gross": 20,
       "net": 35,
       "skins": 38,
       "pog": 0,
       "draw": 0,
-      "total": 73,
-      "weeks": 1,
+      "total": 93,
+      "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
     },
     "Gord Bohmer": {
       "name": "Gord Bohmer",
@@ -861,15 +1609,15 @@
     "Mitch Carr-Hilton": {
       "name": "Mitch Carr-Hilton",
       "pref": "Pro Shop",
-      "gross": 20,
+      "gross": 50,
       "net": 0,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 20,
-      "weeks": 1,
+      "total": 50,
+      "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
     },
     "Rick Dawson": {
       "name": "Rick Dawson",
@@ -938,16 +1686,16 @@
     },
     "Greg Koster": {
       "name": "Greg Koster",
-      "pref": "Cash",
-      "gross": 40,
+      "pref": "Pro Shop",
+      "gross": 80,
       "net": 0,
       "skins": 0,
       "pog": 98,
       "draw": 0,
-      "total": 138,
-      "weeks": 1,
+      "total": 178,
+      "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
     },
     "Gord Lund": {
       "name": "Gord Lund",
@@ -1044,27 +1792,27 @@
       "name": "Kevin Riordan",
       "pref": "Bar",
       "gross": 0,
-      "net": 0,
+      "net": 20,
       "skins": 38,
       "pog": 0,
       "draw": 0,
-      "total": 38,
-      "weeks": 1,
+      "total": 58,
+      "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
     },
     "Doug Rushton": {
       "name": "Doug Rushton",
       "pref": "Pro Shop",
       "gross": 0,
-      "net": 0,
+      "net": 15,
       "skins": 38,
       "pog": 0,
       "draw": 0,
-      "total": 38,
-      "weeks": 1,
+      "total": 53,
+      "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
     },
     "Mike Schwarz": {
       "name": "Mike Schwarz",
@@ -1083,14 +1831,14 @@
       "name": "Trent Skinner",
       "pref": "Pro Shop",
       "gross": 0,
-      "net": 15,
+      "net": 30,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 15,
-      "weeks": 1,
+      "total": 30,
+      "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
     },
     "Yvonne Stewart": {
       "name": "Yvonne Stewart",
@@ -1109,105 +1857,287 @@
       "name": "Bob Tarbuck",
       "pref": "Bar",
       "gross": 0,
-      "net": 25,
+      "net": 40,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 25,
+      "total": 40,
+      "weeks": 2,
+      "played": 0,
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
+    },
+    "Keith Allan": {
+      "name": "Keith Allan",
+      "pref": "Bar",
+      "gross": 30,
+      "net": 0,
+      "skins": 19,
+      "pog": 0,
+      "draw": 0,
+      "total": 49,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
+    },
+    "Randy Arduini": {
+      "name": "Randy Arduini",
+      "pref": "Bar",
+      "gross": 0,
+      "net": 40,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 40,
+      "weeks": 1,
+      "played": 0,
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
+    },
+    "Thyssen De Goede": {
+      "name": "Thyssen De Goede",
+      "pref": "Pro Shop",
+      "gross": 40,
+      "net": 0,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 40,
+      "weeks": 1,
+      "played": 0,
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
+    },
+    "Rod Gray": {
+      "name": "Rod Gray",
+      "pref": "Bar",
+      "gross": 0,
+      "net": 20,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 20,
+      "weeks": 1,
+      "played": 0,
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
+    },
+    "Dan Haaf": {
+      "name": "Dan Haaf",
+      "pref": "Pro Shop",
+      "gross": 0,
+      "net": 0,
+      "skins": 19,
+      "pog": 0,
+      "draw": 0,
+      "total": 19,
+      "weeks": 1,
+      "played": 0,
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
+    },
+    "Iain Haigh": {
+      "name": "Iain Haigh",
+      "pref": "Pro Shop",
+      "gross": 20,
+      "net": 0,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 20,
+      "weeks": 1,
+      "played": 0,
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
+    },
+    "Gary Houg": {
+      "name": "Gary Houg",
+      "pref": "Pro Shop",
+      "gross": 0,
+      "net": 15,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 15,
+      "weeks": 1,
+      "played": 0,
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
+    },
+    "Mandy Johns": {
+      "name": "Mandy Johns",
+      "pref": "Bar",
+      "gross": 0,
+      "net": 0,
+      "skins": 19,
+      "pog": 0,
+      "draw": 0,
+      "total": 19,
+      "weeks": 1,
+      "played": 0,
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
+    },
+    "Ian Mclean": {
+      "name": "Ian Mclean",
+      "pref": "Bar",
+      "gross": 0,
+      "net": 20,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 20,
+      "weeks": 1,
+      "played": 0,
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
+    },
+    "Kelly Mullock": {
+      "name": "Kelly Mullock",
+      "pref": "Bar",
+      "gross": 0,
+      "net": 20,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 20,
+      "weeks": 1,
+      "played": 0,
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
+    },
+    "Scott Parsons": {
+      "name": "Scott Parsons",
+      "pref": "Pro Shop",
+      "gross": 0,
+      "net": 0,
+      "skins": 57,
+      "pog": 0,
+      "draw": 0,
+      "total": 57,
+      "weeks": 1,
+      "played": 0,
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
+    },
+    "Brian Slater": {
+      "name": "Brian Slater",
+      "pref": "Bar",
+      "gross": 40,
+      "net": 0,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 40,
+      "weeks": 1,
+      "played": 0,
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
+    },
+    "Rick Smith": {
+      "name": "Rick Smith",
+      "pref": "Pro Shop",
+      "gross": 30,
+      "net": 0,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 30,
+      "weeks": 1,
+      "played": 0,
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
+    },
+    "Carl Webber": {
+      "name": "Carl Webber",
+      "pref": "Pro Shop",
+      "gross": 20,
+      "net": 0,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 20,
+      "weeks": 1,
+      "played": 0,
+      "lastUpdated": "2026-10-20T03:25:01.171Z"
     }
   },
   "pots": {
     "sk_1": {
       "pot": 0,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
-      "lastWinner": "Gord Bohmer"
+      "updatedAt": "2026-10-20T03:23:24.301Z",
+      "lastWinner": "Mandy Johns"
     },
     "sk_2": {
-      "pot": 38,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
+      "pot": 57,
+      "updatedAt": "2026-10-20T03:23:24.301Z",
       "lastWinner": null
     },
     "sk_5": {
-      "pot": 38,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-10-20T03:23:24.301Z",
+      "lastWinner": "Scott Parsons"
     },
     "sk_6": {
-      "pot": 0,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
-      "lastWinner": "Randy Bennett"
+      "pot": 19,
+      "updatedAt": "2026-10-20T03:23:24.301Z",
+      "lastWinner": null
     },
     "sk_7": {
-      "pot": 0,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
-      "lastWinner": "Doug Rushton"
+      "pot": 19,
+      "updatedAt": "2026-10-20T03:23:24.301Z",
+      "lastWinner": null
     },
     "sk_8": {
-      "pot": 0,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
-      "lastWinner": "Yvonne Stewart"
+      "pot": 19,
+      "updatedAt": "2026-10-20T03:23:24.301Z",
+      "lastWinner": null
     },
     "sk_9": {
-      "pot": 38,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
+      "pot": 57,
+      "updatedAt": "2026-10-20T03:23:24.301Z",
       "lastWinner": null
     },
     "sk_11": {
-      "pot": 0,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
-      "lastWinner": "Kevin Riordan"
+      "pot": 19,
+      "updatedAt": "2026-10-20T03:23:24.301Z",
+      "lastWinner": null
     },
     "sk_12": {
-      "pot": 38,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
+      "pot": 57,
+      "updatedAt": "2026-10-20T03:23:24.301Z",
       "lastWinner": null
     },
     "sk_13": {
       "pot": 0,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
-      "lastWinner": "Ted Baker"
+      "updatedAt": "2026-10-20T03:23:24.301Z",
+      "lastWinner": "Keith Allan"
     },
     "sk_14": {
-      "pot": 38,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
+      "pot": 57,
+      "updatedAt": "2026-10-20T03:23:24.301Z",
       "lastWinner": null
     },
     "sk_16": {
       "pot": 0,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
-      "lastWinner": "Jim Green"
+      "updatedAt": "2026-10-20T03:23:24.301Z",
+      "lastWinner": "Dan Haaf"
     },
     "sk_18": {
-      "pot": 0,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
-      "lastWinner": "Mike Matheson"
+      "pot": 19,
+      "updatedAt": "2026-10-20T03:23:24.301Z",
+      "lastWinner": null
     },
     "pg_3": {
-      "pot": 98,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
+      "pot": 149,
+      "updatedAt": "2026-10-20T03:23:24.301Z",
       "lastWinner": null
     },
     "pg_4": {
-      "pot": 0,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
-      "lastWinner": "Corey Nickerson"
+      "pot": 51,
+      "updatedAt": "2026-10-20T03:23:24.301Z",
+      "lastWinner": null
     },
     "pg_10": {
-      "pot": 98,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
+      "pot": 149,
+      "updatedAt": "2026-10-20T03:23:24.301Z",
       "lastWinner": null
     },
     "pg_15": {
-      "pot": 0,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
-      "lastWinner": "Greg Koster"
+      "pot": 51,
+      "updatedAt": "2026-10-20T03:23:24.301Z",
+      "lastWinner": null
     },
     "pg_17": {
-      "pot": 98,
-      "updatedAt": "2026-10-20T00:36:40.472Z",
+      "pot": 149,
+      "updatedAt": "2026-10-20T03:23:24.301Z",
       "lastWinner": null
     }
   }
