@@ -316,7 +316,7 @@ function renderWeek(w){
     const mwList = w.moneyWinners||[];
     if(mwList.length){
       html+=`<div class="psec"><div class="ptitle" style="background:#0D47A1;">Weekly Money Winners</div>
-        <table class="pt"><thead><tr><th>Rank</th><th>Player</th><th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th><th class="r">Draw</th><th class="r">Total</th></tr></thead><tbody>`;
+        <table class="pt"><thead><tr><th>Rank</th><th>Player</th><th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th><th class="r">Draw</th><th class="r">Total</th><th>Payout</th></tr></thead><tbody>`;
       let wkTotal=0;
       mwList.forEach((r,i)=>{
         const rk=i+1; const bc=rk<=3?`p${rk}b`:'pnb'; wkTotal+=r.total||0;
@@ -324,9 +324,10 @@ function renderWeek(w){
           <td class="r">${r.gross?fmt(r.gross):'—'}</td><td class="r">${r.net?fmt(r.net):'—'}</td>
           <td class="r">${r.skins?fmt(r.skins):'—'}</td><td class="r">${r.pog?fmt(r.pog):'—'}</td>
           <td class="r">${r.draw?fmt(r.draw):'—'}</td>
-          <td class="r"><span class="money">${fmt(r.total)}</span></td></tr>`;
+          <td class="r"><span class="money">${fmt(r.total)}</span></td>
+          <td>${prefBadge(r.pref)}</td></tr>`;
       });
-      html+=`<tr class="mw-total-row"><td colspan="7" style="text-align:right;padding:5px 10px;">Total paid out:</td><td class="r"><span class="money">${fmt(wkTotal)}</span></td></tr>`;
+      html+=`<tr class="mw-total-row"><td colspan="8" style="text-align:right;padding:5px 10px;">Total paid out:</td><td class="r"><span class="money">${fmt(wkTotal)}</span></td></tr>`;
       html+=`</tbody></table></div>`;
     }
   }
