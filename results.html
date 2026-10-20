@@ -66,6 +66,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
 .fhdr td{background:var(--gl);font-family:system-ui,sans-serif;font-size:11px;font-weight:700;color:var(--gd);padding:4px 10px;border-top:1px solid #95D5B2;}
 .cbadge{display:inline-block;padding:1px 6px;background:var(--carry-b);border-radius:3px;font-size:10px;font-weight:700;color:#5C3D00;}
 .countback-badge{display:inline-block;padding:1px 6px;background:#E3F2FD;border:1px solid #90CAF9;border-radius:3px;font-size:10px;font-weight:700;color:#0D47A1;}
+.flt-badge{display:inline-block;padding:1px 7px;border-radius:3px;font-size:10px;font-weight:700;background:var(--gl);color:var(--gd);font-family:system-ui,sans-serif;}
 .pref-bar{display:inline-block;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700;background:#DCF5FF;color:#0969A2;}
 .pref-pro{background:#EDE7FF;color:#6300CC;}
 .pref-cash{background:#D4EDDA;color:#155724;}
@@ -246,13 +247,15 @@ function renderWeek(w){
     // NET
     const netData = w.net||[];
     html+=`<div class="psec"><div class="ptitle">Net Winners — Overall</div>
-      <table class="pt"><thead><tr><th>Place</th><th>Player</th><th>Net</th><th class="r">Prize</th><th>Payout</th></tr></thead><tbody>`;
-    if(!netData.length){html+=`<tr><td colspan="5" style="color:var(--mut);padding:8px 10px;">No entries</td></tr>`;}
+      <table class="pt"><thead><tr><th>Place</th><th>Player</th><th>Flt</th><th>Net</th><th class="r">Prize</th><th>Payout</th></tr></thead><tbody>`;
+    if(!netData.length){html+=`<tr><td colspan="6" style="color:var(--mut);padding:8px 10px;">No entries</td></tr>`;}
     else netData.forEach(r=>{
       const sfx=r.place===1?'st':r.place===2?'nd':r.place===3?'rd':'th';
       const bc=r.place<=3?`p${r.place}b`:'pnb';
       html+=`<tr><td><span class="pbadge ${bc}">${r.place}</span>${r.place}${sfx}${r.cb?' <span class="countback-badge">CB</span>':''}</td>
-        <td>${r.pname||'—'}</td><td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
+        <td>${r.pname||'—'}</td>
+        <td>${r.flt?`<span class="flt-badge">Flt ${r.flt}</span>`:'—'}</td>
+        <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
         <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td><td>${prefBadge(r.pref)}</td></tr>`;
     });
     html+=`</tbody></table></div>`;
@@ -260,12 +263,13 @@ function renderWeek(w){
     // SKINS
     const skinsData = w.skins||[];
     html+=`<div class="psec"><div class="ptitle">Skins — Lowest Net Score per Hole</div>
-      <table class="pt"><thead><tr><th>Hole</th><th>Winner</th><th>Net</th><th class="r">Pot</th><th class="r">Status</th></tr></thead><tbody>`;
+      <table class="pt"><thead><tr><th>Hole</th><th>Winner</th><th>Flt</th><th>Net</th><th class="r">Pot</th><th class="r">Status</th></tr></thead><tbody>`;
     skinsData.forEach(r=>{
       const carry=!r.paid||!r.winner;
       html+=`<tr style="${carry?'background:var(--carry);':'background:#F0FFF4;'}">
         <td style="font-weight:600;">${r.hole}</td>
         <td>${r.winner||'<em style="color:var(--mut)">No winner</em>'}</td>
+        <td>${r.flt?`<span class="flt-badge">Flt ${r.flt}</span>`:'—'}</td>
         <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
         <td class="r"><span class="money">${fmt(r.runPot)}</span></td>
         <td class="r">${carry?'<span class="cbadge">CARRY</span>':'<span style="color:#1E8449;font-weight:700;font-family:system-ui;font-size:11px;">PAID</span>'}</td></tr>`;
@@ -275,12 +279,13 @@ function renderWeek(w){
     // POG
     const pogData = w.pog||[];
     html+=`<div class="psec"><div class="ptitle">Pots of Gold — Unique Gross Birdie Required</div>
-      <table class="pt"><thead><tr><th>Hole</th><th>Winner</th><th>Gross</th><th class="r">Pot</th><th class="r">Status</th></tr></thead><tbody>`;
+      <table class="pt"><thead><tr><th>Hole</th><th>Winner</th><th>Flt</th><th>Gross</th><th class="r">Pot</th><th class="r">Status</th></tr></thead><tbody>`;
     pogData.forEach(r=>{
       const carry=!r.paid||!r.winner;
       html+=`<tr style="${carry?'background:var(--carry);':'background:var(--gold-l);'}">
         <td style="font-weight:600;"><span class="pog-dot"></span>${r.hole}</td>
         <td>${r.winner||'<em style="color:var(--mut)">No unique birdie</em>'}</td>
+        <td>${r.flt?`<span class="flt-badge">Flt ${r.flt}</span>`:'—'}</td>
         <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
         <td class="r"><span class="money">${fmt(r.runPot)}</span></td>
         <td class="r">${carry?'<span class="cbadge">CARRY</span>':'<span style="color:#1E8449;font-weight:700;font-family:system-ui;font-size:11px;">PAID</span>'}</td></tr>`;
