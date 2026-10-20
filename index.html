@@ -265,6 +265,13 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
     <button class="sbtn sbtn-ghost" id="btn-fix-public" style="background:rgba(220,53,69,.15);color:#ff8080;border:1px solid rgba(220,53,69,.4);">🔧 Fix Public Page</button>
     <button class="sbtn sbtn-danger" id="btn-clear">Clear Entries</button>
   </div>
+  <div class="sact" style="margin-top:6px;">
+    <div style="font-size:10px;font-weight:700;color:var(--mut);letter-spacing:.05em;margin-bottom:4px;">LOAD COMMITTED WEEK</div>
+    <select id="week-load-select" style="width:100%;font-size:12px;padding:4px 6px;background:var(--s2);color:var(--tx);border:1px solid var(--bd);border-radius:4px;margin-bottom:5px;">
+      <option value="">— select a saved week —</option>
+    </select>
+    <button class="sbtn sbtn-ghost" id="btn-load-week" style="width:100%;">📅 Load Week into Form</button>
+  </div>
 </nav>
 
 <!-- Content -->
@@ -1204,6 +1211,181 @@ function loadDraft(){
   alert('Draft loaded. Review entries then Generate & Commit when ready.');
 }
 
+// ── Populate week-load dropdown ───────────────────────────────────────────────
+function populateWeekLoadSelect(){
+  const sel=document.getElementById('week-load-select');
+  if(!sel) return;
+  const saved=LS.get('weeks',[]);
+  // Clear existing options except placeholder
+  while(sel.options.length>1) sel.remove(1);
+  if(!saved.length){
+    const opt=document.createElement('option');
+    opt.disabled=true; opt.textContent='No committed weeks yet';
+    sel.appendChild(opt);
+    return;
+  }
+  // Sort newest first
+  const sorted=[...saved].sort((a,b)=>new Date(b.recordedAt||0)-new Date(a.recordedAt||0));
+  sorted.forEach(w=>{
+    const opt=document.createElement('option');
+    opt.value=w.id;
+    const d=w.date||w.id;
+    const n=w.name||d;
+    opt.textContent=`${n} (${d})`;
+    sel.appendChild(opt);
+  });
+}
+
+// ── Load committed week back into entry form ──────────────────────────────────
+function loadCommittedWeek(){
+  populateWeekLoadSelect(); // ensure fresh list
+  const sel=document.getElementById('week-load-select');
+  const weekId=sel?.value;
+  if(!weekId){alert('Please select a week from the dropdown first.');return;}
+  const saved=LS.get('weeks',[]);
+  const wk=saved.find(w=>w.id===weekId);
+  if(!wk){alert('Week not found in saved data.');return;}
+  const label=wk.name||wk.date||weekId;
+  if(!confirm(`Load "${label}" back into the entry form?\n\nThis will overwrite any current entries. You can re-commit after making changes.`)) return;
+
+  // ── Header fields ──
+  // Derive week number and tournament name from stored name e.g. "Week 3 — Medal"
+  const nameMatch=(wk.name||'').match(/^Week\s+(\d+)\s*[—\-]\s*(.+)$/i);
+  const tWeek=document.getElementById('t-week');
+  const tName=document.getElementById('t-name');
+  if(nameMatch){
+    if(tWeek) tWeek.value=nameMatch[1];
+    if(tName) tName.value=nameMatch[2].trim();
+  } else {
+    if(tWeek) tWeek.value='';
+    if(tName) tName.value=wk.name||'';
+  }
+  const tDate=document.getElementById('t-date'); if(tDate) tDate.value=wk.date||'';
+  const tNotes=document.getElementById('t-notes'); if(tNotes) tNotes.value=wk.notes||'';
+  const tTotal=document.getElementById('t-total'); if(tTotal) tTotal.value=wk.players||'';
+  const tCancelled=document.getElementById('t-cancelled'); if(tCancelled) tCancelled.checked=!!wk.cancelled;
+
+  // Skins/POG player counts — back-calculate from pools
+  // skinsPool = skPly*5 → skPly = skinsPool/5
+  const tSkins=document.getElementById('t-skins');
+  if(tSkins&&wk.skinsPool) tSkins.value=Math.round(wk.skinsPool/5);
+  const tPog=document.getElementById('t-pog');
+  if(tPog&&wk.pogPool) tPog.value=Math.round(wk.pogPool/5);
+
+  // ── Flight names/ranges (if stored) ──
+  if(wk.flightNames){
+    ['A','B','C','D'].forEach(f=>{
+      const fn=document.getElementById(`f-${f.toLowerCase()}-name`);
+      if(fn&&wk.flightNames[f]) fn.value=wk.flightNames[f];
+    });
+  }
+  if(wk.flightRanges){
+    ['A','B','C','D'].forEach(f=>{
+      const fr=document.getElementById(`f-${f.toLowerCase()}-range`);
+      if(fr&&wk.flightRanges[f]) fr.value=wk.flightRanges[f];
+    });
+  }
+
+  // ── Gross rows ──
+  // wk.flights = {A:[],B:[],C:[],D:[]} each entry: {place,pname,score,cb,prize}
+  if(wk.flights){
+    // Clear extra rows first
+    document.querySelectorAll('#gross-tbody tr:not([data-flight])').forEach(r=>r.remove());
+    const trs=[...document.querySelectorAll('#gross-tbody tr[data-flight]')];
+    // Map fixed rows by flight+place
+    trs.forEach(tr=>{
+      const f=tr.dataset.flight; const pl=parseInt(tr.dataset.place);
+      const arr=wk.flights[f]||[];
+      const rec=arr.find(r=>r.place===pl)||arr.find(r=>!r._used&&r.place===pl);
+      if(rec){ rec._used=true; }
+      const cells=tr.querySelectorAll('td');
+      const ni=cells[2].querySelector('input'); if(ni) ni.value=rec?.pname||'';
+      const si=cells[3].querySelector('input'); if(si) si.value=rec?.score||'';
+      const pi=cells[4].querySelector('input'); if(pi) pi.value=rec?.prize||'';
+      const ci=cells[5].querySelector('input'); if(ci) ci.checked=!!(rec?.cb);
+    });
+    // Any extra entries beyond the fixed rows become addGrossRow entries
+    FLIGHTS.forEach(f=>{
+      const arr=wk.flights[f]||[];
+      // fixed slots: places 1,2,3 (the standard rows per flight)
+      const extras=arr.filter(r=>r.place>3);
+      extras.forEach(row=>{
+        addGrossRow();
+        const addedTrs=[...document.querySelectorAll('#gross-tbody tr:not([data-flight])')];
+        const tr=addedTrs[addedTrs.length-1]; if(!tr) return;
+        const cells=tr.querySelectorAll('td');
+        const fs=cells[0].querySelector('select'); if(fs) fs.value=f;
+        const pl=cells[1].querySelector('input'); if(pl) pl.value=row.place;
+        const ni=cells[2].querySelector('input'); if(ni) ni.value=row.pname||'';
+        const si=cells[3].querySelector('input'); if(si) si.value=row.score||'';
+        const ci=cells[4].querySelector('input'); if(ci) ci.checked=!!row.cb;
+        const pi=cells[5].querySelector('input'); if(pi) pi.value=row.prize||'';
+      });
+    });
+  }
+
+  // ── Net rows ──
+  // wk.netData = [{place,pname,gross,score,hcp,cb,prize,flt}]
+  if(wk.netData){
+    wk.netData.forEach(row=>{
+      const p=row.place; if(p<1||p>15) return;
+      const nn=document.getElementById(`nn-${p}`); if(nn) nn.value=row.pname||'';
+      const ng=document.getElementById(`ng-${p}`); if(ng) ng.value=row.gross||'';
+      const ns=document.getElementById(`ns-${p}`); if(ns) ns.value=row.score||'';
+      const nh=document.getElementById(`nh-${p}`); if(nh) nh.value=row.hcp||'';
+      const nc=document.getElementById(`nc-${p}`); if(nc) nc.checked=!!row.cb;
+      const np=document.getElementById(`np-${p}`); if(np) np.value=row.prize||'';
+      const nf=document.getElementById(`nf-${p}`); if(nf) nf.value=row.flt||'';
+    });
+  }
+
+  // ── Skins ──
+  // wk.skinsData = [{hole,winner,score,gross,runPot,stored,weekly,paid,flt}]
+  if(wk.skinsData) wk.skinsData.forEach(r=>{
+    const h=r.hole;
+    const n=document.getElementById(`sk-name-${h}`); if(n) n.value=r.winner||'';
+    const s=document.getElementById(`sk-score-${h}`); if(s) s.value=r.score||'';
+    const g=document.getElementById(`sk-gross-${h}`); if(g) g.value=r.gross||'';
+    const c=document.getElementById(`sk-paid-${h}`); if(c) c.checked=!!r.paid;
+    const f=document.getElementById(`sk-flt-${h}`); if(f) f.value=r.flt||'';
+  });
+
+  // ── POG ──
+  // wk.pogData = [{hole,winner,runPot,stored,weekly,paid,flt}]
+  if(wk.pogData) wk.pogData.forEach(r=>{
+    const h=r.hole;
+    const n=document.getElementById(`pog-name-${h}`); if(n) n.value=r.winner||'';
+    const c=document.getElementById(`pog-paid-${h}`); if(c) c.checked=!!r.paid;
+    const f=document.getElementById(`pog-flt-${h}`); if(f) f.value=r.flt||'';
+  });
+
+  // ── Skill shots ──
+  // wk.skill = [{hole,winner,prize}]
+  if(wk.skill) wk.skill.forEach(r=>{
+    const h=r.hole;
+    const n=document.getElementById(`sp-name-${h}`); if(n) n.value=r.winner||'';
+    const p=document.getElementById(`sp-prize-${h}`); if(p) p.value=r.prize||'';
+  });
+
+  // ── Draws ──
+  // wk.meat = [{draw,winner,prize,pref}]
+  if(wk.meat) wk.meat.forEach(r=>{
+    const i=r.draw;
+    const w=document.getElementById(`meat-${i}`); if(w) w.value=r.winner||'';
+    const pr=document.getElementById(`meat-prize-${i}`); if(pr) pr.value=r.prize||'';
+    const pf=document.getElementById(`meat-pref-${i}`); if(pf) pf.value=r.pref||'Bar';
+  });
+  // 50/50
+  if(wk.ff){
+    const ffw=document.getElementById('ff-winner'); if(ffw) ffw.value=wk.ff.winner||'';
+    const ffa=document.getElementById('ff-amount'); if(ffa) ffa.value=wk.ff.amount||'';
+  }
+
+  recalcPools();
+  showTab('setup');
+  alert(`"${label}" loaded into form.\n\nReview entries, make any corrections, then Generate & Commit when ready.\n\nNote: re-committing will overwrite the existing record for this date.`);
+}
+
 // ── Generate payout ───────────────────────────────────────────────────────────
 function generatePayout(previewOnly=false){
   const week   =document.getElementById('t-week')?.value||'';
@@ -1546,6 +1728,7 @@ function confirmCommit(){
     saveWeek({id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData});
   }
   LS.set('weeks',weeksLog);
+  populateWeekLoadSelect(); // keep dropdown in sync after commit
   // Update season — winner entries
   for(const mw of pc.mwList){
     const k=mwKey(mw.name); if(!k) continue;
@@ -1653,6 +1836,7 @@ document.addEventListener('click',function(e){
     case 'btn-clear':      clearEntries();   break;
     case 'btn-save-draft': saveDraft();      break;
     case 'btn-load-draft': loadDraft();      break;
+    case 'btn-load-week':  loadCommittedWeek(); break;
     case 'btn-fix-public': fixPublicPage();  break;
     case 'pin-change-link': showPinModal();      break;
     case 'pm-cancel':    document.getElementById('pin-modal').classList.remove('open'); break;
@@ -1912,6 +2096,7 @@ function init(){
   loadState();
   buildNet(); buildSkins(); buildPOG(); buildSkill();
   recalcPools();
+  populateWeekLoadSelect();
   if(sessionOK()) document.getElementById('pin-overlay').classList.add('unlocked');
   document.getElementById('db-dot').className='dot live';
   document.getElementById('db-msg').textContent='Saved on this device';
