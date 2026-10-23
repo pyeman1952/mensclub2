@@ -1338,35 +1338,46 @@ function initNetPasteListeners(){
     lines.forEach((line, i) => {
       const row = startRow + i;
       const parts = line.split('\t');
-      let name='', hcp='', netOut='', netIn='', netTotal='';
-      if(parts.length >= 6){
-        // Flight | Name | Hcp | NetOut | NetIn | Total
+      let name='', gross='', hcp='', netOut='', netIn='', netTotal='';
+      // Real GS formats:
+      //   7-col: Flight | Name | Gross | Hcp | Net-Out | Net-In | Net
+      //   5-col: Flight | Name | Gross | Hcp | Net
+      //   4-col: Name | Gross | Hcp | Net  (no flight)
+      if(parts.length >= 7){
         name     = parts[1].trim();
-        hcp      = parts[2].trim();
-        netOut   = parts[3].trim();
-        netIn    = parts[4].trim();
-        netTotal = parts[5].trim();
+        gross    = parts[2].trim();
+        hcp      = parts[3].trim();
+        netOut   = parts[4].trim();
+        netIn    = parts[5].trim();
+        netTotal = parts[6].trim();
       } else if(parts.length === 5){
-        // Name | Hcp | NetOut | NetIn | Total
-        name     = parts[0].trim();
-        hcp      = parts[1].trim();
-        netOut   = parts[2].trim();
-        netIn    = parts[3].trim();
+        // Flight | Name | Gross | Hcp | Net
+        name     = parts[1].trim();
+        gross    = parts[2].trim();
+        hcp      = parts[3].trim();
         netTotal = parts[4].trim();
+      } else if(parts.length === 4){
+        // Name | Gross | Hcp | Net
+        name     = parts[0].trim();
+        gross    = parts[1].trim();
+        hcp      = parts[2].trim();
+        netTotal = parts[3].trim();
       } else {
         name     = parts[0].trim();
         netTotal = parts[parts.length-1].trim();
       }
       const nameInp  = document.getElementById(`nn-${row}`);
+      const grossInp = document.getElementById(`ng-${row}`);
       const hcpInp   = document.getElementById(`nh-${row}`);
       const noInp    = document.getElementById(`no-${row}`);
       const niInp    = document.getElementById(`ni-${row}`);
       const netInp   = document.getElementById(`ns-${row}`);
       if(nameInp)              nameInp.value  = name;
-      if(hcpInp  && hcp)      hcpInp.value   = hcp;
-      if(noInp   && netOut)   noInp.value    = netOut;
-      if(niInp   && netIn)    niInp.value    = netIn;
-      if(netInp  && netTotal) netInp.value   = netTotal;
+      if(grossInp && gross)   grossInp.value = gross;
+      if(hcpInp   && hcp)     hcpInp.value   = hcp;
+      if(noInp    && netOut)  noInp.value    = netOut;
+      if(niInp    && netIn)   niInp.value    = netIn;
+      if(netInp   && netTotal) netInp.value  = netTotal;
     });
   });
 }
