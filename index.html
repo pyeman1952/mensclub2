@@ -323,34 +323,6 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
       </div>
     </div>
 
-    <!-- Flight Editor -->
-    <div class="card s2">
-      <h2>Flight Handicap Ranges <em>edit as needed</em></h2>
-      <div class="cb">
-        <div class="flight-editor">
-          <div class="fe-card">
-            <label>Flight A</label>
-            <input type="text" id="f-a-name" value="Flight A" style="margin-bottom:4px;">
-            <input type="text" id="f-a-range" value="0-5" placeholder="e.g. 0-5">
-          </div>
-          <div class="fe-card">
-            <label>Flight B</label>
-            <input type="text" id="f-b-name" value="Flight B" style="margin-bottom:4px;">
-            <input type="text" id="f-b-range" value="6-11" placeholder="e.g. 6-11">
-          </div>
-          <div class="fe-card">
-            <label>Flight C</label>
-            <input type="text" id="f-c-name" value="Flight C" style="margin-bottom:4px;">
-            <input type="text" id="f-c-range" value="12-17" placeholder="e.g. 12-17">
-          </div>
-          <div class="fe-card">
-            <label>Flight D</label>
-            <input type="text" id="f-d-name" value="Flight D" style="margin-bottom:4px;">
-            <input type="text" id="f-d-range" value="18+" placeholder="e.g. 18+">
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Gross Winners -->
     <div class="card s2">
@@ -358,20 +330,25 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
       <div class="cb">
 
         <table class="gt">
-          <thead><tr><th>Flight</th><th>Place</th><th>Player Name</th><th style="width:58px;">Out</th><th style="width:58px;">In</th><th style="width:66px;">Total</th><th>Prize ($)</th><th>CB</th></tr></thead>
+          <thead><tr><th>#</th><th>Flt</th><th>Player Name</th><th style="width:58px;">Out</th><th style="width:58px;">In</th><th style="width:66px;">Total</th><th>Prize ($)</th><th>CB</th></tr></thead>
           <tbody id="gross-tbody">
-            <tr data-flight="A" data-place="1"><td><span class="fb fA" id="lbl-A">Flight A</span><br><small id="rng-A" style="color:var(--mut);font-size:9px;">0-5</small></td><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="gr-name-A1" placeholder="Player name"></td><td><input type="number" id="gr-out-A1" placeholder="out" style="width:52px;" oninput="autoGrossTotal('A1')" inputmode="numeric"></td><td><input type="number" id="gr-in-A1" placeholder="in" style="width:52px;" oninput="autoGrossTotal('A1')" inputmode="numeric"></td><td><input type="number" id="gr-score-A1" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-A1" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-A1" title="Countback"></td></tr>
-            <tr data-flight="A" data-place="2"><td></td><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="gr-name-A2" placeholder="Player name"></td><td><input type="number" id="gr-out-A2" placeholder="out" style="width:52px;" oninput="autoGrossTotal('A2')" inputmode="numeric"></td><td><input type="number" id="gr-in-A2" placeholder="in" style="width:52px;" oninput="autoGrossTotal('A2')" inputmode="numeric"></td><td><input type="number" id="gr-score-A2" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-A2" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-A2" title="Countback"></td></tr>
-            <tr data-flight="A" data-place="3"><td></td><td style="color:var(--mut);font-size:11px;">3rd</td><td><input type="text" id="gr-name-A3" placeholder="Player name"></td><td><input type="number" id="gr-out-A3" placeholder="out" style="width:52px;" oninput="autoGrossTotal('A3')" inputmode="numeric"></td><td><input type="number" id="gr-in-A3" placeholder="in" style="width:52px;" oninput="autoGrossTotal('A3')" inputmode="numeric"></td><td><input type="number" id="gr-score-A3" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-A3" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-A3" title="Countback"></td></tr>
-            <tr data-flight="B" data-place="1"><td><span class="fb fB" id="lbl-B">Flight B</span><br><small id="rng-B" style="color:var(--mut);font-size:9px;">6-11</small></td><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="gr-name-B1" placeholder="Player name"></td><td><input type="number" id="gr-out-B1" placeholder="out" style="width:52px;" oninput="autoGrossTotal('B1')" inputmode="numeric"></td><td><input type="number" id="gr-in-B1" placeholder="in" style="width:52px;" oninput="autoGrossTotal('B1')" inputmode="numeric"></td><td><input type="number" id="gr-score-B1" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-B1" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-B1" title="Countback"></td></tr>
-            <tr data-flight="B" data-place="2"><td></td><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="gr-name-B2" placeholder="Player name"></td><td><input type="number" id="gr-out-B2" placeholder="out" style="width:52px;" oninput="autoGrossTotal('B2')" inputmode="numeric"></td><td><input type="number" id="gr-in-B2" placeholder="in" style="width:52px;" oninput="autoGrossTotal('B2')" inputmode="numeric"></td><td><input type="number" id="gr-score-B2" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-B2" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-B2" title="Countback"></td></tr>
-            <tr data-flight="B" data-place="3"><td></td><td style="color:var(--mut);font-size:11px;">3rd</td><td><input type="text" id="gr-name-B3" placeholder="Player name"></td><td><input type="number" id="gr-out-B3" placeholder="out" style="width:52px;" oninput="autoGrossTotal('B3')" inputmode="numeric"></td><td><input type="number" id="gr-in-B3" placeholder="in" style="width:52px;" oninput="autoGrossTotal('B3')" inputmode="numeric"></td><td><input type="number" id="gr-score-B3" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-B3" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-B3" title="Countback"></td></tr>
-            <tr data-flight="C" data-place="1"><td><span class="fb fC" id="lbl-C">Flight C</span><br><small id="rng-C" style="color:var(--mut);font-size:9px;">12-17</small></td><td style="color:var(--mut);font-size:11px;">1st</td><td><input type="text" id="gr-name-C1" placeholder="Player name"></td><td><input type="number" id="gr-out-C1" placeholder="out" style="width:52px;" oninput="autoGrossTotal('C1')" inputmode="numeric"></td><td><input type="number" id="gr-in-C1" placeholder="in" style="width:52px;" oninput="autoGrossTotal('C1')" inputmode="numeric"></td><td><input type="number" id="gr-score-C1" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-C1" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-C1" title="Countback"></td></tr>
-            <tr data-flight="C" data-place="2"><td></td><td style="color:var(--mut);font-size:11px;">2nd</td><td><input type="text" id="gr-name-C2" placeholder="Player name"></td><td><input type="number" id="gr-out-C2" placeholder="out" style="width:52px;" oninput="autoGrossTotal('C2')" inputmode="numeric"></td><td><input type="number" id="gr-in-C2" placeholder="in" style="width:52px;" oninput="autoGrossTotal('C2')" inputmode="numeric"></td><td><input type="number" id="gr-score-C2" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-C2" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-C2" title="Countback"></td></tr>
-            <tr data-flight="C" data-place="3"><td></td><td style="color:var(--mut);font-size:11px;">3rd</td><td><input type="text" id="gr-name-C3" placeholder="Player name"></td><td><input type="number" id="gr-out-C3" placeholder="out" style="width:52px;" oninput="autoGrossTotal('C3')" inputmode="numeric"></td><td><input type="number" id="gr-in-C3" placeholder="in" style="width:52px;" oninput="autoGrossTotal('C3')" inputmode="numeric"></td><td><input type="number" id="gr-score-C3" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-C3" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-C3" title="Countback"></td></tr>
+            <tr data-gplace="1"><td style="color:var(--mut);font-size:10px;width:26px;"><span id="gr-pos-G01">1st</span></td><td><input type="text" id="gr-flt-G01" placeholder="Flt" style="width:38px;font-size:12px;text-transform:uppercase;" maxlength="1"></td><td><input type="text" id="gr-name-G01" placeholder="Player name"></td><td><input type="number" id="gr-out-G01" placeholder="out" style="width:52px;" oninput="autoGrossTotal('G01')" inputmode="numeric"></td><td><input type="number" id="gr-in-G01" placeholder="in" style="width:52px;" oninput="autoGrossTotal('G01')" inputmode="numeric"></td><td><input type="number" id="gr-score-G01" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G01" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G01" title="Countback"></td></tr>
+            <tr data-gplace="2"><td style="color:var(--mut);font-size:10px;width:26px;"><span id="gr-pos-G02">2nd</span></td><td><input type="text" id="gr-flt-G02" placeholder="Flt" style="width:38px;font-size:12px;text-transform:uppercase;" maxlength="1"></td><td><input type="text" id="gr-name-G02" placeholder="Player name"></td><td><input type="number" id="gr-out-G02" placeholder="out" style="width:52px;" oninput="autoGrossTotal('G02')" inputmode="numeric"></td><td><input type="number" id="gr-in-G02" placeholder="in" style="width:52px;" oninput="autoGrossTotal('G02')" inputmode="numeric"></td><td><input type="number" id="gr-score-G02" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G02" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G02" title="Countback"></td></tr>
+            <tr data-gplace="3"><td style="color:var(--mut);font-size:10px;width:26px;"><span id="gr-pos-G03">3rd</span></td><td><input type="text" id="gr-flt-G03" placeholder="Flt" style="width:38px;font-size:12px;text-transform:uppercase;" maxlength="1"></td><td><input type="text" id="gr-name-G03" placeholder="Player name"></td><td><input type="number" id="gr-out-G03" placeholder="out" style="width:52px;" oninput="autoGrossTotal('G03')" inputmode="numeric"></td><td><input type="number" id="gr-in-G03" placeholder="in" style="width:52px;" oninput="autoGrossTotal('G03')" inputmode="numeric"></td><td><input type="number" id="gr-score-G03" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G03" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G03" title="Countback"></td></tr>
+            <tr data-gplace="4"><td style="color:var(--mut);font-size:10px;width:26px;"><span id="gr-pos-G04">4th</span></td><td><input type="text" id="gr-flt-G04" placeholder="Flt" style="width:38px;font-size:12px;text-transform:uppercase;" maxlength="1"></td><td><input type="text" id="gr-name-G04" placeholder="Player name"></td><td><input type="number" id="gr-out-G04" placeholder="out" style="width:52px;" oninput="autoGrossTotal('G04')" inputmode="numeric"></td><td><input type="number" id="gr-in-G04" placeholder="in" style="width:52px;" oninput="autoGrossTotal('G04')" inputmode="numeric"></td><td><input type="number" id="gr-score-G04" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G04" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G04" title="Countback"></td></tr>
+            <tr data-gplace="5"><td style="color:var(--mut);font-size:10px;width:26px;"><span id="gr-pos-G05">5th</span></td><td><input type="text" id="gr-flt-G05" placeholder="Flt" style="width:38px;font-size:12px;text-transform:uppercase;" maxlength="1"></td><td><input type="text" id="gr-name-G05" placeholder="Player name"></td><td><input type="number" id="gr-out-G05" placeholder="out" style="width:52px;" oninput="autoGrossTotal('G05')" inputmode="numeric"></td><td><input type="number" id="gr-in-G05" placeholder="in" style="width:52px;" oninput="autoGrossTotal('G05')" inputmode="numeric"></td><td><input type="number" id="gr-score-G05" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G05" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G05" title="Countback"></td></tr>
+            <tr data-gplace="6"><td style="color:var(--mut);font-size:10px;width:26px;"><span id="gr-pos-G06">6th</span></td><td><input type="text" id="gr-flt-G06" placeholder="Flt" style="width:38px;font-size:12px;text-transform:uppercase;" maxlength="1"></td><td><input type="text" id="gr-name-G06" placeholder="Player name"></td><td><input type="number" id="gr-out-G06" placeholder="out" style="width:52px;" oninput="autoGrossTotal('G06')" inputmode="numeric"></td><td><input type="number" id="gr-in-G06" placeholder="in" style="width:52px;" oninput="autoGrossTotal('G06')" inputmode="numeric"></td><td><input type="number" id="gr-score-G06" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G06" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G06" title="Countback"></td></tr>
+            <tr data-gplace="7"><td style="color:var(--mut);font-size:10px;width:26px;"><span id="gr-pos-G07">7th</span></td><td><input type="text" id="gr-flt-G07" placeholder="Flt" style="width:38px;font-size:12px;text-transform:uppercase;" maxlength="1"></td><td><input type="text" id="gr-name-G07" placeholder="Player name"></td><td><input type="number" id="gr-out-G07" placeholder="out" style="width:52px;" oninput="autoGrossTotal('G07')" inputmode="numeric"></td><td><input type="number" id="gr-in-G07" placeholder="in" style="width:52px;" oninput="autoGrossTotal('G07')" inputmode="numeric"></td><td><input type="number" id="gr-score-G07" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G07" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G07" title="Countback"></td></tr>
+            <tr data-gplace="8"><td style="color:var(--mut);font-size:10px;width:26px;"><span id="gr-pos-G08">8th</span></td><td><input type="text" id="gr-flt-G08" placeholder="Flt" style="width:38px;font-size:12px;text-transform:uppercase;" maxlength="1"></td><td><input type="text" id="gr-name-G08" placeholder="Player name"></td><td><input type="number" id="gr-out-G08" placeholder="out" style="width:52px;" oninput="autoGrossTotal('G08')" inputmode="numeric"></td><td><input type="number" id="gr-in-G08" placeholder="in" style="width:52px;" oninput="autoGrossTotal('G08')" inputmode="numeric"></td><td><input type="number" id="gr-score-G08" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G08" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G08" title="Countback"></td></tr>
+            <tr data-gplace="9"><td style="color:var(--mut);font-size:10px;width:26px;"><span id="gr-pos-G09">9th</span></td><td><input type="text" id="gr-flt-G09" placeholder="Flt" style="width:38px;font-size:12px;text-transform:uppercase;" maxlength="1"></td><td><input type="text" id="gr-name-G09" placeholder="Player name"></td><td><input type="number" id="gr-out-G09" placeholder="out" style="width:52px;" oninput="autoGrossTotal('G09')" inputmode="numeric"></td><td><input type="number" id="gr-in-G09" placeholder="in" style="width:52px;" oninput="autoGrossTotal('G09')" inputmode="numeric"></td><td><input type="number" id="gr-score-G09" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G09" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G09" title="Countback"></td></tr>
+            <tr data-gplace="10"><td style="color:var(--mut);font-size:10px;width:26px;"><span id="gr-pos-G10">10th</span></td><td><input type="text" id="gr-flt-G10" placeholder="Flt" style="width:38px;font-size:12px;text-transform:uppercase;" maxlength="1"></td><td><input type="text" id="gr-name-G10" placeholder="Player name"></td><td><input type="number" id="gr-out-G10" placeholder="out" style="width:52px;" oninput="autoGrossTotal('G10')" inputmode="numeric"></td><td><input type="number" id="gr-in-G10" placeholder="in" style="width:52px;" oninput="autoGrossTotal('G10')" inputmode="numeric"></td><td><input type="number" id="gr-score-G10" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G10" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G10" title="Countback"></td></tr>
+            <tr data-gplace="11"><td style="color:var(--mut);font-size:10px;width:26px;"><span id="gr-pos-G11">11th</span></td><td><input type="text" id="gr-flt-G11" placeholder="Flt" style="width:38px;font-size:12px;text-transform:uppercase;" maxlength="1"></td><td><input type="text" id="gr-name-G11" placeholder="Player name"></td><td><input type="number" id="gr-out-G11" placeholder="out" style="width:52px;" oninput="autoGrossTotal('G11')" inputmode="numeric"></td><td><input type="number" id="gr-in-G11" placeholder="in" style="width:52px;" oninput="autoGrossTotal('G11')" inputmode="numeric"></td><td><input type="number" id="gr-score-G11" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G11" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G11" title="Countback"></td></tr>
+            <tr data-gplace="12"><td style="color:var(--mut);font-size:10px;width:26px;"><span id="gr-pos-G12">12th</span></td><td><input type="text" id="gr-flt-G12" placeholder="Flt" style="width:38px;font-size:12px;text-transform:uppercase;" maxlength="1"></td><td><input type="text" id="gr-name-G12" placeholder="Player name"></td><td><input type="number" id="gr-out-G12" placeholder="out" style="width:52px;" oninput="autoGrossTotal('G12')" inputmode="numeric"></td><td><input type="number" id="gr-in-G12" placeholder="in" style="width:52px;" oninput="autoGrossTotal('G12')" inputmode="numeric"></td><td><input type="number" id="gr-score-G12" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G12" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G12" title="Countback"></td></tr>
+            <tr data-gplace="13"><td style="color:var(--mut);font-size:10px;width:26px;"><span id="gr-pos-G13">13th</span></td><td><input type="text" id="gr-flt-G13" placeholder="Flt" style="width:38px;font-size:12px;text-transform:uppercase;" maxlength="1"></td><td><input type="text" id="gr-name-G13" placeholder="Player name"></td><td><input type="number" id="gr-out-G13" placeholder="out" style="width:52px;" oninput="autoGrossTotal('G13')" inputmode="numeric"></td><td><input type="number" id="gr-in-G13" placeholder="in" style="width:52px;" oninput="autoGrossTotal('G13')" inputmode="numeric"></td><td><input type="number" id="gr-score-G13" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G13" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G13" title="Countback"></td></tr>
+            <tr data-gplace="14"><td style="color:var(--mut);font-size:10px;width:26px;"><span id="gr-pos-G14">14th</span></td><td><input type="text" id="gr-flt-G14" placeholder="Flt" style="width:38px;font-size:12px;text-transform:uppercase;" maxlength="1"></td><td><input type="text" id="gr-name-G14" placeholder="Player name"></td><td><input type="number" id="gr-out-G14" placeholder="out" style="width:52px;" oninput="autoGrossTotal('G14')" inputmode="numeric"></td><td><input type="number" id="gr-in-G14" placeholder="in" style="width:52px;" oninput="autoGrossTotal('G14')" inputmode="numeric"></td><td><input type="number" id="gr-score-G14" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G14" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G14" title="Countback"></td></tr>
+            <tr data-gplace="15"><td style="color:var(--mut);font-size:10px;width:26px;"><span id="gr-pos-G15">15th</span></td><td><input type="text" id="gr-flt-G15" placeholder="Flt" style="width:38px;font-size:12px;text-transform:uppercase;" maxlength="1"></td><td><input type="text" id="gr-name-G15" placeholder="Player name"></td><td><input type="number" id="gr-out-G15" placeholder="out" style="width:52px;" oninput="autoGrossTotal('G15')" inputmode="numeric"></td><td><input type="number" id="gr-in-G15" placeholder="in" style="width:52px;" oninput="autoGrossTotal('G15')" inputmode="numeric"></td><td><input type="number" id="gr-score-G15" placeholder="total" style="width:60px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G15" placeholder="$" style="width:60px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G15" title="Countback"></td></tr>
           </tbody>
         </table>
-        <button id="btn-add-gross" style="margin-top:8px;font-size:11px;padding:4px 10px;border:1px solid var(--gm);background:var(--gl);color:var(--gd);border-radius:3px;cursor:pointer;">+ Add place</button>
       </div>
     </div>
 
@@ -758,21 +735,8 @@ function buildSkill(){
   }
 }
 
-// ── Add gross row ─────────────────────────────────────────────────────────────
-function addGrossRow(){
-  const tr=document.createElement('tr');
-  tr.innerHTML=`
-    <td><select>${FLIGHTS.map(f=>`<option value="${f}">Flt ${f}</option>`).join('')}</select></td>
-    <td><input type="number" placeholder="#" style="width:40px;"></td>
-    <td><input type="text" placeholder="Player name"></td>
-    <td><input type="number" placeholder="out" style="width:52px;" inputmode="numeric"></td>
-    <td><input type="number" placeholder="in" style="width:52px;" inputmode="numeric"></td>
-    <td><input type="number" placeholder="total" style="width:60px;" inputmode="numeric"></td>
-    <td><input type="number" placeholder="$" style="width:60px;"></td>
-    <td class="tdc"><input type="checkbox" title="Countback"></td>
-    <td><button type="button" title="Remove row" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:15px;padding:0 4px;" onclick="this.closest('tr').remove()">×</button></td>`;
-  document.getElementById('gross-tbody').appendChild(tr);
-}
+// ── Add gross row — obsolete (15 flat rows are fixed) ─────────────────────────
+function addGrossRow(){ /* no-op */ }
 
 // ── Pot display refresh ───────────────────────────────────────────────────────
 function refreshSkinsPotDisplayAll(){ SKINS_HOLES.forEach(refreshSkinsPotDisplay); updatePotBar(); }
@@ -1021,10 +985,12 @@ function clearEntries(){
   document.getElementById('t-skins').value='';
   document.getElementById('t-pog').value='';
   document.getElementById('t-cancelled').checked=false;
-  FLIGHTS.forEach(f=>[1,2].forEach(p=>{
-    ['gr-name','gr-out','gr-in','gr-score','gr-prize'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${f}${p}`);if(el)el.value='';});
-    const cb=document.getElementById(`gr-cb-${f}${p}`);if(cb)cb.checked=false;
-  }));
+  for(let i=1;i<=15;i++){
+    const key='G'+String(i).padStart(2,'0');
+    const ps=document.getElementById(`gr-pos-${key}`); if(ps) ps.textContent=ordSfx(i);
+    ['gr-flt','gr-name','gr-out','gr-in','gr-score','gr-prize'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${key}`);if(el)el.value='';});
+    const cb=document.getElementById(`gr-cb-${key}`);if(cb)cb.checked=false;
+  }
   for(let p=1;p<=15;p++){
     ['nn','ng','no','ni','ns','nh','np'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${p}`);if(el)el.value='';});
     const cb=document.getElementById(`nc-${p}`);if(cb)cb.checked=false;
@@ -1054,32 +1020,22 @@ function saveDraft(){
     const el=document.getElementById(id); if(el) d[id]=el.value;
   });
   d['t-cancelled']=document.getElementById('t-cancelled')?.checked||false;
-  // Gross rows
+  // Gross rows — flat G01–G15
   const grossRows=[];
-  document.querySelectorAll('#gross-tbody tr').forEach(tr=>{
-    const cells=tr.querySelectorAll('td');
-    const row={};
-    if(tr.dataset.flight){
-      row.flt=tr.dataset.flight; row.place=tr.dataset.place;
-      row.name=cells[2].querySelector('input')?.value||'';
-      row.out=cells[3].querySelector('input')?.value||'';
-      row.inV=cells[4].querySelector('input')?.value||'';
-      row.score=cells[5].querySelector('input')?.value||'';
-      row.prize=cells[6].querySelector('input')?.value||'';
-      row.cb=cells[7].querySelector('input')?.checked||false;
-    } else {
-      row.flt=cells[0].querySelector('select')?.value||'A';
-      row.place=cells[1].querySelector('input')?.value||'';
-      row.name=cells[2].querySelector('input')?.value||'';
-      row.out=cells[3].querySelector('input')?.value||'';
-      row.inV=cells[4].querySelector('input')?.value||'';
-      row.score=cells[5].querySelector('input')?.value||'';
-      row.cb=cells[6].querySelector('input')?.checked||false;
-      row.prize=cells[7].querySelector('input')?.value||'';
-      row.extra=true;
-    }
-    grossRows.push(row);
-  });
+  for(let i=1;i<=15;i++){
+    const key='G'+String(i).padStart(2,'0');
+    grossRows.push({
+      key,
+      pos:document.getElementById(`gr-pos-${key}`)?.textContent||'',
+      flt:document.getElementById(`gr-flt-${key}`)?.value||'',
+      name:document.getElementById(`gr-name-${key}`)?.value||'',
+      out:document.getElementById(`gr-out-${key}`)?.value||'',
+      inV:document.getElementById(`gr-in-${key}`)?.value||'',
+      score:document.getElementById(`gr-score-${key}`)?.value||'',
+      prize:document.getElementById(`gr-prize-${key}`)?.value||'',
+      cb:document.getElementById(`gr-cb-${key}`)?.checked||false
+    });
+  }
   d.grossRows=grossRows;
   // Net rows
   const netRows=[];
@@ -1151,40 +1107,18 @@ function loadDraft(){
     const el=document.getElementById(id); if(el&&d[id]!=null) el.value=d[id];
   });
   const canc=document.getElementById('t-cancelled'); if(canc) canc.checked=!!d['t-cancelled'];
-  // Gross — restore existing rows first, add extras
-  if(d.grossRows){
-    const fixedRows=d.grossRows.filter(r=>!r.extra);
-    const extraRows=d.grossRows.filter(r=>r.extra);
-    // Restore existing rows by position
-    const trs=[...document.querySelectorAll('#gross-tbody tr[data-flight]')];
-    fixedRows.forEach((row,i)=>{
-      const tr=trs[i]; if(!tr) return;
-      const cells=tr.querySelectorAll('td');
-      const ni=cells[2].querySelector('input'); if(ni) ni.value=row.name;
-      const oi=cells[3].querySelector('input'); if(oi) oi.value=row.out||'';
-      const ii=cells[4].querySelector('input'); if(ii) ii.value=row.inV||'';
-      const si=cells[5].querySelector('input'); if(si) si.value=row.score||'';
-      const pi=cells[6].querySelector('input'); if(pi) pi.value=row.prize||'';
-      const ci=cells[7].querySelector('input'); if(ci) ci.checked=!!row.cb;
-    });
-    // Clear any previously added extra rows before re-adding
-    document.querySelectorAll('#gross-tbody tr:not([data-flight])').forEach(r=>r.remove());
-    // Re-add extra rows
-    extraRows.forEach(row=>{
-      addGrossRow();
-      const addedTrs=[...document.querySelectorAll('#gross-tbody tr:not([data-flight])')];
-      const tr=addedTrs[addedTrs.length-1]; if(!tr) return;
-      const cells=tr.querySelectorAll('td');
-      const fs=cells[0].querySelector('select'); if(fs) fs.value=row.flt;
-      const pl=cells[1].querySelector('input'); if(pl) pl.value=row.place;
-      const ni=cells[2].querySelector('input'); if(ni) ni.value=row.name;
-      const oi=cells[3].querySelector('input'); if(oi) oi.value=row.out||'';
-      const ii=cells[4].querySelector('input'); if(ii) ii.value=row.inV||'';
-      const si=cells[5].querySelector('input'); if(si) si.value=row.score||'';
-      const ci=cells[6].querySelector('input'); if(ci) ci.checked=!!row.cb;
-      const pi=cells[7].querySelector('input'); if(pi) pi.value=row.prize||'';
-    });
-  }
+  // Gross — restore flat G01–G15 rows
+  if(d.grossRows) d.grossRows.forEach((row,i)=>{
+    const key=row.key||(i<9?'G0'+(i+1):'G'+(i+1));
+    const ps=document.getElementById(`gr-pos-${key}`);   if(ps&&row.pos) ps.textContent=row.pos;
+    const fi=document.getElementById(`gr-flt-${key}`);   if(fi) fi.value=row.flt||'';
+    const ni=document.getElementById(`gr-name-${key}`);  if(ni) ni.value=row.name||'';
+    const oi=document.getElementById(`gr-out-${key}`);   if(oi) oi.value=row.out||'';
+    const ii=document.getElementById(`gr-in-${key}`);    if(ii) ii.value=row.inV||'';
+    const si=document.getElementById(`gr-score-${key}`); if(si) si.value=row.score||'';
+    const pi=document.getElementById(`gr-prize-${key}`); if(pi) pi.value=row.prize||'';
+    const ci=document.getElementById(`gr-cb-${key}`);    if(ci) ci.checked=!!row.cb;
+  });
   // Net
   if(d.netRows) d.netRows.forEach((row,i)=>{
     const p=i+1;
@@ -1260,60 +1194,66 @@ function populateWeekLoadSelect(){
 // ── Load committed week back into entry form ──────────────────────────────────
 // ── Paste-to-populate: Gross name inputs ──────────────────────────────────────
 // When user pastes into a gross Player Name cell, intercept if it looks like
-// GolfSoftware output: "Name\tOut\tIn\tTotal"
-// Fill that row's name + score; if multiple lines, fill subsequent rows too.
+// Ordinal suffix helper
+function ordSfx(n){ const s=['th','st','nd','rd']; const v=n%100; return n+(s[(v-20)%10]||s[v]||s[0]); }
+
+// GolfSoftware gross output: "Position\tFlight\tName\tOut\tIn\tTotal"
+// Paste into any input in the gross table; fills from that row down.
 function initGrossPasteListeners(){
   document.getElementById('gross-tbody').addEventListener('paste', e=>{
     const target = e.target;
-    if(!target.matches('input[type="text"]')) return; // only name inputs
-    const row = target.closest('tr[data-flight]');
+    const row = target.closest('tr[data-gplace]');
     if(!row) return;
     const text = (e.clipboardData||window.clipboardData).getData('text');
     const lines = text.split('\n').map(l=>l.trim()).filter(Boolean);
-    if(lines.length === 0) return;
+    if(!lines.length) return;
     const firstParts = lines[0].split('\t');
-    if(firstParts.length < 2) return; // plain text paste — let it through normally
+    if(firstParts.length < 2) return; // plain text — let through
     e.preventDefault();
-    // Get ordered list of name inputs from this row onwards
-    const allRows = Array.from(document.querySelectorAll('#gross-tbody tr[data-flight]'));
+    const allRows = Array.from(document.querySelectorAll('#gross-tbody tr[data-gplace]'));
     const startIdx = allRows.indexOf(row);
     lines.forEach((line, i) => {
       const r = allRows[startIdx + i];
       if(!r) return;
+      const gplace = parseInt(r.dataset.gplace);
+      const key = 'G' + String(gplace).padStart(2,'0');
       const parts = line.split('\t');
-      // GS Format: [leading-tab?] Name | Out | In | Total
-      // GS sometimes prepends a blank field — detect and skip it
-      let offset = 0;
-      if(parts[0].trim()==='' && parts.length >= 5) offset = 1;
-      const name  = parts[offset].trim();
-      const out   = parts.length > offset+1 ? parts[offset+1].trim() : '';
-      const inV   = parts.length > offset+2 ? parts[offset+2].trim() : '';
-      const total = parts.length > offset+3 ? parts[offset+3].trim() : (parts.length > offset+1 ? parts[parts.length-1].trim() : '');
-      // Get the row key to target by ID (works for both static and dynamic)
-      const key = r.dataset.flight && r.dataset.place
-        ? r.dataset.flight + r.dataset.place
-        : null;
-      if(key){
-        const ni = document.getElementById(`gr-name-${key}`);
-        const oi = document.getElementById(`gr-out-${key}`);
-        const ii = document.getElementById(`gr-in-${key}`);
-        const si = document.getElementById(`gr-score-${key}`);
-        if(ni) ni.value = name;
-        if(oi && out)   oi.value = out;
-        if(ii && inV)   ii.value = inV;
-        if(si && total) si.value = total;
+      // GS format: Position | Flight | Name | Out | In | Total
+      let pos='', flt='', name='', out='', inV='', total='';
+      if(parts.length >= 6 && /^\d+$/.test(parts[0].trim())){
+        pos   = parts[0].trim();
+        flt   = parts[1].trim();
+        name  = parts[2].trim();
+        out   = parts[3].trim();
+        inV   = parts[4].trim();
+        total = parts[5].trim();
+      } else if(parts.length >= 5){
+        flt   = parts[0].trim();
+        name  = parts[1].trim();
+        out   = parts[2].trim();
+        inV   = parts[3].trim();
+        total = parts[4].trim();
+      } else if(parts.length >= 4){
+        name  = parts[0].trim();
+        out   = parts[1].trim();
+        inV   = parts[2].trim();
+        total = parts[3].trim();
       } else {
-        // Dynamic extra rows — use td indices
-        const tds = r.querySelectorAll('td');
-        const ni = tds[2]?.querySelector('input[type="text"]');
-        const oi = tds[3]?.querySelector('input[type="number"]');
-        const ii = tds[4]?.querySelector('input[type="number"]');
-        const si = tds[5]?.querySelector('input[type="number"]');
-        if(ni) ni.value = name;
-        if(oi && out)   oi.value = out;
-        if(ii && inV)   ii.value = inV;
-        if(si && total) si.value = total;
+        name  = parts[0].trim();
+        total = parts[parts.length-1].trim();
       }
+      const posSpan = document.getElementById(`gr-pos-${key}`);
+      const fi = document.getElementById(`gr-flt-${key}`);
+      const ni = document.getElementById(`gr-name-${key}`);
+      const oi = document.getElementById(`gr-out-${key}`);
+      const ii = document.getElementById(`gr-in-${key}`);
+      const si = document.getElementById(`gr-score-${key}`);
+      if(posSpan && pos) posSpan.textContent = ordSfx(parseInt(pos));
+      if(fi && flt)      fi.value = flt.toUpperCase();
+      if(ni)             ni.value = name;
+      if(oi && out)      oi.value = out;
+      if(ii && inV)      ii.value = inV;
+      if(si && total)    si.value = total;
     });
   });
 }
@@ -1472,42 +1412,34 @@ function loadCommittedWeek(){
   }
 
   // ── Gross rows ──
-  // wk.flights = {A:[],B:[],C:[],D:[]} each entry: {place,pname,score,cb,prize}
-  if(wk.flights){
-    // Clear extra rows first
-    document.querySelectorAll('#gross-tbody tr:not([data-flight])').forEach(r=>r.remove());
-    const trs=[...document.querySelectorAll('#gross-tbody tr[data-flight]')];
-    // Map fixed rows by flight+place
-    trs.forEach(tr=>{
-      const f=tr.dataset.flight; const pl=parseInt(tr.dataset.place);
-      const arr=wk.flights[f]||[];
-      const rec=arr.find(r=>r.place===pl)||arr.find(r=>!r._used&&r.place===pl);
-      if(rec){ rec._used=true; }
-      const cells=tr.querySelectorAll('td');
-      const ni=cells[2].querySelector('input'); if(ni) ni.value=rec?.pname||'';
-      const si=cells[3].querySelector('input'); if(si) si.value=rec?.score||'';
-      const pi=cells[4].querySelector('input'); if(pi) pi.value=rec?.prize||'';
-      const ci=cells[5].querySelector('input'); if(ci) ci.checked=!!(rec?.cb);
+  // New format: wk.grossRows = [{key,flt,pname,out,inV,score,prize,cb}]
+  // Legacy format: wk.flights = {A:[],B:[],C:[],D:[]} — map to flat rows
+  if(wk.grossRows){
+    wk.grossRows.forEach((row,i)=>{
+      const key=row.key||(i<9?'G0'+(i+1):'G'+(i+1));
+      const ps=document.getElementById(`gr-pos-${key}`);   if(ps&&(row.posLabel||row.place)) ps.textContent=row.posLabel||ordSfx(row.place);
+      const fi=document.getElementById(`gr-flt-${key}`);   if(fi) fi.value=row.flt||'';
+      const ni=document.getElementById(`gr-name-${key}`);  if(ni) ni.value=row.pname||row.name||'';
+      const oi=document.getElementById(`gr-out-${key}`);   if(oi) oi.value=row.out||'';
+      const ii=document.getElementById(`gr-in-${key}`);    if(ii) ii.value=row.inV||'';
+      const si=document.getElementById(`gr-score-${key}`); if(si) si.value=row.score||'';
+      const pi=document.getElementById(`gr-prize-${key}`); if(pi) pi.value=row.prize||'';
+      const ci=document.getElementById(`gr-cb-${key}`);    if(ci) ci.checked=!!row.cb;
     });
-    // Any extra entries beyond the fixed rows become addGrossRow entries
-    FLIGHTS.forEach(f=>{
-      const arr=wk.flights[f]||[];
-      // fixed slots: places 1,2,3 (the standard rows per flight)
-      const extras=arr.filter(r=>r.place>3);
-      extras.forEach(row=>{
-        addGrossRow();
-        const addedTrs=[...document.querySelectorAll('#gross-tbody tr:not([data-flight])')];
-        const tr=addedTrs[addedTrs.length-1]; if(!tr) return;
-        const cells=tr.querySelectorAll('td');
-        const fs=cells[0].querySelector('select'); if(fs) fs.value=f;
-        const pl=cells[1].querySelector('input'); if(pl) pl.value=row.place;
-        const ni=cells[2].querySelector('input'); if(ni) ni.value=row.pname||'';
-        const oi=cells[3].querySelector('input'); if(oi) oi.value=row.out||'';
-        const ii=cells[4].querySelector('input'); if(ii) ii.value=row.inV||'';
-        const si=cells[5].querySelector('input'); if(si) si.value=row.score||'';
-        const ci=cells[6].querySelector('input'); if(ci) ci.checked=!!row.cb;
-        const pi=cells[7].querySelector('input'); if(pi) pi.value=row.prize||'';
-      });
+  } else if(wk.flights){
+    // Legacy: flatten {A:[],B:[],C:[],D:[]} into sequential rows
+    const flat=[];
+    FLIGHTS.forEach(f=>(wk.flights[f]||[]).forEach(r=>flat.push({...r,flt:f})));
+    flat.forEach((row,i)=>{
+      const key=i<9?'G0'+(i+1):'G'+(i+1);
+      if(!document.getElementById(`gr-name-${key}`)) return;
+      const fi=document.getElementById(`gr-flt-${key}`);   if(fi) fi.value=row.flt||'';
+      const ni=document.getElementById(`gr-name-${key}`);  if(ni) ni.value=row.pname||'';
+      const oi=document.getElementById(`gr-out-${key}`);   if(oi) oi.value=row.out||'';
+      const ii=document.getElementById(`gr-in-${key}`);    if(ii) ii.value=row.inV||'';
+      const si=document.getElementById(`gr-score-${key}`); if(si) si.value=row.score||'';
+      const pi=document.getElementById(`gr-prize-${key}`); if(pi) pi.value=row.prize||'';
+      const ci=document.getElementById(`gr-cb-${key}`);    if(ci) ci.checked=!!row.cb;
     });
   }
 
@@ -1605,27 +1537,25 @@ function generatePayout(previewOnly=false){
   const fmt=n=>'$'+Number(n||0).toFixed(2);
   const prefBadge=p=>{const cl=p==='Bar'?'pref-bar':p==='Pro Shop'?'pref-pro':'pref-cash';return`<span class="pref-bar ${cl}" style="font-size:10px;">${p}</span>`;};
 
-  // Collect gross
+  // Collect gross — flat G01–G15
+  const grossRows=[];
   const fdata={A:[],B:[],C:[],D:[]};
-  document.querySelectorAll('#gross-tbody tr').forEach(tr=>{
-    const cells=tr.querySelectorAll('td');
-    let flt,place,pname,score,cb,prize;
-    if(tr.dataset.flight){
-      flt=tr.dataset.flight; place=parseInt(tr.dataset.place);
-      pname=cells[2].querySelector('input').value.trim();
-      score=cells[3].querySelector('input').value;
-      prize=cells[4].querySelector('input').value;
-      cb   =cells[5].querySelector('input')?.checked;
-    } else {
-      flt  =cells[0].querySelector('select').value;
-      place=parseInt(cells[1].querySelector('input').value)||0;
-      pname=cells[2].querySelector('input').value.trim();
-      score=cells[3].querySelector('input').value;
-      cb   =cells[4].querySelector('input')?.checked;
-      prize=cells[5].querySelector('input').value;
+  for(let i=1;i<=15;i++){
+    const key='G'+String(i).padStart(2,'0');
+    const posText=(document.getElementById(`gr-pos-${key}`)?.textContent||'').trim();
+    const posNum =parseInt(posText)||i; // numeric position from GS (resets per flight)
+    const flt  =(document.getElementById(`gr-flt-${key}`)?.value||'').trim().toUpperCase();
+    const pname=(document.getElementById(`gr-name-${key}`)?.value||'').trim();
+    const out  = document.getElementById(`gr-out-${key}`)?.value||'';
+    const inV  = document.getElementById(`gr-in-${key}`)?.value||'';
+    const score= document.getElementById(`gr-score-${key}`)?.value||'';
+    const prize= document.getElementById(`gr-prize-${key}`)?.value||'';
+    const cb   = document.getElementById(`gr-cb-${key}`)?.checked||false;
+    if(pname||prize){
+      grossRows.push({key,place:posNum,posLabel:posText,flt,pname,out,inV,score,prize,cb});
+      if(fdata[flt]) fdata[flt].push({place:posNum,pname,out,inV,score,prize,cb});
     }
-    if(pname||prize) fdata[flt].push({place,pname,score,cb,prize});
-  });
+  }
 
   // Collect net
   const netData=[];
@@ -1714,7 +1644,7 @@ function generatePayout(previewOnly=false){
     mwMap[k][cat]+=(parseFloat(amount)||0);
     mwMap[k].total=mwMap[k].gross+mwMap[k].net+mwMap[k].skins+mwMap[k].pog+mwMap[k].draw;
   };
-  FLIGHTS.forEach(f=>fdata[f].forEach(r=>addMW(r.pname,'gross',r.prize)));
+  grossRows.forEach(r=>addMW(r.pname,'gross',r.prize));
   netData.forEach(r=>addMW(r.pname,'net',r.prize));
   skinsData.filter(r=>r.paid&&r.winner).forEach(r=>addMW(r.winner,'skins',r.runPot));
   pogData.filter(r=>r.paid&&r.winner).forEach(r=>addMW(r.winner,'pog',r.runPot));
@@ -1732,12 +1662,12 @@ function generatePayout(previewOnly=false){
   if(!previewOnly){
     // Store pending commit data for confirmCommit() to finalize
     window._pendingCommit={weekKey,name,date,notes,cancelled,total,gnPool,skPool,pgPool,
-      fdata,netData,skinsData,pogData,skillData,meatData,ffWinner,ffAmount,ffPref,mwList,isOverwrite};
+      grossRows,fdata,netData,skinsData,pogData,skillData,meatData,ffWinner,ffAmount,ffPref,mwList,isOverwrite};
     refreshSkinsPotDisplayAll(); refreshPOGPotDisplayAll();
   }
 
   // Totals
-  let grossPaid=0; FLIGHTS.forEach(f=>fdata[f].forEach(r=>grossPaid+=parseFloat(r.prize)||0));
+  let grossPaid=0; grossRows.forEach(r=>grossPaid+=parseFloat(r.prize)||0);
   const netPaid  =netData.reduce((s,r)=>s+(parseFloat(r.prize)||0),0);
   const skinsPaid=skinsData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runPot,0);
   const pogPaid  =pogData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runPot,0);
@@ -1760,22 +1690,21 @@ function generatePayout(previewOnly=false){
 
   if(!cancelled){
     // GROSS
-    html+=`<div class="psec"><div class="ptitle">Gross Winners — Flight Results</div>
-      <table class="pt"><thead><tr><th>Flight</th><th>Place</th><th>Player</th><th>Score</th><th class="r">Prize</th></tr></thead><tbody>`;
-    FLIGHTS.forEach(f=>{
-      html+=`<tr class="fhdr"><td colspan="5">${getFL(f)} &nbsp; ${getFR(f)} handicap</td></tr>`;
-      if(!fdata[f].length){
-        html+=`<tr><td colspan="5" style="color:var(--mut);font-size:11px;padding:6px 9px;">No entries</td></tr>`;
-      } else {
-        fdata[f].forEach(r=>{
-          const sfx=r.place===1?'st':r.place===2?'nd':r.place===3?'rd':'th';
-          const bc=r.place<=3?`p${r.place}b`:'pnb';
-          html+=`<tr><td></td><td><span class="pbadge ${bc}">${r.place}</span>${r.place}${sfx}${r.cb?' <span class="countback-badge">CB</span>':''}</td>
-            <td>${r.pname||'—'}</td><td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
-            <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td></tr>`;
-        });
-      }
-    });
+    html+=`<div class="psec"><div class="ptitle">Gross Winners</div>
+      <table class="pt"><thead><tr><th>Flt</th><th>Player</th><th>Out</th><th>In</th><th>Score</th><th class="r">Prize</th></tr></thead><tbody>`;
+    if(!grossRows.length){
+      html+=`<tr><td colspan="6" style="color:var(--mut);padding:8px 9px;">No entries</td></tr>`;
+    } else {
+      grossRows.forEach(r=>{
+        html+=`<tr>
+          <td style="color:var(--mut);font-size:11px;">${r.flt||'—'}</td>
+          <td>${r.pname||'—'}${r.cb?' <span class="countback-badge">CB</span>':''}</td>
+          <td style="color:var(--mut);font-size:11px;">${r.out||'—'}</td>
+          <td style="color:var(--mut);font-size:11px;">${r.inV||'—'}</td>
+          <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
+          <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td></tr>`;
+      });
+    }
     html+=`</tbody></table></div>`;
 
     // NET
@@ -1911,10 +1840,10 @@ function confirmCommit(){
   // Save week (replace if overwrite)
   if(pc.isOverwrite){
     const idx=weeksLog.findIndex(w=>w.id===pc.weekKey);
-    const rec={id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData};
+    const rec={id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),grossRows:pc.grossRows,flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData};
     if(idx>=0) weeksLog[idx]=rec; else weeksLog.push(rec);
   } else {
-    saveWeek({id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData});
+    saveWeek({id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),grossRows:pc.grossRows,flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData});
   }
   LS.set('weeks',weeksLog);
   populateWeekLoadSelect(); // keep dropdown in sync after commit
@@ -1959,7 +1888,7 @@ function confirmCommit(){
   }
   // Publish to GitHub
   publishToGitHub(pc.weekKey,pc.name,pc.date,pc.notes,pc.cancelled,pc.total,pc.gnPool,pc.skPool,pc.pgPool,
-    pc.fdata,pc.netData,pc.skinsData,pc.pogData,pc.skillData,pc.meatData,pc.ffWinner,pc.ffAmount,pc.ffPref,pc.mwList);
+    pc.grossRows,pc.fdata,pc.netData,pc.skinsData,pc.pogData,pc.skillData,pc.meatData,pc.ffWinner,pc.ffAmount,pc.ffPref,pc.mwList);
 }
 
 // ── PIN logic ─────────────────────────────────────────────────────────────────
@@ -2030,7 +1959,7 @@ document.addEventListener('click',function(e){
     case 'pin-change-link': showPinModal();      break;
     case 'pm-cancel':    document.getElementById('pin-modal').classList.remove('open'); break;
     case 'pm-save':      savePIN();              break;
-    case 'btn-add-gross':addGrossRow();          break;
+    // btn-add-gross removed (15 flat rows are fixed)
     case 'btn-export-season': exportSeasonCSV(); break;
     case 'btn-reset-season':  resetSeason();     break;
     case 'btn-repair-data':   repairData();      break;
@@ -2072,7 +2001,7 @@ function getGHToken(){ try{ return localStorage.getItem('gh_token')||''; }catch(
 function setGHToken(t){ try{ localStorage.setItem('gh_token',t); }catch(e){} }
 
 async function publishToGitHub(weekKey, name, date, notes, cancelled, total,
-  gnPool, skPool, pgPool, fdata, netData, skinsData, pogData, skillData,
+  gnPool, skPool, pgPool, grossRows, fdata, netData, skinsData, pogData, skillData,
   meatData, ffWinner, ffAmount, ffPref, mwList){
 
   const token = getGHToken();
@@ -2109,6 +2038,7 @@ async function publishToGitHub(weekKey, name, date, notes, cancelled, total,
       players:parseInt(total)||0,
       gnPool, skinsPool:skPool, pogPool:pgPool,
       recordedAt: new Date().toISOString(),
+      grossRows: grossRows,
       flights: fdata,
       flightNames: {A:document.getElementById('f-a-name')?.value||'Flight A', B:document.getElementById('f-b-name')?.value||'Flight B', C:document.getElementById('f-c-name')?.value||'Flight C', D:document.getElementById('f-d-name')?.value||'Flight D'},
       flightRanges: {A:document.getElementById('f-a-range')?.value||'0–5', B:document.getElementById('f-b-range')?.value||'6–11', C:document.getElementById('f-c-range')?.value||'12–17', D:document.getElementById('f-d-range')?.value||'18+'},
@@ -2120,7 +2050,7 @@ async function publishToGitHub(weekKey, name, date, notes, cancelled, total,
       ff: ffWinner ? {winner:ffWinner, amount:ffAmount, pref:ffPref} : null,
       moneyWinners: mwList,
       totals: {
-        gross: FLIGHTS.reduce((s,f)=>(fdata[f]||[]).reduce((ss,r)=>ss+(parseFloat(r.prize)||0),s),0),
+        gross: grossRows.reduce((s,r)=>s+(parseFloat(r.prize)||0),0),
         net:   netData.reduce((s,r)=>s+(parseFloat(r.prize)||0),0),
         skins: skinsData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runPot,0),
         pog:   pogData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runPot,0),
