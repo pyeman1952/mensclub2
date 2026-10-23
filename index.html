@@ -382,7 +382,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
 
         <table class="gt">
           <thead><tr>
-            <th>#</th><th>Player</th><th>Flt</th><th>Gross</th><th>Hcp</th><th style="width:58px;">Net Out</th><th style="width:58px;">Net In</th><th style="width:58px;">Net</th><th>Prize ($)</th><th>CB</th>
+            <th>#</th><th>Flt</th><th>Player</th><th>Gross</th><th>Hcp</th><th style="width:58px;">Net</th><th>Prize ($)</th><th>CB</th>
           </tr></thead>
           <tbody id="net-tbody"></tbody>
         </table>
@@ -682,12 +682,12 @@ function buildNet(){
     const sfx=p===1?'st':p===2?'nd':p===3?'rd':'th';
     const tr=document.createElement('tr');
     tr.innerHTML=`<td style="color:var(--mut);font-size:10px;width:26px;">${p}${sfx}</td>
-      <td><input type="text" id="nn-${p}" placeholder="Name"></td>
       <td><select id="nf-${p}" style="font-size:12px;padding:4px 3px;width:54px;"><option value="">--</option>${FLIGHT_OPTS}</select></td>
+      <td><input type="text" id="nn-${p}" placeholder="Name"></td>
       <td><input type="number" id="ng-${p}" placeholder="gross" style="width:58px;"></td>
       <td><input type="number" id="nh-${p}" placeholder="hcp" style="width:50px;"></td>
-      <td><input type="number" id="no-${p}" placeholder="net out" style="width:54px;" oninput="autoNetScore(${p})" inputmode="numeric"></td>
-      <td><input type="number" id="ni-${p}" placeholder="net in" style="width:54px;" oninput="autoNetScore(${p})" inputmode="numeric"></td>
+      <td style="display:none;"><input type="number" id="no-${p}" oninput="autoNetScore(${p})" inputmode="numeric"></td>
+      <td style="display:none;"><input type="number" id="ni-${p}" oninput="autoNetScore(${p})" inputmode="numeric"></td>
       <td><input type="number" id="ns-${p}" placeholder="net" style="width:58px;"></td>
       <td><input type="number" id="np-${p}" placeholder="$" style="width:65px;"></td>
       <td class="tdc"><input type="checkbox" id="nc-${p}" title="Countback"></td>`;
