@@ -1338,12 +1338,13 @@ function initNetPasteListeners(){
     lines.forEach((line, i) => {
       const row = startRow + i;
       const parts = line.split('\t');
-      let name='', gross='', hcp='', netOut='', netIn='', netTotal='';
+      let flt='', name='', gross='', hcp='', netOut='', netIn='', netTotal='';
       // Real GS formats:
       //   7-col: Flight | Name | Gross | Hcp | Net-Out | Net-In | Net
       //   5-col: Flight | Name | Gross | Hcp | Net
       //   4-col: Name | Gross | Hcp | Net  (no flight)
       if(parts.length >= 7){
+        flt      = parts[0].trim();
         name     = parts[1].trim();
         gross    = parts[2].trim();
         hcp      = parts[3].trim();
@@ -1352,12 +1353,13 @@ function initNetPasteListeners(){
         netTotal = parts[6].trim();
       } else if(parts.length === 5){
         // Flight | Name | Gross | Hcp | Net
+        flt      = parts[0].trim();
         name     = parts[1].trim();
         gross    = parts[2].trim();
         hcp      = parts[3].trim();
         netTotal = parts[4].trim();
       } else if(parts.length === 4){
-        // Name | Gross | Hcp | Net
+        // Name | Gross | Hcp | Net  (no flight)
         name     = parts[0].trim();
         gross    = parts[1].trim();
         hcp      = parts[2].trim();
@@ -1366,12 +1368,14 @@ function initNetPasteListeners(){
         name     = parts[0].trim();
         netTotal = parts[parts.length-1].trim();
       }
+      const fltSel   = document.getElementById(`nf-${row}`);
       const nameInp  = document.getElementById(`nn-${row}`);
       const grossInp = document.getElementById(`ng-${row}`);
       const hcpInp   = document.getElementById(`nh-${row}`);
       const noInp    = document.getElementById(`no-${row}`);
       const niInp    = document.getElementById(`ni-${row}`);
       const netInp   = document.getElementById(`ns-${row}`);
+      if(fltSel   && flt)      fltSel.value   = flt;
       if(nameInp)              nameInp.value  = name;
       if(grossInp && gross)   grossInp.value = gross;
       if(hcpInp   && hcp)     hcpInp.value   = hcp;
