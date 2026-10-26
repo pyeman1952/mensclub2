@@ -413,7 +413,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
       <h2>Skins <em>holes 1,2,5-9,11-14,16,18</em></h2>
       <div class="cb">
         <table class="gt">
-          <thead><tr><th>Hole</th><th>Winner</th><th>Flt</th><th>Score</th><th class="thr">Prev Pot</th><th class="thr">+This Wk</th><th class="thr">Total Pot</th><th>Paid?</th></tr></thead>
+          <thead><tr><th>Hole</th><th>Winner</th><th>Flt</th><th>Score</th><th class="thr">Prev Pot</th><th class="thr">+This Wk</th><th class="thr">Total Pot</th><th>Paid?</th><th>Guest?</th></tr></thead>
           <tbody id="skins-tbody"></tbody>
         </table>
       </div>
@@ -424,7 +424,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
       <h2>Pots of Gold <em>holes 3,4,10,15,17</em></h2>
       <div class="cb">
         <table class="gt">
-          <thead><tr><th>Hole</th><th>Winner</th><th>Flt</th><th class="thr">Prev Pot</th><th class="thr">+This Wk</th><th class="thr">Total Pot</th><th>Paid?</th></tr></thead>
+          <thead><tr><th>Hole</th><th>Winner</th><th>Flt</th><th class="thr">Prev Pot</th><th class="thr">+This Wk</th><th class="thr">Total Pot</th><th>Paid?</th><th>Guest?</th></tr></thead>
           <tbody id="pog-tbody"></tbody>
         </table>
       </div>
@@ -710,7 +710,8 @@ function buildSkins(){
       <td class="tdr"><span id="sk-prev-${h}" style="color:var(--mut);font-size:12px;">$0.00</span></td>
       <td class="tdr"><span id="sk-add-${h}" style="color:var(--gm);font-size:12px;">+$0.00</span></td>
       <td class="tdr"><span id="sk-pot-${h}" class="pot-display">$0.00</span></td>
-      <td class="tdc"><input type="checkbox" id="sk-paid-${h}"></td>`;
+      <td class="tdc"><input type="checkbox" id="sk-paid-${h}"></td>
+      <td class="tdc" title="Non-member: gets this week's share only, pot carries"><input type="checkbox" id="sk-guest-${h}"><label for="sk-guest-${h}" style="font-size:10px;color:var(--mut);cursor:pointer;"> Guest</label></td>`;
     tbody.appendChild(tr);
   });
 }
@@ -727,7 +728,8 @@ function buildPOG(){
       <td class="tdr"><span id="pog-prev-${h}" style="color:var(--mut);font-size:12px;">$0.00</span></td>
       <td class="tdr"><span id="pog-add-${h}" style="color:var(--gm);font-size:12px;">+$0.00</span></td>
       <td class="tdr"><span id="pog-pot-${h}" class="pot-display">$0.00</span></td>
-      <td class="tdc"><input type="checkbox" id="pog-paid-${h}"></td>`;
+      <td class="tdc"><input type="checkbox" id="pog-paid-${h}"></td>
+      <td class="tdc" title="Non-member: gets this week's share only, pot carries"><input type="checkbox" id="pog-guest-${h}"><label for="pog-guest-${h}" style="font-size:10px;color:var(--mut);cursor:pointer;"> Guest</label></td>`;
     tbody.appendChild(tr);
   });
 }
@@ -1011,10 +1013,12 @@ function clearEntries(){
     const n=document.getElementById(`sk-name-${h}`);if(n)n.value='';
     const s=document.getElementById(`sk-score-${h}`);if(s)s.value='';
     const c=document.getElementById(`sk-paid-${h}`);if(c)c.checked=false;
+    const g=document.getElementById(`sk-guest-${h}`);if(g)g.checked=false;
   });
   POG_HOLES.forEach(h=>{
     const n=document.getElementById(`pog-name-${h}`);if(n)n.value='';
     const c=document.getElementById(`pog-paid-${h}`);if(c)c.checked=false;
+    const g=document.getElementById(`pog-guest-${h}`);if(g)g.checked=false;
   });
   for(let h=1;h<=18;h++){
     ['sp-name','sp-prize'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${h}`);if(el)el.value='';});
@@ -1078,6 +1082,7 @@ function saveDraft(){
       score:document.getElementById(`sk-score-${h}`)?.value||'',
       gross:'',
       paid:document.getElementById(`sk-paid-${h}`)?.checked||false,
+      guest:document.getElementById(`sk-guest-${h}`)?.checked||false,
       flt:document.getElementById(`sk-flt-${h}`)?.value||''
     };
   });
@@ -1088,6 +1093,7 @@ function saveDraft(){
     pgRows[h]={
       name:document.getElementById(`pog-name-${h}`)?.value||'',
       paid:document.getElementById(`pog-paid-${h}`)?.checked||false,
+      guest:document.getElementById(`pog-guest-${h}`)?.checked||false,
       flt:document.getElementById(`pog-flt-${h}`)?.value||''
     };
   });
@@ -1160,6 +1166,7 @@ function loadDraft(){
     const n=document.getElementById(`sk-name-${h}`); if(n) n.value=r.name;
     const s=document.getElementById(`sk-score-${h}`); if(s) s.value=r.score||'';
     const c=document.getElementById(`sk-paid-${h}`); if(c) c.checked=!!r.paid;
+    const g=document.getElementById(`sk-guest-${h}`); if(g) g.checked=!!r.guest;
     const f=document.getElementById(`sk-flt-${h}`); if(f) f.value=r.flt||'';
   });
   // POG
@@ -1167,6 +1174,7 @@ function loadDraft(){
     const r=d.pgRows[h]; if(!r) return;
     const n=document.getElementById(`pog-name-${h}`); if(n) n.value=r.name;
     const c=document.getElementById(`pog-paid-${h}`); if(c) c.checked=!!r.paid;
+    const g=document.getElementById(`pog-guest-${h}`); if(g) g.checked=!!r.guest;
     const f=document.getElementById(`pog-flt-${h}`); if(f) f.value=r.flt||'';
   });
   // Skill shots
@@ -1495,15 +1503,17 @@ function loadCommittedWeek(){
     const n=document.getElementById(`sk-name-${h}`); if(n) n.value=r.winner||'';
     const s=document.getElementById(`sk-score-${h}`); if(s) s.value=r.score||'';
     const c=document.getElementById(`sk-paid-${h}`); if(c) c.checked=!!r.paid;
+    const g=document.getElementById(`sk-guest-${h}`); if(g) g.checked=!!r.guest;
     const f=document.getElementById(`sk-flt-${h}`); if(f) f.value=r.flt||'';
   });
 
   // ── POG ──
-  // wk.pogData = [{hole,winner,runPot,stored,weekly,paid,flt}]
+  // wk.pogData = [{hole,winner,runPot,stored,weekly,paid,flt,guest}]
   if(wk.pogData) wk.pogData.forEach(r=>{
     const h=r.hole;
     const n=document.getElementById(`pog-name-${h}`); if(n) n.value=r.winner||'';
     const c=document.getElementById(`pog-paid-${h}`); if(c) c.checked=!!r.paid;
+    const g=document.getElementById(`pog-guest-${h}`); if(g) g.checked=!!r.guest;
     const f=document.getElementById(`pog-flt-${h}`); if(f) f.value=r.flt||'';
   });
 
@@ -1613,18 +1623,21 @@ function generatePayout(previewOnly=false){
     const winner=(document.getElementById(`sk-name-${h}`)?.value||'').trim();
     const score =document.getElementById(`sk-score-${h}`)?.value||'';
     const paid  =document.getElementById(`sk-paid-${h}`)?.checked;
+    const guest =document.getElementById(`sk-guest-${h}`)?.checked||false;
     const stored=(skinsPots[h]?.pot)||0;
     const runPot=stored+skph;
     const gross='';
     const flt  =document.getElementById(`sk-flt-${h}`)?.value||'';
-    skinsData.push({hole:h,winner,score,gross,runPot,stored,weekly:skph,paid,flt});
+    // Guest winner: pays out only this week's share, pot carries
+    const payout=guest?skph:runPot;
+    skinsData.push({hole:h,winner,score,gross,runPot,payout,stored,weekly:skph,paid,guest,flt});
     if(!previewOnly&&!isOverwrite){
-      const newPot=paid?0:runPot;
-      skinsPots[h]={pot:newPot,updatedAt:new Date().toISOString(),lastWinner:paid?winner:null};
+      // Guest: pot stays (carries), paid member: pot resets
+      const newPot=(paid&&!guest)?0:runPot;
+      skinsPots[h]={pot:newPot,updatedAt:new Date().toISOString(),lastWinner:(paid||guest)?winner:null};
       saveSkinsHole(h);
     } else if(!previewOnly&&isOverwrite){
-      // On overwrite keep stored pot, only update if paid
-      if(paid){
+      if(paid&&!guest){
         skinsPots[h]={pot:0,updatedAt:new Date().toISOString(),lastWinner:winner||null};
         saveSkinsHole(h);
       }
@@ -1636,16 +1649,18 @@ function generatePayout(previewOnly=false){
   for(const h of POG_HOLES){
     const winner=(document.getElementById(`pog-name-${h}`)?.value||'').trim();
     const paid  =document.getElementById(`pog-paid-${h}`)?.checked;
+    const guest =document.getElementById(`pog-guest-${h}`)?.checked||false;
     const stored=(pogPots[h]?.pot)||0;
     const runPot=stored+pgph;
     const flt   =document.getElementById(`pog-flt-${h}`)?.value||'';
-    pogData.push({hole:h,winner,runPot,stored,weekly:pgph,paid,flt});
+    const payout=guest?pgph:runPot;
+    pogData.push({hole:h,winner,runPot,payout,stored,weekly:pgph,paid,guest,flt});
     if(!previewOnly&&!isOverwrite){
-      const newPot=paid?0:runPot;
-      pogPots[h]={pot:newPot,updatedAt:new Date().toISOString(),lastWinner:paid?winner:null};
+      const newPot=(paid&&!guest)?0:runPot;
+      pogPots[h]={pot:newPot,updatedAt:new Date().toISOString(),lastWinner:(paid||guest)?winner:null};
       savePOGHole(h);
     } else if(!previewOnly&&isOverwrite){
-      if(paid){
+      if(paid&&!guest){
         pogPots[h]={pot:0,updatedAt:new Date().toISOString(),lastWinner:winner||null};
         savePOGHole(h);
       }
@@ -1686,8 +1701,8 @@ function generatePayout(previewOnly=false){
   };
   grossRows.forEach(r=>addMW(r.pname,'gross',r.prize));
   netData.forEach(r=>addMW(r.pname,'net',r.prize));
-  skinsData.filter(r=>r.paid&&r.winner).forEach(r=>addMW(r.winner,'skins',r.runPot));
-  pogData.filter(r=>r.paid&&r.winner).forEach(r=>addMW(r.winner,'pog',r.runPot));
+  skinsData.filter(r=>(r.paid||r.guest)&&r.winner).forEach(r=>addMW(r.winner,'skins',r.payout));
+  pogData.filter(r=>(r.paid||r.guest)&&r.winner).forEach(r=>addMW(r.winner,'pog',r.payout));
   meatData.forEach(r=>addMW(r.winner,'draw',0)); // meat is non-cash
   if(ffWinner&&ffAmount) addMW(ffWinner,'draw',ffAmount);
   rdData.forEach(r=>addMW(r.name,'draw',r.amount));
@@ -1771,15 +1786,21 @@ function generatePayout(previewOnly=false){
     html+=`<div class="psec"><div class="ptitle">Skins — Lowest Score per Hole</div>
       <table class="pt"><thead><tr><th>Hole</th><th>Winner</th><th>Net</th><th>Gross</th><th class="r">Prev</th><th class="r">+This Wk</th><th class="r">Pot</th><th class="r">Status</th></tr></thead><tbody>`;
     skinsData.forEach(r=>{
-      const carry=!r.paid||!r.winner;
-      html+=`<tr style="${carry?'background:var(--carry);':'background:#F0FFF4;'}">
+      const carry=!r.paid&&!r.guest&&!r.winner? true : (!r.paid&&!r.guest);
+      const isGuest=r.guest&&r.winner;
+      const rowBg=isGuest?'background:#FFF8E1;':carry?'background:var(--carry);':'background:#F0FFF4;';
+      const statusBadge=isGuest
+        ?`<span style="color:#B8860B;font-weight:700;font-family:system-ui;font-size:11px;">GUEST ${fmt(r.payout)}</span>`
+        :carry?'<span class="cbadge">CARRY</span>'
+        :`<span style="color:var(--gm);font-weight:700;font-family:system-ui;font-size:11px;">PAID</span>`;
+      html+=`<tr style="${rowBg}">
         <td style="font-weight:600;">${r.hole}</td>
-        <td>${r.winner||'<em style="color:var(--mut)">No winner</em>'}</td>
+        <td>${r.winner||'<em style="color:var(--mut)">No winner</em>'}${isGuest?' <span style="font-size:10px;background:#B8860B;color:#fff;padding:1px 4px;border-radius:3px;">GUEST</span>':''}</td>
         <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
         <td class="r" style="color:var(--mut);font-size:11px;">${fmt(r.stored)}</td>
         <td class="r" style="color:var(--gm);font-size:11px;">+${fmt(r.weekly)}</td>
-        <td class="r"><span class="money">${fmt(r.runPot)}</span></td>
-        <td class="r">${carry?'<span class="cbadge">CARRY</span>':'<span style="color:var(--gm);font-weight:700;font-family:system-ui;font-size:11px;">PAID</span>'}</td></tr>`;
+        <td class="r"><span class="money">${fmt(isGuest?r.payout:r.runPot)}</span></td>
+        <td class="r">${statusBadge}</td></tr>`;
     });
     html+=`</tbody></table></div>`;
 
@@ -1787,14 +1808,20 @@ function generatePayout(previewOnly=false){
     html+=`<div class="psec"><div class="ptitle">Pots of Gold — Unique Gross Birdie Required</div>
       <table class="pt"><thead><tr><th>Hole</th><th>Winner</th><th class="r">Prev</th><th class="r">+This Wk</th><th class="r">Pot</th><th class="r">Status</th></tr></thead><tbody>`;
     pogData.forEach(r=>{
-      const carry=!r.paid||!r.winner;
-      html+=`<tr style="${carry?'background:var(--carry);':'background:var(--gold-l);'}">
+      const carry=!r.paid&&!r.guest&&!r.winner? true : (!r.paid&&!r.guest);
+      const isGuest=r.guest&&r.winner;
+      const rowBg=isGuest?'background:#FFF8E1;':carry?'background:var(--carry);':'background:var(--gold-l);';
+      const statusBadge=isGuest
+        ?`<span style="color:#B8860B;font-weight:700;font-family:system-ui;font-size:11px;">GUEST ${fmt(r.payout)}</span>`
+        :carry?'<span class="cbadge">CARRY</span>'
+        :`<span style="color:var(--gm);font-weight:700;font-family:system-ui;font-size:11px;">PAID</span>`;
+      html+=`<tr style="${rowBg}">
         <td style="font-weight:600;"><span class="pog-dot"></span>${r.hole}</td>
-        <td>${r.winner||'<em style="color:var(--mut)">No unique birdie</em>'}</td>
+        <td>${r.winner||'<em style="color:var(--mut)">No unique birdie</em>'}${isGuest?' <span style="font-size:10px;background:#B8860B;color:#fff;padding:1px 4px;border-radius:3px;">GUEST</span>':''}</td>
         <td class="r" style="color:var(--mut);font-size:11px;">${fmt(r.stored)}</td>
         <td class="r" style="color:var(--gm);font-size:11px;">+${fmt(r.weekly)}</td>
-        <td class="r"><span class="money">${fmt(r.runPot)}</span></td>
-        <td class="r">${carry?'<span class="cbadge">CARRY</span>':'<span style="color:var(--gm);font-weight:700;font-family:system-ui;font-size:11px;">PAID</span>'}</td></tr>`;
+        <td class="r"><span class="money">${fmt(isGuest?r.payout:r.runPot)}</span></td>
+        <td class="r">${statusBadge}</td></tr>`;
     });
     html+=`</tbody></table></div>`;
 
