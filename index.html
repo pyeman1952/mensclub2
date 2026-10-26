@@ -1861,34 +1861,31 @@ function generatePayout(previewOnly=false){
     // MONEY WINNERS
     const isCommitting=!previewOnly;
     html+=`<div class="psec"><div class="ptitle" style="background:#0D47A1;">Weekly Money Winners${isCommitting?' — Enter payout amounts per player below':''}</div>
-      <table class="pt"><thead><tr><th>Rank</th><th>Player</th><th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th><th class="r">Draw</th><th class="r">Total</th><th class="r">Bar</th><th class="r">Pro Shop</th><th class="r">Cash</th><th class="r">Cheque</th><th>Other</th></tr></thead><tbody>`;
-    if(!mwList.length){html+=`<tr><td colspan="13" style="color:var(--mut);padding:8px 9px;">No monetary winners this week.</td></tr>`;}
+      <table class="pt"><thead><tr><th>Player</th><th class="r">Total</th><th class="r">Bar</th><th class="r">Pro Shop</th><th class="r">Cash</th><th class="r">Cheque</th><th>Other</th></tr></thead><tbody>`;
+    if(!mwList.length){html+=`<tr><td colspan="7" style="color:var(--mut);padding:8px 9px;">No monetary winners this week.</td></tr>`;}
     else{
       let wkTotal=0;
       mwList.forEach((r,i)=>{
-        const rk=i+1; const bc=rk<=3?`p${rk}b`:'pnb'; wkTotal+=r.total||0;
-        const pref=r.pref&&typeof r.pref==='object'?r.pref:{bar:0,proshop:0,cash:0,cheque:0,other:''};
+        wkTotal+=r.total||0;
+        // pref may be legacy string (old commits) or new object
+        const pref=(r.pref&&typeof r.pref==='object')?r.pref:{bar:0,proshop:0,cash:0,cheque:0,other:''};
         if(isCommitting){
-          html+=`<tr><td><span class="pbadge ${bc}">${rk}</span></td><td><strong>${displayName(r.name)||'—'}</strong></td>
-            <td class="r">${r.gross?fmt(r.gross):'—'}</td><td class="r">${r.net?fmt(r.net):'—'}</td>
-            <td class="r">${r.skins?fmt(r.skins):'—'}</td><td class="r">${r.pog?fmt(r.pog):'—'}</td>
-            <td class="r">${r.draw?fmt(r.draw):'—'}</td>
+          html+=`<tr>
+            <td><strong>${displayName(r.name)||'—'}</strong></td>
             <td class="r"><span class="money">${fmt(r.total)}</span></td>
-            <td class="r"><input type="number" id="mw-bar-${i}" value="${pref.bar||''}" placeholder="0" style="width:58px;text-align:right;font-size:12px;"></td>
-            <td class="r"><input type="number" id="mw-pro-${i}" value="${pref.proshop||''}" placeholder="0" style="width:58px;text-align:right;font-size:12px;"></td>
-            <td class="r"><input type="number" id="mw-cash-${i}" value="${pref.cash||''}" placeholder="0" style="width:58px;text-align:right;font-size:12px;"></td>
-            <td class="r"><input type="number" id="mw-cheque-${i}" value="${pref.cheque||''}" placeholder="0" style="width:58px;text-align:right;font-size:12px;"></td>
-            <td><input type="text" id="mw-other-${i}" value="${pref.other||''}" placeholder="note…" style="width:80px;font-size:12px;"></td></tr>`;
+            <td class="r"><input type="number" id="mw-bar-${i}" value="${pref.bar||''}" placeholder="0" style="width:62px;text-align:right;font-size:12px;"></td>
+            <td class="r"><input type="number" id="mw-pro-${i}" value="${pref.proshop||''}" placeholder="0" style="width:62px;text-align:right;font-size:12px;"></td>
+            <td class="r"><input type="number" id="mw-cash-${i}" value="${pref.cash||''}" placeholder="0" style="width:62px;text-align:right;font-size:12px;"></td>
+            <td class="r"><input type="number" id="mw-cheque-${i}" value="${pref.cheque||''}" placeholder="0" style="width:62px;text-align:right;font-size:12px;"></td>
+            <td><input type="text" id="mw-other-${i}" value="${pref.other||''}" placeholder="note…" style="width:90px;font-size:12px;"></td></tr>`;
         } else {
           const barAmt=pref.bar?fmt(pref.bar):'—';
           const proAmt=pref.proshop?fmt(pref.proshop):'—';
           const cashAmt=pref.cash?fmt(pref.cash):'—';
           const chequeAmt=pref.cheque?fmt(pref.cheque):'—';
           const otherVal=pref.other||'—';
-          html+=`<tr><td><span class="pbadge ${bc}">${rk}</span></td><td><strong>${displayName(r.name)||'—'}</strong></td>
-            <td class="r">${r.gross?fmt(r.gross):'—'}</td><td class="r">${r.net?fmt(r.net):'—'}</td>
-            <td class="r">${r.skins?fmt(r.skins):'—'}</td><td class="r">${r.pog?fmt(r.pog):'—'}</td>
-            <td class="r">${r.draw?fmt(r.draw):'—'}</td>
+          html+=`<tr>
+            <td><strong>${displayName(r.name)||'—'}</strong></td>
             <td class="r"><span class="money">${fmt(r.total)}</span></td>
             <td class="r" style="font-size:11px;">${barAmt}</td>
             <td class="r" style="font-size:11px;">${proAmt}</td>
@@ -1897,7 +1894,7 @@ function generatePayout(previewOnly=false){
             <td style="font-size:11px;">${otherVal}</td></tr>`;
         }
       });
-      html+=`<tr class="mw-total-row"><td colspan="7" style="text-align:right;padding:5px 9px;">Total paid out:</td><td class="r"><span class="money">${fmt(wkTotal)}</span></td><td colspan="5"></td></tr>`;
+      html+=`<tr class="mw-total-row"><td style="text-align:right;padding:5px 9px;">Total paid out:</td><td class="r"><span class="money">${fmt(wkTotal)}</span></td><td colspan="5"></td></tr>`;
     }
     html+=`</tbody></table>`;
     if(isCommitting&&mwList.length){
