@@ -1860,31 +1860,44 @@ function generatePayout(previewOnly=false){
 
     // MONEY WINNERS
     const isCommitting=!previewOnly;
-    html+=`<div class="psec"><div class="ptitle" style="background:#0D47A1;">Weekly Money Winners${isCommitting?' — Set payout preference per player below':''}</div>
-      <table class="pt"><thead><tr><th>Rank</th><th>Player</th><th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th><th class="r">Draw</th><th class="r">Total</th><th>Payout Pref</th></tr></thead><tbody>`;
-    if(!mwList.length){html+=`<tr><td colspan="9" style="color:var(--mut);padding:8px 9px;">No monetary winners this week.</td></tr>`;}
+    html+=`<div class="psec"><div class="ptitle" style="background:#0D47A1;">Weekly Money Winners${isCommitting?' — Enter payout amounts per player below':''}</div>
+      <table class="pt"><thead><tr><th>Rank</th><th>Player</th><th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th><th class="r">Draw</th><th class="r">Total</th><th class="r">Bar</th><th class="r">Pro Shop</th><th class="r">Cash</th><th class="r">Cheque</th><th>Other</th></tr></thead><tbody>`;
+    if(!mwList.length){html+=`<tr><td colspan="13" style="color:var(--mut);padding:8px 9px;">No monetary winners this week.</td></tr>`;}
     else{
       let wkTotal=0;
       mwList.forEach((r,i)=>{
         const rk=i+1; const bc=rk<=3?`p${rk}b`:'pnb'; wkTotal+=r.total||0;
+        const pref=r.pref&&typeof r.pref==='object'?r.pref:{bar:0,proshop:0,cash:0,cheque:0,other:''};
         if(isCommitting){
           html+=`<tr><td><span class="pbadge ${bc}">${rk}</span></td><td><strong>${displayName(r.name)||'—'}</strong></td>
             <td class="r">${r.gross?fmt(r.gross):'—'}</td><td class="r">${r.net?fmt(r.net):'—'}</td>
             <td class="r">${r.skins?fmt(r.skins):'—'}</td><td class="r">${r.pog?fmt(r.pog):'—'}</td>
             <td class="r">${r.draw?fmt(r.draw):'—'}</td>
             <td class="r"><span class="money">${fmt(r.total)}</span></td>
-            <td><select id="mw-pref-${i}" style="font-size:12px;padding:3px 5px;"><option>Bar</option><option>Pro Shop</option><option>Cash</option></select></td></tr>`;
+            <td class="r"><input type="number" id="mw-bar-${i}" value="${pref.bar||''}" placeholder="0" style="width:58px;text-align:right;font-size:12px;"></td>
+            <td class="r"><input type="number" id="mw-pro-${i}" value="${pref.proshop||''}" placeholder="0" style="width:58px;text-align:right;font-size:12px;"></td>
+            <td class="r"><input type="number" id="mw-cash-${i}" value="${pref.cash||''}" placeholder="0" style="width:58px;text-align:right;font-size:12px;"></td>
+            <td class="r"><input type="number" id="mw-cheque-${i}" value="${pref.cheque||''}" placeholder="0" style="width:58px;text-align:right;font-size:12px;"></td>
+            <td><input type="text" id="mw-other-${i}" value="${pref.other||''}" placeholder="note…" style="width:80px;font-size:12px;"></td></tr>`;
         } else {
-          const pc=r.pref==='Bar'?'pref-bar':r.pref==='Pro Shop'?'pref-pro':'pref-cash';
+          const barAmt=pref.bar?fmt(pref.bar):'—';
+          const proAmt=pref.proshop?fmt(pref.proshop):'—';
+          const cashAmt=pref.cash?fmt(pref.cash):'—';
+          const chequeAmt=pref.cheque?fmt(pref.cheque):'—';
+          const otherVal=pref.other||'—';
           html+=`<tr><td><span class="pbadge ${bc}">${rk}</span></td><td><strong>${displayName(r.name)||'—'}</strong></td>
             <td class="r">${r.gross?fmt(r.gross):'—'}</td><td class="r">${r.net?fmt(r.net):'—'}</td>
             <td class="r">${r.skins?fmt(r.skins):'—'}</td><td class="r">${r.pog?fmt(r.pog):'—'}</td>
             <td class="r">${r.draw?fmt(r.draw):'—'}</td>
             <td class="r"><span class="money">${fmt(r.total)}</span></td>
-            <td><span class="pref-bar ${pc}" style="font-size:10px;">${r.pref}</span></td></tr>`;
+            <td class="r" style="font-size:11px;">${barAmt}</td>
+            <td class="r" style="font-size:11px;">${proAmt}</td>
+            <td class="r" style="font-size:11px;">${cashAmt}</td>
+            <td class="r" style="font-size:11px;">${chequeAmt}</td>
+            <td style="font-size:11px;">${otherVal}</td></tr>`;
         }
       });
-      html+=`<tr class="mw-total-row"><td colspan="7" style="text-align:right;padding:5px 9px;">Total paid out:</td><td class="r"><span class="money">${fmt(wkTotal)}</span></td><td></td></tr>`;
+      html+=`<tr class="mw-total-row"><td colspan="7" style="text-align:right;padding:5px 9px;">Total paid out:</td><td class="r"><span class="money">${fmt(wkTotal)}</span></td><td colspan="5"></td></tr>`;
     }
     html+=`</tbody></table>`;
     if(isCommitting&&mwList.length){
@@ -1917,10 +1930,15 @@ function confirmCommit(){
   // Re-sync from localStorage to avoid stale in-memory state
   weeksLog=LS.get('weeks',[]);
   seasonData=LS.get('season',{});
-  // Read pref from rendered selects
+  // Read payout amounts from rendered inputs
   pc.mwList.forEach((r,i)=>{
-    const sel=document.getElementById(`mw-pref-${i}`);
-    if(sel) r.pref=sel.value;
+    r.pref={
+      bar:parseFloat(document.getElementById(`mw-bar-${i}`)?.value)||0,
+      proshop:parseFloat(document.getElementById(`mw-pro-${i}`)?.value)||0,
+      cash:parseFloat(document.getElementById(`mw-cash-${i}`)?.value)||0,
+      cheque:parseFloat(document.getElementById(`mw-cheque-${i}`)?.value)||0,
+      other:(document.getElementById(`mw-other-${i}`)?.value||'').trim()
+    };
   });
   // Save week (replace if overwrite)
   if(pc.isOverwrite){
@@ -1950,25 +1968,28 @@ function confirmCommit(){
   // Re-render MW section without selects (swap confirm button with summary)
   const confirmArea=document.getElementById('btn-confirm-commit')?.closest('div');
   if(confirmArea){
-    const byPref={Bar:0,'Pro Shop':0,Cash:0};
-    pc.mwList.forEach(r=>{if(byPref[r.pref]!==undefined)byPref[r.pref]+=r.total||0;});
-    const fmt=n=>'$'+Number(n||0).toFixed(2);
+    const fmt2=n=>'$'+Number(n||0).toFixed(2);
+    const totBar=pc.mwList.reduce((s,r)=>s+(r.pref?.bar||0),0);
+    const totPro=pc.mwList.reduce((s,r)=>s+(r.pref?.proshop||0),0);
+    const totCash=pc.mwList.reduce((s,r)=>s+(r.pref?.cash||0),0);
+    const totCheque=pc.mwList.reduce((s,r)=>s+(r.pref?.cheque||0),0);
     confirmArea.innerHTML=`<span style="font-size:12px;color:var(--gm);font-weight:700;">✓ Saved!</span>
       &nbsp;
       <span style="font-family:system-ui;font-size:11px;color:var(--mut);">
-        <span class="pref-bar">Bar</span> ${fmt(byPref['Bar'])} &nbsp;
-        <span class="pref-bar pref-pro">Pro Shop</span> ${fmt(byPref['Pro Shop'])} &nbsp;
-        <span class="pref-bar pref-cash">Cash</span> ${fmt(byPref['Cash'])}
+        <span class="pref-bar">Bar</span> ${fmt2(totBar)} &nbsp;
+        <span class="pref-bar pref-pro">Pro Shop</span> ${fmt2(totPro)} &nbsp;
+        <span class="pref-bar pref-cash">Cash</span> ${fmt2(totCash)} &nbsp;
+        <span class="pref-bar pref-cash">Cheque</span> ${fmt2(totCheque)}
       </span>`;
-    // Replace pref selects with badges
+    // Replace payout inputs with locked text
     pc.mwList.forEach((r,i)=>{
-      const sel=document.getElementById(`mw-pref-${i}`);
-      if(sel){
-        const pc2=r.pref==='Bar'?'pref-bar':r.pref==='Pro Shop'?'pref-pro':'pref-cash';
-        const span=document.createElement('span');
-        span.className=`pref-bar ${pc2}`; span.style.fontSize='10px'; span.textContent=r.pref;
-        sel.parentNode.replaceChild(span,sel);
-      }
+      const p=r.pref||{};
+      [{id:`mw-bar-${i}`,v:p.bar?fmt2(p.bar):'—'},{id:`mw-pro-${i}`,v:p.proshop?fmt2(p.proshop):'—'},
+       {id:`mw-cash-${i}`,v:p.cash?fmt2(p.cash):'—'},{id:`mw-cheque-${i}`,v:p.cheque?fmt2(p.cheque):'—'},
+       {id:`mw-other-${i}`,v:p.other||'—'}].forEach(({id,v})=>{
+        const el=document.getElementById(id);
+        if(el){const span=document.createElement('span');span.style.fontSize='11px';span.textContent=v;el.parentNode.replaceChild(span,el);}
+      });
     });
   }
   // Publish to GitHub
