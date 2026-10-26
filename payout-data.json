@@ -10,7 +10,7 @@
       "gnPool": 180,
       "skinsPool": 90,
       "pogPool": 90,
-      "recordedAt": "2026-10-26T04:33:26.034Z",
+      "recordedAt": "2026-10-26T04:48:01.548Z",
       "grossRows": [
         {
           "key": "G01",
@@ -818,7 +818,7 @@
     },
     {
       "id": "October_18-_2026",
-      "name": "Week 2 ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Winter Week 2",
+      "name": "Week 2 ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Winter Week 2",
       "date": "October 18, 2026",
       "notes": "Another beautiful day, hard fairways with Lift clean and place",
       "cancelled": false,
@@ -3134,58 +3134,58 @@
   "pots": {
     "sk_1": {
       "pot": 0,
-      "updatedAt": "2026-10-26T04:30:32.305Z"
+      "updatedAt": "2026-10-26T04:44:04.989Z"
     },
     "sk_2": {
       "pot": 57,
-      "updatedAt": "2026-10-26T04:30:32.306Z"
+      "updatedAt": "2026-10-26T04:44:04.989Z"
     },
     "sk_5": {
       "pot": 0,
-      "updatedAt": "2026-10-26T04:31:40.598Z",
+      "updatedAt": "2026-10-26T04:44:44.195Z",
       "lastWinner": "Haigh, Iain"
     },
     "sk_6": {
       "pot": 19,
-      "updatedAt": "2026-10-26T04:30:32.306Z"
+      "updatedAt": "2026-10-26T04:44:04.989Z"
     },
     "sk_7": {
       "pot": 19,
-      "updatedAt": "2026-10-26T04:30:32.306Z"
+      "updatedAt": "2026-10-26T04:44:04.989Z"
     },
     "sk_8": {
       "pot": 0,
-      "updatedAt": "2026-10-26T04:31:40.598Z",
+      "updatedAt": "2026-10-26T04:44:44.195Z",
       "lastWinner": "Alberti, Silvio"
     },
     "sk_9": {
       "pot": 57,
-      "updatedAt": "2026-10-26T04:30:32.306Z"
+      "updatedAt": "2026-10-26T04:44:04.989Z"
     },
     "sk_11": {
       "pot": 19,
-      "updatedAt": "2026-10-26T04:30:32.306Z"
+      "updatedAt": "2026-10-26T04:44:04.989Z"
     },
     "sk_12": {
       "pot": 0,
-      "updatedAt": "2026-10-26T04:31:40.598Z",
+      "updatedAt": "2026-10-26T04:44:44.195Z",
       "lastWinner": "Follis, Craig"
     },
     "sk_13": {
       "pot": 0,
-      "updatedAt": "2026-10-26T04:30:32.306Z"
+      "updatedAt": "2026-10-26T04:44:04.989Z"
     },
     "sk_14": {
       "pot": 57,
-      "updatedAt": "2026-10-26T04:30:32.306Z"
+      "updatedAt": "2026-10-26T04:44:04.989Z"
     },
     "sk_16": {
       "pot": 0,
-      "updatedAt": "2026-10-26T04:30:32.306Z"
+      "updatedAt": "2026-10-26T04:44:04.989Z"
     },
     "sk_18": {
       "pot": 19,
-      "updatedAt": "2026-10-26T04:30:32.306Z"
+      "updatedAt": "2026-10-26T04:44:04.989Z"
     },
     "pg_3": {
       "pot": 149,
