@@ -381,6 +381,18 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
             </tbody>
           </table>
         </div>
+        <div style="margin-bottom:10px;">
+          <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;">🎟 Random Draw — Sponsored by Men's Club</div>
+          <table class="gt">
+            <thead><tr><th>#</th><th>Winner</th><th>Amount ($)</th><th>Payout</th></tr></thead>
+            <tbody>
+              <tr><td style="color:var(--mut);font-size:11px;">1</td><td><input type="text" id="rd-name-1" placeholder="Player name"></td><td><input type="number" id="rd-amount-1" placeholder="$" style="width:80px;"></td><td><select id="rd-pref-1" style="font-size:12px;padding:4px 3px;width:90px;"><option value="Bar">Bar</option><option value="Pro Shop">Pro Shop</option></select></td></tr>
+              <tr><td style="color:var(--mut);font-size:11px;">2</td><td><input type="text" id="rd-name-2" placeholder="Player name"></td><td><input type="number" id="rd-amount-2" placeholder="$" style="width:80px;"></td><td><select id="rd-pref-2" style="font-size:12px;padding:4px 3px;width:90px;"><option value="Bar">Bar</option><option value="Pro Shop">Pro Shop</option></select></td></tr>
+              <tr><td style="color:var(--mut);font-size:11px;">3</td><td><input type="text" id="rd-name-3" placeholder="Player name"></td><td><input type="number" id="rd-amount-3" placeholder="$" style="width:80px;"></td><td><select id="rd-pref-3" style="font-size:12px;padding:4px 3px;width:90px;"><option value="Bar">Bar</option><option value="Pro Shop">Pro Shop</option></select></td></tr>
+              <tr><td style="color:var(--mut);font-size:11px;">4</td><td><input type="text" id="rd-name-4" placeholder="Player name"></td><td><input type="number" id="rd-amount-4" placeholder="$" style="width:80px;"></td><td><select id="rd-pref-4" style="font-size:12px;padding:4px 3px;width:90px;"><option value="Bar">Bar</option><option value="Pro Shop">Pro Shop</option></select></td></tr>
+            </tbody>
+          </table>
+        </div>
         <div>
           <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;">💵 50/50 Draw</div>
           <table class="gt">
@@ -1009,6 +1021,11 @@ function clearEntries(){
   }
   ['meat-1','meat-2','meat-3','meat-prize-1','meat-prize-2','meat-prize-3','ff-winner','ff-amount'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   ['meat-pref-1','meat-pref-2','meat-pref-3'].forEach(id=>{const el=document.getElementById(id);if(el)el.selectedIndex=0;});
+  [1,2,3,4].forEach(i=>{
+    const n=document.getElementById(`rd-name-${i}`);if(n)n.value='';
+    const a=document.getElementById(`rd-amount-${i}`);if(a)a.value='';
+    const p=document.getElementById(`rd-pref-${i}`);if(p)p.selectedIndex=0;
+  });
   recalcPools();
 }
 
@@ -1092,6 +1109,11 @@ function saveDraft(){
   }));
   d.ffWinner=document.getElementById('ff-winner')?.value||'';
   d.ffAmount=document.getElementById('ff-amount')?.value||'';
+  d.rdRows=[1,2,3,4].map(i=>({
+    name:document.getElementById(`rd-name-${i}`)?.value||'',
+    amount:document.getElementById(`rd-amount-${i}`)?.value||'',
+    pref:document.getElementById(`rd-pref-${i}`)?.value||'Bar'
+  }));
   d.savedAt=new Date().toISOString();
   LS.set('draft_week',d);
   alert(`Draft saved at ${new Date().toLocaleTimeString()}.\n\nYou can reload this any time with Load Draft.`);
@@ -1162,6 +1184,12 @@ function loadDraft(){
   });
   const ffw=document.getElementById('ff-winner'); if(ffw) ffw.value=d.ffWinner||'';
   const ffa=document.getElementById('ff-amount'); if(ffa) ffa.value=d.ffAmount||'';
+  if(d.rdRows) d.rdRows.forEach((row,i)=>{
+    const idx=i+1;
+    const n=document.getElementById(`rd-name-${idx}`); if(n) n.value=row.name||'';
+    const a=document.getElementById(`rd-amount-${idx}`); if(a) a.value=row.amount||'';
+    const p=document.getElementById(`rd-pref-${idx}`); if(p) p.value=row.pref||'Bar';
+  });
   recalcPools();
   alert('Draft loaded. Review entries then Generate & Commit when ready.');
 }
@@ -1495,6 +1523,13 @@ function loadCommittedWeek(){
     const pr=document.getElementById(`meat-prize-${i}`); if(pr) pr.value=r.prize||'';
     const pf=document.getElementById(`meat-pref-${i}`); if(pf) pf.value=r.pref||'Bar';
   });
+  // Random Draw
+  if(wk.rdData) wk.rdData.forEach((row,i)=>{
+    const idx=i+1;
+    const n=document.getElementById(`rd-name-${idx}`); if(n) n.value=row.name||'';
+    const a=document.getElementById(`rd-amount-${idx}`); if(a) a.value=row.amount||'';
+    const p=document.getElementById(`rd-pref-${idx}`); if(p) p.value=row.pref||'Bar';
+  });
   // 50/50
   if(wk.ff){
     const ffw=document.getElementById('ff-winner'); if(ffw) ffw.value=wk.ff.winner||'';
@@ -1635,6 +1670,11 @@ function generatePayout(previewOnly=false){
   const ffWinner=(document.getElementById('ff-winner')?.value||'').trim();
   const ffAmount=parseFloat(document.getElementById('ff-amount')?.value)||0;
   const ffPref  ='Cash';
+  const rdData=[1,2,3,4].map(i=>({
+    name:(document.getElementById(`rd-name-${i}`)?.value||'').trim(),
+    amount:parseFloat(document.getElementById(`rd-amount-${i}`)?.value)||0,
+    pref:document.getElementById(`rd-pref-${i}`)?.value||'Bar'
+  })).filter(r=>r.name);
 
   // Money winners map — pref is set per-winner in the Weekly Money Winners table
   const mwMap={};
@@ -1650,6 +1690,7 @@ function generatePayout(previewOnly=false){
   pogData.filter(r=>r.paid&&r.winner).forEach(r=>addMW(r.winner,'pog',r.runPot));
   meatData.forEach(r=>addMW(r.winner,'draw',0)); // meat is non-cash
   if(ffWinner&&ffAmount) addMW(ffWinner,'draw',ffAmount);
+  rdData.forEach(r=>addMW(r.name,'draw',r.amount));
   // Sort by last name alphabetically (last word of name), then first name
   const lastName=n=>{ const p=(n||'').trim().split(/\s+/); return p.length>1?p[p.length-1]:p[0]||''; };
   const mwList=Object.values(mwMap).sort((a,b)=>{
@@ -1662,7 +1703,7 @@ function generatePayout(previewOnly=false){
   if(!previewOnly){
     // Store pending commit data for confirmCommit() to finalize
     window._pendingCommit={weekKey,name,date,notes,cancelled,total,gnPool,skPool,pgPool,
-      grossRows,fdata,netData,skinsData,pogData,skillData,meatData,ffWinner,ffAmount,ffPref,mwList,isOverwrite};
+      grossRows,fdata,netData,skinsData,pogData,skillData,meatData,ffWinner,ffAmount,ffPref,rdData,mwList,isOverwrite};
     refreshSkinsPotDisplayAll(); refreshPOGPotDisplayAll();
   }
 
@@ -1765,6 +1806,22 @@ function generatePayout(previewOnly=false){
     else fs.forEach(r=>{html+=`<tr><td style="font-weight:600;">${r.hole}</td><td>${r.winner||'—'}</td><td style="color:var(--mut);">${r.prize||'—'}</td></tr>`;});
     html+=`</tbody></table></div>`;
 
+    // RANDOM DRAW
+    html+=`<div class="psec"><div class="ptitle" style="background:#2D6A4F;">🎟 Random Draw — Sponsored by Men's Club</div>
+      <table class="pt"><thead><tr><th>#</th><th>Winner</th><th class="r">Amount</th><th>Payout</th></tr></thead><tbody>`;
+    if(!rdData.length){
+      html+=`<tr><td colspan="4" style="color:var(--mut);padding:8px 9px;">No entries</td></tr>`;
+    } else {
+      rdData.forEach((r,i)=>{
+        html+=`<tr>
+          <td style="color:var(--mut);font-size:11px;">${i+1}</td>
+          <td>${r.name}</td>
+          <td class="r"><span class="money">${fmt(r.amount)}</span></td>
+          <td>${prefBadge(r.pref)}</td></tr>`;
+      });
+    }
+    html+=`</tbody></table></div>`;
+
     // DRAWS
     html+=`<div class="psec"><div class="ptitle" style="background:#5C3D00;">Draw Winners</div>
       <table class="pt"><thead><tr><th>Draw</th><th>Winner</th><th>Prize / Amount</th><th>Payout</th></tr></thead><tbody>`;
@@ -1840,10 +1897,10 @@ function confirmCommit(){
   // Save week (replace if overwrite)
   if(pc.isOverwrite){
     const idx=weeksLog.findIndex(w=>w.id===pc.weekKey);
-    const rec={id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),grossRows:pc.grossRows,flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData};
+    const rec={id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),grossRows:pc.grossRows,flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData,rdData:pc.rdData};
     if(idx>=0) weeksLog[idx]=rec; else weeksLog.push(rec);
   } else {
-    saveWeek({id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),grossRows:pc.grossRows,flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData});
+    saveWeek({id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),grossRows:pc.grossRows,flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData,rdData:pc.rdData});
   }
   LS.set('weeks',weeksLog);
   populateWeekLoadSelect(); // keep dropdown in sync after commit
@@ -1888,7 +1945,7 @@ function confirmCommit(){
   }
   // Publish to GitHub
   publishToGitHub(pc.weekKey,pc.name,pc.date,pc.notes,pc.cancelled,pc.total,pc.gnPool,pc.skPool,pc.pgPool,
-    pc.grossRows,pc.fdata,pc.netData,pc.skinsData,pc.pogData,pc.skillData,pc.meatData,pc.ffWinner,pc.ffAmount,pc.ffPref,pc.mwList);
+    pc.grossRows,pc.fdata,pc.netData,pc.skinsData,pc.pogData,pc.skillData,pc.meatData,pc.ffWinner,pc.ffAmount,pc.ffPref,pc.rdData,pc.mwList);
 }
 
 // ── PIN logic ─────────────────────────────────────────────────────────────────
@@ -2002,7 +2059,7 @@ function setGHToken(t){ try{ localStorage.setItem('gh_token',t); }catch(e){} }
 
 async function publishToGitHub(weekKey, name, date, notes, cancelled, total,
   gnPool, skPool, pgPool, grossRows, fdata, netData, skinsData, pogData, skillData,
-  meatData, ffWinner, ffAmount, ffPref, mwList){
+  meatData, ffWinner, ffAmount, ffPref, rdData, mwList){
 
   const token = getGHToken();
   if(!token){
@@ -2048,6 +2105,7 @@ async function publishToGitHub(weekKey, name, date, notes, cancelled, total,
       skill: skillData,
       meat: meatData,
       ff: ffWinner ? {winner:ffWinner, amount:ffAmount, pref:ffPref} : null,
+      rdData: rdData,
       moneyWinners: mwList,
       totals: {
         gross: grossRows.reduce((s,r)=>s+(parseFloat(r.prize)||0),0),
