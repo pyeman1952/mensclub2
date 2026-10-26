@@ -10,7 +10,7 @@
       "gnPool": 180,
       "skinsPool": 90,
       "pogPool": 90,
-      "recordedAt": "2026-10-26T02:54:29.761Z",
+      "recordedAt": "2026-10-26T03:30:57.730Z",
       "grossRows": [
         {
           "key": "G01",
@@ -676,7 +676,7 @@
           "pref": {
             "bar": 0,
             "proshop": 12,
-            "cash": 40,
+            "cash": 0,
             "cheque": 0,
             "other": ""
           },
@@ -818,7 +818,7 @@
     },
     {
       "id": "October_18-_2026",
-      "name": "Week 2 â Winter Week 2",
+      "name": "Week 2 Ã¢ÂÂ Winter Week 2",
       "date": "October 18, 2026",
       "notes": "Another beautiful day, hard fairways with Lift clean and place",
       "cancelled": false,
@@ -2983,7 +2983,7 @@
       "pref": {
         "bar": 0,
         "proshop": 12,
-        "cash": 40,
+        "cash": 0,
         "cheque": 0,
         "other": ""
       },
@@ -3133,94 +3133,79 @@
   },
   "pots": {
     "sk_1": {
-      "pot": 6,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-10-26T03:23:17.141Z"
     },
     "sk_2": {
-      "pot": 63,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
-      "lastWinner": "Haigh, Gavin"
+      "pot": 57,
+      "updatedAt": "2026-10-26T03:23:17.141Z"
     },
     "sk_5": {
       "pot": 0,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
+      "updatedAt": "2026-10-26T03:28:42.103Z",
       "lastWinner": "Haigh, Iain"
     },
     "sk_6": {
-      "pot": 25,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
-      "lastWinner": null
+      "pot": 19,
+      "updatedAt": "2026-10-26T03:23:17.141Z"
     },
     "sk_7": {
-      "pot": 25,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
-      "lastWinner": null
+      "pot": 19,
+      "updatedAt": "2026-10-26T03:23:17.141Z"
     },
     "sk_8": {
       "pot": 0,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
+      "updatedAt": "2026-10-26T03:28:42.104Z",
       "lastWinner": "Alberti, Silvio"
     },
     "sk_9": {
-      "pot": 63,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
-      "lastWinner": null
+      "pot": 57,
+      "updatedAt": "2026-10-26T03:23:17.141Z"
     },
     "sk_11": {
-      "pot": 25,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
-      "lastWinner": null
+      "pot": 19,
+      "updatedAt": "2026-10-26T03:23:17.141Z"
     },
     "sk_12": {
       "pot": 0,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
+      "updatedAt": "2026-10-26T03:28:42.104Z",
       "lastWinner": "Follis, Craig"
     },
     "sk_13": {
-      "pot": 6,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-10-26T03:23:17.141Z"
     },
     "sk_14": {
-      "pot": 63,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
-      "lastWinner": "Haigh, Gavin"
+      "pot": 57,
+      "updatedAt": "2026-10-26T03:23:17.141Z"
     },
     "sk_16": {
-      "pot": 6,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-10-26T03:23:17.141Z"
     },
     "sk_18": {
-      "pot": 25,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
-      "lastWinner": null
+      "pot": 19,
+      "updatedAt": "2026-10-26T03:23:17.141Z"
     },
     "pg_3": {
-      "pot": 167,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
-      "lastWinner": null
+      "pot": 149,
+      "updatedAt": "2026-10-26T03:27:22.842Z"
     },
     "pg_4": {
-      "pot": 69,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
-      "lastWinner": null
+      "pot": 51,
+      "updatedAt": "2026-10-26T03:27:22.842Z"
     },
     "pg_10": {
-      "pot": 167,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
-      "lastWinner": null
+      "pot": 149,
+      "updatedAt": "2026-10-26T03:27:22.842Z"
     },
     "pg_15": {
-      "pot": 69,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
-      "lastWinner": null
+      "pot": 51,
+      "updatedAt": "2026-10-26T03:27:22.842Z"
     },
     "pg_17": {
-      "pot": 167,
-      "updatedAt": "2026-10-26T02:51:24.796Z",
-      "lastWinner": null
+      "pot": 149,
+      "updatedAt": "2026-10-26T03:27:22.842Z"
     }
   }
 }
