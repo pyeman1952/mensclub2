@@ -1,9 +1,451 @@
 {
   "weeks": [
     {
+      "id": "October_25-_2026",
+      "name": "Week 3 — Regular Golf",
+      "date": "October 25, 2026",
+      "notes": "Rainy Day",
+      "cancelled": false,
+      "players": 18,
+      "gnPool": 180,
+      "skinsPool": 90,
+      "pogPool": 90,
+      "recordedAt": "2026-10-27T22:22:05.872Z",
+      "grossRows": [
+        {
+          "key": "G01",
+          "place": 1,
+          "posLabel": "1st",
+          "flt": "A",
+          "pname": "Haigh, Gavin",
+          "out": "36",
+          "inV": "38",
+          "score": "74",
+          "prize": "40",
+          "cb": false
+        },
+        {
+          "key": "G02",
+          "place": 2,
+          "posLabel": "2nd",
+          "flt": "A",
+          "pname": "Haigh, Iain",
+          "out": "42",
+          "inV": "35",
+          "score": "77",
+          "prize": "30",
+          "cb": false
+        }
+      ],
+      "flights": {
+        "A": [
+          {
+            "place": 1,
+            "pname": "Haigh, Gavin",
+            "out": "36",
+            "inV": "38",
+            "score": "74",
+            "prize": "40",
+            "cb": false
+          },
+          {
+            "place": 2,
+            "pname": "Haigh, Iain",
+            "out": "42",
+            "inV": "35",
+            "score": "77",
+            "prize": "30",
+            "cb": false
+          }
+        ],
+        "B": [],
+        "C": [],
+        "D": []
+      },
+      "flightNames": {
+        "A": "Flight A",
+        "B": "Flight B",
+        "C": "Flight C",
+        "D": "Flight D"
+      },
+      "flightRanges": {
+        "A": "0–5",
+        "B": "6–11",
+        "C": "12–17",
+        "D": "18+"
+      },
+      "net": [],
+      "skins": [
+        {
+          "hole": 1,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 12,
+          "payout": 12,
+          "stored": 6,
+          "weekly": 6,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 2,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 69,
+          "payout": 69,
+          "stored": 63,
+          "weekly": 6,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 5,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 6,
+          "payout": 6,
+          "stored": 0,
+          "weekly": 6,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 6,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 31,
+          "payout": 31,
+          "stored": 25,
+          "weekly": 6,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 7,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 31,
+          "payout": 31,
+          "stored": 25,
+          "weekly": 6,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 8,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 6,
+          "payout": 6,
+          "stored": 0,
+          "weekly": 6,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 9,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 69,
+          "payout": 69,
+          "stored": 63,
+          "weekly": 6,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 11,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 31,
+          "payout": 31,
+          "stored": 25,
+          "weekly": 6,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 12,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 6,
+          "payout": 6,
+          "stored": 0,
+          "weekly": 6,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 13,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 12,
+          "payout": 12,
+          "stored": 6,
+          "weekly": 6,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 14,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 69,
+          "payout": 69,
+          "stored": 63,
+          "weekly": 6,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 16,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 12,
+          "payout": 12,
+          "stored": 6,
+          "weekly": 6,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 18,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 31,
+          "payout": 31,
+          "stored": 25,
+          "weekly": 6,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        }
+      ],
+      "pog": [
+        {
+          "hole": 3,
+          "winner": "",
+          "runPot": 185,
+          "payout": 185,
+          "stored": 167,
+          "weekly": 18,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 4,
+          "winner": "",
+          "runPot": 87,
+          "payout": 87,
+          "stored": 69,
+          "weekly": 18,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 10,
+          "winner": "",
+          "runPot": 185,
+          "payout": 185,
+          "stored": 167,
+          "weekly": 18,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 15,
+          "winner": "",
+          "runPot": 87,
+          "payout": 87,
+          "stored": 69,
+          "weekly": 18,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 17,
+          "winner": "",
+          "runPot": 185,
+          "payout": 185,
+          "stored": 167,
+          "weekly": 18,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        }
+      ],
+      "skill": [
+        {
+          "hole": 1,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 2,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 3,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 4,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 5,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 6,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 7,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 8,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 9,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 10,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 11,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 12,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 13,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 14,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 15,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 16,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 17,
+          "winner": "",
+          "prize": ""
+        },
+        {
+          "hole": 18,
+          "winner": "",
+          "prize": ""
+        }
+      ],
+      "meat": [],
+      "ff": null,
+      "rdData": [],
+      "moneyWinners": [
+        {
+          "name": "Haigh, Gavin",
+          "pref": {
+            "bar": 0,
+            "proshop": 40,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 40,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 40,
+          "weeks": 1
+        },
+        {
+          "name": "Haigh, Iain",
+          "pref": {
+            "bar": 0,
+            "proshop": 0,
+            "cash": 40,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 30,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 30,
+          "weeks": 1
+        }
+      ],
+      "totals": {
+        "gross": 70,
+        "net": 0,
+        "skins": 0,
+        "pog": 0,
+        "draw": 0
+      }
+    },
+    {
       "id": "-",
-      "name": "—",
-      "date": "—",
+      "name": "â",
+      "date": "â",
       "notes": "",
       "cancelled": false,
       "players": 18,
@@ -155,9 +597,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0–5",
-        "B": "6–11",
-        "C": "12–17",
+        "A": "0â5",
+        "B": "6â11",
+        "C": "12â17",
         "D": "18+"
       },
       "net": [
@@ -566,822 +1008,6 @@
           "name": "Follis, Craig",
           "amount": 40,
           "pref": "Bar"
-        }
-      ],
-      "moneyWinners": [
-        {
-          "name": "Alberti, Silvio",
-          "pref": {
-            "bar": 0,
-            "proshop": 25,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 0,
-          "skins": 25,
-          "pog": 0,
-          "draw": 0,
-          "total": 25,
-          "weeks": 1
-        },
-        {
-          "name": "Cox, Jason",
-          "pref": {
-            "bar": 25,
-            "proshop": 0,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 25,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 25,
-          "weeks": 1
-        },
-        {
-          "name": "De Goede, Thyssen",
-          "pref": {
-            "bar": 0,
-            "proshop": 25,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 25,
-          "net": 0,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 25,
-          "weeks": 1
-        },
-        {
-          "name": "Fauteux, Dave",
-          "pref": {
-            "bar": 40,
-            "proshop": 0,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 0,
-          "skins": 0,
-          "pog": 0,
-          "draw": 40,
-          "total": 40,
-          "weeks": 1
-        },
-        {
-          "name": "Follis, Craig",
-          "pref": {
-            "bar": 78,
-            "proshop": 40,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 15,
-          "net": 0,
-          "skins": 63,
-          "pog": 0,
-          "draw": 40,
-          "total": 118,
-          "weeks": 1
-        },
-        {
-          "name": "Haaf, Dan",
-          "pref": {
-            "bar": 0,
-            "proshop": 15,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 15,
-          "net": 0,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 15,
-          "weeks": 1
-        },
-        {
-          "name": "Haigh, Gavin",
-          "pref": {
-            "bar": 0,
-            "proshop": 12,
-            "cash": 40,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 40,
-          "skins": 12,
-          "pog": 0,
-          "draw": 0,
-          "total": 52,
-          "weeks": 1
-        },
-        {
-          "name": "Haigh, Iain",
-          "pref": {
-            "bar": 0,
-            "proshop": 31,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 25,
-          "net": 0,
-          "skins": 6,
-          "pog": 0,
-          "draw": 0,
-          "total": 31,
-          "weeks": 1
-        },
-        {
-          "name": "Lychak, Dennis",
-          "pref": {
-            "bar": 0,
-            "proshop": 15,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 15,
-          "net": 0,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 15,
-          "weeks": 1
-        },
-        {
-          "name": "Rushton, Doug",
-          "pref": {
-            "bar": 0,
-            "proshop": 15,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 15,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 15,
-          "weeks": 1
-        },
-        {
-          "name": "Smith, Darrell",
-          "pref": {
-            "bar": 10,
-            "proshop": 0,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 10,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 10,
-          "weeks": 1
-        },
-        {
-          "name": "Smith, Rick",
-          "pref": {
-            "bar": 0,
-            "proshop": 10,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 10,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 10,
-          "weeks": 1
-        },
-        {
-          "name": "Stewart, Ham",
-          "pref": {
-            "bar": 25,
-            "proshop": 0,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 25,
-          "net": 0,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 25,
-          "weeks": 1
-        },
-        {
-          "name": "VanVelzen, Paul",
-          "pref": {
-            "bar": 0,
-            "proshop": 10,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 10,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 10,
-          "weeks": 1
-        }
-      ],
-      "totals": {
-        "gross": 120,
-        "net": 110,
-        "skins": 94,
-        "pog": 0,
-        "draw": 0
-      }
-    },
-    {
-      "id": "October_25-_2026",
-      "name": "Week 3 Regular golf",
-      "date": "October 25. 2026",
-      "notes": "Light showers, only 18 players showed up",
-      "cancelled": false,
-      "players": 18,
-      "gnPool": 180,
-      "skinsPool": 90,
-      "pogPool": 90,
-      "recordedAt": "2026-10-26T04:48:01.548Z",
-      "grossRows": [
-        {
-          "key": "G01",
-          "place": 2,
-          "posLabel": "2nd",
-          "flt": "A",
-          "pname": "Haigh, Iain",
-          "out": "42",
-          "inV": "35",
-          "score": "77",
-          "prize": "25",
-          "cb": false
-        },
-        {
-          "key": "G02",
-          "place": 3,
-          "posLabel": "3rd",
-          "flt": "A",
-          "pname": "Follis, Craig",
-          "out": "41",
-          "inV": "36",
-          "score": "77",
-          "prize": "15",
-          "cb": true
-        },
-        {
-          "key": "G03",
-          "place": 1,
-          "posLabel": "1st",
-          "flt": "B",
-          "pname": "Stewart, Ham",
-          "out": "44",
-          "inV": "43",
-          "score": "87",
-          "prize": "25",
-          "cb": false
-        },
-        {
-          "key": "G04",
-          "place": 2,
-          "posLabel": "2nd",
-          "flt": "B",
-          "pname": "Haaf, Dan",
-          "out": "45",
-          "inV": "44",
-          "score": "89",
-          "prize": "15",
-          "cb": true
-        },
-        {
-          "key": "G05",
-          "place": 1,
-          "posLabel": "1st",
-          "flt": "C",
-          "pname": "De Goede, Thyssen",
-          "out": "45",
-          "inV": "43",
-          "score": "88",
-          "prize": "25",
-          "cb": false
-        },
-        {
-          "key": "G06",
-          "place": 3,
-          "posLabel": "3rd",
-          "flt": "C",
-          "pname": "Lychak, Dennis",
-          "out": "49",
-          "inV": "48",
-          "score": "97",
-          "prize": "15",
-          "cb": false
-        }
-      ],
-      "flights": {
-        "A": [
-          {
-            "place": 2,
-            "pname": "Haigh, Iain",
-            "out": "42",
-            "inV": "35",
-            "score": "77",
-            "prize": "25",
-            "cb": false
-          },
-          {
-            "place": 3,
-            "pname": "Follis, Craig",
-            "out": "41",
-            "inV": "36",
-            "score": "77",
-            "prize": "15",
-            "cb": true
-          }
-        ],
-        "B": [
-          {
-            "place": 1,
-            "pname": "Stewart, Ham",
-            "out": "44",
-            "inV": "43",
-            "score": "87",
-            "prize": "25",
-            "cb": false
-          },
-          {
-            "place": 2,
-            "pname": "Haaf, Dan",
-            "out": "45",
-            "inV": "44",
-            "score": "89",
-            "prize": "15",
-            "cb": true
-          }
-        ],
-        "C": [
-          {
-            "place": 1,
-            "pname": "De Goede, Thyssen",
-            "out": "45",
-            "inV": "43",
-            "score": "88",
-            "prize": "25",
-            "cb": false
-          },
-          {
-            "place": 3,
-            "pname": "Lychak, Dennis",
-            "out": "49",
-            "inV": "48",
-            "score": "97",
-            "prize": "15",
-            "cb": false
-          }
-        ],
-        "D": []
-      },
-      "flightNames": {
-        "A": "Flight A",
-        "B": "Flight B",
-        "C": "Flight C",
-        "D": "Flight D"
-      },
-      "flightRanges": {
-        "A": "0â5",
-        "B": "6â11",
-        "C": "12â17",
-        "D": "18+"
-      },
-      "net": [
-        {
-          "place": 1,
-          "pname": "Haigh, Gavin",
-          "gross": "77",
-          "netOut": "",
-          "netIn": "",
-          "score": "73",
-          "hcp": "4",
-          "cb": false,
-          "prize": "40",
-          "flt": "A"
-        },
-        {
-          "place": 2,
-          "pname": "Cox, Jason",
-          "gross": "96",
-          "netOut": "",
-          "netIn": "",
-          "score": "73",
-          "hcp": "23",
-          "cb": false,
-          "prize": "25",
-          "flt": "C"
-        },
-        {
-          "place": 3,
-          "pname": "Rushton, Doug",
-          "gross": "89",
-          "netOut": "",
-          "netIn": "",
-          "score": "76",
-          "hcp": "13",
-          "cb": false,
-          "prize": "15",
-          "flt": "B"
-        },
-        {
-          "place": 4,
-          "pname": "Smith, Darrell",
-          "gross": "91",
-          "netOut": "",
-          "netIn": "",
-          "score": "77",
-          "hcp": "14",
-          "cb": false,
-          "prize": "10",
-          "flt": "B"
-        },
-        {
-          "place": 5,
-          "pname": "Smith, Rick",
-          "gross": "91",
-          "netOut": "",
-          "netIn": "",
-          "score": "77",
-          "hcp": "14",
-          "cb": false,
-          "prize": "10",
-          "flt": "B"
-        },
-        {
-          "place": 6,
-          "pname": "VanVelzen, Paul",
-          "gross": "83",
-          "netOut": "",
-          "netIn": "",
-          "score": "77",
-          "hcp": "6",
-          "cb": false,
-          "prize": "10",
-          "flt": "A"
-        }
-      ],
-      "skins": [
-        {
-          "hole": 1,
-          "winner": "",
-          "score": "",
-          "gross": "",
-          "runPot": 6,
-          "payout": 6,
-          "stored": 0,
-          "weekly": 6,
-          "paid": false,
-          "guest": false,
-          "flt": ""
-        },
-        {
-          "hole": 2,
-          "winner": "Haigh, Gavin",
-          "score": "4G",
-          "gross": "",
-          "runPot": 63,
-          "payout": 6,
-          "stored": 57,
-          "weekly": 6,
-          "paid": false,
-          "guest": true,
-          "flt": ""
-        },
-        {
-          "hole": 5,
-          "winner": "Haigh, Iain",
-          "score": "3G",
-          "gross": "",
-          "runPot": 6,
-          "payout": 6,
-          "stored": 0,
-          "weekly": 6,
-          "paid": true,
-          "guest": false,
-          "flt": ""
-        },
-        {
-          "hole": 6,
-          "winner": "",
-          "score": "",
-          "gross": "",
-          "runPot": 25,
-          "payout": 25,
-          "stored": 19,
-          "weekly": 6,
-          "paid": false,
-          "guest": false,
-          "flt": ""
-        },
-        {
-          "hole": 7,
-          "winner": "",
-          "score": "",
-          "gross": "",
-          "runPot": 25,
-          "payout": 25,
-          "stored": 19,
-          "weekly": 6,
-          "paid": false,
-          "guest": false,
-          "flt": ""
-        },
-        {
-          "hole": 8,
-          "winner": "Alberti, Silvio",
-          "score": "3N",
-          "gross": "",
-          "runPot": 25,
-          "payout": 25,
-          "stored": 19,
-          "weekly": 6,
-          "paid": true,
-          "guest": false,
-          "flt": ""
-        },
-        {
-          "hole": 9,
-          "winner": "",
-          "score": "",
-          "gross": "",
-          "runPot": 63,
-          "payout": 63,
-          "stored": 57,
-          "weekly": 6,
-          "paid": false,
-          "guest": false,
-          "flt": ""
-        },
-        {
-          "hole": 11,
-          "winner": "",
-          "score": "",
-          "gross": "",
-          "runPot": 25,
-          "payout": 25,
-          "stored": 19,
-          "weekly": 6,
-          "paid": false,
-          "guest": false,
-          "flt": ""
-        },
-        {
-          "hole": 12,
-          "winner": "Follis, Craig",
-          "score": "3G",
-          "gross": "",
-          "runPot": 63,
-          "payout": 63,
-          "stored": 57,
-          "weekly": 6,
-          "paid": true,
-          "guest": false,
-          "flt": ""
-        },
-        {
-          "hole": 13,
-          "winner": "",
-          "score": "",
-          "gross": "",
-          "runPot": 6,
-          "payout": 6,
-          "stored": 0,
-          "weekly": 6,
-          "paid": false,
-          "guest": false,
-          "flt": ""
-        },
-        {
-          "hole": 14,
-          "winner": "Haigh, Gavin",
-          "score": "3G",
-          "gross": "",
-          "runPot": 63,
-          "payout": 6,
-          "stored": 57,
-          "weekly": 6,
-          "paid": false,
-          "guest": true,
-          "flt": ""
-        },
-        {
-          "hole": 16,
-          "winner": "",
-          "score": "",
-          "gross": "",
-          "runPot": 6,
-          "payout": 6,
-          "stored": 0,
-          "weekly": 6,
-          "paid": false,
-          "guest": false,
-          "flt": ""
-        },
-        {
-          "hole": 18,
-          "winner": "",
-          "score": "",
-          "gross": "",
-          "runPot": 25,
-          "payout": 25,
-          "stored": 19,
-          "weekly": 6,
-          "paid": false,
-          "guest": false,
-          "flt": ""
-        }
-      ],
-      "pog": [
-        {
-          "hole": 3,
-          "winner": "",
-          "runPot": 167,
-          "payout": 167,
-          "stored": 149,
-          "weekly": 18,
-          "paid": false,
-          "guest": false,
-          "flt": ""
-        },
-        {
-          "hole": 4,
-          "winner": "",
-          "runPot": 69,
-          "payout": 69,
-          "stored": 51,
-          "weekly": 18,
-          "paid": false,
-          "guest": false,
-          "flt": ""
-        },
-        {
-          "hole": 10,
-          "winner": "",
-          "runPot": 167,
-          "payout": 167,
-          "stored": 149,
-          "weekly": 18,
-          "paid": false,
-          "guest": false,
-          "flt": ""
-        },
-        {
-          "hole": 15,
-          "winner": "",
-          "runPot": 69,
-          "payout": 69,
-          "stored": 51,
-          "weekly": 18,
-          "paid": false,
-          "guest": false,
-          "flt": ""
-        },
-        {
-          "hole": 17,
-          "winner": "",
-          "runPot": 167,
-          "payout": 167,
-          "stored": 149,
-          "weekly": 18,
-          "paid": false,
-          "guest": false,
-          "flt": ""
-        }
-      ],
-      "skill": [
-        {
-          "hole": 1,
-          "winner": "",
-          "prize": ""
-        },
-        {
-          "hole": 2,
-          "winner": "",
-          "prize": ""
-        },
-        {
-          "hole": 3,
-          "winner": "",
-          "prize": ""
-        },
-        {
-          "hole": 4,
-          "winner": "",
-          "prize": ""
-        },
-        {
-          "hole": 5,
-          "winner": "Lychak, Dennis",
-          "prize": "KP 2nd C flight shot Sponsored by Speer Golf"
-        },
-        {
-          "hole": 6,
-          "winner": "",
-          "prize": ""
-        },
-        {
-          "hole": 7,
-          "winner": "",
-          "prize": ""
-        },
-        {
-          "hole": 8,
-          "winner": "Follis, Craig",
-          "prize": "LP Sponsor Speer Golf"
-        },
-        {
-          "hole": 9,
-          "winner": "Haigh, Gavin",
-          "prize": "2nd shot KP A flight Sponsored by Speer Golf"
-        },
-        {
-          "hole": 10,
-          "winner": "Schwarz, Mike",
-          "prize": "KP Sponsored by Subway"
-        },
-        {
-          "hole": 11,
-          "winner": "",
-          "prize": ""
-        },
-        {
-          "hole": 12,
-          "winner": "",
-          "prize": ""
-        },
-        {
-          "hole": 13,
-          "winner": "",
-          "prize": ""
-        },
-        {
-          "hole": 14,
-          "winner": "",
-          "prize": ""
-        },
-        {
-          "hole": 15,
-          "winner": "",
-          "prize": ""
-        },
-        {
-          "hole": 16,
-          "winner": "",
-          "prize": ""
-        },
-        {
-          "hole": 17,
-          "winner": "",
-          "prize": ""
-        },
-        {
-          "hole": 18,
-          "winner": "Fauteux, Dave",
-          "prize": "LP Beer and Burger"
-        }
-      ],
-      "meat": [],
-      "ff": null,
-      "rdData": [
-        {
-          "name": "Fauteux, Dave",
-          "amount": 40,
-          "pref": "Bar"
-        },
-        {
-          "name": "Follis, Craig",
-          "amount": 40,
-          "pref": "Pro Shop"
         }
       ],
       "moneyWinners": [
@@ -3798,8 +3424,8 @@
       "name": "Haigh, Gavin",
       "pref": {
         "bar": 0,
-        "proshop": 12,
-        "cash": 40,
+        "proshop": 40,
+        "cash": 0,
         "cheque": 0,
         "other": ""
       },
@@ -3817,8 +3443,8 @@
       "name": "Haigh, Iain",
       "pref": {
         "bar": 0,
-        "proshop": 31,
-        "cash": 0,
+        "proshop": 0,
+        "cash": 40,
         "cheque": 0,
         "other": ""
       },
