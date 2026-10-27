@@ -334,19 +334,22 @@ function renderWeek(w){
     // MONEY WINNERS
     const mwList = w.moneyWinners||[];
     if(mwList.length){
+      const displayName=n=>{ const s=(n||'').trim(); const ci=s.indexOf(','); if(ci>-1){const last=s.slice(0,ci).trim();const first=s.slice(ci+1).trim();return first?`${first} ${last}`:last;} return s; };
       html+=`<div class="psec"><div class="ptitle" style="background:#0D47A1;">Weekly Money Winners</div>
-        <table class="pt"><thead><tr><th>Rank</th><th>Player</th><th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th><th class="r">Draw</th><th class="r">Total</th><th>Payout</th></tr></thead><tbody>`;
+        <table class="pt"><thead><tr><th>Player</th><th class="r">Total</th><th class="r">Bar</th><th class="r">Pro Shop</th><th class="r">Cash</th><th class="r">Cheque</th><th>Other</th></tr></thead><tbody>`;
       let wkTotal=0;
       mwList.forEach((r,i)=>{
-        const rk=i+1; const bc=rk<=3?`p${rk}b`:'pnb'; wkTotal+=r.total||0;
-        html+=`<tr><td><span class="pbadge ${bc}">${rk}</span></td><td><strong>${r.name||'—'}</strong></td>
-          <td class="r">${r.gross?fmt(r.gross):'—'}</td><td class="r">${r.net?fmt(r.net):'—'}</td>
-          <td class="r">${r.skins?fmt(r.skins):'—'}</td><td class="r">${r.pog?fmt(r.pog):'—'}</td>
-          <td class="r">${r.draw?fmt(r.draw):'—'}</td>
+        wkTotal+=r.total||0;
+        const p=(r.pref&&typeof r.pref==='object')?r.pref:{bar:0,proshop:0,cash:0,cheque:0,other:''};
+        html+=`<tr><td><strong>${displayName(r.name)||'—'}</strong></td>
           <td class="r"><span class="money">${fmt(r.total)}</span></td>
-          <td>${prefBadge(r.pref)}</td></tr>`;
+          <td class="r" style="font-size:11px;">${p.bar?fmt(p.bar):'—'}</td>
+          <td class="r" style="font-size:11px;">${p.proshop?fmt(p.proshop):'—'}</td>
+          <td class="r" style="font-size:11px;">${p.cash?fmt(p.cash):'—'}</td>
+          <td class="r" style="font-size:11px;">${p.cheque?fmt(p.cheque):'—'}</td>
+          <td style="font-size:11px;">${p.other||'—'}</td></tr>`;
       });
-      html+=`<tr class="mw-total-row"><td colspan="8" style="text-align:right;padding:5px 10px;">Total paid out:</td><td class="r"><span class="money">${fmt(wkTotal)}</span></td></tr>`;
+      html+=`<tr class="mw-total-row"><td colspan="6" style="text-align:right;padding:5px 10px;">Total paid out:</td><td class="r"><span class="money">${fmt(wkTotal)}</span></td></tr>`;
       html+=`</tbody></table></div>`;
     }
   }
