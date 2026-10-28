@@ -502,6 +502,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
       <table class="gt" style="margin-bottom:20px;">
         <thead><tr>
           <th>Flight</th>
+          <th class="thr">Gross ($)</th>
           <th class="thr">Net ($)</th>
           <th class="thr">Skins ($)</th>
           <th class="thr">POG ($)</th>
@@ -832,11 +833,16 @@ function renderFlightReport(){
   // Aggregate by flight
   const flights=['A','B','C'];
   const totals={};
-  flights.forEach(f=>totals[f]={net:0,skins:0,pog:0});
-  totals['?']={net:0,skins:0,pog:0}; // unassigned
+  flights.forEach(f=>totals[f]={gross:0,net:0,skins:0,pog:0});
+  totals['?']={gross:0,net:0,skins:0,pog:0}; // unassigned
   let weeksWithData=0;
   weeksLog.forEach(wk=>{
     let had=false;
+    (wk.grossRows||[]).forEach(r=>{
+      const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
+      totals[f].gross+=(parseFloat(r.prize)||0);
+      had=true;
+    });
     (wk.netData||[]).forEach(r=>{
       const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
       totals[f].net+=(parseFloat(r.prize)||0);
@@ -844,7 +850,6 @@ function renderFlightReport(){
     });
     (wk.skinsData||[]).forEach(r=>{
       const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
-      // use weekly payout per hole (stored field)
       totals[f].skins+=(parseFloat(r.weekly)||0);
       had=true;
     });
@@ -857,16 +862,17 @@ function renderFlightReport(){
   });
   // Build rows
   tbody.innerHTML='';
-  let gNet=0,gSkins=0,gPOG=0;
+  let gGross=0,gNet=0,gSkins=0,gPOG=0;
   const allKeys=[...flights,'?'];
   allKeys.forEach(f=>{
     const t=totals[f];
     if(!t) return;
-    const row=t.net+t.skins+t.pog;
-    gNet+=t.net; gSkins+=t.skins; gPOG+=t.pog;
+    const row=t.gross+t.net+t.skins+t.pog;
+    gGross+=t.gross; gNet+=t.net; gSkins+=t.skins; gPOG+=t.pog;
     const label=f==='?'?'Unassigned':`Flight ${f}`;
     const tr=document.createElement('tr');
     tr.innerHTML=`<td>${label}</td>
+      <td class="thr">$${t.gross.toFixed(2)}</td>
       <td class="thr">$${t.net.toFixed(2)}</td>
       <td class="thr">$${t.skins.toFixed(2)}</td>
       <td class="thr">$${t.pog.toFixed(2)}</td>
@@ -874,10 +880,11 @@ function renderFlightReport(){
     tbody.appendChild(tr);
   });
   // Grand total row
-  const grand=gNet+gSkins+gPOG;
+  const grand=gGross+gNet+gSkins+gPOG;
   const tf=document.createElement('tr');
   tf.style.borderTop='2px solid var(--bdr)';
   tf.innerHTML=`<td style="font-weight:700;">Total</td>
+    <td class="thr" style="font-weight:700;">$${gGross.toFixed(2)}</td>
     <td class="thr" style="font-weight:700;">$${gNet.toFixed(2)}</td>
     <td class="thr" style="font-weight:700;">$${gSkins.toFixed(2)}</td>
     <td class="thr" style="font-weight:700;">$${gPOG.toFixed(2)}</td>
@@ -2389,6 +2396,36 @@ function savePOGOpeningBalances(){
   alert(`POG opening balances saved for ${changed} holes.`);
 }
 
+// ── Sync weeks + season from GitHub on load ───────────────────────────────────
+function syncFromGitHub(){
+  const token=getGHToken();
+  if(!token) return;
+  const apiUrl=`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+  fetch(apiUrl,{headers:{'Authorization':`token ${token}`,'Accept':'application/vnd.github.v3+json'}})
+    .then(r=>r.ok?r.json():null).then(j=>{
+      if(!j) return;
+      try{
+        const data=JSON.parse(atob(j.content.replace(/\n/g,'')));
+        const ghWeeks=data.weeks||[];
+        // Merge GitHub weeks into local (GitHub wins on same id)
+        const merged=Object.values([...weeksLog,...ghWeeks].reduce((m,w)=>{m[w.id]=w;return m;},{}));
+        weeksLog=merged; LS.set('weeks',merged);
+        // Sync season
+        if(data.season && Object.keys(data.season).length){
+          Object.keys(seasonData).forEach(k=>delete seasonData[k]);
+          Object.assign(seasonData,data.season);
+          saveSeason();
+        }
+        populateWeekLoadSelect();
+        // Refresh season/flights if currently visible
+        const activeTab=document.querySelector('.tbtn.active[data-tab]')?.dataset?.tab;
+        if(activeTab==='season') renderLeaderboard(Object.entries(seasonData).map(([id,v])=>({id,...v})));
+        if(activeTab==='flights') renderFlightReport();
+        document.getElementById('db-msg').textContent='Synced from GitHub';
+      }catch(e){ console.warn('GitHub sync failed',e); }
+    }).catch(()=>{});
+}
+
 // ── Init ──────────────────────────────────────────────────────────────────────
 function init(){
   loadState();
@@ -2397,10 +2434,11 @@ function init(){
   populateWeekLoadSelect();
   initGrossPasteListeners();
   initNetPasteListeners();
-  initSkinsPasteListeners();;
+  initSkinsPasteListeners();
   if(sessionOK()) document.getElementById('pin-overlay').classList.add('unlocked');
   document.getElementById('db-dot').className='dot live';
   document.getElementById('db-msg').textContent='Saved on this device';
+  syncFromGitHub(); // pull latest weeks + season from GitHub in background
 }
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
 </script>
