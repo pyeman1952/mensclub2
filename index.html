@@ -1207,43 +1207,23 @@ function loadDraft(){
   alert('Draft loaded. Review entries then Generate & Commit when ready.');
 }
 
-// ── Populate week-load dropdown — merges localStorage + GitHub ───────────────
+// ── Populate week-load dropdown from weeksLog ────────────────────────────────
 function populateWeekLoadSelect(){
   const sel=document.getElementById('week-load-select');
   if(!sel) return;
-  const local=LS.get('weeks',[]);
-  _populateWeekSelectFrom(sel, local);
-  // Also fetch from GitHub to catch weeks committed via pencil-edit
-  const token=getGHToken();
-  if(!token) return;
-  const apiUrl=`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
-  fetch(apiUrl,{headers:{'Authorization':`token ${token}`,'Accept':'application/vnd.github.v3+json'}})
-    .then(r=>r.ok?r.json():null).then(j=>{
-      if(!j) return;
-      try{
-        const data=JSON.parse(atob(j.content.replace(/\n/g,'')));
-        const ghWeeks=data.weeks||[];
-        // Merge: GitHub wins on duplicate ids, also sync into localStorage
-        const merged=Object.values([...local,...ghWeeks].reduce((m,w)=>{m[w.id]=w;return m;},{}));
-        weeksLog=merged; LS.set('weeks',merged);
-        _populateWeekSelectFrom(sel, merged);
-      }catch(e){}
-    }).catch(()=>{});
-}
-function _populateWeekSelectFrom(sel, weeks){
   const cur=sel.value;
   while(sel.options.length>1) sel.remove(1);
-  if(!weeks.length){
+  if(!weeksLog.length){
     const opt=document.createElement('option');
     opt.disabled=true; opt.textContent='No committed weeks yet';
     sel.appendChild(opt); return;
   }
-  const sorted=[...weeks].sort((a,b)=>new Date(b.recordedAt||b.date||0)-new Date(a.recordedAt||a.date||0));
+  const sorted=[...weeksLog].sort((a,b)=>new Date(b.recordedAt||b.date||0)-new Date(a.recordedAt||a.date||0));
   sorted.forEach(w=>{
     const opt=document.createElement('option');
     opt.value=w.id;
     const d=w.date||w.id; const n=w.name||d;
-    opt.textContent=`${n} (${d})`;
+    opt.textContent=`${n} — ${d}`;
     sel.appendChild(opt);
   });
   if(cur) sel.value=cur;
@@ -2406,11 +2386,8 @@ function syncFromGitHub(){
       if(!j) return;
       try{
         const data=JSON.parse(atob(j.content.replace(/\n/g,'')));
-        const ghWeeks=data.weeks||[];
-        // Merge GitHub weeks into local (GitHub wins on same id)
-        const merged=Object.values([...weeksLog,...ghWeeks].reduce((m,w)=>{m[w.id]=w;return m;},{}));
-        weeksLog=merged; LS.set('weeks',merged);
-        // Sync season
+        // GitHub is source of truth — replace local entirely
+        weeksLog=data.weeks||[]; LS.set('weeks',weeksLog);
         if(data.season && Object.keys(data.season).length){
           Object.keys(seasonData).forEach(k=>delete seasonData[k]);
           Object.assign(seasonData,data.season);
