@@ -261,19 +261,20 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
   <button class="tbtn" id="btn-commit" title="Calculate payouts and publish results to the public page. Safe to re-run — will not double the leaderboard.">Generate &amp; Commit</button>
   <button class="tbtn" id="btn-preview" title="Preview the payout sheet on screen without saving or publishing anything.">Preview Payout</button>
   <button class="tbtn no-print" id="btn-print" title="Print the current payout sheet or save it as a PDF.">Print / Save PDF</button>
-  <div class="sact">
-    <button class="sbtn sbtn-blue" id="btn-save-draft" title="Save current entries as a draft on this device. Does not publish anything.">Save Draft</button>
-    <button class="sbtn sbtn-ghost" id="btn-load-draft" title="Load the last saved draft back into the entry form.">Load Draft</button>
-    <button class="sbtn sbtn-ghost" id="btn-publish-pots" style="background:rgba(13,71,161,.15);color:#90CAF9;border:1px solid rgba(13,71,161,.4);" title="Push current pot balances to the public page. Does not change weekly results or the leaderboard.">Publish Pots</button>
-    <button class="sbtn sbtn-ghost" id="btn-fix-public" style="background:rgba(220,53,69,.15);color:#ff8080;border:1px solid rgba(220,53,69,.4);" title="Remove any duplicate or malformed entries from the public results page.">Fix Public Page</button>
-    <button class="sbtn sbtn-danger" id="btn-clear" title="Clear all entries in the current form. Does not affect saved weeks or the public page.">Clear Entries</button>
-  </div>
-  <div class="sact" style="margin-top:6px;">
-    <div style="font-size:10px;font-weight:700;color:var(--mut);letter-spacing:.05em;margin-bottom:4px;">LOAD COMMITTED WEEK</div>
-    <select id="week-load-select" style="width:100%;font-size:12px;padding:4px 6px;background:var(--s2);color:var(--tx);border:1px solid var(--bd);border-radius:4px;margin-bottom:5px;">
-      <option value="">— select a saved week —</option>
+  <hr class="sdiv">
+  <div class="nav-sec">Actions</div>
+  <button class="tbtn" id="btn-save-draft" title="Save current entries as a draft on this device. Does not publish anything.">Save Draft</button>
+  <button class="tbtn" id="btn-load-draft" title="Load the last saved draft back into the entry form.">Load Draft</button>
+  <button class="tbtn" id="btn-publish-pots" title="Push current pot balances to the public page. Does not change weekly results or the leaderboard.">Publish Pots</button>
+  <button class="tbtn" id="btn-fix-public" title="Remove any duplicate or malformed entries from the public results page.">Fix Public Page</button>
+  <button class="tbtn" id="btn-clear" style="color:rgba(255,100,100,.7);" title="Clear all entries in the current form. Does not affect saved weeks or the public page.">Clear Entries</button>
+  <hr class="sdiv">
+  <div class="nav-sec">Load Committed Week</div>
+  <div style="padding:4px 14px 10px;">
+    <select id="week-load-select" style="width:100%;font-size:12px;padding:5px 7px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.15);border-radius:4px;" title="Select a previously committed week to load into the entry form for corrections." onchange="if(this.value){document.getElementById('btn-load-week').click();}">
+      <option value="">— select week to load —</option>
     </select>
-    <button class="sbtn sbtn-ghost" id="btn-load-week" style="width:100%;" title="Load a previously committed week back into the form so you can correct and re-commit it.">Load Week into Form</button>
+    <button id="btn-load-week" style="display:none;"></button>
   </div>
 </nav>
 
