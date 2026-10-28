@@ -259,7 +259,7 @@
           "weekly": 6,
           "paid": false,
           "guest": true,
-          "flt": ""
+          "flt": "A"
         },
         {
           "hole": 5,
@@ -272,7 +272,7 @@
           "weekly": 6,
           "paid": true,
           "guest": false,
-          "flt": ""
+          "flt": "A"
         },
         {
           "hole": 6,
@@ -311,7 +311,7 @@
           "weekly": 6,
           "paid": true,
           "guest": false,
-          "flt": ""
+          "flt": "B"
         },
         {
           "hole": 9,
@@ -350,7 +350,7 @@
           "weekly": 6,
           "paid": true,
           "guest": false,
-          "flt": ""
+          "flt": "A"
         },
         {
           "hole": 13,
@@ -376,7 +376,7 @@
           "weekly": 6,
           "paid": false,
           "guest": true,
-          "flt": ""
+          "flt": "A"
         },
         {
           "hole": 16,
@@ -1946,7 +1946,7 @@
           "stored": 20,
           "weekly": 18,
           "paid": true,
-          "flt": ""
+          "flt": "C"
         },
         {
           "hole": 9,
@@ -2043,7 +2043,8 @@
           "stored": 50,
           "weekly": 48,
           "paid": true,
-          "flt": "B"
+          "flt": "B",
+          "payout": 48
         },
         {
           "hole": 10,
@@ -2061,7 +2062,8 @@
           "stored": 50,
           "weekly": 48,
           "paid": true,
-          "flt": "A"
+          "flt": "A",
+          "payout": 48
         },
         {
           "hole": 17,
