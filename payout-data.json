@@ -2,7 +2,7 @@
   "weeks": [
     {
       "id": "October_25-_2026",
-      "name": "Week 3 — Regular Golf",
+      "name": "Week 3 \u2014 Regular Golf",
       "date": "October 25, 2026",
       "notes": "",
       "cancelled": false,
@@ -155,9 +155,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0–5",
-        "B": "6–11",
-        "C": "12–17",
+        "A": "0\u20135",
+        "B": "6\u201311",
+        "C": "12\u201317",
         "D": "18+"
       },
       "net": [
@@ -2357,22 +2357,26 @@
     }
   ],
   "season": {
-    "Silvio Alberti": {
-      "name": "Silvio Alberti",
-      "pref": "Pro Shop",
+    "Alberti, Silvio": {
+      "name": "Alberti, Silvio",
       "gross": 0,
       "net": 15,
-      "skins": 0,
+      "skins": 6,
       "pog": 0,
       "draw": 0,
-      "total": 15,
-      "weeks": 1,
+      "total": 21,
+      "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": {
+        "bar": 0,
+        "proshop": 25,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      }
     },
-    "Keith Allen": {
-      "name": "Keith Allen",
-      "pref": "Bar",
+    "Allen, Keith": {
+      "name": "Allen, Keith",
       "gross": 40,
       "net": 0,
       "skins": 0,
@@ -2381,11 +2385,10 @@
       "total": 40,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": "Bar"
     },
-    "Ted Baker": {
-      "name": "Ted Baker",
-      "pref": "Pro Shop",
+    "Baker, Ted": {
+      "name": "Baker, Ted",
       "gross": 0,
       "net": 30,
       "skins": 38,
@@ -2394,11 +2397,10 @@
       "total": 68,
       "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Pro Shop"
     },
-    "Randy Bennett": {
-      "name": "Randy Bennett",
-      "pref": "Bar",
+    "Bennett, Randy": {
+      "name": "Bennett, Randy",
       "gross": 20,
       "net": 35,
       "skins": 38,
@@ -2407,11 +2409,10 @@
       "total": 93,
       "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Bar"
     },
-    "Gord Bohmer": {
-      "name": "Gord Bohmer",
-      "pref": "Pro Shop",
+    "Bohmer, Gord": {
+      "name": "Bohmer, Gord",
       "gross": 0,
       "net": 15,
       "skins": 38,
@@ -2420,11 +2421,10 @@
       "total": 53,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": "Pro Shop"
     },
-    "Mitch Carr-Hilton": {
-      "name": "Mitch Carr-Hilton",
-      "pref": "Pro Shop",
+    "Carr-Hilton, Mitch": {
+      "name": "Carr-Hilton, Mitch",
       "gross": 50,
       "net": 0,
       "skins": 0,
@@ -2433,11 +2433,10 @@
       "total": 50,
       "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Pro Shop"
     },
-    "Rick Dawson": {
-      "name": "Rick Dawson",
-      "pref": "Bar",
+    "Dawson, Rick": {
+      "name": "Dawson, Rick",
       "gross": 30,
       "net": 0,
       "skins": 0,
@@ -2446,11 +2445,10 @@
       "total": 30,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": "Bar"
     },
-    "Steve Dewitt": {
-      "name": "Steve Dewitt",
-      "pref": "Pro Shop",
+    "Dewitt, Steve": {
+      "name": "Dewitt, Steve",
       "gross": 0,
       "net": 20,
       "skins": 0,
@@ -2459,24 +2457,28 @@
       "total": 20,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": "Pro Shop"
     },
-    "Craig Follis": {
-      "name": "Craig Follis",
-      "pref": "Bar",
-      "gross": 30,
+    "Follis, Craig": {
+      "name": "Follis, Craig",
+      "gross": 45,
       "net": 0,
-      "skins": 0,
+      "skins": 6,
       "pog": 0,
-      "draw": 0,
-      "total": 30,
-      "weeks": 1,
+      "draw": 40,
+      "total": 91,
+      "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": {
+        "bar": 78,
+        "proshop": 40,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      }
     },
-    "Jim Green": {
-      "name": "Jim Green",
-      "pref": "Pro Shop",
+    "Green, Jim": {
+      "name": "Green, Jim",
       "gross": 40,
       "net": 0,
       "skins": 38,
@@ -2485,11 +2487,10 @@
       "total": 78,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": "Pro Shop"
     },
-    "Larry Hunt": {
-      "name": "Larry Hunt",
-      "pref": "Bar",
+    "Hunt, Larry": {
+      "name": "Hunt, Larry",
       "gross": 20,
       "net": 0,
       "skins": 0,
@@ -2498,11 +2499,10 @@
       "total": 20,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": "Bar"
     },
-    "Greg Koster": {
-      "name": "Greg Koster",
-      "pref": "Pro Shop",
+    "Koster, Greg": {
+      "name": "Koster, Greg",
       "gross": 80,
       "net": 0,
       "skins": 0,
@@ -2511,11 +2511,10 @@
       "total": 178,
       "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Pro Shop"
     },
-    "Gord Lund": {
-      "name": "Gord Lund",
-      "pref": "Pro Shop",
+    "Lund, Gord": {
+      "name": "Lund, Gord",
       "gross": 20,
       "net": 0,
       "skins": 0,
@@ -2524,24 +2523,28 @@
       "total": 20,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": "Pro Shop"
     },
-    "Dennis Lychak": {
-      "name": "Dennis Lychak",
-      "pref": "Pro Shop",
-      "gross": 0,
+    "Lychak, Dennis": {
+      "name": "Lychak, Dennis",
+      "gross": 15,
       "net": 20,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 20,
-      "weeks": 1,
+      "total": 35,
+      "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": {
+        "bar": 0,
+        "proshop": 15,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      }
     },
-    "Mike Matheson": {
-      "name": "Mike Matheson",
-      "pref": "Pro Shop",
+    "Matheson, Mike": {
+      "name": "Matheson, Mike",
       "gross": 0,
       "net": 40,
       "skins": 38,
@@ -2550,11 +2553,10 @@
       "total": 78,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": "Pro Shop"
     },
-    "Scott Murray": {
-      "name": "Scott Murray",
-      "pref": "Bar",
+    "Murray, Scott": {
+      "name": "Murray, Scott",
       "gross": 0,
       "net": 20,
       "skins": 0,
@@ -2563,11 +2565,10 @@
       "total": 20,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": "Bar"
     },
-    "Corey Nickerson": {
-      "name": "Corey Nickerson",
-      "pref": "Pro Shop",
+    "Nickerson, Corey": {
+      "name": "Nickerson, Corey",
       "gross": 0,
       "net": 0,
       "skins": 0,
@@ -2576,11 +2577,10 @@
       "total": 98,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": "Pro Shop"
     },
-    "Matt Noble": {
-      "name": "Matt Noble",
-      "pref": "Pro Shop",
+    "Noble, Matt": {
+      "name": "Noble, Matt",
       "gross": 0,
       "net": 25,
       "skins": 0,
@@ -2589,11 +2589,10 @@
       "total": 25,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": "Pro Shop"
     },
-    "Bryan Phelan": {
-      "name": "Bryan Phelan",
-      "pref": "Pro Shop",
+    "Phelan, Bryan": {
+      "name": "Phelan, Bryan",
       "gross": 0,
       "net": 25,
       "skins": 0,
@@ -2602,11 +2601,10 @@
       "total": 25,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": "Pro Shop"
     },
-    "Kevin Riordan": {
-      "name": "Kevin Riordan",
-      "pref": "Bar",
+    "Riordan, Kevin": {
+      "name": "Riordan, Kevin",
       "gross": 0,
       "net": 20,
       "skins": 38,
@@ -2615,24 +2613,28 @@
       "total": 58,
       "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Bar"
     },
-    "Doug Rushton": {
-      "name": "Doug Rushton",
-      "pref": "Pro Shop",
+    "Rushton, Doug": {
+      "name": "Rushton, Doug",
       "gross": 0,
-      "net": 15,
+      "net": 30,
       "skins": 38,
       "pog": 0,
       "draw": 0,
-      "total": 53,
-      "weeks": 2,
+      "total": 68,
+      "weeks": 3,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": {
+        "bar": 0,
+        "proshop": 15,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      }
     },
-    "Mike Schwarz": {
-      "name": "Mike Schwarz",
-      "pref": "Pro Shop",
+    "Schwarz, Mike": {
+      "name": "Schwarz, Mike",
       "gross": 30,
       "net": 0,
       "skins": 0,
@@ -2641,11 +2643,10 @@
       "total": 30,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": "Pro Shop"
     },
-    "Trent Skinner": {
-      "name": "Trent Skinner",
-      "pref": "Pro Shop",
+    "Skinner, Trent": {
+      "name": "Skinner, Trent",
       "gross": 0,
       "net": 30,
       "skins": 0,
@@ -2654,11 +2655,10 @@
       "total": 30,
       "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Pro Shop"
     },
-    "Yvonne Stewart": {
-      "name": "Yvonne Stewart",
-      "pref": "Pro Shop",
+    "Stewart, Yvonne": {
+      "name": "Stewart, Yvonne",
       "gross": 0,
       "net": 0,
       "skins": 38,
@@ -2667,11 +2667,10 @@
       "total": 38,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T00:38:44.814Z"
+      "pref": "Pro Shop"
     },
-    "Bob Tarbuck": {
-      "name": "Bob Tarbuck",
-      "pref": "Bar",
+    "Tarbuck, Bob": {
+      "name": "Tarbuck, Bob",
       "gross": 0,
       "net": 40,
       "skins": 0,
@@ -2680,11 +2679,10 @@
       "total": 40,
       "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Bar"
     },
-    "Keith Allan": {
-      "name": "Keith Allan",
-      "pref": "Bar",
+    "Allan, Keith": {
+      "name": "Allan, Keith",
       "gross": 30,
       "net": 0,
       "skins": 19,
@@ -2693,11 +2691,10 @@
       "total": 49,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Bar"
     },
-    "Randy Arduini": {
-      "name": "Randy Arduini",
-      "pref": "Bar",
+    "Arduini, Randy": {
+      "name": "Arduini, Randy",
       "gross": 0,
       "net": 40,
       "skins": 0,
@@ -2706,24 +2703,28 @@
       "total": 40,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Bar"
     },
-    "Thyssen De Goede": {
-      "name": "Thyssen De Goede",
-      "pref": "Pro Shop",
-      "gross": 40,
+    "De Goede, Thyssen": {
+      "name": "De Goede, Thyssen",
+      "gross": 65,
       "net": 0,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 40,
-      "weeks": 1,
+      "total": 65,
+      "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": {
+        "bar": 0,
+        "proshop": 25,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      }
     },
-    "Rod Gray": {
-      "name": "Rod Gray",
-      "pref": "Bar",
+    "Gray, Rod": {
+      "name": "Gray, Rod",
       "gross": 0,
       "net": 20,
       "skins": 0,
@@ -2732,37 +2733,46 @@
       "total": 20,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Bar"
     },
-    "Dan Haaf": {
-      "name": "Dan Haaf",
-      "pref": "Pro Shop",
-      "gross": 0,
+    "Haaf, Dan": {
+      "name": "Haaf, Dan",
+      "gross": 15,
       "net": 0,
       "skins": 19,
       "pog": 0,
       "draw": 0,
-      "total": 19,
-      "weeks": 1,
+      "total": 34,
+      "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": {
+        "bar": 0,
+        "proshop": 15,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      }
     },
-    "Iain Haigh": {
-      "name": "Iain Haigh",
-      "pref": "Pro Shop",
-      "gross": 20,
+    "Haigh, Iain": {
+      "name": "Haigh, Iain",
+      "gross": 45,
       "net": 0,
-      "skins": 0,
+      "skins": 6,
       "pog": 0,
       "draw": 0,
-      "total": 20,
-      "weeks": 1,
+      "total": 51,
+      "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": {
+        "bar": 0,
+        "proshop": 31,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      }
     },
-    "Gary Houg": {
-      "name": "Gary Houg",
-      "pref": "Pro Shop",
+    "Houg, Gary": {
+      "name": "Houg, Gary",
       "gross": 0,
       "net": 15,
       "skins": 0,
@@ -2771,11 +2781,10 @@
       "total": 15,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Pro Shop"
     },
-    "Mandy Johns": {
-      "name": "Mandy Johns",
-      "pref": "Bar",
+    "Johns, Mandy": {
+      "name": "Johns, Mandy",
       "gross": 0,
       "net": 0,
       "skins": 19,
@@ -2784,11 +2793,10 @@
       "total": 19,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Bar"
     },
-    "Ian Mclean": {
-      "name": "Ian Mclean",
-      "pref": "Bar",
+    "Mclean, Ian": {
+      "name": "Mclean, Ian",
       "gross": 0,
       "net": 20,
       "skins": 0,
@@ -2797,11 +2805,10 @@
       "total": 20,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Bar"
     },
-    "Kelly Mullock": {
-      "name": "Kelly Mullock",
-      "pref": "Bar",
+    "Mullock, Kelly": {
+      "name": "Mullock, Kelly",
       "gross": 0,
       "net": 20,
       "skins": 0,
@@ -2810,11 +2817,10 @@
       "total": 20,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Bar"
     },
-    "Scott Parsons": {
-      "name": "Scott Parsons",
-      "pref": "Pro Shop",
+    "Parsons, Scott": {
+      "name": "Parsons, Scott",
       "gross": 0,
       "net": 0,
       "skins": 57,
@@ -2823,11 +2829,10 @@
       "total": 57,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Pro Shop"
     },
-    "Brian Slater": {
-      "name": "Brian Slater",
-      "pref": "Bar",
+    "Slater, Brian": {
+      "name": "Slater, Brian",
       "gross": 40,
       "net": 0,
       "skins": 0,
@@ -2836,24 +2841,28 @@
       "total": 40,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": "Bar"
     },
-    "Rick Smith": {
-      "name": "Rick Smith",
-      "pref": "Pro Shop",
+    "Smith, Rick": {
+      "name": "Smith, Rick",
       "gross": 30,
-      "net": 0,
+      "net": 10,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 30,
-      "weeks": 1,
+      "total": 40,
+      "weeks": 2,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
+      "pref": {
+        "bar": 0,
+        "proshop": 10,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      }
     },
-    "Carl Webber": {
-      "name": "Carl Webber",
-      "pref": "Pro Shop",
+    "Webber, Carl": {
+      "name": "Webber, Carl",
       "gross": 20,
       "net": 0,
       "skins": 0,
@@ -2862,273 +2871,115 @@
       "total": 20,
       "weeks": 1,
       "played": 0,
-      "lastUpdated": "2026-10-20T03:25:01.171Z"
-    },
-    "Alberti, Silvio": {
-      "name": "Alberti, Silvio",
-      "pref": {
-        "bar": 0,
-        "proshop": 25,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 0,
-      "net": 0,
-      "skins": 50,
-      "pog": 0,
-      "draw": 0,
-      "total": 50,
-      "weeks": 2,
-      "played": 0,
-      "lastUpdated": "2026-10-26T05:20:40.935Z"
+      "pref": "Pro Shop"
     },
     "Cox, Jason": {
       "name": "Cox, Jason",
+      "gross": 0,
+      "net": 25,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 25,
+      "weeks": 1,
+      "played": 0,
       "pref": {
         "bar": 25,
         "proshop": 0,
         "cash": 0,
         "cheque": 0,
         "other": ""
-      },
-      "gross": 0,
-      "net": 50,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 50,
-      "weeks": 2,
-      "played": 0,
-      "lastUpdated": "2026-10-26T05:20:40.935Z"
-    },
-    "De Goede, Thyssen": {
-      "name": "De Goede, Thyssen",
-      "pref": {
-        "bar": 0,
-        "proshop": 25,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 50,
-      "net": 0,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 50,
-      "weeks": 2,
-      "played": 0,
-      "lastUpdated": "2026-10-26T05:20:40.935Z"
+      }
     },
     "Fauteux, Dave": {
       "name": "Fauteux, Dave",
+      "gross": 0,
+      "net": 0,
+      "skins": 0,
+      "pog": 0,
+      "draw": 40,
+      "total": 40,
+      "weeks": 1,
+      "played": 0,
       "pref": {
         "bar": 40,
         "proshop": 0,
         "cash": 0,
         "cheque": 0,
         "other": ""
-      },
-      "gross": 0,
-      "net": 0,
-      "skins": 0,
-      "pog": 0,
-      "draw": 80,
-      "total": 80,
-      "weeks": 2,
-      "played": 0,
-      "lastUpdated": "2026-10-26T05:20:40.935Z"
-    },
-    "Follis, Craig": {
-      "name": "Follis, Craig",
-      "pref": {
-        "bar": 78,
-        "proshop": 40,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 30,
-      "net": 0,
-      "skins": 126,
-      "pog": 0,
-      "draw": 80,
-      "total": 236,
-      "weeks": 2,
-      "played": 0,
-      "lastUpdated": "2026-10-26T05:20:40.935Z"
-    },
-    "Haaf, Dan": {
-      "name": "Haaf, Dan",
-      "pref": {
-        "bar": 0,
-        "proshop": 15,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 30,
-      "net": 0,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 30,
-      "weeks": 2,
-      "played": 0,
-      "lastUpdated": "2026-10-26T05:20:40.935Z"
+      }
     },
     "Haigh, Gavin": {
       "name": "Haigh, Gavin",
+      "gross": 0,
+      "net": 40,
+      "skins": 12,
+      "pog": 0,
+      "draw": 0,
+      "total": 52,
+      "weeks": 1,
+      "played": 0,
       "pref": {
         "bar": 0,
         "proshop": 12,
         "cash": 40,
         "cheque": 0,
         "other": ""
-      },
-      "gross": 0,
-      "net": 80,
-      "skins": 24,
-      "pog": 0,
-      "draw": 0,
-      "total": 104,
-      "weeks": 2,
-      "played": 0,
-      "lastUpdated": "2026-10-26T05:20:40.935Z"
-    },
-    "Haigh, Iain": {
-      "name": "Haigh, Iain",
-      "pref": {
-        "bar": 0,
-        "proshop": 31,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 50,
-      "net": 0,
-      "skins": 12,
-      "pog": 0,
-      "draw": 0,
-      "total": 62,
-      "weeks": 2,
-      "played": 0,
-      "lastUpdated": "2026-10-26T05:20:40.935Z"
-    },
-    "Lychak, Dennis": {
-      "name": "Lychak, Dennis",
-      "pref": {
-        "bar": 0,
-        "proshop": 15,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 30,
-      "net": 0,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 30,
-      "weeks": 2,
-      "played": 0,
-      "lastUpdated": "2026-10-26T05:20:40.935Z"
-    },
-    "Rushton, Doug": {
-      "name": "Rushton, Doug",
-      "pref": {
-        "bar": 0,
-        "proshop": 15,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 0,
-      "net": 30,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 30,
-      "weeks": 2,
-      "played": 0,
-      "lastUpdated": "2026-10-26T05:20:40.935Z"
+      }
     },
     "Smith, Darrell": {
       "name": "Smith, Darrell",
+      "gross": 0,
+      "net": 10,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 10,
+      "weeks": 1,
+      "played": 0,
       "pref": {
         "bar": 10,
         "proshop": 0,
         "cash": 0,
         "cheque": 0,
         "other": ""
-      },
-      "gross": 0,
-      "net": 20,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 20,
-      "weeks": 2,
-      "played": 0,
-      "lastUpdated": "2026-10-26T05:20:40.935Z"
-    },
-    "Smith, Rick": {
-      "name": "Smith, Rick",
-      "pref": {
-        "bar": 0,
-        "proshop": 10,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 0,
-      "net": 20,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 20,
-      "weeks": 2,
-      "played": 0,
-      "lastUpdated": "2026-10-26T05:20:40.935Z"
+      }
     },
     "Stewart, Ham": {
       "name": "Stewart, Ham",
+      "gross": 25,
+      "net": 0,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 25,
+      "weeks": 1,
+      "played": 0,
       "pref": {
         "bar": 25,
         "proshop": 0,
         "cash": 0,
         "cheque": 0,
         "other": ""
-      },
-      "gross": 50,
-      "net": 0,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 50,
-      "weeks": 2,
-      "played": 0,
-      "lastUpdated": "2026-10-26T05:20:40.935Z"
+      }
     },
     "VanVelzen, Paul": {
       "name": "VanVelzen, Paul",
+      "gross": 0,
+      "net": 10,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 10,
+      "weeks": 1,
+      "played": 0,
       "pref": {
         "bar": 0,
         "proshop": 10,
         "cash": 0,
         "cheque": 0,
         "other": ""
-      },
-      "gross": 0,
-      "net": 20,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 20,
-      "weeks": 2,
-      "played": 0,
-      "lastUpdated": "2026-10-26T05:20:40.935Z"
+      }
     }
   },
   "pots": {
