@@ -851,13 +851,13 @@ function renderFlightReport(){
     (wk.skins||[]).forEach(r=>{
       if(!r.winner) return;
       const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
-      totals[f].skins+=(parseFloat(r.payout)||0);
+      totals[f].skins+=(parseFloat(r.runPot)||0);
       had=true;
     });
     (wk.pog||[]).forEach(r=>{
       if(!r.winner) return;
       const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
-      totals[f].pog+=(parseFloat(r.payout)||0);
+      totals[f].pog+=(parseFloat(r.runPot)||0);
       had=true;
     });
     if(had) weeksWithData++;
