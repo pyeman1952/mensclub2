@@ -245,24 +245,22 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
 <!-- Sidebar -->
 <nav class="sidebar">
   <div class="nav-sec">Entry</div>
-  <button class="tbtn active" data-tab="setup">Weekly Setup</button>
-  <button class="tbtn" data-tab="payout">Payout Sheet</button>
+  <button class="tbtn active" data-tab="setup" title="Enter player count, skins/POG buy-ins, and gross/net winners for the week.">Weekly Setup</button>
+  <button class="tbtn" data-tab="payout" title="Review and confirm money winners, payout preferences, and skins/POG results.">Payout Sheet</button>
   <hr class="sdiv">
   <div class="nav-sec">Admin</div>
-  <button class="tbtn" data-tab="balances">Edit POG &amp; Skins Balances</button>
-  <button class="tbtn" data-tab="change-pin">Change PIN</button>
+  <button class="tbtn" data-tab="balances" title="Set the current carry-over balances for each skins and POG hole at the start of the season or after a correction.">Edit POG &amp; Skins Balances</button>
+  <button class="tbtn" data-tab="change-pin" title="Change the 4-digit PIN used to unlock this app.">Change PIN</button>
   <hr class="sdiv">
   <div class="nav-sec">Season</div>
-  <button class="tbtn" data-tab="season">Leaderboard</button>
-  <button class="tbtn" data-tab="pots">Pot History</button>
-  <button class="tbtn" data-tab="flights">Flight Report</button>
+  <button class="tbtn" data-tab="season" title="Season-to-date money winnings for all players across all committed weeks.">Leaderboard</button>
+  <button class="tbtn" data-tab="pots" title="Current skins and POG pot balances by hole, including carry-overs and weekly contributions.">Pot History</button>
+  <button class="tbtn" data-tab="flights" title="Gross and net results broken down by flight for all committed weeks.">Flight Report</button>
   <hr class="sdiv">
   <div class="nav-sec">Tools</div>
   <button class="tbtn" id="btn-commit" title="Calculate payouts and publish results to the public page. Safe to re-run — will not double the leaderboard.">Generate &amp; Commit</button>
   <button class="tbtn" id="btn-preview" title="Preview the payout sheet on screen without saving or publishing anything.">Preview Payout</button>
   <button class="tbtn no-print" id="btn-print" title="Print the current payout sheet or save it as a PDF.">Print / Save PDF</button>
-  <hr class="sdiv">
-  <div class="nav-sec">Actions</div>
   <button class="tbtn" id="btn-save-draft" title="Save current entries as a draft on this device. Does not publish anything.">Save Draft</button>
   <button class="tbtn" id="btn-load-draft" title="Load the last saved draft back into the entry form.">Load Draft</button>
   <button class="tbtn" id="btn-publish-pots" title="Push current pot balances to the public page. Does not change weekly results or the leaderboard.">Publish Pots</button>
@@ -271,10 +269,9 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
   <hr class="sdiv">
   <div class="nav-sec">Load Committed Week</div>
   <div style="padding:4px 14px 10px;">
-    <select id="week-load-select" style="width:100%;font-size:12px;padding:5px 7px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.15);border-radius:4px;" title="Select a previously committed week to load into the entry form for corrections." onchange="if(this.value){document.getElementById('btn-load-week').click();}">
+    <select id="week-load-select" style="width:100%;font-size:12px;padding:5px 7px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.15);border-radius:4px;" title="Select a previously committed week to load into the entry form for corrections. Re-committing is safe and will not double the leaderboard." onchange="if(this.value) loadCommittedWeek();">
       <option value="">— select week to load —</option>
     </select>
-    <button id="btn-load-week" style="display:none;"></button>
   </div>
 </nav>
 
