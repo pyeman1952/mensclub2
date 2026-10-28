@@ -580,10 +580,10 @@
           },
           "gross": 0,
           "net": 0,
-          "skins": 6,
+          "skins": 25,
           "pog": 0,
           "draw": 0,
-          "total": 6,
+          "total": 25,
           "weeks": 1
         },
         {
@@ -648,10 +648,10 @@
           },
           "gross": 15,
           "net": 0,
-          "skins": 6,
+          "skins": 63,
           "pog": 0,
           "draw": 40,
-          "total": 61,
+          "total": 118,
           "weeks": 1
         },
         {
@@ -2361,10 +2361,10 @@
       "name": "Alberti, Silvio",
       "gross": 0,
       "net": 15,
-      "skins": 6,
+      "skins": 25,
       "pog": 0,
       "draw": 0,
-      "total": 21,
+      "total": 40,
       "weeks": 2,
       "played": 0,
       "pref": {
@@ -2463,10 +2463,10 @@
       "name": "Follis, Craig",
       "gross": 45,
       "net": 0,
-      "skins": 6,
+      "skins": 63,
       "pog": 0,
       "draw": 40,
-      "total": 91,
+      "total": 148,
       "weeks": 2,
       "played": 0,
       "pref": {
