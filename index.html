@@ -246,7 +246,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
 <nav class="sidebar">
   <div class="nav-sec">Entry</div>
   <button class="tbtn active" data-tab="setup" title="Enter player count, skins/POG buy-ins, and gross/net winners for the week.">Weekly Setup</button>
-  <button class="tbtn" data-tab="payout" title="Review and confirm money winners, payout preferences, and skins/POG results.">Payout Sheet</button>
+  <button class="tbtn" data-tab="payout" title="Review calculated results before committing. Shows gross/net winners, skins, POG, and money winner totals.">Payout Sheet Preview</button>
   <hr class="sdiv">
   <div class="nav-sec">Admin</div>
   <button class="tbtn" data-tab="balances" title="Set the current carry-over balances for each skins and POG hole at the start of the season or after a correction.">Edit POG &amp; Skins Balances</button>
@@ -259,7 +259,6 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
   <hr class="sdiv">
   <div class="nav-sec">Tools</div>
   <button class="tbtn" id="btn-commit" title="Calculate payouts and publish results to the public page. Safe to re-run — will not double the leaderboard.">Generate &amp; Commit</button>
-  <button class="tbtn" id="btn-preview" title="Preview the payout sheet on screen without saving or publishing anything.">Preview Payout</button>
   <button class="tbtn no-print" id="btn-print" title="Print the current payout sheet or save it as a PDF.">Print / Save PDF</button>
   <button class="tbtn" id="btn-save-draft" title="Save current entries as a draft on this device. Does not publish anything.">Save Draft</button>
   <button class="tbtn" id="btn-load-draft" title="Load the last saved draft back into the entry form.">Load Draft</button>
@@ -1201,29 +1200,46 @@ function loadDraft(){
   alert('Draft loaded. Review entries then Generate & Commit when ready.');
 }
 
-// ── Populate week-load dropdown ───────────────────────────────────────────────
+// ── Populate week-load dropdown — merges localStorage + GitHub ───────────────
 function populateWeekLoadSelect(){
   const sel=document.getElementById('week-load-select');
   if(!sel) return;
-  const saved=LS.get('weeks',[]);
-  // Clear existing options except placeholder
+  const local=LS.get('weeks',[]);
+  _populateWeekSelectFrom(sel, local);
+  // Also fetch from GitHub to catch weeks committed via pencil-edit
+  const token=getGHToken();
+  if(!token) return;
+  const apiUrl=`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+  fetch(apiUrl,{headers:{'Authorization':`token ${token}`,'Accept':'application/vnd.github.v3+json'}})
+    .then(r=>r.ok?r.json():null).then(j=>{
+      if(!j) return;
+      try{
+        const data=JSON.parse(atob(j.content.replace(/\n/g,'')));
+        const ghWeeks=data.weeks||[];
+        // Merge: GitHub wins on duplicate ids, also sync into localStorage
+        const merged=Object.values([...local,...ghWeeks].reduce((m,w)=>{m[w.id]=w;return m;},{}));
+        weeksLog=merged; LS.set('weeks',merged);
+        _populateWeekSelectFrom(sel, merged);
+      }catch(e){}
+    }).catch(()=>{});
+}
+function _populateWeekSelectFrom(sel, weeks){
+  const cur=sel.value;
   while(sel.options.length>1) sel.remove(1);
-  if(!saved.length){
+  if(!weeks.length){
     const opt=document.createElement('option');
     opt.disabled=true; opt.textContent='No committed weeks yet';
-    sel.appendChild(opt);
-    return;
+    sel.appendChild(opt); return;
   }
-  // Sort newest first
-  const sorted=[...saved].sort((a,b)=>new Date(b.recordedAt||0)-new Date(a.recordedAt||0));
+  const sorted=[...weeks].sort((a,b)=>new Date(b.recordedAt||b.date||0)-new Date(a.recordedAt||a.date||0));
   sorted.forEach(w=>{
     const opt=document.createElement('option');
     opt.value=w.id;
-    const d=w.date||w.id;
-    const n=w.name||d;
+    const d=w.date||w.id; const n=w.name||d;
     opt.textContent=`${n} (${d})`;
     sel.appendChild(opt);
   });
+  if(cur) sel.value=cur;
 }
 
 // ── Load committed week back into entry form ──────────────────────────────────
