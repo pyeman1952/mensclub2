@@ -592,7 +592,29 @@ const LS = {
 
 // ── State ─────────────────────────────────────────────────────────────────────
 let skinsPots={}, pogPots={}, seasonData={}, weeksLog=[];
-const mwKey=(name)=>name||null;
+// Normalize player name to "Lastname, Firstname" and trim whitespace.
+// Handles paste from Golfsoftware (already "Lastname, Firstname") and any
+// accidental "Firstname Lastname" entries — also collapses stray spaces.
+const mwKey=(name)=>{
+  if(!name) return null;
+  const s=name.trim().replace(/\s+/g,' ');
+  if(!s) return null;
+  const ci=s.indexOf(',');
+  if(ci>-1){
+    // Already "Lastname, Firstname" — normalize spacing around comma
+    const last=s.slice(0,ci).trim();
+    const first=s.slice(ci+1).trim();
+    return first?`${last}, ${first}`:last;
+  }
+  // "Firstname Lastname" — flip to "Lastname, Firstname"
+  const words=s.split(' ');
+  if(words.length>=2){
+    const last=words[words.length-1];
+    const first=words.slice(0,words.length-1).join(' ');
+    return `${last}, ${first}`;
+  }
+  return s;
+};
 
 function loadState(){
   SKINS_HOLES.forEach(h=>{ skinsPots[h]=LS.get(`sk_${h}`,{pot:0,updatedAt:null}); });
@@ -1954,7 +1976,7 @@ function confirmCommit(){
       if(seasonData[k]) seasonData[k].pref=mw.pref;
     } else {
       const ex=seasonData[k]||{gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:0,played:0};
-      seasonData[k]={name:mw.name,pref:mw.pref,
+      seasonData[k]={name:k,pref:mw.pref,
         gross:(ex.gross||0)+(mw.gross||0),net:(ex.net||0)+(mw.net||0),
         skins:(ex.skins||0)+(mw.skins||0),pog:(ex.pog||0)+(mw.pog||0),
         draw:(ex.draw||0)+(mw.draw||0),total:(ex.total||0)+(mw.total||0),
