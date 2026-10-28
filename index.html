@@ -843,19 +843,21 @@ function renderFlightReport(){
       totals[f].gross+=(parseFloat(r.prize)||0);
       had=true;
     });
-    (wk.netData||[]).forEach(r=>{
+    (wk.net||[]).forEach(r=>{
       const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
       totals[f].net+=(parseFloat(r.prize)||0);
       had=true;
     });
-    (wk.skinsData||[]).forEach(r=>{
+    (wk.skins||[]).forEach(r=>{
+      if(!r.winner) return;
       const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
-      totals[f].skins+=(parseFloat(r.weekly)||0);
+      totals[f].skins+=(parseFloat(r.payout)||0);
       had=true;
     });
-    (wk.pogData||[]).forEach(r=>{
+    (wk.pog||[]).forEach(r=>{
+      if(!r.winner) return;
       const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
-      totals[f].pog+=(parseFloat(r.weekly)||0);
+      totals[f].pog+=(parseFloat(r.payout)||0);
       had=true;
     });
     if(had) weeksWithData++;
