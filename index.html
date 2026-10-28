@@ -264,6 +264,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
   <div class="sact">
     <button class="sbtn sbtn-blue" id="btn-save-draft">💾 Save Draft</button>
     <button class="sbtn sbtn-ghost" id="btn-load-draft">📂 Load Draft</button>
+    <button class="sbtn sbtn-ghost" id="btn-publish-pots" style="background:rgba(13,71,161,.15);color:#90CAF9;border:1px solid rgba(13,71,161,.4);">📤 Publish Pots</button>
     <button class="sbtn sbtn-ghost" id="btn-fix-public" style="background:rgba(220,53,69,.15);color:#ff8080;border:1px solid rgba(220,53,69,.4);">🔧 Fix Public Page</button>
     <button class="sbtn sbtn-danger" id="btn-clear">Clear Entries</button>
   </div>
@@ -592,29 +593,7 @@ const LS = {
 
 // ── State ─────────────────────────────────────────────────────────────────────
 let skinsPots={}, pogPots={}, seasonData={}, weeksLog=[];
-// Normalize player name to "Lastname, Firstname" and trim whitespace.
-// Handles paste from Golfsoftware (already "Lastname, Firstname") and any
-// accidental "Firstname Lastname" entries — also collapses stray spaces.
-const mwKey=(name)=>{
-  if(!name) return null;
-  const s=name.trim().replace(/\s+/g,' ');
-  if(!s) return null;
-  const ci=s.indexOf(',');
-  if(ci>-1){
-    // Already "Lastname, Firstname" — normalize spacing around comma
-    const last=s.slice(0,ci).trim();
-    const first=s.slice(ci+1).trim();
-    return first?`${last}, ${first}`:last;
-  }
-  // "Firstname Lastname" — flip to "Lastname, Firstname"
-  const words=s.split(' ');
-  if(words.length>=2){
-    const last=words[words.length-1];
-    const first=words.slice(0,words.length-1).join(' ');
-    return `${last}, ${first}`;
-  }
-  return s;
-};
+const mwKey=(name)=>name||null;
 
 function loadState(){
   SKINS_HOLES.forEach(h=>{ skinsPots[h]=LS.get(`sk_${h}`,{pot:0,updatedAt:null}); });
@@ -1969,20 +1948,21 @@ function confirmCommit(){
   }
   LS.set('weeks',weeksLog);
   populateWeekLoadSelect(); // keep dropdown in sync after commit
-  // Update season — winner entries
-  for(const mw of pc.mwList){
-    const k=mwKey(mw.name); if(!k) continue;
-    if(pc.isOverwrite){
-      if(seasonData[k]) seasonData[k].pref=mw.pref;
-    } else {
-      const ex=seasonData[k]||{gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:0,played:0};
-      seasonData[k]={name:k,pref:mw.pref,
+  // Rebuild season from scratch using ALL committed weeks (prevents doubling on re-commit)
+  const rebuilt={};
+  for(const wk of weeksLog){
+    for(const mw of (wk.moneyWinners||[])){
+      const k=mwKey(mw.name); if(!k) continue;
+      const ex=rebuilt[k]||{gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:0,played:0};
+      rebuilt[k]={name:k,pref:mw.pref,
         gross:(ex.gross||0)+(mw.gross||0),net:(ex.net||0)+(mw.net||0),
         skins:(ex.skins||0)+(mw.skins||0),pog:(ex.pog||0)+(mw.pog||0),
         draw:(ex.draw||0)+(mw.draw||0),total:(ex.total||0)+(mw.total||0),
         weeks:(ex.weeks||0)+1,played:(ex.played||0),lastUpdated:new Date().toISOString()};
     }
   }
+  Object.keys(seasonData).forEach(k=>delete seasonData[k]);
+  Object.assign(seasonData,rebuilt);
   saveSeason();
   // Re-render MW section without selects (swap confirm button with summary)
   const confirmArea=document.getElementById('btn-confirm-commit')?.closest('div');
@@ -2080,6 +2060,7 @@ document.addEventListener('click',function(e){
     case 'btn-save-draft': saveDraft();      break;
     case 'btn-load-draft': loadDraft();      break;
     case 'btn-load-week':  loadCommittedWeek(); break;
+    case 'btn-publish-pots': publishPots(); break;
     case 'btn-fix-public': fixPublicPage();  break;
     case 'pin-change-link': showPinModal();      break;
     case 'pm-cancel':    document.getElementById('pin-modal').classList.remove('open'); break;
@@ -2196,7 +2177,20 @@ async function publishToGitHub(weekKey, name, date, notes, cancelled, total,
     SKINS_HOLES.forEach(h=>{ pots[`sk_${h}`]=skinsPots[h]||{pot:0}; });
     POG_HOLES.forEach(h=>{ pots[`pg_${h}`]=pogPots[h]||{pot:0}; });
 
-    const newData = { weeks, season:seasonData, pots };
+    // Rebuild season from all weeks in the push (idempotent — safe to re-commit)
+    const builtSeason={};
+    weeks.forEach(wk=>{
+      (wk.moneyWinners||[]).forEach(mw=>{
+        const k=mwKey(mw.name); if(!k) return;
+        const ex=builtSeason[k]||{gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:0,played:0};
+        builtSeason[k]={name:k,pref:mw.pref,
+          gross:(ex.gross||0)+(mw.gross||0),net:(ex.net||0)+(mw.net||0),
+          skins:(ex.skins||0)+(mw.skins||0),pog:(ex.pog||0)+(mw.pog||0),
+          draw:(ex.draw||0)+(mw.draw||0),total:(ex.total||0)+(mw.total||0),
+          weeks:(ex.weeks||0)+1,played:(ex.played||0)};
+      });
+    });
+    const newData = { weeks, season:builtSeason, pots };
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(newData, null, 2))));
 
     const body = { message:`Payout update: ${name} ${date}`, content };
@@ -2205,6 +2199,51 @@ async function publishToGitHub(weekKey, name, date, notes, cancelled, total,
     const res = await fetch(apiUrl, { method:'PUT', headers, body: JSON.stringify(body) });
     if(res.ok){
       showGHStatus('✓ Results published to public page', false);
+    } else {
+      const err = await res.json();
+      showGHStatus(`⚠ Publish failed: ${err.message}`, true);
+    }
+  } catch(e){
+    showGHStatus(`⚠ Publish error: ${e.message}`, true);
+  }
+}
+
+// ── Publish Pots — push only the pots section to GitHub, leaves weeks/season untouched ──
+async function publishPots(){
+  const token = getGHToken();
+  if(!token){
+    alert('No GitHub token set. Add your token in the Opening Balances → Settings section first.');
+    return;
+  }
+  if(!confirm('This will update only the pot balances on the public page.\n\nWeekly results and the season leaderboard will not be changed.\n\nProceed?')) return;
+
+  const headers = {
+    'Authorization': `token ${token}`,
+    'Accept': 'application/vnd.github.v3+json',
+    'Content-Type': 'application/json'
+  };
+  const apiUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+
+  try {
+    showGHStatus('⏳ Fetching current public data…', false);
+    const cur = await fetch(apiUrl, {headers});
+    if(!cur.ok){ showGHStatus('⚠ Could not read public file: '+cur.status, true); return; }
+    const j = await cur.json();
+    const sha = j.sha;
+    const decoded = atob(j.content.replace(/\n/g,''));
+    const data = JSON.parse(decoded);
+
+    // Replace only pots, keep weeks and season as-is
+    const pots = {};
+    SKINS_HOLES.forEach(h=>{ pots[`sk_${h}`]=skinsPots[h]||{pot:0}; });
+    POG_HOLES.forEach(h=>{ pots[`pg_${h}`]=pogPots[h]||{pot:0}; });
+    data.pots = pots;
+
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    const body = { message:'Pots update: publish current balances', content, sha };
+    const res = await fetch(apiUrl, { method:'PUT', headers, body: JSON.stringify(body) });
+    if(res.ok){
+      showGHStatus('✓ Pot balances published to public page', false);
     } else {
       const err = await res.json();
       showGHStatus(`⚠ Publish failed: ${err.message}`, true);
