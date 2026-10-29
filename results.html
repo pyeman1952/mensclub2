@@ -124,6 +124,7 @@ table.gt td{padding:7px 8px;border-bottom:1px solid #F0F0F0;}
   <button class="tab active" data-tab="results">This Week's Results</button>
   <button class="tab" data-tab="leaderboard">Season Leaderboard</button>
   <button class="tab" data-tab="pots">Pot History</button>
+  <button class="tab" data-tab="flightreport">Flight Report</button>
 </div>
 
 <div class="content">
@@ -162,6 +163,26 @@ table.gt td{padding:7px 8px;border-bottom:1px solid #F0F0F0;}
   <!-- Pots tab -->
   <div id="tab-pots" class="hidden">
     <div id="pots-content"><div class="loading"><div class="spinner"></div>Loading pot history…</div></div>
+  </div>
+
+  <!-- Flight Report tab -->
+  <div id="tab-flightreport" class="hidden">
+    <!-- PIN gate -->
+    <div id="fr-pin-gate" style="text-align:center;padding:48px 20px;display:none;">
+      <div style="display:inline-block;background:var(--wh);border:1px solid var(--bdr);border-radius:8px;padding:28px 32px;max-width:320px;width:100%;box-shadow:0 2px 12px rgba(0,0,0,.08);">
+        <div style="font-size:32px;margin-bottom:10px;">🔒</div>
+        <h3 style="font-family:Georgia,serif;font-size:17px;color:var(--gd);font-weight:normal;margin-bottom:6px;">Flight Report</h3>
+        <p style="font-size:12px;color:var(--mut);margin-bottom:18px;">Enter the club PIN to view flight totals</p>
+        <input type="password" id="fr-pin-input" maxlength="8" placeholder="PIN" autocomplete="off"
+          style="width:100%;text-align:center;font-size:20px;letter-spacing:.3em;padding:10px;border:1px solid var(--bdr);border-radius:var(--rad);margin-bottom:10px;">
+        <button id="fr-pin-submit" style="width:100%;padding:10px;background:var(--gd);color:#fff;border:none;border-radius:var(--rad);font-size:14px;cursor:pointer;font-weight:600;">Unlock</button>
+        <p id="fr-pin-error" style="color:#DC3545;font-size:12px;margin-top:8px;display:none;">Incorrect PIN — try again</p>
+      </div>
+    </div>
+    <!-- Actual content -->
+    <div id="fr-unlocked" style="display:none;">
+      <div id="fr-content"><div class="loading"><div class="spinner"></div>Loading flight report…</div></div>
+    </div>
   </div>
 
 </div>
@@ -463,11 +484,14 @@ document.querySelectorAll('.tab').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    ['results','leaderboard','pots'].forEach(t=>{
+    ['results','leaderboard','pots','flightreport'].forEach(t=>{
       document.getElementById(`tab-${t}`).classList.toggle('hidden',`tab-${t}`!==`tab-${btn.dataset.tab}`);
     });
     if(btn.dataset.tab==='leaderboard'){
       if(lbPinUnlocked()) showLbContent(); else showLbGate();
+    }
+    if(btn.dataset.tab==='flightreport'){
+      if(frPinUnlocked()) showFrContent(); else showFrGate();
     }
   });
 });
@@ -477,9 +501,112 @@ document.getElementById('lb-search').addEventListener('input',e=>{
   if(appData) renderLeaderboard(e.target.value);
 });
 
+// ── Flight Report PIN ─────────────────────────────────────────────────────────
+const FR_PIN_KEY = 'fr_pin_unlocked';
+
+function frPinUnlocked(){ return sessionStorage.getItem(FR_PIN_KEY)==='1'; }
+
+function showFrGate(){
+  document.getElementById('fr-pin-gate').style.display = '';
+  document.getElementById('fr-unlocked').style.display = 'none';
+  document.getElementById('fr-pin-input').value = '';
+  document.getElementById('fr-pin-error').style.display = 'none';
+  setTimeout(()=>document.getElementById('fr-pin-input').focus(), 80);
+}
+function showFrContent(){
+  document.getElementById('fr-pin-gate').style.display = 'none';
+  document.getElementById('fr-unlocked').style.display = '';
+  if(appData) renderFlightReport();
+}
+function checkFrPin(){
+  const entered = document.getElementById('fr-pin-input').value.trim();
+  const correct = localStorage.getItem(LB_PIN_STORE) || DEFAULT_LB_PIN;
+  if(entered === correct){
+    sessionStorage.setItem(FR_PIN_KEY,'1');
+    document.getElementById('fr-pin-error').style.display='none';
+    showFrContent();
+  } else {
+    document.getElementById('fr-pin-error').style.display='';
+    document.getElementById('fr-pin-input').value='';
+    document.getElementById('fr-pin-input').focus();
+  }
+}
+document.getElementById('fr-pin-submit').addEventListener('click', checkFrPin);
+document.getElementById('fr-pin-input').addEventListener('keydown', e=>{ if(e.key==='Enter') checkFrPin(); });
+
+// ── Flight Report ─────────────────────────────────────────────────────────────
+function renderFlightReport(){
+  const weeks = appData.weeks||[];
+  const flights = ['A','B','C','D'];
+  const totals = {};
+  flights.forEach(f=>{ totals[f]={gross:0,net:0,skins:0,pog:0}; });
+  totals['?']={gross:0,net:0,skins:0,pog:0};
+  let weeksWithData=0;
+
+  weeks.forEach(wk=>{
+    let had=false;
+    (wk.grossRows||[]).forEach(r=>{
+      const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
+      totals[f].gross+=(parseFloat(r.prize)||0); had=true;
+    });
+    // fallback: old flights object
+    if(!(wk.grossRows||[]).length && wk.flights){
+      flights.forEach(f=>{
+        (wk.flights[f]||[]).forEach(r=>{ totals[f].gross+=(parseFloat(r.prize)||0); had=true; });
+      });
+    }
+    (wk.net||[]).forEach(r=>{
+      const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
+      totals[f].net+=(parseFloat(r.prize)||0); had=true;
+    });
+    (wk.skins||[]).forEach(r=>{
+      if(!r.winner) return;
+      const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
+      totals[f].skins+=(parseFloat(r.runPot)||0); had=true;
+    });
+    (wk.pog||[]).forEach(r=>{
+      if(!r.winner) return;
+      const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
+      totals[f].pog+=(parseFloat(r.runPot)||0); had=true;
+    });
+    if(had) weeksWithData++;
+  });
+
+  const fmt=n=>'$'+Number(n||0).toFixed(2);
+  const allFlights=[...flights,'?'];
+  let html=`<p style="font-size:12px;color:var(--mut);margin-bottom:14px;">Totals based on ${weeksWithData} committed week(s) with flight data.</p>
+  <div class="card" style="overflow:auto;">
+  <table class="lb-table"><thead><tr>
+    <th>Flight</th><th class="r">Gross ($)</th><th class="r">Net ($)</th>
+    <th class="r">Skins ($)</th><th class="r">POG ($)</th><th class="r">Total ($)</th>
+  </tr></thead><tbody>`;
+
+  let gT=0,nT=0,sT=0,pT=0;
+  allFlights.forEach(f=>{
+    const d=totals[f];
+    const row=d.gross+d.net+d.skins+d.pog;
+    if(f==='?' && !row) return;
+    gT+=d.gross; nT+=d.net; sT+=d.skins; pT+=d.pog;
+    const label=f==='?'?'Unassigned':`Flight ${f}`;
+    html+=`<tr><td>${label}</td>
+      <td class="r">${fmt(d.gross)}</td><td class="r">${fmt(d.net)}</td>
+      <td class="r">${fmt(d.skins)}</td><td class="r">${fmt(d.pog)}</td>
+      <td class="r"><strong class="money">${fmt(row)}</strong></td></tr>`;
+  });
+  const grandTotal=gT+nT+sT+pT;
+  html+=`<tr style="background:var(--gl);font-weight:700;">
+    <td><strong>Total</strong></td>
+    <td class="r">${fmt(gT)}</td><td class="r">${fmt(nT)}</td>
+    <td class="r">${fmt(sT)}</td><td class="r">${fmt(pT)}</td>
+    <td class="r"><strong class="money">${fmt(grandTotal)}</strong></td>
+  </tr></tbody></table></div>`;
+
+  document.getElementById('fr-content').innerHTML=html;
+}
+
 // Fix tab data attr
 document.querySelectorAll('.tab').forEach((btn,i)=>{
-  btn.dataset.tab=['results','leaderboard','pots'][i];
+  btn.dataset.tab=['results','leaderboard','pots','flightreport'][i];
 });
 
 // Load data
