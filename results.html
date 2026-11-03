@@ -454,12 +454,20 @@ const DEFAULT_LB_PIN = '1923';                // default = year club established
 function lbPinUnlocked(){ return sessionStorage.getItem(LB_PIN_KEY)==='1'; }
 
 // ── Hit counter ───────────────────────────────────────────────────────────────
+// Track locally in localStorage as reliable fallback; also try remote API
+function localHit(){
+  try {
+    const n=(parseInt(localStorage.getItem('mc_hits')||'0'))+1;
+    localStorage.setItem('mc_hits',n);
+    return n;
+  } catch(e){ return null; }
+}
 async function fetchHitCount(){
   try {
-    const r = await fetch('https://countapi.mileshilliard.com/hit/pyeman1952-mensclub2/visits');
+    const r = await fetch('https://api.counterapi.dev/v1/pyeman1952-mensclub2/visits/up');
     if(!r.ok) return null;
     const d = await r.json();
-    return d.value||null;
+    return d.count||null;
   } catch(e){ return null; }
 }
 let hitCountFetched = false;
@@ -468,9 +476,14 @@ async function showHitCount(){
   hitCountFetched = true;
   const el = document.getElementById('hit-counter');
   if(!el) return;
-  const v = await fetchHitCount();
-  el.textContent = v !== null ? `Page views: ${v}` : '';
-  el.style.display = v !== null ? '' : 'none';
+  const local = localHit();
+  el.textContent = `Page views: ${local||'—'}`;
+  el.style.display = '';
+  // Try to get remote count and update if available
+  const remote = await fetchHitCount();
+  if(remote !== null){
+    el.textContent = `Page views: ${remote}`;
+  }
 }
 
 function showLbGate(){
@@ -634,7 +647,7 @@ document.querySelectorAll('.tab').forEach((btn,i)=>{
 });
 
 // Increment hit counter on every page load (silently — display only shown after PIN)
-fetchHitCount();
+fetch('https://api.counterapi.dev/v1/pyeman1952-mensclub2/visits/up').catch(()=>{});
 
 // Load data
 loadData();
