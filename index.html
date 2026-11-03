@@ -663,7 +663,7 @@ function refreshFlightLabels(){
 }
 
 // ── Build net tbody ───────────────────────────────────────────────────────────
-const FLIGHT_OPTS=['A','B','C'].map(f=>`<option value="${f}">${f}</option>`).join('');
+const FLIGHT_OPTS=['A','B','C','D'].map(f=>`<option value="${f}">${f}</option>`).join('');
 function buildNet(){
   const tbody=document.getElementById('net-tbody');
   for(let p=1;p<=15;p++){
@@ -831,7 +831,7 @@ function renderFlightReport(){
   const summary=document.getElementById('flight-weeks-summary');
   if(!tbody) return;
   // Aggregate by flight
-  const flights=['A','B','C'];
+  const flights=['A','B','C','D'];
   const totals={};
   flights.forEach(f=>totals[f]={gross:0,net:0,skins:0,pog:0});
   totals['?']={gross:0,net:0,skins:0,pog:0}; // unassigned
