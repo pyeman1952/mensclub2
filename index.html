@@ -432,10 +432,10 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
 
     <!-- Skill Prizes -->
     <div class="card s2">
-      <h2>Skill Prizes <em>one per hole — sponsor provided</em></h2>
+      <h2>Skill Prizes <em>sponsor awards — cash prizes added to money winners</em></h2>
       <div class="cb">
         <table class="gt">
-          <thead><tr><th>H</th><th>Winner</th><th>Prize</th><th>H</th><th>Winner</th><th>Prize</th><th>H</th><th>Winner</th><th>Prize</th></tr></thead>
+          <thead><tr><th style="width:32px;">Hole</th><th>Winner</th><th>Prize Description</th><th style="width:72px;">$</th><th style="width:90px;">Payout</th><th style="width:28px;"></th></tr></thead>
           <tbody id="skill-tbody"></tbody>
         </table>
       </div>
@@ -734,18 +734,37 @@ function buildPOG(){
 }
 
 // ── Build skill tbody ─────────────────────────────────────────────────────────
+const PREF_OPTS_SK=['Cash','Bar','Pro Shop','Cheque'].map(p=>`<option>${p}</option>`).join('');
+// skillExtraRows[h] = number of extra rows added for hole h (beyond the first)
+const skillExtraRows={};
+function addSkillRow(h, isFirst){
+  const tbody=document.getElementById('skill-tbody');
+  const rowIdx=isFirst?0:(skillExtraRows[h]=(skillExtraRows[h]||0)+1, skillExtraRows[h]);
+  const uid=`${h}-${rowIdx}`;
+  const tr=document.createElement('tr');
+  tr.id=`sk-row-${uid}`;
+  tr.dataset.hole=h;
+  tr.innerHTML=`
+    <td style="font-weight:600;color:var(--gd);">${isFirst?h:''}</td>
+    <td><input type="text" id="sp-name-${uid}" placeholder="Winner" style="width:100%;"></td>
+    <td><input type="text" id="sp-prize-${uid}" placeholder="Prize description" style="width:100%;"></td>
+    <td><input type="number" id="sp-cash-${uid}" placeholder="0" min="0" step="0.01" style="width:68px;text-align:right;"></td>
+    <td><select id="sp-pref-${uid}" style="font-size:12px;padding:3px;width:88px;"><option value="">—</option>${PREF_OPTS_SK}</select></td>
+    <td>${isFirst?`<button type="button" onclick="addSkillRow(${h},false)" style="background:none;border:none;color:var(--ac);font-size:16px;cursor:pointer;padding:0 4px;" title="Add another prize for hole ${h}">+</button>`:
+      `<button type="button" onclick="this.closest('tr').remove()" style="background:none;border:none;color:#c00;font-size:16px;cursor:pointer;padding:0 4px;" title="Remove">×</button>`}</td>`;
+  // Insert after last row with same hole
+  const existingRows=[...tbody.querySelectorAll(`tr[data-hole="${h}"]`)];
+  if(existingRows.length){
+    existingRows[existingRows.length-1].after(tr);
+  } else {
+    tbody.appendChild(tr);
+  }
+}
 function buildSkill(){
   const tbody=document.getElementById('skill-tbody');
-  for(let r=0;r<6;r++){
-    const tr=document.createElement('tr'); let html='';
-    for(let c=0;c<3;c++){
-      const h=r*3+c+1;
-      html+=`<td style="font-weight:600;width:18px;">${h}</td>
-        <td><input type="text" id="sp-name-${h}" placeholder="Winner"></td>
-        <td><input type="text" id="sp-prize-${h}" placeholder="Prize description"></td>`;
-    }
-    tr.innerHTML=html; tbody.appendChild(tr);
-  }
+  tbody.innerHTML='';
+  for(let k in skillExtraRows) delete skillExtraRows[k];
+  for(let h=1;h<=18;h++) addSkillRow(h,true);
 }
 
 // ── Add gross row — obsolete (15 flat rows are fixed) ─────────────────────────
@@ -1027,9 +1046,8 @@ function clearEntries(){
     const c=document.getElementById(`pog-paid-${h}`);if(c)c.checked=false;
     const g=document.getElementById(`pog-guest-${h}`);if(g)g.checked=false;
   });
-  for(let h=1;h<=18;h++){
-    ['sp-name','sp-prize'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${h}`);if(el)el.value='';});
-  }
+  // Clear skill prizes — rebuild to wipe extra rows too
+  buildSkill();
   ['meat-1','meat-2','meat-3','meat-prize-1','meat-prize-2','meat-prize-3','ff-winner','ff-amount'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   ['meat-pref-1','meat-pref-2','meat-pref-3'].forEach(id=>{const el=document.getElementById(id);if(el)el.selectedIndex=0;});
   [1,2,3,4].forEach(i=>{
@@ -1105,14 +1123,17 @@ function saveDraft(){
     };
   });
   d.pgRows=pgRows;
-  // Skill shots
-  const spRows={};
-  for(let h=1;h<=18;h++){
-    spRows[h]={
-      name:document.getElementById(`sp-name-${h}`)?.value||'',
-      prize:document.getElementById(`sp-prize-${h}`)?.value||''
-    };
-  }
+  // Skill shots — collect all rows (first + extras)
+  const spRows=[];
+  document.querySelectorAll('#skill-tbody tr[data-hole]').forEach(tr=>{
+    const uid=tr.id.replace('sk-row-','');
+    const h=parseInt(tr.dataset.hole);
+    const n=(document.getElementById(`sp-name-${uid}`)?.value||'').trim();
+    const pr=(document.getElementById(`sp-prize-${uid}`)?.value||'').trim();
+    const cash=parseFloat(document.getElementById(`sp-cash-${uid}`)?.value)||0;
+    const pref=(document.getElementById(`sp-pref-${uid}`)?.value||'').trim();
+    if(n||pr) spRows.push({hole:h,winner:n,prize:pr,cash,pref});
+  });
   d.spRows=spRows;
   // Draws
   d.meat=[1,2,3].map(i=>({
@@ -1185,10 +1206,21 @@ function loadDraft(){
     const f=document.getElementById(`pog-flt-${h}`); if(f) f.value=r.flt||'';
   });
   // Skill shots
-  if(d.spRows) for(let h=1;h<=18;h++){
-    const r=d.spRows[h]; if(!r) continue;
-    const n=document.getElementById(`sp-name-${h}`); if(n) n.value=r.name;
-    const p=document.getElementById(`sp-prize-${h}`); if(p) p.value=r.prize;
+  if(d.spRows && Array.isArray(d.spRows)){
+    buildSkill(); // reset to 18 blank rows
+    const byHole={};
+    d.spRows.forEach(r=>{ (byHole[r.hole]=byHole[r.hole]||[]).push(r); });
+    for(let h=1;h<=18;h++){
+      const rows=byHole[h]||[]; if(!rows.length) continue;
+      rows.forEach((r,i)=>{
+        if(i>0) addSkillRow(h,false); // add extra row
+        const uid=i===0?`${h}-0`:`${h}-${skillExtraRows[h]||i}`;
+        const n=document.getElementById(`sp-name-${uid}`); if(n) n.value=r.winner||'';
+        const p=document.getElementById(`sp-prize-${uid}`); if(p) p.value=r.prize||'';
+        const c=document.getElementById(`sp-cash-${uid}`); if(c) c.value=r.cash||'';
+        const pf=document.getElementById(`sp-pref-${uid}`); if(pf) pf.value=r.pref||'';
+      });
+    }
   }
   // Draws
   if(d.meat) d.meat.forEach((row,i)=>{
@@ -1529,12 +1561,22 @@ function loadCommittedWeek(){
   });
 
   // ── Skill shots ──
-  // wk.skill = [{hole,winner,prize}]
-  if(wk.skill) wk.skill.forEach(r=>{
-    const h=r.hole;
-    const n=document.getElementById(`sp-name-${h}`); if(n) n.value=r.winner||'';
-    const p=document.getElementById(`sp-prize-${h}`); if(p) p.value=r.prize||'';
-  });
+  if(wk.skill && wk.skill.length){
+    buildSkill(); // reset to 18 blank rows
+    const byHole={};
+    wk.skill.forEach(r=>{ (byHole[r.hole]=byHole[r.hole]||[]).push(r); });
+    for(let h=1;h<=18;h++){
+      const rows=byHole[h]||[]; if(!rows.length) continue;
+      rows.forEach((r,i)=>{
+        if(i>0) addSkillRow(h,false);
+        const uid=i===0?`${h}-0`:`${h}-${skillExtraRows[h]||i}`;
+        const n=document.getElementById(`sp-name-${uid}`); if(n) n.value=r.winner||'';
+        const p=document.getElementById(`sp-prize-${uid}`); if(p) p.value=r.prize||'';
+        const c=document.getElementById(`sp-cash-${uid}`); if(c) c.value=r.cash||'';
+        const pf=document.getElementById(`sp-pref-${uid}`); if(pf) pf.value=r.pref||'';
+      });
+    }
+  }
 
   // ── Draws ──
   // wk.meat = [{draw,winner,prize,pref}]
@@ -1678,13 +1720,17 @@ function generatePayout(previewOnly=false){
     }
   }
 
-  // Collect skill
+  // Collect skill — all rows including extras
   const skillData=[];
-  for(let h=1;h<=18;h++){
-    const n=(document.getElementById(`sp-name-${h}`)?.value||'').trim();
-    const pr=(document.getElementById(`sp-prize-${h}`)?.value||'').trim();
-    skillData.push({hole:h,winner:n,prize:pr});
-  }
+  document.querySelectorAll('#skill-tbody tr[data-hole]').forEach(tr=>{
+    const uid=tr.id.replace('sk-row-','');
+    const h=parseInt(tr.dataset.hole);
+    const n=(document.getElementById(`sp-name-${uid}`)?.value||'').trim();
+    const pr=(document.getElementById(`sp-prize-${uid}`)?.value||'').trim();
+    const cash=parseFloat(document.getElementById(`sp-cash-${uid}`)?.value)||0;
+    const pref=(document.getElementById(`sp-pref-${uid}`)?.value||'').trim();
+    if(n||pr) skillData.push({hole:h,winner:n,prize:pr,cash,pref});
+  });
 
   // Collect draws
   const meatData=[1,2,3].map(i=>({
@@ -1714,6 +1760,7 @@ function generatePayout(previewOnly=false){
   netData.forEach(r=>addMW(r.pname,'net',r.prize));
   skinsData.filter(r=>(r.paid||r.guest)&&r.winner).forEach(r=>addMW(r.winner,'skins',r.payout));
   pogData.filter(r=>(r.paid||r.guest)&&r.winner).forEach(r=>addMW(r.winner,'pog',r.payout));
+  skillData.filter(r=>r.winner&&r.cash>0).forEach(r=>addMW(r.winner,'skill',r.cash));
   meatData.forEach(r=>addMW(r.winner,'draw',0)); // meat is non-cash
   if(ffWinner&&ffAmount) addMW(ffWinner,'draw',ffAmount);
   rdData.forEach(r=>addMW(r.name,'draw',r.amount));
@@ -1840,9 +1887,11 @@ function generatePayout(previewOnly=false){
     // SKILL
     const fs=skillData.filter(r=>r.winner||r.prize);
     html+=`<div class="psec"><div class="ptitle">Skill Prizes — Sponsor Awards</div>
-      <table class="pt"><thead><tr><th>Hole</th><th>Winner</th><th>Prize</th></tr></thead><tbody>`;
-    if(!fs.length){html+=`<tr><td colspan="3" style="color:var(--mut);padding:8px 9px;">No entries</td></tr>`;}
-    else fs.forEach(r=>{html+=`<tr><td style="font-weight:600;">${r.hole}</td><td>${r.winner||'—'}</td><td style="color:var(--mut);">${r.prize||'—'}</td></tr>`;});
+      <table class="pt"><thead><tr><th>Hole</th><th>Winner</th><th>Prize</th><th class="r">Cash</th><th>Payout</th></tr></thead><tbody>`;
+    if(!fs.length){html+=`<tr><td colspan="5" style="color:var(--mut);padding:8px 9px;">No entries</td></tr>`;}
+    else fs.forEach(r=>{html+=`<tr><td style="font-weight:600;">${r.hole}</td><td>${r.winner||'—'}</td><td style="color:var(--mut);">${r.prize||'—'}</td>
+      <td class="r">${r.cash?'<span class="money">$'+Number(r.cash).toFixed(2)+'</span>':'—'}</td>
+      <td>${r.cash&&r.pref?`<span class="pref-bar ${r.pref==='Bar'?'pref-bar':r.pref==='Pro Shop'?'pref-pro':'pref-cash'}">${r.pref}</span>`:'—'}</td></tr>`;});
     html+=`</tbody></table></div>`;
 
     // RANDOM DRAW
