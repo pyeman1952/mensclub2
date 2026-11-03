@@ -1441,7 +1441,7 @@ function initSkinsPasteListeners(){
   });
 }
 
-function loadCommittedWeek(){
+async function loadCommittedWeek(){
   const sel=document.getElementById('week-load-select');
   const weekId=sel?.value; // read BEFORE repopulating (rebuild resets selection)
   populateWeekLoadSelect(); // refresh list
@@ -1451,6 +1451,18 @@ function loadCommittedWeek(){
   if(!wk){alert('Week not found in saved data.');return;}
   const label=wk.name||wk.date||weekId;
   if(!confirm(`Load "${label}" back into the entry form?\n\nThis will overwrite any current entries. You can re-commit after making changes.`)) return;
+
+  // Fetch public JSON for fallback data (net, skins, pog, meat, rdData)
+  let jsonWk=null;
+  try{
+    const r=await fetch('https://raw.githubusercontent.com/pyeman1952/mensclub2/main/payout-data.json?cb='+Date.now());
+    if(r.ok){
+      const jd=await r.json();
+      // Match by id, or by date if id differs slightly
+      jsonWk=(jd.weeks||[]).find(w=>w.id===weekId)||
+              (jd.weeks||[]).find(w=>w.date===wk.date)||null;
+    }
+  }catch(e){ /* network unavailable — use localStorage only */ }
 
   // ── Header fields ──
   // Derive week number and tournament name from stored name e.g. "Week 3 — Medal"
@@ -1523,25 +1535,27 @@ function loadCommittedWeek(){
   }
 
   // ── Net rows ──
-  // wk.netData = [{place,pname,gross,score,hcp,cb,prize,flt}]
-  if(wk.netData){
-    wk.netData.forEach(row=>{
-      const p=row.place; if(p<1||p>15) return;
-      const nn=document.getElementById(`nn-${p}`); if(nn) nn.value=row.pname||'';
-      const ng=document.getElementById(`ng-${p}`); if(ng) ng.value=row.gross||'';
-      const no=document.getElementById(`no-${p}`); if(no) no.value=row.netOut||'';
-      const ni=document.getElementById(`ni-${p}`); if(ni) ni.value=row.netIn||'';
-      const ns=document.getElementById(`ns-${p}`); if(ns) ns.value=row.score||'';
-      const nh=document.getElementById(`nh-${p}`); if(nh) nh.value=row.hcp||'';
-      const nc=document.getElementById(`nc-${p}`); if(nc) nc.checked=!!row.cb;
-      const np=document.getElementById(`np-${p}`); if(np) np.value=row.prize||'';
-      const nf=document.getElementById(`nf-${p}`); if(nf) nf.value=row.flt||'';
-    });
-  }
+  // localStorage: wk.netData [{place,pname,gross,netOut,netIn,score,hcp,cb,prize,flt}]
+  // JSON fallback: jsonWk.net [{place,pname,gross,score,hcp,cb,prize,flt}]
+  const netSrc=wk.netData||(jsonWk&&jsonWk.net)||[];
+  netSrc.forEach(row=>{
+    const p=row.place; if(p<1||p>15) return;
+    const nn=document.getElementById(`nn-${p}`); if(nn) nn.value=row.pname||'';
+    const ng=document.getElementById(`ng-${p}`); if(ng) ng.value=row.gross||'';
+    const no=document.getElementById(`no-${p}`); if(no) no.value=row.netOut||'';
+    const ni=document.getElementById(`ni-${p}`); if(ni) ni.value=row.netIn||'';
+    const ns=document.getElementById(`ns-${p}`); if(ns) ns.value=row.score||'';
+    const nh=document.getElementById(`nh-${p}`); if(nh) nh.value=row.hcp||'';
+    const nc=document.getElementById(`nc-${p}`); if(nc) nc.checked=!!row.cb;
+    const np=document.getElementById(`np-${p}`); if(np) np.value=row.prize||'';
+    const nf=document.getElementById(`nf-${p}`); if(nf) nf.value=row.flt||'';
+  });
 
   // ── Skins ──
-  // wk.skinsData = [{hole,winner,score,gross,runPot,stored,weekly,paid,flt}]
-  if(wk.skinsData) wk.skinsData.forEach(r=>{
+  // localStorage: wk.skinsData [{hole,winner,score,gross,runPot,stored,weekly,paid,flt}]
+  // JSON fallback: jsonWk.skins [{hole,winner,score,gross,runPot,stored,weekly,paid,flt}]
+  const skinsSrc=wk.skinsData||(jsonWk&&jsonWk.skins)||[];
+  skinsSrc.forEach(r=>{
     const h=r.hole;
     const n=document.getElementById(`sk-name-${h}`); if(n) n.value=r.winner||'';
     const s=document.getElementById(`sk-score-${h}`); if(s) s.value=r.score||'';
@@ -1551,8 +1565,10 @@ function loadCommittedWeek(){
   });
 
   // ── POG ──
-  // wk.pogData = [{hole,winner,runPot,stored,weekly,paid,flt,guest}]
-  if(wk.pogData) wk.pogData.forEach(r=>{
+  // localStorage: wk.pogData [{hole,winner,runPot,stored,weekly,paid,flt,guest}]
+  // JSON fallback: jsonWk.pog [{hole,winner,runPot,stored,weekly,paid,flt}]
+  const pogSrc=wk.pogData||(jsonWk&&jsonWk.pog)||[];
+  pogSrc.forEach(r=>{
     const h=r.hole;
     const n=document.getElementById(`pog-name-${h}`); if(n) n.value=r.winner||'';
     const c=document.getElementById(`pog-paid-${h}`); if(c) c.checked=!!r.paid;
@@ -1579,15 +1595,20 @@ function loadCommittedWeek(){
   }
 
   // ── Draws ──
-  // wk.meat = [{draw,winner,prize,pref}]
-  if(wk.meat) wk.meat.forEach(r=>{
+  // localStorage: wk.meat [{draw,winner,prize,pref}]
+  // JSON fallback: jsonWk.meat [{draw,winner,prize,pref}]  (same field names)
+  const meatSrc=wk.meat||(jsonWk&&jsonWk.meat)||[];
+  meatSrc.forEach(r=>{
     const i=r.draw;
     const w=document.getElementById(`meat-${i}`); if(w) w.value=r.winner||'';
     const pr=document.getElementById(`meat-prize-${i}`); if(pr) pr.value=r.prize||'';
     const pf=document.getElementById(`meat-pref-${i}`); if(pf) pf.value=r.pref||'Bar';
   });
   // Random Draw
-  if(wk.rdData) wk.rdData.forEach((row,i)=>{
+  // localStorage: wk.rdData [{name,amount,pref}]
+  // JSON fallback: jsonWk.rdData [{name,amount,pref}]
+  const rdSrc=wk.rdData||(jsonWk&&jsonWk.rdData)||[];
+  rdSrc.forEach((row,i)=>{
     const idx=i+1;
     const n=document.getElementById(`rd-name-${idx}`); if(n) n.value=row.name||'';
     const a=document.getElementById(`rd-amount-${idx}`); if(a) a.value=row.amount||'';
@@ -1601,7 +1622,8 @@ function loadCommittedWeek(){
 
   recalcPools();
   showTab('setup');
-  alert(`"${label}" loaded into form.\n\nReview entries, make any corrections, then Generate & Commit when ready.\n\nNote: re-committing will overwrite the existing record for this date.`);
+  const jsonNote=jsonWk?' Some fields were filled from the public results file (net/skins/pog/draws).':'';
+  alert(`"${label}" loaded into form.${jsonNote}\n\nReview entries, make any corrections, then Generate & Commit when ready.\n\nNote: re-committing will overwrite the existing record for this date.`);
 }
 
 // ── Generate payout ───────────────────────────────────────────────────────────
