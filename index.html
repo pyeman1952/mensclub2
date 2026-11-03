@@ -1256,8 +1256,8 @@ function populateWeekLoadSelect(){
   sorted.forEach(w=>{
     const opt=document.createElement('option');
     opt.value=w.id;
-    const d=w.date||w.id; const n=w.name||d;
-    opt.textContent=`${n} — ${d}`;
+    const d=w.date||w.id; const n=(w.name||d).replace(/—|–/g,'-');
+    opt.textContent=`${n} - ${d}`;
     sel.appendChild(opt);
   });
   if(cur) sel.value=cur;
