@@ -1331,6 +1331,13 @@ function initNetPasteListeners(){
         netOut   = parts[4].trim();
         netIn    = parts[5].trim();
         netTotal = parts[6].trim();
+      } else if(parts.length === 6){
+        // Place | Flight | Name | Gross | Hcp | Net
+        flt      = parts[1].trim();
+        name     = parts[2].trim();
+        gross    = parts[3].trim();
+        hcp      = parts[4].trim();
+        netTotal = parts[5].trim();
       } else if(parts.length === 5){
         // Flight | Name | Gross | Hcp | Net
         flt      = parts[0].trim();
