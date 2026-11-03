@@ -1442,9 +1442,9 @@ function initSkinsPasteListeners(){
 }
 
 function loadCommittedWeek(){
-  populateWeekLoadSelect(); // ensure fresh list
   const sel=document.getElementById('week-load-select');
-  const weekId=sel?.value;
+  const weekId=sel?.value; // read BEFORE repopulating (rebuild resets selection)
+  populateWeekLoadSelect(); // refresh list
   if(!weekId){alert('Please select a week from the dropdown first.');return;}
   const saved=LS.get('weeks',[]);
   const wk=saved.find(w=>w.id===weekId);
