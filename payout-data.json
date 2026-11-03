@@ -2,7 +2,7 @@
   "weeks": [
     {
       "id": "November_1-_2026",
-      "name": "Week 4 — Regular Golf",
+      "name": "Week 4 \u2014 Regular Golf",
       "date": "November 1, 2026",
       "notes": "Frost Delayed",
       "cancelled": false,
@@ -17,7 +17,7 @@
           "place": 1,
           "posLabel": "1st",
           "flt": "A",
-          "pname": "Koster, Greg",
+          "pname": "Greg Koster",
           "out": "40",
           "inV": "34",
           "score": "74",
@@ -29,7 +29,7 @@
           "place": 1,
           "posLabel": "1st",
           "flt": "B",
-          "pname": "Alberti, Silvio",
+          "pname": "Silvio Alberti",
           "out": "42",
           "inV": "39",
           "score": "81",
@@ -41,7 +41,7 @@
           "place": 2,
           "posLabel": "2nd",
           "flt": "B",
-          "pname": "Koster, Gerry",
+          "pname": "Gerry Koster",
           "out": "41",
           "inV": "41",
           "score": "82",
@@ -53,7 +53,7 @@
           "place": 2,
           "posLabel": "2nd",
           "flt": "C",
-          "pname": "Rushton, Doug",
+          "pname": "Doug Rushton",
           "out": "45",
           "inV": "39",
           "score": "84",
@@ -65,7 +65,7 @@
           "place": 4,
           "posLabel": "4th",
           "flt": "C",
-          "pname": "Rallison, Gord",
+          "pname": "Gord Rallison",
           "out": "44",
           "inV": "42",
           "score": "86",
@@ -77,7 +77,7 @@
           "place": 1,
           "posLabel": "1st",
           "flt": "D",
-          "pname": "Sheldon, Rick",
+          "pname": "Rick Sheldon",
           "out": "47",
           "inV": "45",
           "score": "92",
@@ -89,7 +89,7 @@
           "place": 2,
           "posLabel": "2nd",
           "flt": "D",
-          "pname": "Lychak, Dennis",
+          "pname": "Dennis Lychak",
           "out": "46",
           "inV": "47",
           "score": "93",
@@ -101,7 +101,7 @@
           "place": 3,
           "posLabel": "3rd",
           "flt": "D",
-          "pname": "Cox, Jason",
+          "pname": "Jason Cox",
           "out": "45",
           "inV": "48",
           "score": "93",
@@ -113,7 +113,7 @@
         "A": [
           {
             "place": 1,
-            "pname": "Koster, Greg",
+            "pname": "Greg Koster",
             "out": "40",
             "inV": "34",
             "score": "74",
@@ -124,7 +124,7 @@
         "B": [
           {
             "place": 1,
-            "pname": "Alberti, Silvio",
+            "pname": "Silvio Alberti",
             "out": "42",
             "inV": "39",
             "score": "81",
@@ -133,7 +133,7 @@
           },
           {
             "place": 2,
-            "pname": "Koster, Gerry",
+            "pname": "Gerry Koster",
             "out": "41",
             "inV": "41",
             "score": "82",
@@ -144,7 +144,7 @@
         "C": [
           {
             "place": 2,
-            "pname": "Rushton, Doug",
+            "pname": "Doug Rushton",
             "out": "45",
             "inV": "39",
             "score": "84",
@@ -153,7 +153,7 @@
           },
           {
             "place": 4,
-            "pname": "Rallison, Gord",
+            "pname": "Gord Rallison",
             "out": "44",
             "inV": "42",
             "score": "86",
@@ -164,7 +164,7 @@
         "D": [
           {
             "place": 1,
-            "pname": "Sheldon, Rick",
+            "pname": "Rick Sheldon",
             "out": "47",
             "inV": "45",
             "score": "92",
@@ -173,7 +173,7 @@
           },
           {
             "place": 2,
-            "pname": "Lychak, Dennis",
+            "pname": "Dennis Lychak",
             "out": "46",
             "inV": "47",
             "score": "93",
@@ -182,7 +182,7 @@
           },
           {
             "place": 3,
-            "pname": "Cox, Jason",
+            "pname": "Jason Cox",
             "out": "45",
             "inV": "48",
             "score": "93",
@@ -198,15 +198,15 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0–5",
-        "B": "6–11",
-        "C": "12–17",
+        "A": "0\u20135",
+        "B": "6\u201311",
+        "C": "12\u201317",
         "D": "18+"
       },
       "net": [
         {
           "place": 1,
-          "pname": "Schwarz, Mike",
+          "pname": "Mike Schwarz",
           "gross": "83",
           "netOut": "",
           "netIn": "",
@@ -218,7 +218,7 @@
         },
         {
           "place": 2,
-          "pname": "De Goede, Thyssen",
+          "pname": "Thyssen De Goede",
           "gross": "84",
           "netOut": "",
           "netIn": "",
@@ -230,7 +230,7 @@
         },
         {
           "place": 3,
-          "pname": "Fauteux, Dave",
+          "pname": "Dave Fauteux",
           "gross": "96",
           "netOut": "",
           "netIn": "",
@@ -242,7 +242,7 @@
         },
         {
           "place": 4,
-          "pname": "Murray, Scott",
+          "pname": "Scott Murray",
           "gross": "82",
           "netOut": "",
           "netIn": "",
@@ -254,7 +254,7 @@
         },
         {
           "place": 5,
-          "pname": "Baker, Ted",
+          "pname": "Ted Baker",
           "gross": "98",
           "netOut": "",
           "netIn": "",
@@ -266,7 +266,7 @@
         },
         {
           "place": 6,
-          "pname": "Allan, Keith",
+          "pname": "Keith Allan",
           "gross": "88",
           "netOut": "",
           "netIn": "",
@@ -278,7 +278,7 @@
         },
         {
           "place": 7,
-          "pname": "Matheson, Mike",
+          "pname": "Mike Matheson",
           "gross": "101",
           "netOut": "",
           "netIn": "",
@@ -290,7 +290,7 @@
         },
         {
           "place": 8,
-          "pname": "Titchener, Peter",
+          "pname": "Peter Titchener",
           "gross": "88",
           "netOut": "",
           "netIn": "",
@@ -302,7 +302,7 @@
         },
         {
           "place": 9,
-          "pname": "Mullock, Kelly",
+          "pname": "Kelly Mullock",
           "gross": "88",
           "netOut": "",
           "netIn": "",
@@ -314,7 +314,7 @@
         },
         {
           "place": 10,
-          "pname": "Dawson, Rick",
+          "pname": "Rick Dawson",
           "gross": "84",
           "netOut": "",
           "netIn": "",
@@ -326,7 +326,7 @@
         },
         {
           "place": 11,
-          "pname": "Smith, Darrell",
+          "pname": "Darrell Smith",
           "gross": "87",
           "netOut": "",
           "netIn": "",
@@ -338,7 +338,7 @@
         },
         {
           "place": 12,
-          "pname": "Nickerson, Corey",
+          "pname": "Corey Nickerson",
           "gross": "87",
           "netOut": "",
           "netIn": "",
@@ -350,7 +350,7 @@
         },
         {
           "place": 13,
-          "pname": "Ferguson, Larry",
+          "pname": "Larry Ferguson",
           "gross": "76",
           "netOut": "",
           "netIn": "",
@@ -442,7 +442,7 @@
         },
         {
           "hole": 9,
-          "winner": "Schwarz, Mike",
+          "winner": "Mike Schwarz",
           "score": "2N",
           "gross": "",
           "runPot": 79,
@@ -520,7 +520,7 @@
         },
         {
           "hole": 18,
-          "winner": "Mullock, Kelly",
+          "winner": "Kelly Mullock",
           "score": "2N",
           "gross": "",
           "runPot": 41,
@@ -568,7 +568,7 @@
         },
         {
           "hole": 15,
-          "winner": "Tarbuck, Bob",
+          "winner": "Bob Tarbuck",
           "runPot": 113,
           "payout": 113,
           "stored": 69,
@@ -592,21 +592,21 @@
       "skill": [
         {
           "hole": 2,
-          "winner": "Appleyard, Laurie",
+          "winner": "Laurie Appleyard",
           "prize": "LP Sponsored by Men's Club",
           "cash": 20,
           "pref": ""
         },
         {
           "hole": 5,
-          "winner": "Baker, Ted",
+          "winner": "Ted Baker",
           "prize": "KP 2nd shot Sponsored by Speer Golf",
           "cash": 0,
           "pref": ""
         },
         {
           "hole": 5,
-          "winner": "Sheldon, Rick",
+          "winner": "Rick Sheldon",
           "prize": "LP Sponsored by the Men's Club",
           "cash": 20,
           "pref": ""
@@ -620,7 +620,7 @@
         },
         {
           "hole": 9,
-          "winner": "Schwarz, Mike",
+          "winner": "Mike Schwarz",
           "prize": "LP Sponsored by Speer Golf",
           "cash": 0,
           "pref": ""
@@ -634,14 +634,14 @@
         },
         {
           "hole": 10,
-          "winner": "Yarrow, Ben",
+          "winner": "Ben Yarrow",
           "prize": "LP Sponsored by the Men's Club",
           "cash": 20,
           "pref": ""
         },
         {
           "hole": 11,
-          "winner": "Cox, Jason",
+          "winner": "Jason Cox",
           "prize": "LP Sponsored by the Men's Club",
           "cash": 20,
           "pref": ""
@@ -659,7 +659,7 @@
       "rdData": [],
       "moneyWinners": [
         {
-          "name": "Alberti, Silvio",
+          "name": "Silvio Alberti",
           "pref": {
             "bar": 0,
             "proshop": 30,
@@ -676,7 +676,7 @@
           "weeks": 1
         },
         {
-          "name": "Allan, Keith",
+          "name": "Keith Allan",
           "pref": {
             "bar": 20,
             "proshop": 0,
@@ -693,7 +693,7 @@
           "weeks": 1
         },
         {
-          "name": "Appleyard, Laurie",
+          "name": "Laurie Appleyard",
           "pref": {
             "bar": 0,
             "proshop": 0,
@@ -711,7 +711,7 @@
           "skill": null
         },
         {
-          "name": "Baker, Ted",
+          "name": "Ted Baker",
           "pref": {
             "bar": 20,
             "proshop": 0,
@@ -728,7 +728,7 @@
           "weeks": 1
         },
         {
-          "name": "Cox, Jason",
+          "name": "Jason Cox",
           "pref": {
             "bar": 20,
             "proshop": 0,
@@ -746,7 +746,7 @@
           "skill": null
         },
         {
-          "name": "Dawson, Rick",
+          "name": "Rick Dawson",
           "pref": {
             "bar": 10,
             "proshop": 0,
@@ -763,7 +763,7 @@
           "weeks": 1
         },
         {
-          "name": "De Goede, Thyssen",
+          "name": "Thyssen De Goede",
           "pref": {
             "bar": 0,
             "proshop": 30,
@@ -780,7 +780,7 @@
           "weeks": 1
         },
         {
-          "name": "Fauteux, Dave",
+          "name": "Dave Fauteux",
           "pref": {
             "bar": 25,
             "proshop": 0,
@@ -797,7 +797,7 @@
           "weeks": 1
         },
         {
-          "name": "Ferguson, Larry",
+          "name": "Larry Ferguson",
           "pref": {
             "bar": 0,
             "proshop": 10,
@@ -814,7 +814,7 @@
           "weeks": 1
         },
         {
-          "name": "Koster, Gerry",
+          "name": "Gerry Koster",
           "pref": {
             "bar": 0,
             "proshop": 25,
@@ -831,7 +831,7 @@
           "weeks": 1
         },
         {
-          "name": "Koster, Greg",
+          "name": "Greg Koster",
           "pref": {
             "bar": 0,
             "proshop": 30,
@@ -848,7 +848,7 @@
           "weeks": 1
         },
         {
-          "name": "Lychak, Dennis",
+          "name": "Dennis Lychak",
           "pref": {
             "bar": 0,
             "proshop": 25,
@@ -865,7 +865,7 @@
           "weeks": 1
         },
         {
-          "name": "Matheson, Mike",
+          "name": "Mike Matheson",
           "pref": {
             "bar": 0,
             "proshop": 20,
@@ -882,7 +882,7 @@
           "weeks": 1
         },
         {
-          "name": "Mullock, Kelly",
+          "name": "Kelly Mullock",
           "pref": {
             "bar": 0,
             "proshop": 56,
@@ -899,7 +899,7 @@
           "weeks": 1
         },
         {
-          "name": "Murray, Scott",
+          "name": "Scott Murray",
           "pref": {
             "bar": 20,
             "proshop": 0,
@@ -916,7 +916,7 @@
           "weeks": 1
         },
         {
-          "name": "Nickerson, Corey",
+          "name": "Corey Nickerson",
           "pref": {
             "bar": 0,
             "proshop": 10,
@@ -933,7 +933,7 @@
           "weeks": 1
         },
         {
-          "name": "Rallison, Gord",
+          "name": "Gord Rallison",
           "pref": {
             "bar": 25,
             "proshop": 0,
@@ -950,7 +950,7 @@
           "weeks": 1
         },
         {
-          "name": "Rushton, Doug",
+          "name": "Doug Rushton",
           "pref": {
             "bar": 0,
             "proshop": 30,
@@ -967,7 +967,7 @@
           "weeks": 1
         },
         {
-          "name": "Schwarz, Mike",
+          "name": "Mike Schwarz",
           "pref": {
             "bar": 0,
             "proshop": 119,
@@ -984,7 +984,7 @@
           "weeks": 1
         },
         {
-          "name": "Sheldon, Rick",
+          "name": "Rick Sheldon",
           "pref": {
             "bar": 0,
             "proshop": 30,
@@ -1002,7 +1002,7 @@
           "skill": null
         },
         {
-          "name": "Smith, Darrell",
+          "name": "Darrell Smith",
           "pref": {
             "bar": 10,
             "proshop": 0,
@@ -1019,7 +1019,7 @@
           "weeks": 1
         },
         {
-          "name": "Tarbuck, Bob",
+          "name": "Bob Tarbuck",
           "pref": {
             "bar": 113,
             "proshop": 0,
@@ -1036,7 +1036,7 @@
           "weeks": 1
         },
         {
-          "name": "Titchener, Peter",
+          "name": "Peter Titchener",
           "pref": {
             "bar": 0,
             "proshop": 15,
@@ -1053,7 +1053,7 @@
           "weeks": 1
         },
         {
-          "name": "Yarrow, Ben",
+          "name": "Ben Yarrow",
           "pref": {
             "bar": 0,
             "proshop": 0,
@@ -1081,7 +1081,7 @@
     },
     {
       "id": "October_25-_2026",
-      "name": "Week 3 — Regular Golf",
+      "name": "Week 3 \u2014 Regular Golf",
       "date": "October 25, 2026",
       "notes": "",
       "cancelled": false,
@@ -1096,7 +1096,7 @@
           "place": 2,
           "posLabel": "2nd",
           "flt": "A",
-          "pname": "Haigh, Iain",
+          "pname": "Iain Haigh",
           "out": "42",
           "inV": "35",
           "score": "77",
@@ -1108,7 +1108,7 @@
           "place": 3,
           "posLabel": "3rd",
           "flt": "A",
-          "pname": "Follis, Craig",
+          "pname": "Craig Follis",
           "out": "41",
           "inV": "36",
           "score": "77",
@@ -1120,7 +1120,7 @@
           "place": 1,
           "posLabel": "1st",
           "flt": "B",
-          "pname": "Stewart, Ham",
+          "pname": "Ham Stewart",
           "out": "44",
           "inV": "43",
           "score": "87",
@@ -1132,7 +1132,7 @@
           "place": 2,
           "posLabel": "2nd",
           "flt": "B",
-          "pname": "Haaf, Dan",
+          "pname": "Dan Haaf",
           "out": "45",
           "inV": "44",
           "score": "89",
@@ -1144,7 +1144,7 @@
           "place": 1,
           "posLabel": "1st",
           "flt": "C",
-          "pname": "De Goede, Thyssen",
+          "pname": "Thyssen De Goede",
           "out": "45",
           "inV": "43",
           "score": "88",
@@ -1156,7 +1156,7 @@
           "place": 3,
           "posLabel": "3rd",
           "flt": "C",
-          "pname": "Lychak, Dennis",
+          "pname": "Dennis Lychak",
           "out": "49",
           "inV": "48",
           "score": "97",
@@ -1168,7 +1168,7 @@
         "A": [
           {
             "place": 2,
-            "pname": "Haigh, Iain",
+            "pname": "Iain Haigh",
             "out": "42",
             "inV": "35",
             "score": "77",
@@ -1177,7 +1177,7 @@
           },
           {
             "place": 3,
-            "pname": "Follis, Craig",
+            "pname": "Craig Follis",
             "out": "41",
             "inV": "36",
             "score": "77",
@@ -1188,7 +1188,7 @@
         "B": [
           {
             "place": 1,
-            "pname": "Stewart, Ham",
+            "pname": "Ham Stewart",
             "out": "44",
             "inV": "43",
             "score": "87",
@@ -1197,7 +1197,7 @@
           },
           {
             "place": 2,
-            "pname": "Haaf, Dan",
+            "pname": "Dan Haaf",
             "out": "45",
             "inV": "44",
             "score": "89",
@@ -1208,7 +1208,7 @@
         "C": [
           {
             "place": 1,
-            "pname": "De Goede, Thyssen",
+            "pname": "Thyssen De Goede",
             "out": "45",
             "inV": "43",
             "score": "88",
@@ -1217,7 +1217,7 @@
           },
           {
             "place": 3,
-            "pname": "Lychak, Dennis",
+            "pname": "Dennis Lychak",
             "out": "49",
             "inV": "48",
             "score": "97",
@@ -1234,15 +1234,15 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0–5",
-        "B": "6–11",
-        "C": "12–17",
+        "A": "0\u20135",
+        "B": "6\u201311",
+        "C": "12\u201317",
         "D": "18+"
       },
       "net": [
         {
           "place": 1,
-          "pname": "Haigh, Gavin",
+          "pname": "Gavin Haigh",
           "gross": "74",
           "netOut": "",
           "netIn": "",
@@ -1254,7 +1254,7 @@
         },
         {
           "place": 2,
-          "pname": "Cox, Jason",
+          "pname": "Jason Cox",
           "gross": "96",
           "netOut": "",
           "netIn": "",
@@ -1266,7 +1266,7 @@
         },
         {
           "place": 3,
-          "pname": "Rushton, Doug",
+          "pname": "Doug Rushton",
           "gross": "89",
           "netOut": "",
           "netIn": "",
@@ -1278,7 +1278,7 @@
         },
         {
           "place": 4,
-          "pname": "Smith, Darrell",
+          "pname": "Darrell Smith",
           "gross": "91",
           "netOut": "",
           "netIn": "",
@@ -1290,7 +1290,7 @@
         },
         {
           "place": 5,
-          "pname": "Smith, Rick",
+          "pname": "Rick Smith",
           "gross": "91",
           "netOut": "",
           "netIn": "",
@@ -1302,7 +1302,7 @@
         },
         {
           "place": 6,
-          "pname": "VanVelzen, Paul",
+          "pname": "Paul VanVelzen",
           "gross": "83",
           "netOut": "",
           "netIn": "",
@@ -1329,7 +1329,7 @@
         },
         {
           "hole": 2,
-          "winner": "Haigh, Gavin",
+          "winner": "Gavin Haigh",
           "score": "4G",
           "gross": "",
           "runPot": 6,
@@ -1342,7 +1342,7 @@
         },
         {
           "hole": 5,
-          "winner": "Haigh, Iain",
+          "winner": "Iain Haigh",
           "score": "3G",
           "gross": "",
           "runPot": 6,
@@ -1381,7 +1381,7 @@
         },
         {
           "hole": 8,
-          "winner": "Alberti, Silvio",
+          "winner": "Silvio Alberti",
           "score": "3N",
           "gross": "",
           "runPot": 25,
@@ -1420,7 +1420,7 @@
         },
         {
           "hole": 12,
-          "winner": "Follis, Craig",
+          "winner": "Craig Follis",
           "score": "3G",
           "gross": "",
           "runPot": 63,
@@ -1446,7 +1446,7 @@
         },
         {
           "hole": 14,
-          "winner": "Haigh, Gavin",
+          "winner": "Gavin Haigh",
           "score": "3G",
           "gross": "",
           "runPot": 6,
@@ -1564,7 +1564,7 @@
         },
         {
           "hole": 5,
-          "winner": "Lychak, Dennis",
+          "winner": "Dennis Lychak",
           "prize": "KP C flight Sponsored by Speer Golf"
         },
         {
@@ -1579,17 +1579,17 @@
         },
         {
           "hole": 8,
-          "winner": "Haigh, Gavin",
+          "winner": "Gavin Haigh",
           "prize": "9KP 2nd shot A flight Sponsored by Speer Golf"
         },
         {
           "hole": 9,
-          "winner": "Follis, Craig",
+          "winner": "Craig Follis",
           "prize": "LP Sponsored by Speer Golf"
         },
         {
           "hole": 10,
-          "winner": "Schwarz, Mike",
+          "winner": "Mike Schwarz",
           "prize": "KP Sponsored by Subway"
         },
         {
@@ -1629,7 +1629,7 @@
         },
         {
           "hole": 18,
-          "winner": "Smith, Darrell",
+          "winner": "Darrell Smith",
           "prize": "LP Beer and Burger"
         }
       ],
@@ -1649,7 +1649,7 @@
       ],
       "moneyWinners": [
         {
-          "name": "Alberti, Silvio",
+          "name": "Silvio Alberti",
           "pref": {
             "bar": 0,
             "proshop": 25,
@@ -1666,7 +1666,7 @@
           "weeks": 1
         },
         {
-          "name": "Cox, Jason",
+          "name": "Jason Cox",
           "pref": {
             "bar": 25,
             "proshop": 0,
@@ -1683,7 +1683,7 @@
           "weeks": 1
         },
         {
-          "name": "De Goede, Thyssen",
+          "name": "Thyssen De Goede",
           "pref": {
             "bar": 0,
             "proshop": 25,
@@ -1700,7 +1700,7 @@
           "weeks": 1
         },
         {
-          "name": "Fauteux, Dave",
+          "name": "Dave Fauteux",
           "pref": {
             "bar": 40,
             "proshop": 0,
@@ -1717,7 +1717,7 @@
           "weeks": 1
         },
         {
-          "name": "Follis, Craig",
+          "name": "Craig Follis",
           "pref": {
             "bar": 78,
             "proshop": 40,
@@ -1734,7 +1734,7 @@
           "weeks": 1
         },
         {
-          "name": "Haaf, Dan",
+          "name": "Dan Haaf",
           "pref": {
             "bar": 0,
             "proshop": 15,
@@ -1751,7 +1751,7 @@
           "weeks": 1
         },
         {
-          "name": "Haigh, Gavin",
+          "name": "Gavin Haigh",
           "pref": {
             "bar": 0,
             "proshop": 12,
@@ -1768,7 +1768,7 @@
           "weeks": 1
         },
         {
-          "name": "Haigh, Iain",
+          "name": "Iain Haigh",
           "pref": {
             "bar": 0,
             "proshop": 31,
@@ -1785,7 +1785,7 @@
           "weeks": 1
         },
         {
-          "name": "Lychak, Dennis",
+          "name": "Dennis Lychak",
           "pref": {
             "bar": 0,
             "proshop": 15,
@@ -1802,7 +1802,7 @@
           "weeks": 1
         },
         {
-          "name": "Rushton, Doug",
+          "name": "Doug Rushton",
           "pref": {
             "bar": 0,
             "proshop": 15,
@@ -1819,7 +1819,7 @@
           "weeks": 1
         },
         {
-          "name": "Smith, Darrell",
+          "name": "Darrell Smith",
           "pref": {
             "bar": 10,
             "proshop": 0,
@@ -1836,7 +1836,7 @@
           "weeks": 1
         },
         {
-          "name": "Smith, Rick",
+          "name": "Rick Smith",
           "pref": {
             "bar": 0,
             "proshop": 10,
@@ -1853,7 +1853,7 @@
           "weeks": 1
         },
         {
-          "name": "Stewart, Ham",
+          "name": "Ham Stewart",
           "pref": {
             "bar": 25,
             "proshop": 0,
@@ -1870,7 +1870,7 @@
           "weeks": 1
         },
         {
-          "name": "VanVelzen, Paul",
+          "name": "Paul VanVelzen",
           "pref": {
             "bar": 0,
             "proshop": 10,
@@ -2648,7 +2648,7 @@
           "place": 1,
           "posLabel": "1st",
           "flt": "A",
-          "pname": "Koster, Greg",
+          "pname": "Greg Koster",
           "out": "",
           "inV": "",
           "score": "69",
@@ -2660,7 +2660,7 @@
           "place": 2,
           "posLabel": "2nd",
           "flt": "A",
-          "pname": "Carr-Hilton, Mitch",
+          "pname": "Mitch Carr-Hilton",
           "out": "",
           "inV": "",
           "score": "72",
@@ -2672,7 +2672,7 @@
           "place": 3,
           "posLabel": "3rd",
           "flt": "A",
-          "pname": "Haigh, Iain",
+          "pname": "Iain Haigh",
           "out": "",
           "inV": "",
           "score": "74",
@@ -2684,7 +2684,7 @@
           "place": 1,
           "posLabel": "1st",
           "flt": "B",
-          "pname": "Slater, Brian",
+          "pname": "Brian Slater",
           "out": "",
           "inV": "",
           "score": "83",
@@ -2696,7 +2696,7 @@
           "place": 2,
           "posLabel": "2nd",
           "flt": "B",
-          "pname": "Smith, Rick",
+          "pname": "Rick Smith",
           "out": "",
           "inV": "",
           "score": "84",
@@ -2708,7 +2708,7 @@
           "place": 3,
           "posLabel": "3rd",
           "flt": "B",
-          "pname": "Webber, Carl",
+          "pname": "Carl Webber",
           "out": "",
           "inV": "",
           "score": "84",
@@ -2720,7 +2720,7 @@
           "place": 1,
           "posLabel": "1st",
           "flt": "C",
-          "pname": "Goede, Thyssen De",
+          "pname": "Thyssen De Goede",
           "out": "",
           "inV": "",
           "score": "82",
@@ -2732,7 +2732,7 @@
           "place": 2,
           "posLabel": "2nd",
           "flt": "C",
-          "pname": "Allan, Keith",
+          "pname": "Keith Allan",
           "out": "",
           "inV": "",
           "score": "87",
@@ -3551,7 +3551,7 @@
           "place": 1,
           "posLabel": "1st",
           "flt": "A",
-          "pname": "Koster, Greg",
+          "pname": "Greg Koster",
           "out": "35",
           "inV": "33",
           "score": "68",
@@ -3563,7 +3563,7 @@
           "place": 2,
           "posLabel": "2nd",
           "flt": "A",
-          "pname": "Follis, Craig",
+          "pname": "Craig Follis",
           "out": "39",
           "inV": "36",
           "score": "75",
@@ -3575,7 +3575,7 @@
           "place": 3,
           "posLabel": "3rd",
           "flt": "A",
-          "pname": "Carr-Hilton, Mitch",
+          "pname": "Mitch Carr-Hilton",
           "out": "38",
           "inV": "38",
           "score": "76",
@@ -3587,7 +3587,7 @@
           "place": 1,
           "posLabel": "1st",
           "flt": "B",
-          "pname": "Green, Jim",
+          "pname": "Jim Green",
           "out": "42",
           "inV": "40",
           "score": "82",
@@ -3599,7 +3599,7 @@
           "place": 2,
           "posLabel": "2nd",
           "flt": "B",
-          "pname": "Dawson, Rick",
+          "pname": "Rick Dawson",
           "out": "42",
           "inV": "40",
           "score": "82",
@@ -3611,7 +3611,7 @@
           "place": 3,
           "posLabel": "3rd",
           "flt": "B",
-          "pname": "Hunt, Larry",
+          "pname": "Larry Hunt",
           "out": "42",
           "inV": "43",
           "score": "85",
@@ -3623,7 +3623,7 @@
           "place": 1,
           "posLabel": "1st",
           "flt": "C",
-          "pname": "Allen, Keith",
+          "pname": "Keith Allan",
           "out": "44",
           "inV": "41",
           "score": "85",
@@ -3635,7 +3635,7 @@
           "place": 2,
           "posLabel": "2nd",
           "flt": "C",
-          "pname": "Schwarz, Mike",
+          "pname": "Mike Schwarz",
           "out": "44",
           "inV": "43",
           "score": "87",
@@ -3647,7 +3647,7 @@
           "place": 3,
           "posLabel": "3rd",
           "flt": "C",
-          "pname": "Lund, Gord",
+          "pname": "Gord Lund",
           "out": "47",
           "inV": "41",
           "score": "88",
@@ -3658,8 +3658,8 @@
     }
   ],
   "season": {
-    "Alberti, Silvio": {
-      "name": "Alberti, Silvio",
+    "Silvio Alberti": {
+      "name": "Silvio Alberti",
       "pref": {
         "bar": 0,
         "proshop": 25,
@@ -3668,16 +3668,16 @@
         "other": ""
       },
       "gross": 30,
-      "net": 0,
+      "net": 15,
       "skins": 25,
       "pog": 0,
       "draw": 0,
-      "total": 55,
-      "weeks": 2,
+      "total": 70,
+      "weeks": 3,
       "played": 0
     },
-    "Allan, Keith": {
-      "name": "Allan, Keith",
+    "Keith Allan": {
+      "name": "Keith Allan",
       "pref": {
         "bar": 20,
         "proshop": 0,
@@ -3685,17 +3685,17 @@
         "cheque": 0,
         "other": ""
       },
-      "gross": 0,
+      "gross": 30,
       "net": 20,
-      "skins": 0,
+      "skins": 19,
       "pog": 0,
       "draw": 0,
-      "total": 20,
-      "weeks": 1,
+      "total": 69,
+      "weeks": 2,
       "played": 0
     },
-    "Appleyard, Laurie": {
-      "name": "Appleyard, Laurie",
+    "Laurie Appleyard": {
+      "name": "Laurie Appleyard",
       "pref": {
         "bar": 0,
         "proshop": 0,
@@ -3712,8 +3712,8 @@
       "weeks": 1,
       "played": 0
     },
-    "Baker, Ted": {
-      "name": "Baker, Ted",
+    "Ted Baker": {
+      "name": "Ted Baker",
       "pref": {
         "bar": 20,
         "proshop": 0,
@@ -3722,16 +3722,16 @@
         "other": ""
       },
       "gross": 0,
-      "net": 20,
-      "skins": 0,
+      "net": 50,
+      "skins": 38,
       "pog": 0,
       "draw": 0,
-      "total": 20,
-      "weeks": 1,
+      "total": 88,
+      "weeks": 3,
       "played": 0
     },
-    "Cox, Jason": {
-      "name": "Cox, Jason",
+    "Jason Cox": {
+      "name": "Jason Cox",
       "pref": {
         "bar": 25,
         "proshop": 0,
@@ -3748,8 +3748,8 @@
       "weeks": 2,
       "played": 0
     },
-    "Dawson, Rick": {
-      "name": "Dawson, Rick",
+    "Rick Dawson": {
+      "name": "Rick Dawson",
       "pref": {
         "bar": 10,
         "proshop": 0,
@@ -3757,17 +3757,17 @@
         "cheque": 0,
         "other": ""
       },
-      "gross": 0,
+      "gross": 30,
       "net": 10,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 10,
-      "weeks": 1,
+      "total": 40,
+      "weeks": 2,
       "played": 0
     },
-    "De Goede, Thyssen": {
-      "name": "De Goede, Thyssen",
+    "Thyssen De Goede": {
+      "name": "Thyssen De Goede",
       "pref": {
         "bar": 0,
         "proshop": 25,
@@ -3775,17 +3775,17 @@
         "cheque": 0,
         "other": ""
       },
-      "gross": 25,
+      "gross": 65,
       "net": 30,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 55,
-      "weeks": 2,
+      "total": 95,
+      "weeks": 3,
       "played": 0
     },
-    "Fauteux, Dave": {
-      "name": "Fauteux, Dave",
+    "Dave Fauteux": {
+      "name": "Dave Fauteux",
       "pref": {
         "bar": 40,
         "proshop": 0,
@@ -3802,8 +3802,8 @@
       "weeks": 2,
       "played": 0
     },
-    "Ferguson, Larry": {
-      "name": "Ferguson, Larry",
+    "Larry Ferguson": {
+      "name": "Larry Ferguson",
       "pref": {
         "bar": 0,
         "proshop": 10,
@@ -3820,8 +3820,8 @@
       "weeks": 1,
       "played": 0
     },
-    "Koster, Gerry": {
-      "name": "Koster, Gerry",
+    "Gerry Koster": {
+      "name": "Gerry Koster",
       "pref": {
         "bar": 0,
         "proshop": 25,
@@ -3838,8 +3838,8 @@
       "weeks": 1,
       "played": 0
     },
-    "Koster, Greg": {
-      "name": "Koster, Greg",
+    "Greg Koster": {
+      "name": "Greg Koster",
       "pref": {
         "bar": 0,
         "proshop": 30,
@@ -3847,17 +3847,17 @@
         "cheque": 0,
         "other": ""
       },
-      "gross": 30,
+      "gross": 110,
       "net": 0,
       "skins": 0,
-      "pog": 0,
+      "pog": 98,
       "draw": 0,
-      "total": 30,
-      "weeks": 1,
+      "total": 208,
+      "weeks": 3,
       "played": 0
     },
-    "Lychak, Dennis": {
-      "name": "Lychak, Dennis",
+    "Dennis Lychak": {
+      "name": "Dennis Lychak",
       "pref": {
         "bar": 0,
         "proshop": 15,
@@ -3866,16 +3866,16 @@
         "other": ""
       },
       "gross": 40,
-      "net": 0,
+      "net": 20,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 40,
-      "weeks": 2,
+      "total": 60,
+      "weeks": 3,
       "played": 0
     },
-    "Matheson, Mike": {
-      "name": "Matheson, Mike",
+    "Mike Matheson": {
+      "name": "Mike Matheson",
       "pref": {
         "bar": 0,
         "proshop": 20,
@@ -3884,16 +3884,16 @@
         "other": ""
       },
       "gross": 0,
-      "net": 20,
-      "skins": 0,
+      "net": 60,
+      "skins": 38,
       "pog": 0,
       "draw": 0,
-      "total": 20,
-      "weeks": 1,
+      "total": 98,
+      "weeks": 2,
       "played": 0
     },
-    "Mullock, Kelly": {
-      "name": "Mullock, Kelly",
+    "Kelly Mullock": {
+      "name": "Kelly Mullock",
       "pref": {
         "bar": 0,
         "proshop": 56,
@@ -3902,16 +3902,16 @@
         "other": ""
       },
       "gross": 0,
-      "net": 15,
+      "net": 35,
       "skins": 41,
       "pog": 0,
       "draw": 0,
-      "total": 56,
-      "weeks": 1,
+      "total": 76,
+      "weeks": 2,
       "played": 0
     },
-    "Murray, Scott": {
-      "name": "Murray, Scott",
+    "Scott Murray": {
+      "name": "Scott Murray",
       "pref": {
         "bar": 20,
         "proshop": 0,
@@ -3920,16 +3920,16 @@
         "other": ""
       },
       "gross": 0,
-      "net": 20,
+      "net": 40,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 20,
-      "weeks": 1,
+      "total": 40,
+      "weeks": 2,
       "played": 0
     },
-    "Nickerson, Corey": {
-      "name": "Nickerson, Corey",
+    "Corey Nickerson": {
+      "name": "Corey Nickerson",
       "pref": {
         "bar": 0,
         "proshop": 10,
@@ -3940,14 +3940,14 @@
       "gross": 0,
       "net": 10,
       "skins": 0,
-      "pog": 0,
+      "pog": 98,
       "draw": 0,
-      "total": 10,
-      "weeks": 1,
+      "total": 108,
+      "weeks": 2,
       "played": 0
     },
-    "Rallison, Gord": {
-      "name": "Rallison, Gord",
+    "Gord Rallison": {
+      "name": "Gord Rallison",
       "pref": {
         "bar": 25,
         "proshop": 0,
@@ -3964,8 +3964,8 @@
       "weeks": 1,
       "played": 0
     },
-    "Rushton, Doug": {
-      "name": "Rushton, Doug",
+    "Doug Rushton": {
+      "name": "Doug Rushton",
       "pref": {
         "bar": 0,
         "proshop": 15,
@@ -3974,16 +3974,16 @@
         "other": ""
       },
       "gross": 30,
-      "net": 15,
-      "skins": 0,
+      "net": 30,
+      "skins": 38,
       "pog": 0,
       "draw": 0,
-      "total": 45,
-      "weeks": 2,
+      "total": 98,
+      "weeks": 4,
       "played": 0
     },
-    "Schwarz, Mike": {
-      "name": "Schwarz, Mike",
+    "Mike Schwarz": {
+      "name": "Mike Schwarz",
       "pref": {
         "bar": 0,
         "proshop": 119,
@@ -3991,17 +3991,17 @@
         "cheque": 0,
         "other": "turkey prize entered as $40"
       },
-      "gross": 0,
+      "gross": 30,
       "net": 40,
       "skins": 79,
       "pog": 0,
       "draw": 0,
-      "total": 119,
-      "weeks": 1,
+      "total": 149,
+      "weeks": 2,
       "played": 0
     },
-    "Sheldon, Rick": {
-      "name": "Sheldon, Rick",
+    "Rick Sheldon": {
+      "name": "Rick Sheldon",
       "pref": {
         "bar": 0,
         "proshop": 30,
@@ -4018,8 +4018,8 @@
       "weeks": 1,
       "played": 0
     },
-    "Smith, Darrell": {
-      "name": "Smith, Darrell",
+    "Darrell Smith": {
+      "name": "Darrell Smith",
       "pref": {
         "bar": 10,
         "proshop": 0,
@@ -4036,8 +4036,8 @@
       "weeks": 2,
       "played": 0
     },
-    "Tarbuck, Bob": {
-      "name": "Tarbuck, Bob",
+    "Bob Tarbuck": {
+      "name": "Bob Tarbuck",
       "pref": {
         "bar": 113,
         "proshop": 0,
@@ -4046,16 +4046,16 @@
         "other": ""
       },
       "gross": 0,
-      "net": 0,
+      "net": 40,
       "skins": 0,
       "pog": 113,
       "draw": 0,
-      "total": 113,
-      "weeks": 1,
+      "total": 153,
+      "weeks": 3,
       "played": 0
     },
-    "Titchener, Peter": {
-      "name": "Titchener, Peter",
+    "Peter Titchener": {
+      "name": "Peter Titchener",
       "pref": {
         "bar": 0,
         "proshop": 15,
@@ -4072,8 +4072,8 @@
       "weeks": 1,
       "played": 0
     },
-    "Yarrow, Ben": {
-      "name": "Yarrow, Ben",
+    "Ben Yarrow": {
+      "name": "Ben Yarrow",
       "pref": {
         "bar": 0,
         "proshop": 0,
@@ -4090,8 +4090,8 @@
       "weeks": 1,
       "played": 0
     },
-    "Follis, Craig": {
-      "name": "Follis, Craig",
+    "Craig Follis": {
+      "name": "Craig Follis",
       "pref": {
         "bar": 78,
         "proshop": 40,
@@ -4099,17 +4099,17 @@
         "cheque": 0,
         "other": ""
       },
-      "gross": 15,
+      "gross": 45,
       "net": 0,
       "skins": 63,
       "pog": 0,
       "draw": 40,
-      "total": 118,
-      "weeks": 1,
+      "total": 148,
+      "weeks": 2,
       "played": 0
     },
-    "Haaf, Dan": {
-      "name": "Haaf, Dan",
+    "Dan Haaf": {
+      "name": "Dan Haaf",
       "pref": {
         "bar": 0,
         "proshop": 15,
@@ -4119,15 +4119,15 @@
       },
       "gross": 15,
       "net": 0,
-      "skins": 0,
+      "skins": 19,
       "pog": 0,
       "draw": 0,
-      "total": 15,
-      "weeks": 1,
+      "total": 34,
+      "weeks": 2,
       "played": 0
     },
-    "Haigh, Gavin": {
-      "name": "Haigh, Gavin",
+    "Gavin Haigh": {
+      "name": "Gavin Haigh",
       "pref": {
         "bar": 0,
         "proshop": 12,
@@ -4144,8 +4144,8 @@
       "weeks": 1,
       "played": 0
     },
-    "Haigh, Iain": {
-      "name": "Haigh, Iain",
+    "Iain Haigh": {
+      "name": "Iain Haigh",
       "pref": {
         "bar": 0,
         "proshop": 31,
@@ -4153,17 +4153,17 @@
         "cheque": 0,
         "other": ""
       },
-      "gross": 25,
+      "gross": 45,
       "net": 0,
       "skins": 6,
       "pog": 0,
       "draw": 0,
-      "total": 31,
-      "weeks": 1,
+      "total": 51,
+      "weeks": 2,
       "played": 0
     },
-    "Smith, Rick": {
-      "name": "Smith, Rick",
+    "Rick Smith": {
+      "name": "Rick Smith",
       "pref": {
         "bar": 0,
         "proshop": 10,
@@ -4171,17 +4171,17 @@
         "cheque": 0,
         "other": ""
       },
-      "gross": 0,
+      "gross": 30,
       "net": 10,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 10,
-      "weeks": 1,
+      "total": 40,
+      "weeks": 2,
       "played": 0
     },
-    "Stewart, Ham": {
-      "name": "Stewart, Ham",
+    "Ham Stewart": {
+      "name": "Ham Stewart",
       "pref": {
         "bar": 25,
         "proshop": 0,
@@ -4198,8 +4198,8 @@
       "weeks": 1,
       "played": 0
     },
-    "VanVelzen, Paul": {
-      "name": "VanVelzen, Paul",
+    "Paul VanVelzen": {
+      "name": "Paul VanVelzen",
       "pref": {
         "bar": 0,
         "proshop": 10,
@@ -4216,18 +4216,6 @@
       "weeks": 1,
       "played": 0
     },
-    "Keith Allan": {
-      "name": "Keith Allan",
-      "pref": "Bar",
-      "gross": 30,
-      "net": 0,
-      "skins": 19,
-      "pog": 0,
-      "draw": 0,
-      "total": 49,
-      "weeks": 1,
-      "played": 0
-    },
     "Randy Arduini": {
       "name": "Randy Arduini",
       "pref": "Bar",
@@ -4238,18 +4226,6 @@
       "draw": 0,
       "total": 40,
       "weeks": 1,
-      "played": 0
-    },
-    "Ted Baker": {
-      "name": "Ted Baker",
-      "pref": "Pro Shop",
-      "gross": 0,
-      "net": 30,
-      "skins": 38,
-      "pog": 0,
-      "draw": 0,
-      "total": 68,
-      "weeks": 2,
       "played": 0
     },
     "Randy Bennett": {
@@ -4276,47 +4252,11 @@
       "weeks": 2,
       "played": 0
     },
-    "Thyssen De Goede": {
-      "name": "Thyssen De Goede",
-      "pref": "Pro Shop",
-      "gross": 40,
-      "net": 0,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 40,
-      "weeks": 1,
-      "played": 0
-    },
     "Rod Gray": {
       "name": "Rod Gray",
       "pref": "Bar",
       "gross": 0,
       "net": 20,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 20,
-      "weeks": 1,
-      "played": 0
-    },
-    "Dan Haaf": {
-      "name": "Dan Haaf",
-      "pref": "Pro Shop",
-      "gross": 0,
-      "net": 0,
-      "skins": 19,
-      "pog": 0,
-      "draw": 0,
-      "total": 19,
-      "weeks": 1,
-      "played": 0
-    },
-    "Iain Haigh": {
-      "name": "Iain Haigh",
-      "pref": "Pro Shop",
-      "gross": 20,
-      "net": 0,
       "skins": 0,
       "pog": 0,
       "draw": 0,
@@ -4348,32 +4288,8 @@
       "weeks": 1,
       "played": 0
     },
-    "Greg Koster": {
-      "name": "Greg Koster",
-      "pref": "Cash",
-      "gross": 80,
-      "net": 0,
-      "skins": 0,
-      "pog": 98,
-      "draw": 0,
-      "total": 178,
-      "weeks": 2,
-      "played": 0
-    },
     "Ian Mclean": {
       "name": "Ian Mclean",
-      "pref": "Bar",
-      "gross": 0,
-      "net": 20,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 20,
-      "weeks": 1,
-      "played": 0
-    },
-    "Kelly Mullock": {
-      "name": "Kelly Mullock",
       "pref": "Bar",
       "gross": 0,
       "net": 20,
@@ -4408,18 +4324,6 @@
       "weeks": 2,
       "played": 0
     },
-    "Doug Rushton": {
-      "name": "Doug Rushton",
-      "pref": "Pro Shop",
-      "gross": 0,
-      "net": 15,
-      "skins": 38,
-      "pog": 0,
-      "draw": 0,
-      "total": 53,
-      "weeks": 2,
-      "played": 0
-    },
     "Trent Skinner": {
       "name": "Trent Skinner",
       "pref": "Pro Shop",
@@ -4444,30 +4348,6 @@
       "weeks": 1,
       "played": 0
     },
-    "Rick Smith": {
-      "name": "Rick Smith",
-      "pref": "Pro Shop",
-      "gross": 30,
-      "net": 0,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 30,
-      "weeks": 1,
-      "played": 0
-    },
-    "Bob Tarbuck": {
-      "name": "Bob Tarbuck",
-      "pref": "Bar",
-      "gross": 0,
-      "net": 40,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 40,
-      "weeks": 2,
-      "played": 0
-    },
     "Carl Webber": {
       "name": "Carl Webber",
       "pref": "Pro Shop",
@@ -4477,18 +4357,6 @@
       "pog": 0,
       "draw": 0,
       "total": 20,
-      "weeks": 1,
-      "played": 0
-    },
-    "Silvio Alberti": {
-      "name": "Silvio Alberti",
-      "pref": "Pro Shop",
-      "gross": 0,
-      "net": 15,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 15,
       "weeks": 1,
       "played": 0
     },
@@ -4516,18 +4384,6 @@
       "weeks": 1,
       "played": 0
     },
-    "Rick Dawson": {
-      "name": "Rick Dawson",
-      "pref": "Bar",
-      "gross": 30,
-      "net": 0,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 30,
-      "weeks": 1,
-      "played": 0
-    },
     "Steve Dewitt": {
       "name": "Steve Dewitt",
       "pref": "Pro Shop",
@@ -4537,18 +4393,6 @@
       "pog": 0,
       "draw": 0,
       "total": 20,
-      "weeks": 1,
-      "played": 0
-    },
-    "Craig Follis": {
-      "name": "Craig Follis",
-      "pref": "Bar",
-      "gross": 30,
-      "net": 0,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 30,
       "weeks": 1,
       "played": 0
     },
@@ -4588,54 +4432,6 @@
       "weeks": 1,
       "played": 0
     },
-    "Dennis Lychak": {
-      "name": "Dennis Lychak",
-      "pref": "Pro Shop",
-      "gross": 0,
-      "net": 20,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 20,
-      "weeks": 1,
-      "played": 0
-    },
-    "Mike Matheson": {
-      "name": "Mike Matheson",
-      "pref": "Pro Shop",
-      "gross": 0,
-      "net": 40,
-      "skins": 38,
-      "pog": 0,
-      "draw": 0,
-      "total": 78,
-      "weeks": 1,
-      "played": 0
-    },
-    "Scott Murray": {
-      "name": "Scott Murray",
-      "pref": "Bar",
-      "gross": 0,
-      "net": 20,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 20,
-      "weeks": 1,
-      "played": 0
-    },
-    "Corey Nickerson": {
-      "name": "Corey Nickerson",
-      "pref": "Pro Shop",
-      "gross": 0,
-      "net": 0,
-      "skins": 0,
-      "pog": 98,
-      "draw": 0,
-      "total": 98,
-      "weeks": 1,
-      "played": 0
-    },
     "Matt Noble": {
       "name": "Matt Noble",
       "pref": "Pro Shop",
@@ -4657,18 +4453,6 @@
       "pog": 0,
       "draw": 0,
       "total": 25,
-      "weeks": 1,
-      "played": 0
-    },
-    "Mike Schwarz": {
-      "name": "Mike Schwarz",
-      "pref": "Pro Shop",
-      "gross": 30,
-      "net": 0,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 30,
       "weeks": 1,
       "played": 0
     },
