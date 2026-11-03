@@ -155,7 +155,10 @@ table.gt td{padding:7px 8px;border-bottom:1px solid #F0F0F0;}
     </div>
     <!-- Actual content (hidden until unlocked) -->
     <div id="lb-unlocked" style="display:none;">
-      <input class="lb-search" type="text" id="lb-search" placeholder="Search player…">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:10px;">
+        <input class="lb-search" type="text" id="lb-search" placeholder="Search player…" style="margin-bottom:0;">
+        <span id="hit-counter" style="font-size:11px;color:var(--mut);white-space:nowrap;display:none;"></span>
+      </div>
       <div id="lb-content"><div class="loading"><div class="spinner"></div>Loading leaderboard…</div></div>
     </div>
   </div>
@@ -402,7 +405,7 @@ function renderLeaderboard(q=''){
   let html=`<table class="lb-table"><thead><tr>
     <th>Rank</th><th>Player</th><th class="r">Gross</th><th class="r">Net</th>
     <th class="r">Skins</th><th class="r">POG</th><th class="r">Draw</th>
-    <th class="r">Season Total</th><th>Weeks</th>
+    <th class="r">Season Total</th><th>Wins</th>
   </tr></thead><tbody>`;
   rows.forEach((r,i)=>{
     const rk=i+1; const rc=rk===1?'lb1':rk===2?'lb2':rk===3?'lb3':'lbn';
@@ -450,6 +453,26 @@ const DEFAULT_LB_PIN = '1923';                // default = year club established
 
 function lbPinUnlocked(){ return sessionStorage.getItem(LB_PIN_KEY)==='1'; }
 
+// ── Hit counter ───────────────────────────────────────────────────────────────
+async function fetchHitCount(){
+  try {
+    const r = await fetch('https://countapi.mileshilliard.com/hit/pyeman1952-mensclub2/visits');
+    if(!r.ok) return null;
+    const d = await r.json();
+    return d.value||null;
+  } catch(e){ return null; }
+}
+let hitCountFetched = false;
+async function showHitCount(){
+  if(hitCountFetched) return;
+  hitCountFetched = true;
+  const el = document.getElementById('hit-counter');
+  if(!el) return;
+  const v = await fetchHitCount();
+  el.textContent = v !== null ? `Page views: ${v}` : '';
+  el.style.display = v !== null ? '' : 'none';
+}
+
 function showLbGate(){
   document.getElementById('lb-pin-gate').style.display   = '';
   document.getElementById('lb-unlocked').style.display   = 'none';
@@ -461,6 +484,7 @@ function showLbContent(){
   document.getElementById('lb-pin-gate').style.display   = 'none';
   document.getElementById('lb-unlocked').style.display   = '';
   if(appData) renderLeaderboard();
+  showHitCount();
 }
 function checkLbPin(){
   const entered = document.getElementById('lb-pin-input').value.trim();
@@ -608,6 +632,9 @@ function renderFlightReport(){
 document.querySelectorAll('.tab').forEach((btn,i)=>{
   btn.dataset.tab=['results','leaderboard','pots','flightreport'][i];
 });
+
+// Increment hit counter on every page load (silently — display only shown after PIN)
+fetchHitCount();
 
 // Load data
 loadData();
