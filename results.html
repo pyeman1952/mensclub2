@@ -229,7 +229,7 @@ function initApp(){
 
 // ── Week selector ─────────────────────────────────────────────────────────────
 function populateWeekSelector(){
-  const weeks = (appData.weeks||[]).slice().reverse();
+  const weeks = (appData.weeks||[]).slice(); // already newest-first in JSON
   const sel = document.getElementById('week-select');
   if(!weeks.length){
     document.getElementById('results-content').innerHTML='<div class="no-data"><div class="icon">📋</div><p>No weeks posted yet.</p></div>';
