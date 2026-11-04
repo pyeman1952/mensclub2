@@ -441,6 +441,20 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
       </div>
     </div>
 
+    <!-- Weekly Payouts Summary -->
+    <div class="card s2" id="weekly-summary-card">
+      <h2>Weekly Payouts Summary <em>live check — players with winnings this week</em></h2>
+      <div class="cb">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <button onclick="buildWeeklySummary()" style="padding:5px 14px;font-size:12px;font-weight:700;background:var(--gd);color:#fff;border:none;border-radius:4px;cursor:pointer;">↻ Refresh Summary</button>
+          <span id="weekly-summary-total" style="font-size:12px;color:var(--mut);"></span>
+        </div>
+        <div id="weekly-summary-body">
+          <p style="font-size:12px;color:var(--mut);margin:0;">Click Refresh Summary to see payouts for current entries.</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div><!-- /panel-setup -->
 
@@ -760,6 +774,115 @@ function addSkillRow(h, isFirst){
     tbody.appendChild(tr);
   }
 }
+function buildWeeklySummary(){
+  const fmt=n=>n?'$'+Number(n).toFixed(2):'';
+  const totals={}; // {pname: {gross,net,skins,pog,skill,draws}}
+  const add=(pname,cat,amt)=>{
+    if(!pname||!amt) return;
+    const n=pname.trim(); if(!n) return;
+    if(!totals[n]) totals[n]={gross:0,net:0,skins:0,pog:0,skill:0,draws:0};
+    totals[n][cat]+=parseFloat(amt)||0;
+  };
+
+  // Gross winners
+  for(let i=1;i<=15;i++){
+    const key='G'+String(i).padStart(2,'0');
+    const name=(document.getElementById(`gr-name-${key}`)?.value||'').trim();
+    const prize=parseFloat(document.getElementById(`gr-prize-${key}`)?.value)||0;
+    add(name,'gross',prize);
+  }
+  // Net winners
+  for(let p=1;p<=15;p++){
+    const name=(document.getElementById(`nn-${p}`)?.value||'').trim();
+    const prize=parseFloat(document.getElementById(`np-${p}`)?.value)||0;
+    add(name,'net',prize);
+  }
+  // Skins — read actual payout from sk-pot-${h} (carry-over + weekly already calculated)
+  for(let h=1;h<=18;h++){
+    const name=(document.getElementById(`sk-name-${h}`)?.value||'').trim();
+    const paid=document.getElementById(`sk-paid-${h}`)?.checked;
+    const guest=document.getElementById(`sk-guest-${h}`)?.checked;
+    if(paid&&name){
+      // Guest gets weekly share only (sk-add), member gets full pot (sk-pot)
+      const potEl=guest?document.getElementById(`sk-add-${h}`):document.getElementById(`sk-pot-${h}`);
+      const potAmt=parseFloat((potEl?.textContent||'').replace(/[^0-9.]/g,''))||0;
+      add(name,'skins',potAmt);
+    }
+  }
+  // POG — read actual payout from pog-pot-${h} (carry-over + weekly already calculated)
+  for(let h=1;h<=18;h++){
+    const name=(document.getElementById(`pog-name-${h}`)?.value||'').trim();
+    const paid=document.getElementById(`pog-paid-${h}`)?.checked;
+    const guest=document.getElementById(`pog-guest-${h}`)?.checked;
+    if(paid&&name){
+      // Guest gets weekly share only (pog-add), member gets full pot (pog-pot)
+      const potEl=guest?document.getElementById(`pog-add-${h}`):document.getElementById(`pog-pot-${h}`);
+      const potAmt=parseFloat((potEl?.textContent||'').replace(/[^0-9.]/g,''))||0;
+      add(name,'pog',potAmt);
+    }
+  }
+  // Skill prizes — uid is embedded in the row id as "sk-row-{h}-{idx}"
+  document.querySelectorAll('#skill-tbody tr[id]').forEach(tr=>{
+    const uid=tr.id.replace(/^sk-row-/,'');
+    const name=(document.getElementById(`sp-name-${uid}`)?.value||'').trim();
+    const cash=parseFloat(document.getElementById(`sp-cash-${uid}`)?.value)||0;
+    add(name,'skill',cash);
+  });
+  // Meat draw
+  for(let i=1;i<=3;i++){
+    const name=(document.getElementById(`meat-${i}`)?.value||'').trim();
+    const prize=parseFloat(document.getElementById(`meat-prize-${i}`)?.value)||0;
+    add(name,'draws',prize);
+  }
+  // Random draw
+  for(let i=1;i<=4;i++){
+    const name=(document.getElementById(`rd-name-${i}`)?.value||'').trim();
+    const amt=parseFloat(document.getElementById(`rd-amount-${i}`)?.value)||0;
+    add(name,'draws',amt);
+  }
+  // 50/50
+  const ffName=(document.getElementById('ff-winner')?.value||'').trim();
+  const ffAmt=parseFloat(document.getElementById('ff-amount')?.value)||0;
+  add(ffName,'draws',ffAmt);
+
+  // Build table
+  const rows=Object.entries(totals)
+    .map(([n,v])=>({name:n,...v,total:v.gross+v.net+v.skins+v.pog+v.skill+v.draws}))
+    .filter(r=>r.total>0)
+    .sort((a,b)=>b.total-a.total);
+
+  const body=document.getElementById('weekly-summary-body');
+  const totalEl=document.getElementById('weekly-summary-total');
+  if(!rows.length){
+    body.innerHTML='<p style="font-size:12px;color:var(--mut);margin:0;">No prize entries found yet.</p>';
+    totalEl.textContent='';
+    return;
+  }
+  const grandTotal=rows.reduce((s,r)=>s+r.total,0);
+  totalEl.textContent=`Total paid out: $${grandTotal.toFixed(2)}`;
+
+  let html='<table class="gt"><thead><tr>'
+    +'<th>Player</th><th class="thr">Gross</th><th class="thr">Net</th>'
+    +'<th class="thr">Skins</th><th class="thr">POG</th>'
+    +'<th class="thr">Skill</th><th class="thr">Draws</th>'
+    +'<th class="thr" style="font-weight:700;">Total</th>'
+    +'</tr></thead><tbody>';
+  rows.forEach(r=>{
+    html+=`<tr>`
+      +`<td>${r.name}</td>`
+      +`<td class="thr">${fmt(r.gross)}</td>`
+      +`<td class="thr">${fmt(r.net)}</td>`
+      +`<td class="thr">${fmt(r.skins)}</td>`
+      +`<td class="thr">${fmt(r.pog)}</td>`
+      +`<td class="thr">${fmt(r.skill)}</td>`
+      +`<td class="thr">${fmt(r.draws)}</td>`
+      +`<td class="thr" style="font-weight:700;">$${r.total.toFixed(2)}</td>`
+      +`</tr>`;
+  });
+  html+='</tbody></table>';
+  body.innerHTML=html;
+}
+
 function buildSkill(){
   const tbody=document.getElementById('skill-tbody');
   tbody.innerHTML='';
