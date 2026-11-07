@@ -895,6 +895,37 @@ function buildWeeklySummary(){
   });
   html+='</tbody></table>';
   body.innerHTML=html;
+
+  // Restore saved prefs from last committed version of this week (if available)
+  // Check window._loadedWeekMwList set by loadCommittedWeek()
+  const savedMw=window._loadedWeekMwList||[];
+  if(savedMw.length){
+    rows.forEach((r,i)=>{
+      // Match by display name or stored name
+      const mwRec=savedMw.find(m=>displayName(m.name)===r.name||m.name===r.name);
+      if(!mwRec||!mwRec.pref) return;
+      const p=mwRec.pref;
+      const selEl=document.getElementById(`ws-pref-${i}`);
+      if(!selEl) return;
+      if(typeof p==='object'){
+        // Determine if it's a split (more than one non-zero field)
+        const nonZero=[p.bar,p.proshop,p.cash,p.cheque].filter(v=>v>0).length;
+        if(nonZero>1){
+          selEl.value='Split';
+          wsSplitToggle(i,r.total);
+          const barEl=document.getElementById(`ws-bar-${i}`); if(barEl) barEl.value=p.bar||'';
+          const proEl=document.getElementById(`ws-pro-${i}`); if(proEl) proEl.value=p.proshop||'';
+          const cashEl=document.getElementById(`ws-cash-${i}`); if(cashEl) cashEl.value=p.cash||'';
+          const cheqEl=document.getElementById(`ws-cheque-${i}`); if(cheqEl) cheqEl.value=p.cheque||'';
+        } else if(p.proshop>0) selEl.value='Pro Shop';
+        else if(p.cash>0) selEl.value='Cash';
+        else if(p.cheque>0) selEl.value='Cheque';
+        else selEl.value='Bar';
+      } else if(typeof p==='string'){
+        selEl.value=p; // legacy string pref
+      }
+    });
+  }
 }
 
 function wsSplitToggle(i, total){
@@ -1225,6 +1256,7 @@ function clearEntries(){
   if(sb) sb.innerHTML='<p style="font-size:12px;color:var(--mut);margin:0;">Click Refresh Summary to see payouts for current entries.</p>';
   const st=document.getElementById('weekly-summary-total'); if(st) st.textContent='';
   window._pendingCommit=null;
+  window._loadedWeekMwList=[];
   showTab('setup');
 }
 
@@ -1791,6 +1823,8 @@ async function loadCommittedWeek(){
   }
 
   recalcPools();
+  // Store saved mwList so buildWeeklySummary() can restore pref dropdowns on Refresh
+  window._loadedWeekMwList=wk.mwList||(jsonWk&&jsonWk.moneyWinners)||[];
   showTab('setup');
   const jsonNote=jsonWk?' Some fields were filled from the public results file (net/skins/pog/draws).':'';
   alert(`"${label}" loaded into form.${jsonNote}\n\nReview entries, make any corrections, then Generate & Commit when ready.\n\nNote: re-committing will overwrite the existing record for this date.`);
@@ -1944,7 +1978,7 @@ async function generatePayout(previewOnly=false){
   const mwMap={};
   const addMW=(name,cat,amount)=>{
     const k=mwKey(name); if(!k||!amount) return;
-    if(!mwMap[k]) mwMap[k]={name,pref:'Bar',gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:1};
+    if(!mwMap[k]) mwMap[k]={name,pref:{bar:0,proshop:0,cash:0,cheque:0,other:''},gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:1};
     mwMap[k][cat]+=(parseFloat(amount)||0);
     mwMap[k].total=mwMap[k].gross+mwMap[k].net+mwMap[k].skins+mwMap[k].pog+mwMap[k].draw;
   };
@@ -1984,16 +2018,15 @@ async function generatePayout(previewOnly=false){
         cheque:parseFloat(document.getElementById(`ws-cheque-${i}`)?.value)||0,
         other:''
       };
-    } else if(selVal&&selVal!=='Bar'){
-      // Non-default selection — will be applied as full total to that category
-      wsPrefs[pname]=selVal; // store as string; resolved below per player total
+    } else {
+      // Bar or any other simple string selection — always store it (default is Bar)
+      wsPrefs[pname]=selVal||'Bar';
     }
   });
   // Apply summary prefs to mwList — match by display name since summary shows display names
   mwList.forEach(r=>{
     const dn=displayName(r.name);
-    const sp=wsPrefs[dn]||wsPrefs[r.name];
-    if(!sp) return;
+    const sp=wsPrefs[dn]||wsPrefs[r.name]||'Bar'; // default to Bar if not in summary
     if(typeof sp==='object') r.pref=sp;
     else r.pref={bar:sp==='Bar'?r.total:0, proshop:sp==='Pro Shop'?r.total:0,
                   cash:sp==='Cash'?r.total:0, cheque:sp==='Cheque'?r.total:0, other:''};
@@ -2226,10 +2259,10 @@ function confirmCommit(){
   // Save week (replace if overwrite)
   if(pc.isOverwrite){
     const idx=weeksLog.findIndex(w=>w.id===pc.weekKey);
-    const rec={id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),grossRows:pc.grossRows,flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData,rdData:pc.rdData};
+    const rec={id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),grossRows:pc.grossRows,flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData,rdData:pc.rdData,mwList:pc.mwList};
     if(idx>=0) weeksLog[idx]=rec; else weeksLog.push(rec);
   } else {
-    saveWeek({id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),grossRows:pc.grossRows,flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData,rdData:pc.rdData});
+    saveWeek({id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),grossRows:pc.grossRows,flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData,rdData:pc.rdData,mwList:pc.mwList});
   }
   LS.set('weeks',weeksLog);
   populateWeekLoadSelect(); // keep dropdown in sync after commit
