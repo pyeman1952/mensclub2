@@ -2,7 +2,7 @@
   "weeks": [
     {
       "id": "November_1-_2026",
-      "name": "Week 4 - Regular Golf",
+      "name": "Week 4 — Regular Golf",
       "date": "November 1, 2026",
       "notes": "Frost Delayed",
       "cancelled": false,
@@ -10,7 +10,7 @@
       "gnPool": 480,
       "skinsPool": 220,
       "pogPool": 220,
-      "recordedAt": "2026-11-03T05:11:11.959Z",
+      "recordedAt": "2026-11-07T06:02:18.473Z",
       "grossRows": [
         {
           "key": "G01",
@@ -198,9 +198,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0\u20135",
-        "B": "6\u201311",
-        "C": "12\u201317",
+        "A": "0–5",
+        "B": "6–11",
+        "C": "12–17",
         "D": "18+"
       },
       "net": [
@@ -367,9 +367,9 @@
           "winner": "",
           "score": "",
           "gross": "",
-          "runPot": 22,
-          "payout": 22,
-          "stored": 6,
+          "runPot": 38,
+          "payout": 38,
+          "stored": 22,
           "weekly": 16,
           "paid": false,
           "guest": false,
@@ -380,9 +380,9 @@
           "winner": "",
           "score": "",
           "gross": "",
-          "runPot": 73,
-          "payout": 73,
-          "stored": 57,
+          "runPot": 89,
+          "payout": 89,
+          "stored": 73,
           "weekly": 16,
           "paid": false,
           "guest": false,
@@ -406,9 +406,9 @@
           "winner": "",
           "score": "",
           "gross": "",
-          "runPot": 41,
-          "payout": 41,
-          "stored": 25,
+          "runPot": 57,
+          "payout": 57,
+          "stored": 41,
           "weekly": 16,
           "paid": false,
           "guest": false,
@@ -419,9 +419,9 @@
           "winner": "",
           "score": "",
           "gross": "",
-          "runPot": 41,
-          "payout": 41,
-          "stored": 25,
+          "runPot": 57,
+          "payout": 57,
+          "stored": 41,
           "weekly": 16,
           "paid": false,
           "guest": false,
@@ -445,22 +445,22 @@
           "winner": "Mike Schwarz",
           "score": "2N",
           "gross": "",
-          "runPot": 79,
-          "payout": 79,
-          "stored": 63,
+          "runPot": 16,
+          "payout": 16,
+          "stored": 0,
           "weekly": 16,
           "paid": true,
           "guest": false,
-          "flt": ""
+          "flt": "C"
         },
         {
           "hole": 11,
           "winner": "",
           "score": "",
           "gross": "",
-          "runPot": 41,
-          "payout": 41,
-          "stored": 25,
+          "runPot": 57,
+          "payout": 57,
+          "stored": 41,
           "weekly": 16,
           "paid": false,
           "guest": false,
@@ -484,9 +484,9 @@
           "winner": "",
           "score": "",
           "gross": "",
-          "runPot": 22,
-          "payout": 22,
-          "stored": 6,
+          "runPot": 38,
+          "payout": 38,
+          "stored": 22,
           "weekly": 16,
           "paid": false,
           "guest": false,
@@ -497,9 +497,9 @@
           "winner": "",
           "score": "",
           "gross": "",
-          "runPot": 73,
-          "payout": 73,
-          "stored": 57,
+          "runPot": 89,
+          "payout": 89,
+          "stored": 73,
           "weekly": 16,
           "paid": false,
           "guest": false,
@@ -510,9 +510,9 @@
           "winner": "",
           "score": "",
           "gross": "",
-          "runPot": 22,
-          "payout": 22,
-          "stored": 6,
+          "runPot": 38,
+          "payout": 38,
+          "stored": 22,
           "weekly": 16,
           "paid": false,
           "guest": false,
@@ -523,22 +523,22 @@
           "winner": "Kelly Mullock",
           "score": "2N",
           "gross": "",
-          "runPot": 41,
-          "payout": 41,
-          "stored": 25,
+          "runPot": 16,
+          "payout": 16,
+          "stored": 0,
           "weekly": 16,
           "paid": true,
           "guest": false,
-          "flt": ""
+          "flt": "C"
         }
       ],
       "pog": [
         {
           "hole": 3,
           "winner": "",
-          "runPot": 211,
-          "payout": 211,
-          "stored": 167,
+          "runPot": 255,
+          "payout": 255,
+          "stored": 211,
           "weekly": 44,
           "paid": false,
           "guest": false,
@@ -547,9 +547,9 @@
         {
           "hole": 4,
           "winner": "",
-          "runPot": 113,
-          "payout": 113,
-          "stored": 69,
+          "runPot": 157,
+          "payout": 157,
+          "stored": 113,
           "weekly": 44,
           "paid": false,
           "guest": false,
@@ -558,9 +558,9 @@
         {
           "hole": 10,
           "winner": "",
-          "runPot": 211,
-          "payout": 211,
-          "stored": 167,
+          "runPot": 255,
+          "payout": 255,
+          "stored": 211,
           "weekly": 44,
           "paid": false,
           "guest": false,
@@ -569,9 +569,9 @@
         {
           "hole": 15,
           "winner": "Bob Tarbuck",
-          "runPot": 113,
-          "payout": 113,
-          "stored": 69,
+          "runPot": 44,
+          "payout": 44,
+          "stored": 0,
           "weekly": 44,
           "paid": true,
           "guest": false,
@@ -580,9 +580,9 @@
         {
           "hole": 17,
           "winner": "",
-          "runPot": 211,
-          "payout": 211,
-          "stored": 167,
+          "runPot": 255,
+          "payout": 255,
+          "stored": 211,
           "weekly": 44,
           "paid": false,
           "guest": false,
@@ -659,45 +659,11 @@
       "rdData": [],
       "moneyWinners": [
         {
-          "name": "Silvio Alberti",
-          "pref": {
-            "bar": 0,
-            "proshop": 30,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 30,
-          "net": 0,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 30,
-          "weeks": 1
-        },
-        {
-          "name": "Keith Allan",
-          "pref": {
-            "bar": 20,
-            "proshop": 0,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 20,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 20,
-          "weeks": 1
-        },
-        {
-          "name": "Laurie Appleyard",
+          "name": "Ben Yarrow",
           "pref": {
             "bar": 0,
             "proshop": 0,
-            "cash": 20,
+            "cash": 0,
             "cheque": 0,
             "other": ""
           },
@@ -711,208 +677,20 @@
           "skill": null
         },
         {
-          "name": "Ted Baker",
+          "name": "Bob Tarbuck",
           "pref": {
-            "bar": 20,
+            "bar": 44,
             "proshop": 0,
             "cash": 0,
             "cheque": 0,
             "other": ""
           },
           "gross": 0,
-          "net": 20,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 20,
-          "weeks": 1
-        },
-        {
-          "name": "Jason Cox",
-          "pref": {
-            "bar": 20,
-            "proshop": 0,
-            "cash": 20,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 20,
           "net": 0,
           "skins": 0,
-          "pog": 0,
+          "pog": 44,
           "draw": 0,
-          "total": 20,
-          "weeks": 1,
-          "skill": null
-        },
-        {
-          "name": "Rick Dawson",
-          "pref": {
-            "bar": 10,
-            "proshop": 0,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 10,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 10,
-          "weeks": 1
-        },
-        {
-          "name": "Thyssen De Goede",
-          "pref": {
-            "bar": 0,
-            "proshop": 30,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 30,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 30,
-          "weeks": 1
-        },
-        {
-          "name": "Dave Fauteux",
-          "pref": {
-            "bar": 25,
-            "proshop": 0,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 25,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 25,
-          "weeks": 1
-        },
-        {
-          "name": "Larry Ferguson",
-          "pref": {
-            "bar": 0,
-            "proshop": 10,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 10,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 10,
-          "weeks": 1
-        },
-        {
-          "name": "Gerry Koster",
-          "pref": {
-            "bar": 0,
-            "proshop": 25,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 25,
-          "net": 0,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 25,
-          "weeks": 1
-        },
-        {
-          "name": "Greg Koster",
-          "pref": {
-            "bar": 0,
-            "proshop": 30,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 30,
-          "net": 0,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 30,
-          "weeks": 1
-        },
-        {
-          "name": "Dennis Lychak",
-          "pref": {
-            "bar": 0,
-            "proshop": 25,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 25,
-          "net": 0,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 25,
-          "weeks": 1
-        },
-        {
-          "name": "Mike Matheson",
-          "pref": {
-            "bar": 0,
-            "proshop": 20,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 20,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 20,
-          "weeks": 1
-        },
-        {
-          "name": "Kelly Mullock",
-          "pref": {
-            "bar": 0,
-            "proshop": 56,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 15,
-          "skins": 41,
-          "pog": 0,
-          "draw": 0,
-          "total": 56,
-          "weeks": 1
-        },
-        {
-          "name": "Scott Murray",
-          "pref": {
-            "bar": 20,
-            "proshop": 0,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 20,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 20,
+          "total": 44,
           "weeks": 1
         },
         {
@@ -933,10 +711,44 @@
           "weeks": 1
         },
         {
-          "name": "Gord Rallison",
+          "name": "Darrell Smith",
+          "pref": {
+            "bar": 10,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 10,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 10,
+          "weeks": 1
+        },
+        {
+          "name": "Dave Fauteux",
           "pref": {
             "bar": 25,
             "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 25,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 25,
+          "weeks": 1
+        },
+        {
+          "name": "Dennis Lychak",
+          "pref": {
+            "bar": 0,
+            "proshop": 25,
             "cash": 0,
             "cheque": 0,
             "other": ""
@@ -967,20 +779,209 @@
           "weeks": 1
         },
         {
+          "name": "Gerry Koster",
+          "pref": {
+            "bar": 0,
+            "proshop": 25,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 25,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 25,
+          "weeks": 1
+        },
+        {
+          "name": "Gord Rallison",
+          "pref": {
+            "bar": 25,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 25,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 25,
+          "weeks": 1
+        },
+        {
+          "name": "Greg Koster",
+          "pref": {
+            "bar": 0,
+            "proshop": 30,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 30,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 30,
+          "weeks": 1
+        },
+        {
+          "name": "Jason Cox",
+          "pref": {
+            "bar": 20,
+            "proshop": 0,
+            "cash": 20,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 20,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1,
+          "skill": null
+        },
+        {
+          "name": "Keith Allan",
+          "pref": {
+            "bar": 20,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 20,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1
+        },
+        {
+          "name": "Kelly Mullock",
+          "pref": {
+            "bar": 0,
+            "proshop": 31,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 15,
+          "skins": 16,
+          "pog": 0,
+          "draw": 0,
+          "total": 31,
+          "weeks": 1
+        },
+        {
+          "name": "Larry Ferguson",
+          "pref": {
+            "bar": 0,
+            "proshop": 10,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 10,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 10,
+          "weeks": 1
+        },
+        {
+          "name": "Laurie Appleyard",
+          "pref": {
+            "bar": 0,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 0,
+          "weeks": 1,
+          "skill": null
+        },
+        {
+          "name": "Mike Matheson",
+          "pref": {
+            "bar": 0,
+            "proshop": 20,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 20,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1
+        },
+        {
           "name": "Mike Schwarz",
           "pref": {
             "bar": 0,
-            "proshop": 119,
+            "proshop": 56,
             "cash": 0,
             "cheque": 0,
-            "other": "turkey prize entered as $40"
+            "other": "Turkey entered as $40"
           },
           "gross": 0,
           "net": 40,
-          "skins": 79,
+          "skins": 16,
           "pog": 0,
           "draw": 0,
-          "total": 119,
+          "total": 56,
+          "weeks": 1
+        },
+        {
+          "name": "Peter Titchener",
+          "pref": {
+            "bar": 0,
+            "proshop": 15,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 15,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 15,
+          "weeks": 1
+        },
+        {
+          "name": "Rick Dawson",
+          "pref": {
+            "bar": 10,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 10,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 10,
           "weeks": 1
         },
         {
@@ -1002,80 +1003,79 @@
           "skill": null
         },
         {
-          "name": "Darrell Smith",
+          "name": "Scott Murray",
           "pref": {
-            "bar": 10,
+            "bar": 20,
             "proshop": 0,
             "cash": 0,
             "cheque": 0,
             "other": ""
           },
           "gross": 0,
-          "net": 10,
+          "net": 20,
           "skins": 0,
           "pog": 0,
           "draw": 0,
-          "total": 10,
+          "total": 20,
           "weeks": 1
         },
         {
-          "name": "Bob Tarbuck",
+          "name": "Silvio Alberti",
           "pref": {
-            "bar": 113,
-            "proshop": 0,
+            "bar": 0,
+            "proshop": 30,
             "cash": 0,
             "cheque": 0,
             "other": ""
           },
-          "gross": 0,
-          "net": 0,
-          "skins": 0,
-          "pog": 113,
-          "draw": 0,
-          "total": 113,
-          "weeks": 1
-        },
-        {
-          "name": "Peter Titchener",
-          "pref": {
-            "bar": 0,
-            "proshop": 15,
-            "cash": 0,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
-          "net": 15,
-          "skins": 0,
-          "pog": 0,
-          "draw": 0,
-          "total": 15,
-          "weeks": 1
-        },
-        {
-          "name": "Ben Yarrow",
-          "pref": {
-            "bar": 0,
-            "proshop": 0,
-            "cash": 20,
-            "cheque": 0,
-            "other": ""
-          },
-          "gross": 0,
+          "gross": 30,
           "net": 0,
           "skins": 0,
           "pog": 0,
           "draw": 0,
-          "total": 0,
-          "weeks": 1,
-          "skill": null
+          "total": 30,
+          "weeks": 1
+        },
+        {
+          "name": "Ted Baker",
+          "pref": {
+            "bar": 0,
+            "proshop": 20,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 20,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1
+        },
+        {
+          "name": "Thyssen De Goede",
+          "pref": {
+            "bar": 0,
+            "proshop": 30,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 30,
+          "skins": 0,
+          "pog": 0,
+          "draw": 0,
+          "total": 30,
+          "weeks": 1
         }
       ],
       "totals": {
         "gross": 215,
         "net": 245,
-        "skins": 120,
-        "pog": 113,
+        "skins": 32,
+        "pog": 44,
         "draw": 0
       }
     },
@@ -1234,9 +1234,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0\u20135",
-        "B": "6\u201311",
-        "C": "12\u201317",
+        "A": "0–5",
+        "B": "6–11",
+        "C": "12–17",
         "D": "18+"
       },
       "net": [
@@ -3658,48 +3658,12 @@
     }
   ],
   "season": {
-    "Silvio Alberti": {
-      "name": "Silvio Alberti",
-      "pref": {
-        "bar": 0,
-        "proshop": 25,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 30,
-      "net": 15,
-      "skins": 25,
-      "pog": 0,
-      "draw": 0,
-      "total": 70,
-      "weeks": 3,
-      "played": 0
-    },
-    "Keith Allan": {
-      "name": "Keith Allan",
-      "pref": {
-        "bar": 20,
-        "proshop": 0,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 30,
-      "net": 20,
-      "skins": 19,
-      "pog": 0,
-      "draw": 0,
-      "total": 69,
-      "weeks": 2,
-      "played": 0
-    },
-    "Laurie Appleyard": {
-      "name": "Laurie Appleyard",
+    "Ben Yarrow": {
+      "name": "Ben Yarrow",
       "pref": {
         "bar": 0,
         "proshop": 0,
-        "cash": 20,
+        "cash": 0,
         "cheque": 0,
         "other": ""
       },
@@ -3712,21 +3676,135 @@
       "weeks": 1,
       "played": 0
     },
-    "Ted Baker": {
-      "name": "Ted Baker",
+    "Bob Tarbuck": {
+      "name": "Bob Tarbuck",
+      "pref": "Bar",
+      "gross": 0,
+      "net": 40,
+      "skins": 0,
+      "pog": 44,
+      "draw": 0,
+      "total": 84,
+      "weeks": 3,
+      "played": 0
+    },
+    "Corey Nickerson": {
+      "name": "Corey Nickerson",
+      "pref": "Pro Shop",
+      "gross": 0,
+      "net": 10,
+      "skins": 0,
+      "pog": 98,
+      "draw": 0,
+      "total": 108,
+      "weeks": 2,
+      "played": 0
+    },
+    "Darrell Smith": {
+      "name": "Darrell Smith",
       "pref": {
-        "bar": 20,
+        "bar": 10,
         "proshop": 0,
         "cash": 0,
         "cheque": 0,
         "other": ""
       },
       "gross": 0,
-      "net": 50,
+      "net": 20,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 20,
+      "weeks": 2,
+      "played": 0
+    },
+    "Dave Fauteux": {
+      "name": "Dave Fauteux",
+      "pref": {
+        "bar": 40,
+        "proshop": 0,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      },
+      "gross": 0,
+      "net": 25,
+      "skins": 0,
+      "pog": 0,
+      "draw": 40,
+      "total": 65,
+      "weeks": 2,
+      "played": 0
+    },
+    "Dennis Lychak": {
+      "name": "Dennis Lychak",
+      "pref": "Pro Shop",
+      "gross": 40,
+      "net": 20,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 60,
+      "weeks": 3,
+      "played": 0
+    },
+    "Doug Rushton": {
+      "name": "Doug Rushton",
+      "pref": "Pro Shop",
+      "gross": 30,
+      "net": 30,
       "skins": 38,
       "pog": 0,
       "draw": 0,
-      "total": 88,
+      "total": 98,
+      "weeks": 4,
+      "played": 0
+    },
+    "Gerry Koster": {
+      "name": "Gerry Koster",
+      "pref": {
+        "bar": 0,
+        "proshop": 25,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      },
+      "gross": 25,
+      "net": 0,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 25,
+      "weeks": 1,
+      "played": 0
+    },
+    "Gord Rallison": {
+      "name": "Gord Rallison",
+      "pref": {
+        "bar": 25,
+        "proshop": 0,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      },
+      "gross": 25,
+      "net": 0,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 25,
+      "weeks": 1,
+      "played": 0
+    },
+    "Greg Koster": {
+      "name": "Greg Koster",
+      "pref": "Cash",
+      "gross": 110,
+      "net": 0,
+      "skins": 0,
+      "pog": 98,
+      "draw": 0,
+      "total": 208,
       "weeks": 3,
       "played": 0
     },
@@ -3748,57 +3826,27 @@
       "weeks": 2,
       "played": 0
     },
-    "Rick Dawson": {
-      "name": "Rick Dawson",
-      "pref": {
-        "bar": 10,
-        "proshop": 0,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
+    "Keith Allan": {
+      "name": "Keith Allan",
+      "pref": "Bar",
       "gross": 30,
-      "net": 10,
-      "skins": 0,
+      "net": 20,
+      "skins": 19,
       "pog": 0,
       "draw": 0,
-      "total": 40,
+      "total": 69,
       "weeks": 2,
       "played": 0
     },
-    "Thyssen De Goede": {
-      "name": "Thyssen De Goede",
-      "pref": {
-        "bar": 0,
-        "proshop": 25,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 65,
-      "net": 30,
-      "skins": 0,
+    "Kelly Mullock": {
+      "name": "Kelly Mullock",
+      "pref": "Bar",
+      "gross": 0,
+      "net": 35,
+      "skins": 16,
       "pog": 0,
       "draw": 0,
-      "total": 95,
-      "weeks": 3,
-      "played": 0
-    },
-    "Dave Fauteux": {
-      "name": "Dave Fauteux",
-      "pref": {
-        "bar": 40,
-        "proshop": 0,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 0,
-      "net": 25,
-      "skins": 0,
-      "pog": 0,
-      "draw": 40,
-      "total": 65,
+      "total": 51,
       "weeks": 2,
       "played": 0
     },
@@ -3820,69 +3868,27 @@
       "weeks": 1,
       "played": 0
     },
-    "Gerry Koster": {
-      "name": "Gerry Koster",
+    "Laurie Appleyard": {
+      "name": "Laurie Appleyard",
       "pref": {
         "bar": 0,
-        "proshop": 25,
+        "proshop": 0,
         "cash": 0,
         "cheque": 0,
         "other": ""
       },
-      "gross": 25,
+      "gross": 0,
       "net": 0,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 25,
+      "total": 0,
       "weeks": 1,
-      "played": 0
-    },
-    "Greg Koster": {
-      "name": "Greg Koster",
-      "pref": {
-        "bar": 0,
-        "proshop": 30,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 110,
-      "net": 0,
-      "skins": 0,
-      "pog": 98,
-      "draw": 0,
-      "total": 208,
-      "weeks": 3,
-      "played": 0
-    },
-    "Dennis Lychak": {
-      "name": "Dennis Lychak",
-      "pref": {
-        "bar": 0,
-        "proshop": 15,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 40,
-      "net": 20,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 60,
-      "weeks": 3,
       "played": 0
     },
     "Mike Matheson": {
       "name": "Mike Matheson",
-      "pref": {
-        "bar": 0,
-        "proshop": 20,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
+      "pref": "Pro Shop",
       "gross": 0,
       "net": 60,
       "skins": 38,
@@ -3892,80 +3898,20 @@
       "weeks": 2,
       "played": 0
     },
-    "Kelly Mullock": {
-      "name": "Kelly Mullock",
-      "pref": {
-        "bar": 0,
-        "proshop": 56,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 0,
-      "net": 35,
-      "skins": 41,
-      "pog": 0,
-      "draw": 0,
-      "total": 76,
-      "weeks": 2,
-      "played": 0
-    },
-    "Scott Murray": {
-      "name": "Scott Murray",
-      "pref": {
-        "bar": 20,
-        "proshop": 0,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 0,
+    "Mike Schwarz": {
+      "name": "Mike Schwarz",
+      "pref": "Pro Shop",
+      "gross": 30,
       "net": 40,
-      "skins": 0,
+      "skins": 16,
       "pog": 0,
       "draw": 0,
-      "total": 40,
+      "total": 86,
       "weeks": 2,
       "played": 0
     },
-    "Corey Nickerson": {
-      "name": "Corey Nickerson",
-      "pref": {
-        "bar": 0,
-        "proshop": 10,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 0,
-      "net": 10,
-      "skins": 0,
-      "pog": 98,
-      "draw": 0,
-      "total": 108,
-      "weeks": 2,
-      "played": 0
-    },
-    "Gord Rallison": {
-      "name": "Gord Rallison",
-      "pref": {
-        "bar": 25,
-        "proshop": 0,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 25,
-      "net": 0,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 25,
-      "weeks": 1,
-      "played": 0
-    },
-    "Doug Rushton": {
-      "name": "Doug Rushton",
+    "Peter Titchener": {
+      "name": "Peter Titchener",
       "pref": {
         "bar": 0,
         "proshop": 15,
@@ -3973,30 +3919,24 @@
         "cheque": 0,
         "other": ""
       },
-      "gross": 30,
-      "net": 30,
-      "skins": 38,
+      "gross": 0,
+      "net": 15,
+      "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 98,
-      "weeks": 4,
+      "total": 15,
+      "weeks": 1,
       "played": 0
     },
-    "Mike Schwarz": {
-      "name": "Mike Schwarz",
-      "pref": {
-        "bar": 0,
-        "proshop": 119,
-        "cash": 0,
-        "cheque": 0,
-        "other": "turkey prize entered as $40"
-      },
+    "Rick Dawson": {
+      "name": "Rick Dawson",
+      "pref": "Bar",
       "gross": 30,
-      "net": 40,
-      "skins": 79,
+      "net": 10,
+      "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 149,
+      "total": 40,
       "weeks": 2,
       "played": 0
     },
@@ -4018,87 +3958,57 @@
       "weeks": 1,
       "played": 0
     },
-    "Darrell Smith": {
-      "name": "Darrell Smith",
-      "pref": {
-        "bar": 10,
-        "proshop": 0,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 0,
-      "net": 20,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 20,
-      "weeks": 2,
-      "played": 0
-    },
-    "Bob Tarbuck": {
-      "name": "Bob Tarbuck",
-      "pref": {
-        "bar": 113,
-        "proshop": 0,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
+    "Scott Murray": {
+      "name": "Scott Murray",
+      "pref": "Bar",
       "gross": 0,
       "net": 40,
       "skins": 0,
-      "pog": 113,
+      "pog": 0,
       "draw": 0,
-      "total": 153,
+      "total": 40,
+      "weeks": 2,
+      "played": 0
+    },
+    "Silvio Alberti": {
+      "name": "Silvio Alberti",
+      "pref": "Pro Shop",
+      "gross": 30,
+      "net": 15,
+      "skins": 25,
+      "pog": 0,
+      "draw": 0,
+      "total": 70,
       "weeks": 3,
       "played": 0
     },
-    "Peter Titchener": {
-      "name": "Peter Titchener",
-      "pref": {
-        "bar": 0,
-        "proshop": 15,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
+    "Ted Baker": {
+      "name": "Ted Baker",
+      "pref": "Pro Shop",
       "gross": 0,
-      "net": 15,
-      "skins": 0,
+      "net": 50,
+      "skins": 38,
       "pog": 0,
       "draw": 0,
-      "total": 15,
-      "weeks": 1,
+      "total": 88,
+      "weeks": 3,
       "played": 0
     },
-    "Ben Yarrow": {
-      "name": "Ben Yarrow",
-      "pref": {
-        "bar": 0,
-        "proshop": 0,
-        "cash": 20,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 0,
-      "net": 0,
+    "Thyssen De Goede": {
+      "name": "Thyssen De Goede",
+      "pref": "Pro Shop",
+      "gross": 65,
+      "net": 30,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 0,
-      "weeks": 1,
+      "total": 95,
+      "weeks": 3,
       "played": 0
     },
     "Craig Follis": {
       "name": "Craig Follis",
-      "pref": {
-        "bar": 78,
-        "proshop": 40,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
+      "pref": "Bar",
       "gross": 45,
       "net": 0,
       "skins": 63,
@@ -4110,13 +4020,7 @@
     },
     "Dan Haaf": {
       "name": "Dan Haaf",
-      "pref": {
-        "bar": 0,
-        "proshop": 15,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
+      "pref": "Pro Shop",
       "gross": 15,
       "net": 0,
       "skins": 19,
@@ -4146,13 +4050,7 @@
     },
     "Iain Haigh": {
       "name": "Iain Haigh",
-      "pref": {
-        "bar": 0,
-        "proshop": 31,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
+      "pref": "Pro Shop",
       "gross": 45,
       "net": 0,
       "skins": 6,
@@ -4164,13 +4062,7 @@
     },
     "Rick Smith": {
       "name": "Rick Smith",
-      "pref": {
-        "bar": 0,
-        "proshop": 10,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
+      "pref": "Pro Shop",
       "gross": 30,
       "net": 10,
       "skins": 0,
@@ -4481,9 +4373,9 @@
       "lastWinner": null
     },
     "sk_5": {
-      "pot": 16,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-11-07T05:33:50.946Z",
+      "lastWinner": "Iain Haigh"
     },
     "sk_6": {
       "pot": 41,
@@ -4496,14 +4388,14 @@
       "lastWinner": null
     },
     "sk_8": {
-      "pot": 16,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-11-07T05:33:50.946Z",
+      "lastWinner": "Silvio Alberti"
     },
     "sk_9": {
       "pot": 0,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
-      "lastWinner": "Schwarz, Mike"
+      "updatedAt": "2026-11-07T06:01:34.946Z",
+      "lastWinner": "Mike Schwarz"
     },
     "sk_11": {
       "pot": 41,
@@ -4511,9 +4403,9 @@
       "lastWinner": null
     },
     "sk_12": {
-      "pot": 16,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-11-07T05:33:50.946Z",
+      "lastWinner": "Craig Follis"
     },
     "sk_13": {
       "pot": 22,
@@ -4532,8 +4424,8 @@
     },
     "sk_18": {
       "pot": 0,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
-      "lastWinner": "Mullock, Kelly"
+      "updatedAt": "2026-11-07T06:01:34.946Z",
+      "lastWinner": "Kelly Mullock"
     },
     "pg_3": {
       "pot": 211,
@@ -4552,8 +4444,8 @@
     },
     "pg_15": {
       "pot": 0,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
-      "lastWinner": "Tarbuck, Bob"
+      "updatedAt": "2026-11-07T06:01:34.946Z",
+      "lastWinner": "Bob Tarbuck"
     },
     "pg_17": {
       "pot": 211,
