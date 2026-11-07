@@ -2,7 +2,7 @@
   "weeks": [
     {
       "id": "November_1-_2026",
-      "name": "Week 4 - Regular Golf",
+      "name": "Week 4 — Regular Golf",
       "date": "November 1, 2026",
       "notes": "Frost Delayed",
       "cancelled": false,
@@ -10,7 +10,7 @@
       "gnPool": 480,
       "skinsPool": 220,
       "pogPool": 220,
-      "recordedAt": "2026-11-08T00:11:51.563Z",
+      "recordedAt": "2026-11-08T00:35:32.024Z",
       "grossRows": [
         {
           "key": "G01",
@@ -973,7 +973,7 @@
             "proshop": 56,
             "cash": 0,
             "cheque": 0,
-            "other": ""
+            "other": "Turkey entered as $40"
           },
           "gross": 0,
           "net": 40,
@@ -988,7 +988,7 @@
           "pref": {
             "bar": 0,
             "proshop": 30,
-            "cash": 0,
+            "cash": 20,
             "cheque": 0,
             "other": ""
           },
@@ -1234,9 +1234,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0ÃÂ¢ÃÂÃÂ5",
-        "B": "6ÃÂ¢ÃÂÃÂ11",
-        "C": "12ÃÂ¢ÃÂÃÂ17",
+        "A": "0ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ5",
+        "B": "6ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ11",
+        "C": "12ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ17",
         "D": "18+"
       },
       "net": [
@@ -3927,7 +3927,7 @@
       "pref": {
         "bar": 0,
         "proshop": 30,
-        "cash": 0,
+        "cash": 20,
         "cheque": 0,
         "other": ""
       },
@@ -4394,7 +4394,7 @@
     },
     "sk_9": {
       "pot": 0,
-      "updatedAt": "2026-11-08T00:11:49.272Z",
+      "updatedAt": "2026-11-08T00:35:10.194Z",
       "lastWinner": "Mike Schwarz"
     },
     "sk_11": {
@@ -4424,7 +4424,7 @@
     },
     "sk_18": {
       "pot": 0,
-      "updatedAt": "2026-11-08T00:11:49.273Z",
+      "updatedAt": "2026-11-08T00:35:10.194Z",
       "lastWinner": "Kelly Mullock"
     },
     "pg_3": {
@@ -4444,7 +4444,7 @@
     },
     "pg_15": {
       "pot": 0,
-      "updatedAt": "2026-11-08T00:11:49.273Z",
+      "updatedAt": "2026-11-08T00:35:10.194Z",
       "lastWinner": "Bob Tarbuck"
     },
     "pg_17": {
