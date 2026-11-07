@@ -2,7 +2,7 @@
   "weeks": [
     {
       "id": "November_1-_2026",
-      "name": "Week 4-Regular Golf",
+      "name": "Week 4 — Regular Golf",
       "date": "November 1, 2026",
       "notes": "Frost Delayed",
       "cancelled": false,
@@ -10,7 +10,7 @@
       "gnPool": 480,
       "skinsPool": 220,
       "pogPool": 220,
-      "recordedAt": "2026-11-07T06:27:35.653Z",
+      "recordedAt": "2026-11-07T07:02:40.531Z",
       "grossRows": [
         {
           "key": "G01",
@@ -732,7 +732,7 @@
           "pref": {
             "bar": 20,
             "proshop": 0,
-            "cash": 0,
+            "cash": 20,
             "cheque": 0,
             "other": ""
           },
@@ -901,8 +901,8 @@
         {
           "name": "Murray, Scott",
           "pref": {
-            "bar": 0,
-            "proshop": 20,
+            "bar": 20,
+            "proshop": 0,
             "cash": 0,
             "cheque": 0,
             "other": ""
@@ -973,7 +973,7 @@
             "proshop": 56,
             "cash": 0,
             "cheque": 0,
-            "other": ""
+            "other": "Turkey entered as $40"
           },
           "gross": 0,
           "net": 40,
@@ -988,7 +988,7 @@
           "pref": {
             "bar": 0,
             "proshop": 30,
-            "cash": 20,
+            "cash": 0,
             "cheque": 0,
             "other": ""
           },
@@ -1234,9 +1234,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0â5",
-        "B": "6â11",
-        "C": "12â17",
+        "A": "0Ã¢ÂÂ5",
+        "B": "6Ã¢ÂÂ11",
+        "C": "12Ã¢ÂÂ17",
         "D": "18+"
       },
       "net": [
@@ -3927,7 +3927,7 @@
       "pref": {
         "bar": 0,
         "proshop": 30,
-        "cash": 20,
+        "cash": 0,
         "cheque": 0,
         "other": ""
       },
@@ -4394,7 +4394,7 @@
     },
     "sk_9": {
       "pot": 0,
-      "updatedAt": "2026-11-07T06:27:20.953Z",
+      "updatedAt": "2026-11-07T07:02:10.154Z",
       "lastWinner": "Mike Schwarz"
     },
     "sk_11": {
@@ -4424,7 +4424,7 @@
     },
     "sk_18": {
       "pot": 0,
-      "updatedAt": "2026-11-07T06:27:20.953Z",
+      "updatedAt": "2026-11-07T07:02:10.154Z",
       "lastWinner": "Kelly Mullock"
     },
     "pg_3": {
@@ -4444,7 +4444,7 @@
     },
     "pg_15": {
       "pot": 0,
-      "updatedAt": "2026-11-07T06:27:20.953Z",
+      "updatedAt": "2026-11-07T07:02:10.154Z",
       "lastWinner": "Bob Tarbuck"
     },
     "pg_17": {
