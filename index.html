@@ -1987,7 +1987,7 @@ async function generatePayout(previewOnly=false){
   const mwMap={};
   const addMW=(name,cat,amount)=>{
     const k=mwKey(name); if(!k||!amount) return;
-    if(!mwMap[k]) mwMap[k]={name,pref:{bar:0,proshop:0,cash:0,cheque:0,other:''},gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:1};
+    if(!mwMap[k]) mwMap[k]={name:k,pref:{bar:0,proshop:0,cash:0,cheque:0,other:''},gross:0,net:0,skins:0,pog:0,draw:0,total:0,weeks:1};
     mwMap[k][cat]+=(parseFloat(amount)||0);
     mwMap[k].total=mwMap[k].gross+mwMap[k].net+mwMap[k].skins+mwMap[k].pog+mwMap[k].draw;
   };
