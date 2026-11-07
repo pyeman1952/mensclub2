@@ -605,7 +605,16 @@ const LS = {
 
 // ── State ─────────────────────────────────────────────────────────────────────
 let skinsPots={}, pogPots={}, seasonData={}, weeksLog=[];
-const mwKey=(name)=>name||null;
+// Normalize any name format to "Last, First" for consistent mwMap keying
+// Handles both "Last, First" and "First Last" inputs
+const mwKey=(name)=>{
+  if(!name) return null;
+  const s=name.trim();
+  if(s.indexOf(',')>-1) return s; // already "Last, First"
+  const parts=s.split(/\s+/);
+  if(parts.length>=2){ const last=parts[parts.length-1]; const first=parts.slice(0,-1).join(' '); return `${last}, ${first}`; }
+  return s; // single name, use as-is
+};
 
 function loadState(){
   SKINS_HOLES.forEach(h=>{ skinsPots[h]=LS.get(`sk_${h}`,{pot:0,updatedAt:null}); });
