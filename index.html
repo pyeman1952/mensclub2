@@ -435,7 +435,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
       <h2>Skill Prizes <em>sponsor awards — cash prizes added to money winners</em></h2>
       <div class="cb">
         <table class="gt">
-          <thead><tr><th style="width:32px;">Hole</th><th>Winner</th><th>Prize Description</th><th style="width:72px;">$</th><th style="width:90px;">Payout</th><th style="width:28px;"></th></tr></thead>
+          <thead><tr><th style="width:32px;">Hole</th><th>Winner</th><th>Prize Description</th><th style="width:72px;">$</th><th style="width:28px;"></th></tr></thead>
           <tbody id="skill-tbody"></tbody>
         </table>
       </div>
@@ -763,7 +763,6 @@ function addSkillRow(h, isFirst){
     <td><input type="text" id="sp-name-${uid}" placeholder="Winner" style="width:100%;"></td>
     <td><input type="text" id="sp-prize-${uid}" placeholder="Prize description" style="width:100%;"></td>
     <td><input type="number" id="sp-cash-${uid}" placeholder="0" min="0" step="0.01" style="width:68px;text-align:right;"></td>
-    <td><select id="sp-pref-${uid}" style="font-size:12px;padding:3px;width:88px;"><option value="">—</option>${PREF_OPTS_SK}</select></td>
     <td>${isFirst?`<button type="button" onclick="addSkillRow(${h},false)" style="background:none;border:none;color:var(--ac);font-size:16px;cursor:pointer;padding:0 4px;" title="Add another prize for hole ${h}">+</button>`:
       `<button type="button" onclick="this.closest('tr').remove()" style="background:none;border:none;color:#c00;font-size:16px;cursor:pointer;padding:0 4px;" title="Remove">×</button>`}</td>`;
   // Insert after last row with same hole
@@ -861,14 +860,18 @@ function buildWeeklySummary(){
   const grandTotal=rows.reduce((s,r)=>s+r.total,0);
   totalEl.textContent=`Total paid out: $${grandTotal.toFixed(2)}`;
 
-  let html='<table class="gt"><thead><tr>'
+  const PREF_OPTS='<option value="Bar">Bar</option><option value="Pro Shop">Pro Shop</option><option value="Cash">Cash</option><option value="Cheque">Cheque</option><option value="Split">— Split —</option>';
+
+  let html='<table class="gt" id="ws-table"><thead><tr>'
     +'<th>Player</th><th class="thr">Gross</th><th class="thr">Net</th>'
     +'<th class="thr">Skins</th><th class="thr">POG</th>'
     +'<th class="thr">Skill</th><th class="thr">Draws</th>'
     +'<th class="thr" style="font-weight:700;">Total</th>'
+    +'<th style="min-width:110px;">Payout To</th>'
     +'</tr></thead><tbody>';
-  rows.forEach(r=>{
-    html+=`<tr>`
+
+  rows.forEach((r,i)=>{
+    html+=`<tr id="ws-row-${i}">`
       +`<td>${r.name}</td>`
       +`<td class="thr">${fmt(r.gross)}</td>`
       +`<td class="thr">${fmt(r.net)}</td>`
@@ -877,10 +880,47 @@ function buildWeeklySummary(){
       +`<td class="thr">${fmt(r.skill)}</td>`
       +`<td class="thr">${fmt(r.draws)}</td>`
       +`<td class="thr" style="font-weight:700;">$${r.total.toFixed(2)}</td>`
-      +`</tr>`;
+      +`<td><select id="ws-pref-${i}" onchange="wsSplitToggle(${i},${r.total.toFixed(2)})" style="font-size:12px;padding:3px;width:100px;">${PREF_OPTS}</select></td>`
+      +`</tr>`
+      // Split sub-rows (hidden until "Split" chosen)
+      +`<tr id="ws-split-${i}" style="display:none;background:#f9f6ff;">`
+      +`<td colspan="8" style="padding:4px 8px 6px 20px;">`
+      +`<span style="font-size:11px;color:var(--mut);">Split amounts (must total $${r.total.toFixed(2)}):</span>`
+      +`<span style="margin-left:10px;font-size:12px;">Bar <input type="number" id="ws-bar-${i}" placeholder="0" min="0" step="0.01" style="width:58px;" oninput="wsSplitCheck(${i},${r.total.toFixed(2)})"></span>`
+      +`<span style="margin-left:8px;font-size:12px;">Pro Shop <input type="number" id="ws-pro-${i}" placeholder="0" min="0" step="0.01" style="width:58px;" oninput="wsSplitCheck(${i},${r.total.toFixed(2)})"></span>`
+      +`<span style="margin-left:8px;font-size:12px;">Cash <input type="number" id="ws-cash-${i}" placeholder="0" min="0" step="0.01" style="width:58px;" oninput="wsSplitCheck(${i},${r.total.toFixed(2)})"></span>`
+      +`<span style="margin-left:8px;font-size:12px;">Cheque <input type="number" id="ws-cheque-${i}" placeholder="0" min="0" step="0.01" style="width:58px;" oninput="wsSplitCheck(${i},${r.total.toFixed(2)})"></span>`
+      +`<span id="ws-split-warn-${i}" style="margin-left:10px;font-size:11px;color:#c00;"></span>`
+      +`</td><td></td></tr>`;
   });
   html+='</tbody></table>';
   body.innerHTML=html;
+}
+
+function wsSplitToggle(i, total){
+  const sel=document.getElementById(`ws-pref-${i}`);
+  const splitRow=document.getElementById(`ws-split-${i}`);
+  if(!sel||!splitRow) return;
+  splitRow.style.display=sel.value==='Split'?'':'none';
+  if(sel.value==='Split'){
+    // Pre-fill Bar with full total as a starting point
+    const barEl=document.getElementById(`ws-bar-${i}`);
+    if(barEl&&!barEl.value) barEl.value=total.toFixed(2);
+    wsSplitCheck(i,total);
+  }
+}
+function wsSplitCheck(i, total){
+  const bar=parseFloat(document.getElementById(`ws-bar-${i}`)?.value)||0;
+  const pro=parseFloat(document.getElementById(`ws-pro-${i}`)?.value)||0;
+  const cash=parseFloat(document.getElementById(`ws-cash-${i}`)?.value)||0;
+  const cheque=parseFloat(document.getElementById(`ws-cheque-${i}`)?.value)||0;
+  const sum=bar+pro+cash+cheque;
+  const warn=document.getElementById(`ws-split-warn-${i}`);
+  if(warn){
+    const diff=Math.abs(sum-total);
+    if(diff>0.01) warn.textContent=`⚠ Total is $${sum.toFixed(2)} — should be $${total.toFixed(2)}`;
+    else warn.textContent='✓';
+  }
 }
 
 function buildSkill(){
@@ -1750,7 +1790,7 @@ async function loadCommittedWeek(){
 }
 
 // ── Generate payout ───────────────────────────────────────────────────────────
-function generatePayout(previewOnly=false){
+async function generatePayout(previewOnly=false){
   const week   =document.getElementById('t-week')?.value||'';
   const tname  =document.getElementById('t-name')?.value||'';
   const date   =document.getElementById('t-date').value||'—';
@@ -1917,6 +1957,24 @@ function generatePayout(previewOnly=false){
     if(la!==lb) return la<lb?-1:1;
     return (a.name||'').toLowerCase()<(b.name||'').toLowerCase()?-1:1;
   });
+
+  // On overwrite: restore saved pref allocations from the existing committed week in JSON
+  if(isOverwrite){
+    try{
+      const jr=await fetch('https://raw.githubusercontent.com/pyeman1952/mensclub2/main/payout-data.json?cb='+Date.now());
+      if(jr.ok){
+        const jd=await jr.json();
+        const savedWk=(jd.weeks||[]).find(w=>w.id===weekKey);
+        if(savedWk){
+          const savedPrefs={};
+          (savedWk.moneyWinners||[]).forEach(mw=>{
+            if(mw.name&&mw.pref&&typeof mw.pref==='object') savedPrefs[mwKey(mw.name)]=mw.pref;
+          });
+          mwList.forEach(r=>{ if(savedPrefs[r.name]) r.pref=savedPrefs[r.name]; });
+        }
+      }
+    }catch(e){/* network unavailable — prefs stay blank */}
+  }
 
   // Commit season — pref is read from mw-pref-N selects after render (see confirmCommit)
   if(!previewOnly){
