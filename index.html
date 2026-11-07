@@ -2033,6 +2033,11 @@ async function generatePayout(previewOnly=false){
       wsPrefs[pname]=selVal||'Bar';
     }
   });
+  // DEBUG — remove after testing
+  const prefKeys=Object.keys(wsPrefs);
+  const firstKey=prefKeys[0]||'(none)';
+  const firstVal=wsPrefs[firstKey]||'(none)';
+  alert(`wsPrefs has ${prefKeys.length} entries.\nFirst: "${firstKey}" → "${firstVal}"\nSample mwList name: "${mwList[0]?.name}" → displayName: "${displayName(mwList[0]?.name||'')}"`);
   // Apply summary prefs to mwList — match by display name since summary shows display names
   mwList.forEach(r=>{
     const dn=displayName(r.name);
