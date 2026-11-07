@@ -1965,8 +1965,9 @@ async function generatePayout(previewOnly=false){
     return (a.name||'').toLowerCase()<(b.name||'').toLowerCase()?-1:1;
   });
 
-  // On overwrite: restore saved pref allocations from the existing committed week in JSON
-  if(isOverwrite){
+  // Restore saved pref allocations from JSON whenever week already exists (overwrite or preview)
+  const alreadyExists=weeksLog.some(w=>w.id===weekKey);
+  if(alreadyExists){
     try{
       const jr=await fetch('https://raw.githubusercontent.com/pyeman1952/mensclub2/main/payout-data.json?cb='+Date.now());
       if(jr.ok){
