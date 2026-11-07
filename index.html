@@ -246,7 +246,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
 <nav class="sidebar">
   <div class="nav-sec">Entry</div>
   <button class="tbtn active" data-tab="setup" title="Enter player count, skins/POG buy-ins, and gross/net winners for the week.">Weekly Setup</button>
-  <button class="tbtn" data-tab="payout" title="Review calculated results before committing. Shows gross/net winners, skins, POG, and money winner totals.">Payout Sheet Preview</button>
+  <button class="tbtn" data-tab="payout" title="Review the calculated payout sheet — gross/net winners, skins, POG, and money winner totals.">Payout Sheet</button>
   <hr class="sdiv">
   <div class="nav-sec">Admin</div>
   <button class="tbtn" data-tab="balances" title="Set the current carry-over balances for each skins and POG hole at the start of the season or after a correction.">Edit POG &amp; Skins Balances</button>
@@ -258,7 +258,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
   <button class="tbtn" data-tab="flights" title="Gross and net results broken down by flight for all committed weeks.">Flight Report</button>
   <hr class="sdiv">
   <div class="nav-sec">Tools</div>
-  <button class="tbtn" id="btn-commit" title="Calculate payouts and publish results to the public page. Safe to re-run — will not double the leaderboard.">Generate &amp; Commit</button>
+  <button class="tbtn" id="btn-commit" title="Preview the full payout sheet, then confirm to publish results to the public page. Safe to re-run — will not double the leaderboard.">Preview &amp; Commit</button>
   <button class="tbtn no-print" id="btn-print" title="Print the current payout sheet or save it as a PDF.">Print / Save PDF</button>
   <button class="tbtn" id="btn-save-draft" title="Save current entries as a draft on this device. Does not publish anything.">Save Draft</button>
   <button class="tbtn" id="btn-load-draft" title="Load the last saved draft back into the entry form.">Load Draft</button>
@@ -1465,7 +1465,7 @@ function loadDraft(){
     const p=document.getElementById(`rd-pref-${idx}`); if(p) p.value=row.pref||'Bar';
   });
   recalcPools();
-  alert('Draft loaded. Review entries then Generate & Commit when ready.');
+  alert('Draft loaded. Review entries then Preview & Commit when ready.');
 }
 
 // ── Populate week-load dropdown from weeksLog ────────────────────────────────
@@ -1852,7 +1852,7 @@ async function loadCommittedWeek(){
   window._loadedWeekMwList=wk.mwList||(jsonWk&&jsonWk.moneyWinners)||[];
   showTab('setup');
   const jsonNote=jsonWk?' Some fields were filled from the public results file (net/skins/pog/draws).':'';
-  alert(`"${label}" loaded into form.${jsonNote}\n\nReview entries, make any corrections, then Generate & Commit when ready.\n\nNote: re-committing will overwrite the existing record for this date.`);
+  alert(`"${label}" loaded into form.${jsonNote}\n\nReview entries, make any corrections, then Preview & Commit when ready.\n\nNote: re-committing will overwrite the existing record for this date.`);
 }
 
 // ── Generate payout ───────────────────────────────────────────────────────────
