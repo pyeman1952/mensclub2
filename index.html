@@ -2042,7 +2042,6 @@ async function generatePayout(previewOnly=false){
   const nonBarVal=nonBar?wsPrefs[nonBar]:'(all Bar)';
   // Find matching mwList entry
   const mwMatch=mwList.find(r=>displayName(r.name)===nonBar||r.name===nonBar);
-  alert(`wsPrefs: ${prefKeys.length} entries\nFirst non-Bar key: "${nonBar}" → "${nonBarVal}"\nMatching mwList entry: "${mwMatch?.name||'NOT FOUND'}" total=${mwMatch?.total}\ndisplayName check: displayName("${mwMatch?.name||''}") = "${displayName(mwMatch?.name||'')}"`);
   // Apply summary prefs to mwList — match by display name since summary shows display names
   mwList.forEach(r=>{
     const dn=displayName(r.name);
@@ -2051,6 +2050,9 @@ async function generatePayout(previewOnly=false){
     else r.pref={bar:sp==='Bar'?r.total:0, proshop:sp==='Pro Shop'?r.total:0,
                   cash:sp==='Cash'?r.total:0, cheque:sp==='Cheque'?r.total:0, other:''};
   });
+  // DEBUG — check pref was set correctly for first non-Bar player
+  const mwMatchAfter=mwList.find(r=>displayName(r.name)===nonBar||r.name===nonBar);
+  alert(`After apply:\n"${mwMatchAfter?.name}" total=${mwMatchAfter?.total}\npref=${JSON.stringify(mwMatchAfter?.pref)}\nsp lookup: wsPrefs["${displayName(mwMatchAfter?.name||'')}"]="${wsPrefs[displayName(mwMatchAfter?.name||'')]}"`);
 
   // Commit season — pref is read from mw-pref-N selects after render (see confirmCommit)
   if(!previewOnly){
