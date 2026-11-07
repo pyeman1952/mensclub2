@@ -908,11 +908,26 @@ function buildWeeklySummary(){
 
   // Restore saved prefs from last committed version of this week (if available)
   // Check window._loadedWeekMwList set by loadCommittedWeek()
-  const savedMw=window._loadedWeekMwList||[];
+  // Also check localStorage directly for current week (survives page reload)
+  let savedMw=window._loadedWeekMwList||[];
+  if(!savedMw.length){
+    const curWkEl=document.getElementById('week-select');
+    const curWk=curWkEl?curWkEl.value:'';
+    if(curWk){
+      try{
+        const stored=localStorage.getItem('golfPayout_weeks');
+        if(stored){
+          const allWks=JSON.parse(stored);
+          const wkRec=allWks.find(w=>w.weekName===curWk||w.id===curWk);
+          if(wkRec&&wkRec.mwList) savedMw=wkRec.mwList;
+        }
+      }catch(e){}
+    }
+  }
   if(savedMw.length){
     rows.forEach((r,i)=>{
-      // Match by display name or stored name
-      const mwRec=savedMw.find(m=>displayName(m.name)===r.name||m.name===r.name);
+      // Normalize both sides to "Last, First" for reliable match
+      const mwRec=savedMw.find(m=>mwKey(m.name)===r.name);
       if(!mwRec||!mwRec.pref) return;
       const p=mwRec.pref;
       const selEl=document.getElementById(`ws-pref-${i}`);
