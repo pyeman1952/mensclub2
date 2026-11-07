@@ -1219,6 +1219,13 @@ function clearEntries(){
     const p=document.getElementById(`rd-pref-${i}`);if(p)p.selectedIndex=0;
   });
   recalcPools();
+  // Clear payout sheet and weekly summary so stale generated output isn't visible
+  const ps=document.getElementById('payout-sheet'); if(ps) ps.innerHTML='';
+  const sb=document.getElementById('weekly-summary-body');
+  if(sb) sb.innerHTML='<p style="font-size:12px;color:var(--mut);margin:0;">Click Refresh Summary to see payouts for current entries.</p>';
+  const st=document.getElementById('weekly-summary-total'); if(st) st.textContent='';
+  window._pendingCommit=null;
+  showTab('setup');
 }
 
 // ── Save / Load Draft ─────────────────────────────────────────────────────────
@@ -1968,7 +1975,14 @@ async function generatePayout(previewOnly=false){
         if(savedWk){
           const savedPrefs={};
           (savedWk.moneyWinners||[]).forEach(mw=>{
-            if(mw.name&&mw.pref&&typeof mw.pref==='object') savedPrefs[mwKey(mw.name)]=mw.pref;
+            if(!mw.name||!mw.pref) return;
+            // Handle both legacy string pref ('Bar') and new object pref
+            let p=mw.pref;
+            if(typeof p==='string'){
+              p={bar:p==='Bar'?mw.total:0, proshop:p==='Pro Shop'?mw.total:0,
+                 cash:p==='Cash'?mw.total:0, cheque:p==='Cheque'?mw.total:0, other:''};
+            }
+            savedPrefs[mwKey(mw.name)]=p;
           });
           mwList.forEach(r=>{ if(savedPrefs[r.name]) r.pref=savedPrefs[r.name]; });
         }
