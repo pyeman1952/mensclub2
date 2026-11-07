@@ -787,7 +787,7 @@ function buildWeeklySummary(){
   const totals={}; // {pname: {gross,net,skins,pog,skill,draws}}
   const add=(pname,cat,amt)=>{
     if(!pname||!amt) return;
-    const n=pname.trim(); if(!n) return;
+    const n=mwKey(pname.trim()); if(!n) return; // normalize to 'Last, First'
     if(!totals[n]) totals[n]={gross:0,net:0,skins:0,pog:0,skill:0,draws:0};
     totals[n][cat]+=parseFloat(amt)||0;
   };
@@ -880,8 +880,9 @@ function buildWeeklySummary(){
     +'</tr></thead><tbody>';
 
   rows.forEach((r,i)=>{
+    const dispName=(n=>{const s=(n||'').trim();const ci=s.indexOf(',');if(ci>-1){const last=s.slice(0,ci).trim();const first=s.slice(ci+1).trim();return first?`${first} ${last}`:last;}return s;})(r.name);
     html+=`<tr id="ws-row-${i}">`
-      +`<td>${r.name}</td>`
+      +`<td>${dispName}</td>`
       +`<td class="thr">${fmt(r.gross)}</td>`
       +`<td class="thr">${fmt(r.net)}</td>`
       +`<td class="thr">${fmt(r.skins)}</td>`
