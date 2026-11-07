@@ -1965,31 +1965,39 @@ async function generatePayout(previewOnly=false){
     return (a.name||'').toLowerCase()<(b.name||'').toLowerCase()?-1:1;
   });
 
-  // Restore saved pref allocations from JSON whenever week already exists (overwrite or preview)
-  const alreadyExists=weeksLog.some(w=>w.id===weekKey);
-  if(alreadyExists){
-    try{
-      const jr=await fetch('https://raw.githubusercontent.com/pyeman1952/mensclub2/main/payout-data.json?cb='+Date.now());
-      if(jr.ok){
-        const jd=await jr.json();
-        const savedWk=(jd.weeks||[]).find(w=>w.id===weekKey);
-        if(savedWk){
-          const savedPrefs={};
-          (savedWk.moneyWinners||[]).forEach(mw=>{
-            if(!mw.name||!mw.pref) return;
-            // Handle both legacy string pref ('Bar') and new object pref
-            let p=mw.pref;
-            if(typeof p==='string'){
-              p={bar:p==='Bar'?mw.total:0, proshop:p==='Pro Shop'?mw.total:0,
-                 cash:p==='Cash'?mw.total:0, cheque:p==='Cheque'?mw.total:0, other:''};
-            }
-            savedPrefs[mwKey(mw.name)]=p;
-          });
-          mwList.forEach(r=>{ if(savedPrefs[r.name]) r.pref=savedPrefs[r.name]; });
-        }
-      }
-    }catch(e){/* network unavailable — prefs stay blank */}
-  }
+  // Restore pref allocations from Weekly Summary dropdowns if already set
+  // Build a name→index map from the summary table rows
+  const wsPrefs={};
+  document.querySelectorAll('#ws-table tbody tr[id^="ws-row-"]').forEach(tr=>{
+    const i=parseInt(tr.id.replace('ws-row-',''));
+    const nameCell=tr.querySelector('td:first-child');
+    const selEl=document.getElementById(`ws-pref-${i}`);
+    if(!nameCell||!selEl) return;
+    const pname=nameCell.textContent.trim();
+    if(!pname) return;
+    const selVal=selEl.value;
+    if(selVal==='Split'){
+      wsPrefs[pname]={
+        bar:parseFloat(document.getElementById(`ws-bar-${i}`)?.value)||0,
+        proshop:parseFloat(document.getElementById(`ws-pro-${i}`)?.value)||0,
+        cash:parseFloat(document.getElementById(`ws-cash-${i}`)?.value)||0,
+        cheque:parseFloat(document.getElementById(`ws-cheque-${i}`)?.value)||0,
+        other:''
+      };
+    } else if(selVal&&selVal!=='Bar'){
+      // Non-default selection — will be applied as full total to that category
+      wsPrefs[pname]=selVal; // store as string; resolved below per player total
+    }
+  });
+  // Apply summary prefs to mwList — match by display name since summary shows display names
+  mwList.forEach(r=>{
+    const dn=displayName(r.name);
+    const sp=wsPrefs[dn]||wsPrefs[r.name];
+    if(!sp) return;
+    if(typeof sp==='object') r.pref=sp;
+    else r.pref={bar:sp==='Bar'?r.total:0, proshop:sp==='Pro Shop'?r.total:0,
+                  cash:sp==='Cash'?r.total:0, cheque:sp==='Cheque'?r.total:0, other:''};
+  });
 
   // Commit season — pref is read from mw-pref-N selects after render (see confirmCommit)
   if(!previewOnly){
