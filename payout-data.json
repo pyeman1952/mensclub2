@@ -2,7 +2,7 @@
   "weeks": [
     {
       "id": "November_1-_2026",
-      "name": "Week 4 — Regular Golf",
+      "name": "Week 4 — Week 4 - Regular Golf",
       "date": "November 1, 2026",
       "notes": "Frost Delayed",
       "cancelled": false,
@@ -10,7 +10,7 @@
       "gnPool": 480,
       "skinsPool": 220,
       "pogPool": 220,
-      "recordedAt": "2026-11-08T00:35:32.024Z",
+      "recordedAt": "2026-11-08T01:27:23.112Z",
       "grossRows": [
         {
           "key": "G01",
@@ -4364,92 +4364,92 @@
   "pots": {
     "sk_1": {
       "pot": 22,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
+      "updatedAt": "2026-11-08T00:57:22.354Z",
       "lastWinner": null
     },
     "sk_2": {
       "pot": 73,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
+      "updatedAt": "2026-11-08T00:57:22.354Z",
       "lastWinner": null
     },
     "sk_5": {
       "pot": 0,
-      "updatedAt": "2026-11-07T05:33:50.946Z",
-      "lastWinner": "Iain Haigh"
+      "updatedAt": "2026-11-08T00:57:22.354Z",
+      "lastWinner": null
     },
     "sk_6": {
       "pot": 41,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
+      "updatedAt": "2026-11-08T00:57:22.354Z",
       "lastWinner": null
     },
     "sk_7": {
       "pot": 41,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
+      "updatedAt": "2026-11-08T00:57:22.354Z",
       "lastWinner": null
     },
     "sk_8": {
       "pot": 0,
-      "updatedAt": "2026-11-07T05:33:50.946Z",
-      "lastWinner": "Silvio Alberti"
+      "updatedAt": "2026-11-08T00:57:22.354Z",
+      "lastWinner": null
     },
     "sk_9": {
       "pot": 0,
-      "updatedAt": "2026-11-08T00:35:10.194Z",
+      "updatedAt": "2026-11-08T01:27:02.875Z",
       "lastWinner": "Mike Schwarz"
     },
     "sk_11": {
       "pot": 41,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
+      "updatedAt": "2026-11-08T00:57:22.354Z",
       "lastWinner": null
     },
     "sk_12": {
       "pot": 0,
-      "updatedAt": "2026-11-07T05:33:50.946Z",
-      "lastWinner": "Craig Follis"
+      "updatedAt": "2026-11-08T00:57:22.354Z",
+      "lastWinner": null
     },
     "sk_13": {
       "pot": 22,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
+      "updatedAt": "2026-11-08T00:57:22.354Z",
       "lastWinner": null
     },
     "sk_14": {
       "pot": 73,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
+      "updatedAt": "2026-11-08T00:57:22.354Z",
       "lastWinner": null
     },
     "sk_16": {
       "pot": 22,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
+      "updatedAt": "2026-11-08T00:57:22.354Z",
       "lastWinner": null
     },
     "sk_18": {
       "pot": 0,
-      "updatedAt": "2026-11-08T00:35:10.194Z",
+      "updatedAt": "2026-11-08T01:27:02.876Z",
       "lastWinner": "Kelly Mullock"
     },
     "pg_3": {
       "pot": 211,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
+      "updatedAt": "2026-11-08T00:57:22.355Z",
       "lastWinner": null
     },
     "pg_4": {
       "pot": 113,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
+      "updatedAt": "2026-11-08T00:57:22.355Z",
       "lastWinner": null
     },
     "pg_10": {
       "pot": 211,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
+      "updatedAt": "2026-11-08T00:57:22.355Z",
       "lastWinner": null
     },
     "pg_15": {
       "pot": 0,
-      "updatedAt": "2026-11-08T00:35:10.194Z",
+      "updatedAt": "2026-11-08T01:27:02.876Z",
       "lastWinner": "Bob Tarbuck"
     },
     "pg_17": {
       "pot": 211,
-      "updatedAt": "2026-11-03T05:00:49.439Z",
+      "updatedAt": "2026-11-08T00:57:22.355Z",
       "lastWinner": null
     }
   }
