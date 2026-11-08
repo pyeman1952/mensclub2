@@ -2,7 +2,7 @@
   "weeks": [
     {
       "id": "November_1-_2026",
-      "name": "Week 4 — Week 4 - Regular Golf",
+      "name": "Week 4 Regular Golf",
       "date": "November 1, 2026",
       "notes": "Frost Delayed",
       "cancelled": false,
@@ -10,7 +10,7 @@
       "gnPool": 480,
       "skinsPool": 220,
       "pogPool": 220,
-      "recordedAt": "2026-11-08T01:27:23.112Z",
+      "recordedAt": "2026-11-08T01:33:29.909Z",
       "grossRows": [
         {
           "key": "G01",
@@ -973,7 +973,7 @@
             "proshop": 56,
             "cash": 0,
             "cheque": 0,
-            "other": "Turkey entered as $40"
+            "other": ""
           },
           "gross": 0,
           "net": 40,
@@ -4394,7 +4394,7 @@
     },
     "sk_9": {
       "pot": 0,
-      "updatedAt": "2026-11-08T01:27:02.875Z",
+      "updatedAt": "2026-11-08T01:33:16.610Z",
       "lastWinner": "Mike Schwarz"
     },
     "sk_11": {
@@ -4424,7 +4424,7 @@
     },
     "sk_18": {
       "pot": 0,
-      "updatedAt": "2026-11-08T01:27:02.876Z",
+      "updatedAt": "2026-11-08T01:33:16.611Z",
       "lastWinner": "Kelly Mullock"
     },
     "pg_3": {
@@ -4444,7 +4444,7 @@
     },
     "pg_15": {
       "pot": 0,
-      "updatedAt": "2026-11-08T01:27:02.876Z",
+      "updatedAt": "2026-11-08T01:33:16.611Z",
       "lastWinner": "Bob Tarbuck"
     },
     "pg_17": {
