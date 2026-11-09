@@ -2,7 +2,7 @@
   "weeks": [
     {
       "id": "November_8-_2026",
-      "name": "Week 5 â Regular Golf",
+      "name": "Week 5 Ã¢ÂÂ Regular Golf",
       "date": "November 8, 2026",
       "notes": "Fairways starting to get soggy, bunkers not in play",
       "cancelled": false,
@@ -177,9 +177,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0–5",
-        "B": "6–11",
-        "C": "12–17",
+        "A": "0â5",
+        "B": "6â11",
+        "C": "12â17",
         "D": "18+"
       },
       "net": [
@@ -1035,9 +1035,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0Ã¢ÂÂ5",
-        "B": "6Ã¢ÂÂ11",
-        "C": "12Ã¢ÂÂ17",
+        "A": "0ÃÂ¢ÃÂÃÂ5",
+        "B": "6ÃÂ¢ÃÂÃÂ11",
+        "C": "12ÃÂ¢ÃÂÃÂ17",
         "D": "18+"
       },
       "net": [
