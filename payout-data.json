@@ -2,7 +2,7 @@
   "weeks": [
     {
       "id": "November_8-_2026",
-      "name": "Week 5 — Regular Golf",
+      "name": "Week 5 â Regular Golf",
       "date": "November 8, 2026",
       "notes": "Fairways starting to get soggy, bunkers not in play",
       "cancelled": false,
@@ -10,7 +10,7 @@
       "gnPool": 350,
       "skinsPool": 145,
       "pogPool": 170,
-      "recordedAt": "2026-11-09T06:19:40.920Z",
+      "recordedAt": "2026-11-10T00:09:17.506Z",
       "grossRows": [
         {
           "key": "G01",
@@ -274,9 +274,9 @@
           "winner": "Rallison, Jordan",
           "score": "3G",
           "gross": "",
-          "runPot": 11,
-          "payout": 11,
-          "stored": 0,
+          "runPot": 33,
+          "payout": 33,
+          "stored": 22,
           "weekly": 11,
           "paid": true,
           "guest": false,
@@ -287,9 +287,9 @@
           "winner": "Schwarz, Mike",
           "score": "3N",
           "gross": "",
-          "runPot": 11,
-          "payout": 11,
-          "stored": 0,
+          "runPot": 94,
+          "payout": 94,
+          "stored": 83,
           "weekly": 11,
           "paid": true,
           "guest": false,
@@ -300,9 +300,9 @@
           "winner": "Rallison, Jordan",
           "score": "3G",
           "gross": "",
-          "runPot": 11,
-          "payout": 11,
-          "stored": 0,
+          "runPot": 27,
+          "payout": 27,
+          "stored": 16,
           "weekly": 11,
           "paid": true,
           "guest": false,
@@ -313,9 +313,9 @@
           "winner": "",
           "score": "",
           "gross": "",
-          "runPot": 74,
-          "payout": 74,
-          "stored": 63,
+          "runPot": 52,
+          "payout": 52,
+          "stored": 41,
           "weekly": 11,
           "paid": false,
           "guest": false,
@@ -326,9 +326,9 @@
           "winner": "Rallison, Jordan",
           "score": "4G",
           "gross": "",
-          "runPot": 11,
-          "payout": 11,
-          "stored": 0,
+          "runPot": 52,
+          "payout": 52,
+          "stored": 41,
           "weekly": 11,
           "paid": true,
           "guest": false,
@@ -339,9 +339,9 @@
           "winner": "",
           "score": "",
           "gross": "",
-          "runPot": 49,
-          "payout": 49,
-          "stored": 38,
+          "runPot": 27,
+          "payout": 27,
+          "stored": 16,
           "weekly": 11,
           "paid": false,
           "guest": false,
@@ -352,9 +352,9 @@
           "winner": "",
           "score": "",
           "gross": "",
-          "runPot": 33,
-          "payout": 33,
-          "stored": 22,
+          "runPot": 11,
+          "payout": 11,
+          "stored": 0,
           "weekly": 11,
           "paid": false,
           "guest": false,
@@ -365,9 +365,9 @@
           "winner": "",
           "score": "",
           "gross": "",
-          "runPot": 74,
-          "payout": 74,
-          "stored": 63,
+          "runPot": 52,
+          "payout": 52,
+          "stored": 41,
           "weekly": 11,
           "paid": false,
           "guest": false,
@@ -378,9 +378,9 @@
           "winner": "Hunt, Larry",
           "score": "2N",
           "gross": "",
-          "runPot": 11,
-          "payout": 11,
-          "stored": 0,
+          "runPot": 27,
+          "payout": 27,
+          "stored": 16,
           "weekly": 11,
           "paid": true,
           "guest": false,
@@ -391,9 +391,9 @@
           "winner": "Lychak, Dennis",
           "score": "2N",
           "gross": "",
-          "runPot": 11,
-          "payout": 11,
-          "stored": 0,
+          "runPot": 33,
+          "payout": 33,
+          "stored": 22,
           "weekly": 11,
           "paid": true,
           "guest": false,
@@ -404,9 +404,9 @@
           "winner": "Follis, Craig",
           "score": "4G",
           "gross": "",
-          "runPot": 11,
-          "payout": 11,
-          "stored": 0,
+          "runPot": 84,
+          "payout": 84,
+          "stored": 73,
           "weekly": 11,
           "paid": true,
           "guest": false,
@@ -417,9 +417,9 @@
           "winner": "",
           "score": "",
           "gross": "",
-          "runPot": 55,
-          "payout": 55,
-          "stored": 44,
+          "runPot": 33,
+          "payout": 33,
+          "stored": 22,
           "weekly": 11,
           "paid": false,
           "guest": false,
@@ -430,9 +430,9 @@
           "winner": "",
           "score": "",
           "gross": "",
-          "runPot": 33,
-          "payout": 33,
-          "stored": 22,
+          "runPot": 11,
+          "payout": 11,
+          "stored": 0,
           "weekly": 11,
           "paid": false,
           "guest": false,
@@ -443,9 +443,9 @@
         {
           "hole": 3,
           "winner": "",
-          "runPot": 313,
-          "payout": 313,
-          "stored": 279,
+          "runPot": 245,
+          "payout": 245,
+          "stored": 211,
           "weekly": 34,
           "paid": false,
           "guest": false,
@@ -454,9 +454,9 @@
         {
           "hole": 4,
           "winner": "",
-          "runPot": 215,
-          "payout": 215,
-          "stored": 181,
+          "runPot": 147,
+          "payout": 147,
+          "stored": 113,
           "weekly": 34,
           "paid": false,
           "guest": false,
@@ -465,9 +465,9 @@
         {
           "hole": 10,
           "winner": "Smith, Darrell",
-          "runPot": 34,
-          "payout": 34,
-          "stored": 0,
+          "runPot": 245,
+          "payout": 245,
+          "stored": 211,
           "weekly": 34,
           "paid": true,
           "guest": false,
@@ -476,9 +476,9 @@
         {
           "hole": 15,
           "winner": "",
-          "runPot": 102,
-          "payout": 102,
-          "stored": 68,
+          "runPot": 34,
+          "payout": 34,
+          "stored": 0,
           "weekly": 34,
           "paid": false,
           "guest": false,
@@ -487,9 +487,9 @@
         {
           "hole": 17,
           "winner": "",
-          "runPot": 313,
-          "payout": 313,
-          "stored": 279,
+          "runPot": 245,
+          "payout": 245,
+          "stored": 211,
           "weekly": 34,
           "paid": false,
           "guest": false,
@@ -563,16 +563,17 @@
           "pref": {
             "bar": 0,
             "proshop": 0,
-            "cash": 36,
+            "cash": 109,
             "cheque": 0,
             "other": ""
           },
           "gross": 0,
           "net": 25,
-          "skins": 11,
+          "skins": 84,
           "pog": 0,
+          "skill": 0,
           "draw": 0,
-          "total": 36,
+          "total": 109,
           "weeks": 1
         },
         {
@@ -588,6 +589,7 @@
           "net": 0,
           "skins": 0,
           "pog": 0,
+          "skill": 0,
           "draw": 0,
           "total": 30,
           "weeks": 1
@@ -605,6 +607,7 @@
           "net": 25,
           "skins": 0,
           "pog": 0,
+          "skill": 0,
           "draw": 0,
           "total": 25,
           "weeks": 1
@@ -620,12 +623,12 @@
           },
           "gross": 0,
           "net": 25,
-          "skins": 11,
+          "skins": 27,
           "pog": 0,
+          "skill": 20,
           "draw": 0,
-          "total": 36,
-          "weeks": 1,
-          "skill": null
+          "total": 72,
+          "weeks": 1
         },
         {
           "name": "Johns, Mandy",
@@ -640,6 +643,7 @@
           "net": 0,
           "skins": 0,
           "pog": 0,
+          "skill": 0,
           "draw": 0,
           "total": 30,
           "weeks": 1
@@ -657,6 +661,7 @@
           "net": 0,
           "skins": 0,
           "pog": 0,
+          "skill": 0,
           "draw": 0,
           "total": 25,
           "weeks": 1
@@ -672,12 +677,12 @@
           },
           "gross": 0,
           "net": 40,
-          "skins": 11,
+          "skins": 33,
           "pog": 0,
+          "skill": 20,
           "draw": 0,
-          "total": 51,
-          "weeks": 1,
-          "skill": null
+          "total": 93,
+          "weeks": 1
         },
         {
           "name": "Pye, Dave",
@@ -692,6 +697,7 @@
           "net": 0,
           "skins": 0,
           "pog": 0,
+          "skill": 0,
           "draw": 0,
           "total": 20,
           "weeks": 1
@@ -701,16 +707,17 @@
           "pref": {
             "bar": 0,
             "proshop": 0,
-            "cash": 58,
+            "cash": 137,
             "cheque": 0,
             "other": ""
           },
           "gross": 25,
           "net": 0,
-          "skins": 33,
+          "skins": 112,
           "pog": 0,
+          "skill": 0,
           "draw": 0,
-          "total": 58,
+          "total": 137,
           "weeks": 1
         },
         {
@@ -726,6 +733,7 @@
           "net": 20,
           "skins": 0,
           "pog": 0,
+          "skill": 0,
           "draw": 0,
           "total": 20,
           "weeks": 1
@@ -741,12 +749,12 @@
           },
           "gross": 0,
           "net": 20,
-          "skins": 11,
+          "skins": 94,
           "pog": 0,
+          "skill": 20,
           "draw": 0,
-          "total": 31,
-          "weeks": 1,
-          "skill": null
+          "total": 134,
+          "weeks": 1
         },
         {
           "name": "Smith, Darrell",
@@ -760,9 +768,10 @@
           "gross": 0,
           "net": 20,
           "skins": 0,
-          "pog": 34,
+          "pog": 245,
+          "skill": 0,
           "draw": 0,
-          "total": 54,
+          "total": 265,
           "weeks": 1
         },
         {
@@ -778,6 +787,7 @@
           "net": 0,
           "skins": 0,
           "pog": 0,
+          "skill": 0,
           "draw": 0,
           "total": 20,
           "weeks": 1
@@ -795,10 +805,10 @@
           "net": 0,
           "skins": 0,
           "pog": 0,
+          "skill": 20,
           "draw": 0,
-          "total": 0,
-          "weeks": 1,
-          "skill": null
+          "total": 20,
+          "weeks": 1
         },
         {
           "name": "VanVelzen, Paul",
@@ -813,6 +823,7 @@
           "net": 0,
           "skins": 0,
           "pog": 0,
+          "skill": 0,
           "draw": 0,
           "total": 30,
           "weeks": 1
@@ -821,8 +832,8 @@
       "totals": {
         "gross": 180,
         "net": 175,
-        "skins": 77,
-        "pog": 34,
+        "skins": 350,
+        "pog": 245,
         "draw": 0
       }
     },
@@ -1024,9 +1035,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0â5",
-        "B": "6â11",
-        "C": "12â17",
+        "A": "0Ã¢ÂÂ5",
+        "B": "6Ã¢ÂÂ11",
+        "C": "12Ã¢ÂÂ17",
         "D": "18+"
       },
       "net": [
@@ -4489,10 +4500,10 @@
       "pref": "Bar",
       "gross": 45,
       "net": 25,
-      "skins": 74,
+      "skins": 147,
       "pog": 0,
       "draw": 40,
-      "total": 184,
+      "total": 257,
       "weeks": 3,
       "played": 0
     },
@@ -4525,10 +4536,10 @@
       "pref": "Bar",
       "gross": 20,
       "net": 25,
-      "skins": 11,
+      "skins": 27,
       "pog": 0,
       "draw": 0,
-      "total": 56,
+      "total": 92,
       "weeks": 2,
       "played": 0
     },
@@ -4561,10 +4572,10 @@
       "pref": "Pro Shop",
       "gross": 40,
       "net": 60,
-      "skins": 11,
+      "skins": 33,
       "pog": 0,
       "draw": 0,
-      "total": 111,
+      "total": 153,
       "weeks": 4,
       "played": 0
     },
@@ -4591,16 +4602,16 @@
       "pref": {
         "bar": 0,
         "proshop": 0,
-        "cash": 58,
+        "cash": 137,
         "cheque": 0,
         "other": ""
       },
       "gross": 25,
       "net": 0,
-      "skins": 33,
+      "skins": 112,
       "pog": 0,
       "draw": 0,
-      "total": 58,
+      "total": 137,
       "weeks": 1,
       "played": 0
     },
@@ -4621,10 +4632,10 @@
       "pref": "Pro Shop",
       "gross": 30,
       "net": 60,
-      "skins": 27,
+      "skins": 110,
       "pog": 0,
       "draw": 0,
-      "total": 117,
+      "total": 220,
       "weeks": 3,
       "played": 0
     },
@@ -4640,9 +4651,9 @@
       "gross": 0,
       "net": 40,
       "skins": 0,
-      "pog": 34,
+      "pog": 245,
       "draw": 0,
-      "total": 74,
+      "total": 285,
       "weeks": 3,
       "played": 0
     },
@@ -4672,7 +4683,7 @@
       "skins": 38,
       "pog": 0,
       "draw": 0,
-      "total": 38,
+      "total": 58,
       "weeks": 2,
       "played": 0
     },
@@ -5226,93 +5237,83 @@
   "pots": {
     "sk_1": {
       "pot": 0,
-      "updatedAt": "2026-11-09T06:19:28.956Z",
+      "updatedAt": "2026-11-10T00:09:09.578Z",
       "lastWinner": "Rallison, Jordan"
     },
     "sk_2": {
       "pot": 0,
-      "updatedAt": "2026-11-09T06:19:28.956Z",
+      "updatedAt": "2026-11-10T00:09:09.578Z",
       "lastWinner": "Schwarz, Mike"
     },
     "sk_5": {
       "pot": 0,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "updatedAt": "2026-11-10T00:09:09.578Z",
       "lastWinner": "Rallison, Jordan"
     },
     "sk_6": {
-      "pot": 74,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
-      "lastWinner": null
+      "pot": 41,
+      "updatedAt": "2026-11-10T00:06:29.599Z"
     },
     "sk_7": {
       "pot": 0,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "updatedAt": "2026-11-10T00:09:09.578Z",
       "lastWinner": "Rallison, Jordan"
     },
     "sk_8": {
-      "pot": 49,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
-      "lastWinner": null
+      "pot": 16,
+      "updatedAt": "2026-11-10T00:06:29.599Z"
     },
     "sk_9": {
-      "pot": 33,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-11-10T00:06:29.599Z"
     },
     "sk_11": {
-      "pot": 74,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
-      "lastWinner": null
+      "pot": 41,
+      "updatedAt": "2026-11-10T00:06:29.599Z"
     },
     "sk_12": {
       "pot": 0,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "updatedAt": "2026-11-10T00:09:09.578Z",
       "lastWinner": "Hunt, Larry"
     },
     "sk_13": {
       "pot": 0,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "updatedAt": "2026-11-10T00:09:09.578Z",
       "lastWinner": "Lychak, Dennis"
     },
     "sk_14": {
       "pot": 0,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "updatedAt": "2026-11-10T00:09:09.578Z",
       "lastWinner": "Follis, Craig"
     },
     "sk_16": {
-      "pot": 55,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
-      "lastWinner": null
+      "pot": 22,
+      "updatedAt": "2026-11-10T00:06:29.599Z"
     },
     "sk_18": {
-      "pot": 33,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-11-10T00:06:29.599Z"
     },
     "pg_3": {
-      "pot": 313,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
-      "lastWinner": null
+      "pot": 211,
+      "updatedAt": "2026-11-10T00:07:25.355Z"
     },
     "pg_4": {
-      "pot": 215,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
-      "lastWinner": null
+      "pot": 113,
+      "updatedAt": "2026-11-10T00:07:25.355Z"
     },
     "pg_10": {
       "pot": 0,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "updatedAt": "2026-11-10T00:09:09.579Z",
       "lastWinner": "Smith, Darrell"
     },
     "pg_15": {
-      "pot": 102,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-11-10T00:07:25.355Z"
     },
     "pg_17": {
-      "pot": 313,
-      "updatedAt": "2026-11-09T06:19:28.957Z",
-      "lastWinner": null
+      "pot": 211,
+      "updatedAt": "2026-11-10T00:07:25.355Z"
     }
   }
 }
