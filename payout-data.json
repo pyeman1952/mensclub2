@@ -2,7 +2,7 @@
   "weeks": [
     {
       "id": "November_8-_2026",
-      "name": "Week 5 Ã¢ÂÂ Regular Golf",
+      "name": "Week 5 ÃÂ¢ÃÂÃÂ Regular Golf",
       "date": "November 8, 2026",
       "notes": "Fairways starting to get soggy, bunkers not in play",
       "cancelled": false,
@@ -177,9 +177,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0â5",
-        "B": "6â11",
-        "C": "12â17",
+        "A": "0Ã¢ÂÂ5",
+        "B": "6Ã¢ÂÂ11",
+        "C": "12Ã¢ÂÂ17",
         "D": "18+"
       },
       "net": [
@@ -1035,9 +1035,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0ÃÂ¢ÃÂÃÂ5",
-        "B": "6ÃÂ¢ÃÂÃÂ11",
-        "C": "12ÃÂ¢ÃÂÃÂ17",
+        "A": "0ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ5",
+        "B": "6ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ11",
+        "C": "12ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ17",
         "D": "18+"
       },
       "net": [
@@ -5237,83 +5237,93 @@
   "pots": {
     "sk_1": {
       "pot": 0,
-      "updatedAt": "2026-11-10T00:09:09.578Z",
+      "updatedAt": "2026-11-09T23:34:53.066Z",
       "lastWinner": "Rallison, Jordan"
     },
     "sk_2": {
       "pot": 0,
-      "updatedAt": "2026-11-10T00:09:09.578Z",
+      "updatedAt": "2026-11-09T23:34:53.066Z",
       "lastWinner": "Schwarz, Mike"
     },
     "sk_5": {
       "pot": 0,
-      "updatedAt": "2026-11-10T00:09:09.578Z",
+      "updatedAt": "2026-11-09T23:34:53.066Z",
       "lastWinner": "Rallison, Jordan"
     },
     "sk_6": {
-      "pot": 41,
-      "updatedAt": "2026-11-10T00:06:29.599Z"
+      "pot": 74,
+      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "lastWinner": null
     },
     "sk_7": {
       "pot": 0,
-      "updatedAt": "2026-11-10T00:09:09.578Z",
+      "updatedAt": "2026-11-09T23:34:53.066Z",
       "lastWinner": "Rallison, Jordan"
     },
     "sk_8": {
-      "pot": 16,
-      "updatedAt": "2026-11-10T00:06:29.599Z"
+      "pot": 49,
+      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "lastWinner": null
     },
     "sk_9": {
-      "pot": 0,
-      "updatedAt": "2026-11-10T00:06:29.599Z"
+      "pot": 33,
+      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "lastWinner": null
     },
     "sk_11": {
-      "pot": 41,
-      "updatedAt": "2026-11-10T00:06:29.599Z"
+      "pot": 74,
+      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "lastWinner": null
     },
     "sk_12": {
       "pot": 0,
-      "updatedAt": "2026-11-10T00:09:09.578Z",
+      "updatedAt": "2026-11-09T23:34:53.066Z",
       "lastWinner": "Hunt, Larry"
     },
     "sk_13": {
       "pot": 0,
-      "updatedAt": "2026-11-10T00:09:09.578Z",
+      "updatedAt": "2026-11-09T23:34:53.066Z",
       "lastWinner": "Lychak, Dennis"
     },
     "sk_14": {
       "pot": 0,
-      "updatedAt": "2026-11-10T00:09:09.578Z",
+      "updatedAt": "2026-11-09T23:34:53.066Z",
       "lastWinner": "Follis, Craig"
     },
     "sk_16": {
-      "pot": 22,
-      "updatedAt": "2026-11-10T00:06:29.599Z"
+      "pot": 55,
+      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "lastWinner": null
     },
     "sk_18": {
-      "pot": 0,
-      "updatedAt": "2026-11-10T00:06:29.599Z"
+      "pot": 33,
+      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "lastWinner": null
     },
     "pg_3": {
-      "pot": 211,
-      "updatedAt": "2026-11-10T00:07:25.355Z"
+      "pot": 313,
+      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "lastWinner": null
     },
     "pg_4": {
-      "pot": 113,
-      "updatedAt": "2026-11-10T00:07:25.355Z"
+      "pot": 215,
+      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "lastWinner": null
     },
     "pg_10": {
       "pot": 0,
-      "updatedAt": "2026-11-10T00:09:09.579Z",
+      "updatedAt": "2026-11-09T23:34:53.066Z",
       "lastWinner": "Smith, Darrell"
     },
     "pg_15": {
-      "pot": 0,
-      "updatedAt": "2026-11-10T00:07:25.355Z"
+      "pot": 102,
+      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "lastWinner": null
     },
     "pg_17": {
-      "pot": 211,
-      "updatedAt": "2026-11-10T00:07:25.355Z"
+      "pot": 313,
+      "updatedAt": "2026-11-09T06:19:28.957Z",
+      "lastWinner": null
     }
   }
 }
