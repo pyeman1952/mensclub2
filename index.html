@@ -301,7 +301,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:end;">
           <div><label class="flbl" style="display:block;margin-bottom:3px;">Week #</label><input type="text" id="t-week" placeholder="e.g. 1"></div>
           <div><label class="flbl" style="display:block;margin-bottom:3px;">Tournament Name</label><input type="text" id="t-name" placeholder="e.g. Winter Opener"></div>
-          <div><label class="flbl" style="display:block;margin-bottom:3px;">Date</label><input type="text" id="t-date" placeholder="e.g. Oct 5, 2025"></div>
+          <div><label class="flbl" style="display:block;margin-bottom:3px;">Date</label><input type="date" id="t-date" style="width:100%;padding:6px 8px;border:1px solid var(--bdr);border-radius:var(--rad);font-size:13px;background:var(--wh);color:var(--txt);" onchange="validateSunday(this)"></div>
           <div><label class="flbl" style="display:block;margin-bottom:3px;">Total Players</label><input type="number" id="t-total" placeholder="0" min="1"></div>
           <div><label class="flbl" style="display:block;margin-bottom:3px;">Skins Buy-ins</label><input type="number" id="t-skins" placeholder="0" min="0"></div>
         </div>
@@ -604,6 +604,36 @@ const LS = {
 
 // ── State ─────────────────────────────────────────────────────────────────────
 let skinsPots={}, pogPots={}, seasonData={}, weeksLog=[];
+// ── Date picker helpers ────────────────────────────────────────────────────────
+// Validate that selected date is a Sunday; clear and alert if not
+function validateSunday(input){
+  if(!input.value) return;
+  const d=new Date(input.value+'T12:00:00');
+  if(d.getDay()!==0){ alert('Games are played on Sundays. Please select a Sunday.'); input.value=''; }
+}
+// Format YYYY-MM-DD → "November 8, 2026" for display/storage
+function formatDateDisplay(iso){
+  if(!iso) return '—';
+  const d=new Date(iso+'T12:00:00');
+  return d.toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'});
+}
+// Parse a stored date string (e.g. "November 8, 2026") back to YYYY-MM-DD for the date picker
+// Also handles legacy ID format like "November_8-_2026"
+function parseDateToISO(str){
+  if(!str) return '';
+  // Already ISO
+  if(/^\d{4}-\d{2}-\d{2}$/.test(str)) return str;
+  // Try parsing display format "November 8, 2026"
+  const d=new Date(str.replace(/_/g,' ').replace(/-/g,' '));
+  if(!isNaN(d.getTime())){
+    const y=d.getFullYear();
+    const m=String(d.getMonth()+1).padStart(2,'0');
+    const dy=String(d.getDate()).padStart(2,'0');
+    return `${y}-${m}-${dy}`;
+  }
+  return '';
+}
+
 // Normalize any name format to "Last, First" for consistent mwMap keying
 // Handles both "Last, First" and "First Last" inputs
 const mwKey=(name)=>{
@@ -1702,7 +1732,7 @@ async function loadCommittedWeek(){
     if(tWeek) tWeek.value='';
     if(tName) tName.value=wk.name||'';
   }
-  const tDate=document.getElementById('t-date'); if(tDate) tDate.value=wk.date||'';
+  const tDate=document.getElementById('t-date'); if(tDate) tDate.value=parseDateToISO(wk.date||wk.id||'');
   const tNotes=document.getElementById('t-notes'); if(tNotes) tNotes.value=wk.notes||'';
   const tTotal=document.getElementById('t-total'); if(tTotal) tTotal.value=wk.players||'';
   const tCancelled=document.getElementById('t-cancelled'); if(tCancelled) tCancelled.checked=!!wk.cancelled;
@@ -1862,12 +1892,13 @@ async function loadCommittedWeek(){
 async function generatePayout(previewOnly=false){
   const week   =document.getElementById('t-week')?.value||'';
   const tname  =document.getElementById('t-name')?.value||'';
-  const date   =document.getElementById('t-date').value||'—';
+  const dateRaw =document.getElementById('t-date').value||'';// YYYY-MM-DD from date picker
+  const date    =dateRaw?formatDateDisplay(dateRaw):'—';
   const notes  =document.getElementById('t-notes')?.value||'';
   const total  =document.getElementById('t-total').value||'?';
   const cancelled=document.getElementById('t-cancelled')?.checked||false;
   const name   =(week&&tname)?`Week ${week} — ${tname}`:week?`Week ${week}`:tname||'—';
-  const weekKey=date.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'-');
+  const weekKey=dateRaw?dateRaw.replace(/-/g,'_'):(date.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'-'));
   const totalPly=parseFloat(document.getElementById('t-total').value)||0;
   const skPly  =parseFloat(document.getElementById('t-skins').value)||0;
   const pgPly  =parseFloat(document.getElementById('t-pog').value)||0;
