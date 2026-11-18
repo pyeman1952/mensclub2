@@ -2047,6 +2047,11 @@ async function generatePayout(previewOnly=false){
     mwMap[k][cat]+=(parseFloat(amount)||0);
     mwMap[k].total=mwMap[k].gross+mwMap[k].net+mwMap[k].skins+mwMap[k].pog+mwMap[k].draw+(mwMap[k].skill||0);
   };
+  // Build name→flight lookup from grossRows and netData (both carry flt field)
+  const playerFltMap={};
+  grossRows.forEach(r=>{ if(r.pname&&r.flt) playerFltMap[mwKey(r.pname)]=r.flt; });
+  netData.forEach(r=>{ if(r.pname&&r.flt&&!playerFltMap[mwKey(r.pname)]) playerFltMap[mwKey(r.pname)]=r.flt; });
+
   grossRows.forEach(r=>addMW(r.pname,'gross',r.prize));
   netData.forEach(r=>addMW(r.pname,'net',r.prize));
   skinsData.filter(r=>(r.paid||r.guest)&&r.winner).forEach(r=>addMW(r.winner,'skins',r.payout));
@@ -2055,6 +2060,9 @@ async function generatePayout(previewOnly=false){
   meatData.forEach(r=>addMW(r.winner,'draw',0)); // meat is non-cash
   if(ffWinner&&ffAmount) addMW(ffWinner,'draw',ffAmount);
   rdData.forEach(r=>addMW(r.name,'draw',r.amount));
+
+  // Stamp flt onto each mwMap entry from the lookup
+  Object.keys(mwMap).forEach(k=>{ if(playerFltMap[k]) mwMap[k].flt=playerFltMap[k]; });
   // Sort alphabetically by last name; display as "Firstname Lastname" (names entered as "Lastname, Firstname")
   const sortKey=n=>{ const s=(n||'').trim(); const ci=s.indexOf(','); return ci>-1?s.slice(0,ci).trim().toLowerCase():s.toLowerCase(); };
   const displayName=n=>{ const s=(n||'').trim(); const ci=s.indexOf(','); if(ci>-1){const last=s.slice(0,ci).trim();const first=s.slice(ci+1).trim();return first?`${first} ${last}`:last;} return s; };
