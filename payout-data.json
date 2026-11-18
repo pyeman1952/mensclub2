@@ -350,7 +350,7 @@
           "weekly": 10,
           "paid": true,
           "guest": false,
-          "flt": ""
+          "flt": "D"
         },
         {
           "hole": 12,
