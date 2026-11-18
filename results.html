@@ -608,9 +608,20 @@ function renderFlightReport(){
     });
     // Accumulate pref (bar/proshop/cash) per flight from moneyWinners
     // Prefer r.flt if present (committed after this fix); fall back to name-lookup for older weeks
+    // Index both "Lastname, Firstname" and "Firstname Lastname" so older weeks with mixed formats match
     const playerFlight={};
-    (wk.grossRows||[]).forEach(r=>{ if(r.pname&&r.flt) playerFlight[r.pname]=r.flt; });
-    (wk.net||[]).forEach(r=>{ if(r.pname&&r.flt&&!playerFlight[r.pname]) playerFlight[r.pname]=r.flt; });
+    const addPF=(pname,flt)=>{
+      if(!pname||!flt) return;
+      playerFlight[pname]=flt;
+      // also index the reversed format
+      if(pname.includes(',')){
+        const p=pname.split(','); playerFlight[(p[1]||'').trim()+' '+(p[0]||'').trim()]=flt;
+      } else {
+        const p=pname.trim().split(/\s+/); if(p.length>=2) playerFlight[p.slice(1).join(' ')+', '+p[0]]=flt;
+      }
+    };
+    (wk.grossRows||[]).forEach(r=>{ addPF(r.pname,r.flt); });
+    (wk.net||[]).forEach(r=>{ if(!playerFlight[r.pname]&&!playerFlight[(r.pname||'')]) addPF(r.pname,r.flt); });
     (wk.moneyWinners||[]).forEach(r=>{
       const f=r.flt||playerFlight[r.name]||'?';
       const pf=flights.includes(f)?f:'?';
