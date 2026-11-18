@@ -607,12 +607,12 @@ function renderFlightReport(){
       totals[f].pog+=(parseFloat(r.runPot)||0); had=true;
     });
     // Accumulate pref (bar/proshop/cash) per flight from moneyWinners
-    // We attribute each player's pref to their flight using grossRows or net as a lookup
+    // Prefer r.flt if present (committed after this fix); fall back to name-lookup for older weeks
     const playerFlight={};
     (wk.grossRows||[]).forEach(r=>{ if(r.pname&&r.flt) playerFlight[r.pname]=r.flt; });
     (wk.net||[]).forEach(r=>{ if(r.pname&&r.flt&&!playerFlight[r.pname]) playerFlight[r.pname]=r.flt; });
     (wk.moneyWinners||[]).forEach(r=>{
-      const f=playerFlight[r.name]||'?';
+      const f=r.flt||playerFlight[r.name]||'?';
       const pf=flights.includes(f)?f:'?';
       const p=(r.pref&&typeof r.pref==='object')?r.pref:{bar:0,proshop:0,cash:0};
       totals[pf].bar+=(parseFloat(p.bar)||0);
