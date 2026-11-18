@@ -616,10 +616,20 @@ function renderFlightReport(){
     (wk.moneyWinners||[]).forEach(r=>{
       const f=r.flt||playerFlight[normName(r.name)]||'?';
       const pf=flights.includes(f)?f:'?';
-      const p=(r.pref&&typeof r.pref==='object')?r.pref:{bar:0,proshop:0,cash:0};
-      totals[pf].bar+=(parseFloat(p.bar)||0);
-      totals[pf].proshop+=(parseFloat(p.proshop)||0);
-      totals[pf].cash+=(parseFloat(p.cash)||0);
+      // pref may be an object {bar,proshop,cash} (newer weeks) or a string "Bar"/"Pro Shop"/"Cash" (early weeks)
+      let p;
+      if(r.pref&&typeof r.pref==='object'){
+        p={bar:parseFloat(r.pref.bar)||0,proshop:parseFloat(r.pref.proshop)||0,cash:parseFloat(r.pref.cash)||0};
+      } else if(typeof r.pref==='string'){
+        const t=parseFloat(r.total)||0;
+        const s=(r.pref||'').toLowerCase().replace(/\s+/g,'');
+        p={bar:s==='bar'?t:0,proshop:s==='proshop'||s==='pro shop'?t:0,cash:s==='cash'?t:0};
+      } else {
+        p={bar:0,proshop:0,cash:0};
+      }
+      totals[pf].bar+=p.bar;
+      totals[pf].proshop+=p.proshop;
+      totals[pf].cash+=p.cash;
     });
     if(had) weeksWithData++;
   });
