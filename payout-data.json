@@ -422,9 +422,9 @@
         {
           "hole": 3,
           "winner": "",
-          "runPot": 300,
-          "payout": 300,
-          "stored": 272,
+          "runPot": 273,
+          "payout": 273,
+          "stored": 245,
           "weekly": 28,
           "paid": false,
           "guest": false,
@@ -433,9 +433,9 @@
         {
           "hole": 4,
           "winner": "",
-          "runPot": 56,
-          "payout": 56,
-          "stored": 28,
+          "runPot": 175,
+          "payout": 175,
+          "stored": 147,
           "weekly": 28,
           "paid": false,
           "guest": false,
@@ -444,9 +444,9 @@
         {
           "hole": 10,
           "winner": "",
-          "runPot": 56,
-          "payout": 56,
-          "stored": 28,
+          "runPot": 28,
+          "payout": 28,
+          "stored": 0,
           "weekly": 28,
           "paid": false,
           "guest": false,
@@ -455,9 +455,9 @@
         {
           "hole": 15,
           "winner": "",
-          "runPot": 90,
-          "payout": 90,
-          "stored": 62,
+          "runPot": 62,
+          "payout": 62,
+          "stored": 34,
           "weekly": 28,
           "paid": false,
           "guest": false,
@@ -466,9 +466,9 @@
         {
           "hole": 17,
           "winner": "",
-          "runPot": 301,
-          "payout": 301,
-          "stored": 273,
+          "runPot": 273,
+          "payout": 273,
+          "stored": 245,
           "weekly": 28,
           "paid": false,
           "guest": false,
@@ -6142,12 +6142,12 @@
       "lastWinner": null
     },
     "pg_3": {
-      "pot": 272,
+      "pot": 273,
       "updatedAt": "2026-11-18T01:48:14.268Z",
       "lastWinner": null
     },
     "pg_4": {
-      "pot": 28,
+      "pot": 175,
       "updatedAt": "2026-11-18T01:48:14.268Z",
       "lastWinner": null
     },
