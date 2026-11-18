@@ -270,18 +270,18 @@ function renderWeek(w){
     const flightNames = w.flightNames||{A:'Flight A',B:'Flight B',C:'Flight C',D:'Flight D'};
     const flightRanges = w.flightRanges||{A:'0–5',B:'6–11',C:'12–17',D:'18+'};
     html+=`<div class="psec"><div class="ptitle">Gross Winners — Flight Results</div>
-      <table class="pt"><thead><tr><th>Flight</th><th>Place</th><th>Player</th><th>Score</th><th class="r">Prize</th><th>Payout</th></tr></thead><tbody>`;
+      <table class="pt"><thead><tr><th>Flight</th><th>Place</th><th>Player</th><th>Score</th><th class="r">Prize</th></tr></thead><tbody>`;
     ['A','B','C','D'].forEach(f=>{
-      html+=`<tr class="fhdr"><td colspan="6">${flightNames[f]} &nbsp; ${flightRanges[f]} handicap</td></tr>`;
+      html+=`<tr class="fhdr"><td colspan="5">${flightNames[f]} &nbsp; ${flightRanges[f]} handicap</td></tr>`;
       if(!(flights[f]||[]).length){
-        html+=`<tr><td colspan="6" style="color:var(--mut);font-size:11px;padding:6px 10px;">No entries</td></tr>`;
+        html+=`<tr><td colspan="5" style="color:var(--mut);font-size:11px;padding:6px 10px;">No entries</td></tr>`;
       } else {
         flights[f].forEach(r=>{
           const sfx=r.place===1?'st':r.place===2?'nd':r.place===3?'rd':'th';
           const bc=r.place<=3?`p${r.place}b`:'pnb';
           html+=`<tr><td></td><td><span class="pbadge ${bc}">${r.place}</span>${r.place}${sfx}${r.cb?' <span class="countback-badge">CB</span>':''}</td>
             <td>${r.pname||'—'}</td><td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
-            <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td><td>${prefBadge(r.pref)}</td></tr>`;
+            <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td></tr>`;
         });
       }
     });
@@ -290,8 +290,8 @@ function renderWeek(w){
     // NET
     const netData = w.net||[];
     html+=`<div class="psec"><div class="ptitle">Net Winners — Overall</div>
-      <table class="pt"><thead><tr><th>Place</th><th>Player</th><th>Flt</th><th>Net</th><th class="r">Prize</th><th>Payout</th></tr></thead><tbody>`;
-    if(!netData.length){html+=`<tr><td colspan="6" style="color:var(--mut);padding:8px 10px;">No entries</td></tr>`;}
+      <table class="pt"><thead><tr><th>Place</th><th>Player</th><th>Flt</th><th>Net</th><th class="r">Prize</th></tr></thead><tbody>`;
+    if(!netData.length){html+=`<tr><td colspan="5" style="color:var(--mut);padding:8px 10px;">No entries</td></tr>`;}
     else netData.forEach(r=>{
       const sfx=r.place===1?'st':r.place===2?'nd':r.place===3?'rd':'th';
       const bc=r.place<=3?`p${r.place}b`:'pnb';
@@ -299,7 +299,7 @@ function renderWeek(w){
         <td>${r.pname||'—'}</td>
         <td>${r.flt?`<span class="flt-badge">Flt ${r.flt}</span>`:'—'}</td>
         <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
-        <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td><td>${prefBadge(r.pref)}</td></tr>`;
+        <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td></tr>`;
     });
     html+=`</tbody></table></div>`;
 
@@ -576,8 +576,8 @@ function renderFlightReport(){
   const weeks = appData.weeks||[];
   const flights = ['A','B','C','D'];
   const totals = {};
-  flights.forEach(f=>{ totals[f]={gross:0,net:0,skins:0,pog:0}; });
-  totals['?']={gross:0,net:0,skins:0,pog:0};
+  flights.forEach(f=>{ totals[f]={gross:0,net:0,skins:0,pog:0,bar:0,proshop:0,cash:0}; });
+  totals['?']={gross:0,net:0,skins:0,pog:0,bar:0,proshop:0,cash:0};
   let weeksWithData=0;
 
   weeks.forEach(wk=>{
@@ -606,6 +606,19 @@ function renderFlightReport(){
       const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
       totals[f].pog+=(parseFloat(r.runPot)||0); had=true;
     });
+    // Accumulate pref (bar/proshop/cash) per flight from moneyWinners
+    // We attribute each player's pref to their flight using grossRows or net as a lookup
+    const playerFlight={};
+    (wk.grossRows||[]).forEach(r=>{ if(r.pname&&r.flt) playerFlight[r.pname]=r.flt; });
+    (wk.net||[]).forEach(r=>{ if(r.pname&&r.flt&&!playerFlight[r.pname]) playerFlight[r.pname]=r.flt; });
+    (wk.moneyWinners||[]).forEach(r=>{
+      const f=playerFlight[r.name]||'?';
+      const pf=flights.includes(f)?f:'?';
+      const p=(r.pref&&typeof r.pref==='object')?r.pref:{bar:0,proshop:0,cash:0};
+      totals[pf].bar+=(parseFloat(p.bar)||0);
+      totals[pf].proshop+=(parseFloat(p.proshop)||0);
+      totals[pf].cash+=(parseFloat(p.cash)||0);
+    });
     if(had) weeksWithData++;
   });
 
@@ -613,22 +626,26 @@ function renderFlightReport(){
   const allFlights=[...flights,'?'];
   let html=`<p style="font-size:12px;color:var(--mut);margin-bottom:14px;">Totals based on ${weeksWithData} committed week(s) with flight data.</p>
   <div class="card" style="overflow:auto;">
-  <table class="lb-table"><thead><tr>
-    <th>Flight</th><th class="r">Gross ($)</th><th class="r">Net ($)</th>
-    <th class="r">Skins ($)</th><th class="r">POG ($)</th><th class="r">Total ($)</th>
-  </tr></thead><tbody>`;
+  <table class="lb-table"><thead>
+    <tr><th rowspan="2">Flight</th><th class="r" colspan="4" style="border-bottom:1px solid var(--bdr);padding-bottom:3px;">Winnings by Category</th><th class="r" rowspan="2">Total ($)</th><th class="r" colspan="3" style="border-bottom:1px solid var(--bdr);padding-bottom:3px;">Payout Destination</th></tr>
+    <tr><th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th><th class="r">Bar</th><th class="r">Pro Shop</th><th class="r">Cash</th></tr>
+  </thead><tbody>`;
 
-  let gT=0,nT=0,sT=0,pT=0;
+  let gT=0,nT=0,sT=0,pT=0,bT=0,psT=0,cT=0;
   allFlights.forEach(f=>{
     const d=totals[f];
     const row=d.gross+d.net+d.skins+d.pog;
     if(f==='?' && !row) return;
     gT+=d.gross; nT+=d.net; sT+=d.skins; pT+=d.pog;
+    bT+=d.bar; psT+=d.proshop; cT+=d.cash;
     const label=f==='?'?'Unassigned':`Flight ${f}`;
     html+=`<tr><td>${label}</td>
       <td class="r">${fmt(d.gross)}</td><td class="r">${fmt(d.net)}</td>
       <td class="r">${fmt(d.skins)}</td><td class="r">${fmt(d.pog)}</td>
-      <td class="r"><strong class="money">${fmt(row)}</strong></td></tr>`;
+      <td class="r"><strong class="money">${fmt(row)}</strong></td>
+      <td class="r" style="color:var(--mut);font-size:12px;">${fmt(d.bar)}</td>
+      <td class="r" style="color:var(--mut);font-size:12px;">${fmt(d.proshop)}</td>
+      <td class="r" style="color:var(--mut);font-size:12px;">${fmt(d.cash)}</td></tr>`;
   });
   const grandTotal=gT+nT+sT+pT;
   html+=`<tr style="background:var(--gl);font-weight:700;">
@@ -636,6 +653,7 @@ function renderFlightReport(){
     <td class="r">${fmt(gT)}</td><td class="r">${fmt(nT)}</td>
     <td class="r">${fmt(sT)}</td><td class="r">${fmt(pT)}</td>
     <td class="r"><strong class="money">${fmt(grandTotal)}</strong></td>
+    <td class="r">${fmt(bT)}</td><td class="r">${fmt(psT)}</td><td class="r">${fmt(cT)}</td>
   </tr></tbody></table></div>`;
 
   document.getElementById('fr-content').innerHTML=html;
