@@ -2575,11 +2575,14 @@ async function publishToGitHub(weekKey, name, date, notes, cancelled, total,
       rdData: rdData,
       moneyWinners: mwList,
       totals: {
-        gross: grossRows.reduce((s,r)=>s+(parseFloat(r.prize)||0),0),
-        net:   netData.reduce((s,r)=>s+(parseFloat(r.prize)||0),0),
-        skins: skinsData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runPot,0),
-        pog:   pogData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runPot,0),
-        draw:  ffAmount||0
+        gross:  grossRows.reduce((s,r)=>s+(parseFloat(r.prize)||0),0),
+        net:    netData.reduce((s,r)=>s+(parseFloat(r.prize)||0),0),
+        skins:  skinsData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runPot,0),
+        pog:    pogData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runPot,0),
+        skill:  skillData.reduce((s,r)=>s+(parseFloat(r.cash)||0),0),
+        draw:   (ffAmount||0)
+                + meatData.reduce((s,r)=>s+(parseFloat(r.prize)||0),0)
+                + rdData.reduce((s,r)=>s+(parseFloat(r.amount)||0),0)
       }
     };
 
