@@ -892,7 +892,7 @@ function buildWeeklySummary(){
   const rows=Object.entries(totals)
     .map(([n,v])=>({name:n,...v,total:v.gross+v.net+v.skins+v.pog+v.skill+v.draws}))
     .filter(r=>r.total>0)
-    .sort((a,b)=>b.total-a.total);
+    .sort((a,b)=>a.name.localeCompare(b.name));
 
   const body=document.getElementById('weekly-summary-body');
   const totalEl=document.getElementById('weekly-summary-total');
