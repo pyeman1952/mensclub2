@@ -519,6 +519,8 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
           <th class="thr">Net ($)</th>
           <th class="thr">Skins ($)</th>
           <th class="thr">POG ($)</th>
+          <th class="thr">Skill ($)</th>
+          <th class="thr">Draws ($)</th>
           <th class="thr">Total ($)</th>
         </tr></thead>
         <tbody id="flight-tbody"></tbody>
@@ -1106,8 +1108,8 @@ function renderFlightReport(){
   // Aggregate by flight
   const flights=['A','B','C','D'];
   const totals={};
-  flights.forEach(f=>totals[f]={gross:0,net:0,skins:0,pog:0});
-  totals['?']={gross:0,net:0,skins:0,pog:0}; // unassigned
+  flights.forEach(f=>totals[f]={gross:0,net:0,skins:0,pog:0,skill:0,draws:0});
+  totals['?']={gross:0,net:0,skins:0,pog:0,skill:0,draws:0}; // unassigned
   let weeksWithData=0;
   weeksLog.forEach(wk=>{
     let had=false;
@@ -1133,17 +1135,37 @@ function renderFlightReport(){
       totals[f].pog+=(parseFloat(r.runPot)||0);
       had=true;
     });
+    // Skill prizes — spRows, keyed by hole; no flt on spRows so use '?'
+    (wk.spRows||[]).forEach(r=>{
+      if(!r.winner&&!r.prize) return;
+      totals['?'].skill+=(parseFloat(r.cash)||0);
+      had=true;
+    });
+    // Draws: meat draw, random draw rows, 50/50
+    (wk.meat||[]).forEach(r=>{
+      if(!r.winner) return;
+      totals['?'].draws+=(parseFloat(r.prize)||0);
+      had=true;
+    });
+    (wk.rdRows||[]).forEach(r=>{
+      if(!r.name) return;
+      totals['?'].draws+=(parseFloat(r.amount)||0);
+      had=true;
+    });
+    if(wk.ffWinner&&parseFloat(wk.ffAmount)){
+      totals['?'].draws+=(parseFloat(wk.ffAmount)||0);
+    }
     if(had) weeksWithData++;
   });
   // Build rows
   tbody.innerHTML='';
-  let gGross=0,gNet=0,gSkins=0,gPOG=0;
+  let gGross=0,gNet=0,gSkins=0,gPOG=0,gSkill=0,gDraws=0;
   const allKeys=[...flights,'?'];
   allKeys.forEach(f=>{
     const t=totals[f];
     if(!t) return;
-    const row=t.gross+t.net+t.skins+t.pog;
-    gGross+=t.gross; gNet+=t.net; gSkins+=t.skins; gPOG+=t.pog;
+    const row=t.gross+t.net+t.skins+t.pog+t.skill+t.draws;
+    gGross+=t.gross; gNet+=t.net; gSkins+=t.skins; gPOG+=t.pog; gSkill+=t.skill; gDraws+=t.draws;
     const label=f==='?'?'Unassigned':`Flight ${f}`;
     const tr=document.createElement('tr');
     tr.innerHTML=`<td>${label}</td>
@@ -1151,11 +1173,13 @@ function renderFlightReport(){
       <td class="thr">$${t.net.toFixed(2)}</td>
       <td class="thr">$${t.skins.toFixed(2)}</td>
       <td class="thr">$${t.pog.toFixed(2)}</td>
+      <td class="thr">$${t.skill.toFixed(2)}</td>
+      <td class="thr">$${t.draws.toFixed(2)}</td>
       <td class="thr" style="font-weight:600;">$${row.toFixed(2)}</td>`;
     tbody.appendChild(tr);
   });
   // Grand total row
-  const grand=gGross+gNet+gSkins+gPOG;
+  const grand=gGross+gNet+gSkins+gPOG+gSkill+gDraws;
   const tf=document.createElement('tr');
   tf.style.borderTop='2px solid var(--bdr)';
   tf.innerHTML=`<td style="font-weight:700;">Total</td>
@@ -1163,6 +1187,8 @@ function renderFlightReport(){
     <td class="thr" style="font-weight:700;">$${gNet.toFixed(2)}</td>
     <td class="thr" style="font-weight:700;">$${gSkins.toFixed(2)}</td>
     <td class="thr" style="font-weight:700;">$${gPOG.toFixed(2)}</td>
+    <td class="thr" style="font-weight:700;">$${gSkill.toFixed(2)}</td>
+    <td class="thr" style="font-weight:700;">$${gDraws.toFixed(2)}</td>
     <td class="thr" style="font-weight:700;">$${grand.toFixed(2)}</td>`;
   tbody.appendChild(tf);
   if(sub) sub.textContent=`season to date`;
