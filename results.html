@@ -576,8 +576,8 @@ function renderFlightReport(){
   const weeks = appData.weeks||[];
   const flights = ['A','B','C','D'];
   const totals = {};
-  flights.forEach(f=>{ totals[f]={gross:0,net:0,skins:0,pog:0,bar:0,proshop:0,cash:0}; });
-  totals['?']={gross:0,net:0,skins:0,pog:0,bar:0,proshop:0,cash:0};
+  flights.forEach(f=>{ totals[f]={gross:0,net:0,skins:0,pog:0,skill:0,draws:0,bar:0,proshop:0,cash:0}; });
+  totals['?']={gross:0,net:0,skins:0,pog:0,skill:0,draws:0,bar:0,proshop:0,cash:0};
   let weeksWithData=0;
 
   weeks.forEach(wk=>{
@@ -606,6 +606,24 @@ function renderFlightReport(){
       const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
       if(r.paid) { totals[f].pog+=(parseFloat(r.runPot)||0); had=true; }
     });
+    (wk.skill||[]).forEach(r=>{
+      if(!r.winner) return;
+      totals['?'].skill+=(parseFloat(r.cash)||0);
+      had=true;
+    });
+    (wk.meat||[]).forEach(r=>{
+      if(!r.winner) return;
+      totals['?'].draws+=(parseFloat(r.prize)||0);
+      had=true;
+    });
+    (wk.rdData||[]).forEach(r=>{
+      if(!r.name) return;
+      totals['?'].draws+=(parseFloat(r.amount)||0);
+      had=true;
+    });
+    if(wk.ff&&parseFloat(wk.ff.amount)){
+      totals['?'].draws+=(parseFloat(wk.ff.amount)||0);
+    }
     // Accumulate pref (bar/proshop/cash) per flight from moneyWinners
     // Prefer r.flt if present (committed after this fix); fall back to name-lookup for older weeks
     // normName produces a lowercase sorted-words key so "Craig Follis" and "Follis, Craig" both map to "craig follis"
@@ -639,31 +657,33 @@ function renderFlightReport(){
   let html=`<p style="font-size:12px;color:var(--mut);margin-bottom:14px;">Totals based on ${weeksWithData} committed week(s) with flight data.</p>
   <div class="card" style="overflow:auto;">
   <table class="lb-table"><thead>
-    <tr><th rowspan="2">Flight</th><th class="r" colspan="4" style="border-bottom:1px solid var(--bdr);padding-bottom:3px;">Winnings by Category</th><th class="r" rowspan="2">Total ($)</th><th class="r" colspan="3" style="border-bottom:1px solid var(--bdr);padding-bottom:3px;">Payout Destination</th></tr>
-    <tr><th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th><th class="r">Bar</th><th class="r">Pro Shop</th><th class="r">Cash</th></tr>
+    <tr><th rowspan="2">Flight</th><th class="r" colspan="6" style="border-bottom:1px solid var(--bdr);padding-bottom:3px;">Winnings by Category</th><th class="r" rowspan="2">Total ($)</th><th class="r" colspan="3" style="border-bottom:1px solid var(--bdr);padding-bottom:3px;">Payout Destination</th></tr>
+    <tr><th class="r">Gross</th><th class="r">Net</th><th class="r">Skins</th><th class="r">POG</th><th class="r">Skill ($)</th><th class="r">Draws ($)</th><th class="r">Bar</th><th class="r">Pro Shop</th><th class="r">Cash</th></tr>
   </thead><tbody>`;
 
-  let gT=0,nT=0,sT=0,pT=0,bT=0,psT=0,cT=0;
+  let gT=0,nT=0,sT=0,pT=0,skT=0,drT=0,bT=0,psT=0,cT=0;
   allFlights.forEach(f=>{
     const d=totals[f];
-    const row=d.gross+d.net+d.skins+d.pog;
+    const row=d.gross+d.net+d.skins+d.pog+d.skill+d.draws;
     if(f==='?' && !row) return;
-    gT+=d.gross; nT+=d.net; sT+=d.skins; pT+=d.pog;
+    gT+=d.gross; nT+=d.net; sT+=d.skins; pT+=d.pog; skT+=d.skill; drT+=d.draws;
     bT+=d.bar; psT+=d.proshop; cT+=d.cash;
     const label=f==='?'?'Unassigned':`Flight ${f}`;
     html+=`<tr><td>${label}</td>
       <td class="r">${fmt(d.gross)}</td><td class="r">${fmt(d.net)}</td>
       <td class="r">${fmt(d.skins)}</td><td class="r">${fmt(d.pog)}</td>
+      <td class="r">${fmt(d.skill)}</td><td class="r">${fmt(d.draws)}</td>
       <td class="r"><strong class="money">${fmt(row)}</strong></td>
       <td class="r" style="color:var(--mut);font-size:12px;">${fmt(d.bar)}</td>
       <td class="r" style="color:var(--mut);font-size:12px;">${fmt(d.proshop)}</td>
       <td class="r" style="color:var(--mut);font-size:12px;">${fmt(d.cash)}</td></tr>`;
   });
-  const grandTotal=gT+nT+sT+pT;
+  const grandTotal=gT+nT+sT+pT+skT+drT;
   html+=`<tr style="background:var(--gl);font-weight:700;">
     <td><strong>Total</strong></td>
     <td class="r">${fmt(gT)}</td><td class="r">${fmt(nT)}</td>
     <td class="r">${fmt(sT)}</td><td class="r">${fmt(pT)}</td>
+    <td class="r">${fmt(skT)}</td><td class="r">${fmt(drT)}</td>
     <td class="r"><strong class="money">${fmt(grandTotal)}</strong></td>
     <td class="r">${fmt(bT)}</td><td class="r">${fmt(psT)}</td><td class="r">${fmt(cT)}</td>
   </tr></tbody></table></div>`;
