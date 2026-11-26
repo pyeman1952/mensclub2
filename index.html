@@ -294,6 +294,40 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
 
   <div class="g2">
 
+    <!-- ── Import from Scoring Software ───────────────────────────────────── -->
+    <div class="card s2" id="import-card">
+      <h2>Import from Scoring Software <em>pre-fills form fields — all results remain editable</em></h2>
+      <div class="cb">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;">
+          <div>
+            <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;">📄 Scores CSV</div>
+            <label style="display:block;border:2px dashed var(--bdr);border-radius:var(--rad);padding:14px 12px;cursor:pointer;text-align:center;font-size:12px;color:var(--mut);transition:border-color .15s;" id="csv-drop-label">
+              <div style="font-size:22px;margin-bottom:4px;">⬆️</div>
+              <div>Click to choose <strong>export_*.csv</strong></div>
+              <div style="margin-top:4px;font-size:11px;">Gross winners · Net rankings · Player count · Date</div>
+              <input type="file" id="import-csv" accept=".csv,text/csv" style="display:none;" onchange="handleImportFileChange()">
+            </label>
+            <div id="csv-status" style="font-size:11px;color:var(--gm);margin-top:5px;min-height:16px;"></div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;">🏌️ Skins/POG HTML</div>
+            <label style="display:block;border:2px dashed var(--bdr);border-radius:var(--rad);padding:14px 12px;cursor:pointer;text-align:center;font-size:12px;color:var(--mut);transition:border-color .15s;" id="html-drop-label">
+              <div style="font-size:22px;margin-bottom:4px;">⬆️</div>
+              <div>Click to choose <strong>Week_*_Pots.html</strong></div>
+              <div style="margin-top:4px;font-size:11px;">Skins winners · POG winners (gold cells)</div>
+              <input type="file" id="import-html" accept=".html,.htm,text/html" style="display:none;" onchange="handleImportFileChange()">
+            </label>
+            <div id="html-status" style="font-size:11px;color:var(--gm);margin-top:5px;min-height:16px;"></div>
+          </div>
+        </div>
+        <div style="margin-top:12px;display:flex;align-items:center;gap:12px;">
+          <button id="import-btn" onclick="runImport()" style="padding:9px 20px;font-size:13px;font-weight:700;background:var(--gm);color:#fff;border:none;border-radius:var(--rad);cursor:pointer;opacity:.4;pointer-events:none;" disabled>⬇ Pre-fill from Files</button>
+          <span id="import-msg" style="font-size:12px;color:var(--mut);"></span>
+        </div>
+        <div id="import-preview" style="display:none;margin-top:10px;padding:10px 12px;background:var(--gl);border:1px solid #95D5B2;border-radius:var(--rad);font-size:12px;line-height:1.7;"></div>
+      </div>
+    </div>
+
     <!-- Tournament Details -->
     <div class="card s2">
       <h2>Tournament Details</h2>
@@ -2862,6 +2896,422 @@ function syncFromGitHub(manual=false){
         document.getElementById('db-msg').textContent='Synced from GitHub';
       }catch(e){ console.warn('GitHub sync failed',e); }
     }).catch(()=>{});
+}
+
+// ── CSV / HTML Import ─────────────────────────────────────────────────────────
+// Holds file text between selection and button press
+const _importStore = { csv: null, html: null };
+
+function handleImportFileChange(){
+  const csvFile  = document.getElementById('import-csv').files[0];
+  const htmlFile = document.getElementById('import-html').files[0];
+  const csvSt    = document.getElementById('csv-status');
+  const htmlSt   = document.getElementById('html-status');
+
+  const reads = [];
+  if(csvFile){
+    reads.push(new Promise(res=>{
+      const r=new FileReader();
+      r.onload=e=>{ _importStore.csv=e.target.result; csvSt.textContent='✓ '+csvFile.name; csvSt.style.color='var(--gm)'; res(); };
+      r.onerror=()=>{ csvSt.textContent='⚠ Could not read file'; csvSt.style.color='var(--red)'; res(); };
+      r.readAsText(csvFile);
+    }));
+  }
+  if(htmlFile){
+    reads.push(new Promise(res=>{
+      const r=new FileReader();
+      r.onload=e=>{ _importStore.html=e.target.result; htmlSt.textContent='✓ '+htmlFile.name; htmlSt.style.color='var(--gm)'; res(); };
+      r.onerror=()=>{ htmlSt.textContent='⚠ Could not read file'; htmlSt.style.color='var(--red)'; res(); };
+      r.readAsText(htmlFile);
+    }));
+  }
+  Promise.all(reads).then(()=>{
+    const btn = document.getElementById('import-btn');
+    if(_importStore.csv || _importStore.html){
+      btn.disabled=false; btn.style.opacity='1'; btn.style.pointerEvents='auto';
+    }
+    document.getElementById('import-msg').textContent = '';
+    document.getElementById('import-preview').style.display='none';
+  });
+}
+
+// ── Countback tiebreaker (USGA): back9 → back6 → back3 → hole18
+function countbackScore(holes){
+  // holes = array of 18 scores (index 0=hole1 … 17=hole18), NaN-safe
+  const safe = i => (isNaN(holes[i]) ? 999 : holes[i]);
+  const sum = (from,to) => { let s=0; for(let i=from;i<=to;i++) s+=safe(i); return s; };
+  // back9  = holes 10-18 (indices 9-17)
+  // back6  = holes 13-18 (indices 12-17)
+  // back3  = holes 16-18 (indices 15-17)
+  // hole18 = index 17
+  return {
+    back9 : sum(9,17),
+    back6 : sum(12,17),
+    back3 : sum(15,17),
+    h18   : safe(17)
+  };
+}
+function compareCountback(a, b){
+  // lower is better for each tiebreaker
+  const ca=countbackScore(a.holes), cb=countbackScore(b.holes);
+  if(ca.back9 !== cb.back9) return ca.back9 - cb.back9;
+  if(ca.back6 !== cb.back6) return ca.back6 - cb.back6;
+  if(ca.back3 !== cb.back3) return ca.back3 - cb.back3;
+  if(ca.h18   !== cb.h18  ) return ca.h18   - cb.h18;
+  return 0; // genuine tie — flag externally
+}
+
+// ── Parse scores CSV ─────────────────────────────────────────────────────────
+function parseScoresCSV(text){
+  // Split lines, skip blank
+  const lines = text.split(/\r?\n/).filter(l=>l.trim());
+  if(lines.length < 2) return null;
+
+  // Detect delimiter: comma or semicolon
+  const delim = lines[0].includes(';') ? ';' : ',';
+
+  // Simple CSV parse (handles basic quoted fields)
+  function parseLine(line){
+    const cols=[]; let cur='', inQ=false;
+    for(let i=0;i<line.length;i++){
+      const c=line[i];
+      if(c==='"'){ inQ=!inQ; }
+      else if(c===delim && !inQ){ cols.push(cur.trim()); cur=''; }
+      else { cur+=c; }
+    }
+    cols.push(cur.trim());
+    return cols;
+  }
+
+  const headers = parseLine(lines[0]).map(h=>h.replace(/^"|"$/g,'').trim().toLowerCase());
+  const col = name => headers.indexOf(name.toLowerCase());
+
+  // Required columns
+  const iName   = col('Name');
+  const iFlight = col('Flight');
+  const iDate   = col('Date');
+  const iGross  = col('Gross');
+  const iHcp    = col('Hcp');
+  const iNet    = col('Net');
+  const iAdjGross = col('AdjustedGross');
+  // Hole columns H1–H18
+  const holeIdx = [];
+  for(let h=1;h<=18;h++){
+    const idx = col('H'+h);
+    holeIdx.push(idx); // -1 if missing
+  }
+
+  if(iName===-1 || iFlight===-1 || iGross===-1) return null;
+
+  const players = [];
+  let exportDate = null;
+
+  for(let i=1;i<lines.length;i++){
+    const c = parseLine(lines[i]);
+    if(c.length < 3) continue;
+    const flight = (c[iFlight]||'').replace(/^"|"$/g,'').trim().toUpperCase();
+    if(!['A','B','C','D'].includes(flight)) continue; // skip non-flight rows
+    const name  = (c[iName]||'').replace(/^"|"$/g,'').trim();
+    if(!name) continue;
+    const gross = parseInt(c[iGross])||0;
+    const hcp   = parseInt(c[iHcp])||0;
+    const net   = iNet>=0 ? parseInt(c[iNet])||0 : gross-hcp;
+    if(!exportDate && iDate>=0 && c[iDate]){
+      // Try to parse date from CSV (various formats)
+      const raw = c[iDate].replace(/^"|"$/g,'').trim();
+      const d = new Date(raw);
+      if(!isNaN(d.getTime())) exportDate = d;
+    }
+    const holes = holeIdx.map(idx=>(idx>=0 && c[idx]) ? parseInt(c[idx]) : NaN);
+    players.push({ name, flight, gross, hcp, net, holes });
+  }
+
+  if(players.length===0) return null;
+
+  // ── Gross: top 2 per flight (top 3 if 13+ in that flight), USGA countback ──
+  const flights = ['A','B','C','D'];
+  const grossWinners = []; // flat array in flight order
+  const grossWinnerNames = new Set();
+
+  flights.forEach(flt=>{
+    const inFlight = players.filter(p=>p.flight===flt);
+    if(inFlight.length===0) return;
+    const places = inFlight.length >= 13 ? 3 : 2;
+    // Sort: ascending gross, then countback
+    const sorted = [...inFlight].sort((a,b)=>{
+      if(a.gross !== b.gross) return a.gross - b.gross;
+      return compareCountback(a,b);
+    });
+    // Assign places — detect genuine ties (same gross AND same countback = flagged)
+    let prev = null;
+    let pos = 0;
+    for(let p=0;p<Math.min(places+2, sorted.length);p++){
+      const player = sorted[p];
+      if(grossWinners.filter(w=>w.flight===flt).length >= places) break;
+      let isTied = false;
+      if(prev && player.gross === prev.gross){
+        const cb = compareCountback(player, prev);
+        if(cb===0) isTied=true;
+      }
+      pos++;
+      grossWinners.push({ flight:flt, name:player.name, gross:player.gross, hcp:player.hcp,
+                          holes:player.holes, pos, tied:isTied });
+      grossWinnerNames.add(player.name);
+      prev = player;
+    }
+  });
+
+  // ── Net: top 8 overall, skip gross flight winners, flag net ties ─────────
+  // Sort all players by net score ascending
+  const netSorted = [...players].sort((a,b)=>{
+    if(a.net !== b.net) return a.net - b.net;
+    // secondary: gross ascending
+    return a.gross - b.gross;
+  });
+
+  const netWinners = [];
+  const usedNames = new Set();
+  let netPos = 0;
+  for(const p of netSorted){
+    if(netWinners.length >= 8) break;
+    if(usedNames.has(p.name)) continue;
+    if(grossWinnerNames.has(p.name)){
+      // Skip gross flight winners (they won via gross), mark as skipped
+      usedNames.add(p.name);
+      continue;
+    }
+    // Check tie with previous net winner
+    let tied = false;
+    if(netWinners.length>0){
+      const last = netWinners[netWinners.length-1];
+      if(last.net === p.net) tied=true;
+    }
+    netPos++;
+    netWinners.push({ pos:netPos, flight:p.flight, name:p.name, gross:p.gross, hcp:p.hcp, net:p.net, tied });
+    usedNames.add(p.name);
+  }
+
+  return {
+    date       : exportDate,
+    playerCount: players.length,
+    grossWinners,
+    netWinners
+  };
+}
+
+// ── Parse skins/POG HTML ──────────────────────────────────────────────────────
+const POG_HOLE_SET = new Set([3,4,10,15,17]);
+
+function parsePOGHTML(text){
+  // Parse using a temporary DOM element
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(text, 'text/html');
+  const skinsWinners = {}; // hole -> { name, flight, score }
+  const pogWinners   = {}; // hole -> { name, flight, score }
+
+  // Find all table cells with gold background
+  const allCells = doc.querySelectorAll('td,th');
+  allCells.forEach(cell=>{
+    const bg = cell.style.backgroundColor || cell.getAttribute('bgcolor') || '';
+    // Match gold highlight: background-color:gold or rgb(255,215,0) or #FFD700 / #ffd700
+    const isGold = /gold/i.test(bg) || /255,\s*215,\s*0/.test(bg) || /ffd700/i.test(bg);
+    if(!isGold) return;
+
+    // Cell text: e.g. "2G*" or "4N*"
+    const raw = (cell.textContent||'').trim();
+    if(!raw || !/\d/.test(raw)) return; // must have a digit
+
+    // Find the hole number: look for a row that starts with a hole number column,
+    // or the table has a header row with hole numbers
+    // Strategy: walk up to <tr>, then back to find hole-number cell in that row
+    const tr = cell.closest('tr');
+    if(!tr) return;
+
+    // The player name is usually the first cell in the row (non-numeric text)
+    const cells = Array.from(tr.querySelectorAll('td,th'));
+    const idxOfGold = cells.indexOf(cell);
+    if(idxOfGold < 0) return;
+
+    // Name: scan left for a text cell that looks like a player name
+    let playerName = '';
+    let playerFlight = '';
+    for(let j=0;j<idxOfGold;j++){
+      const t=(cells[j].textContent||'').trim();
+      // Name cells contain letters, are not pure numbers, and are reasonably long
+      if(t && /[A-Za-z]{2,}/.test(t) && !/^\d+$/.test(t)){
+        // Could be "Name, First" or "Last, First" or "Last/First" format
+        // Check if it looks like a flight (single letter A-D)
+        if(/^[A-D]$/i.test(t)) { playerFlight=t.toUpperCase(); }
+        else { playerName=t; }
+      }
+    }
+    if(!playerName) return;
+
+    // Find hole number: look at the <thead> of the table for column index → hole mapping
+    const table = tr.closest('table');
+    if(!table) return;
+    const thead = table.querySelector('thead');
+    let holeNumber = -1;
+    if(thead){
+      const hdrRows = thead.querySelectorAll('tr');
+      // Find the row that has hole numbers (1-18)
+      for(const hdr of hdrRows){
+        const hdrCells = Array.from(hdr.querySelectorAll('th,td'));
+        const holeNums = hdrCells.map(c=>parseInt(c.textContent));
+        if(holeNums[idxOfGold] && !isNaN(holeNums[idxOfGold]) && holeNums[idxOfGold]>=1 && holeNums[idxOfGold]<=18){
+          holeNumber = holeNums[idxOfGold];
+          break;
+        }
+      }
+    }
+    if(holeNumber < 1) return;
+
+    // Strip asterisk from score for display
+    const score = raw.replace('*','').trim();
+
+    // Route by hole: POG holes → POG, others → Skins
+    if(POG_HOLE_SET.has(holeNumber)){
+      pogWinners[holeNumber] = { name:playerName, flight:playerFlight, score };
+    } else {
+      skinsWinners[holeNumber] = { name:playerName, flight:playerFlight, score };
+    }
+  });
+
+  return { skinsWinners, pogWinners };
+}
+
+// ── Run import — fill form fields ─────────────────────────────────────────────
+function runImport(){
+  const msg  = document.getElementById('import-msg');
+  const prev = document.getElementById('import-preview');
+  msg.textContent='Processing…'; prev.style.display='none';
+
+  let csvData=null, pogData=null;
+  const errors=[];
+
+  if(_importStore.csv){
+    try{ csvData=parseScoresCSV(_importStore.csv); }
+    catch(e){ errors.push('CSV parse error: '+e.message); }
+    if(!csvData) errors.push('CSV: could not read player data — check column headers (Name, Flight, Gross, Hcp required).');
+  }
+  if(_importStore.html){
+    try{ pogData=parsePOGHTML(_importStore.html); }
+    catch(e){ errors.push('HTML parse error: '+e.message); }
+  }
+
+  if(!csvData && !pogData){
+    msg.textContent='⚠ No data could be parsed. See errors above.';
+    msg.style.color='var(--red)'; return;
+  }
+
+  const summary=[];
+
+  // ── Fill Tournament Details ─────────────────────────────────────────────────
+  if(csvData){
+    if(csvData.date){
+      // Format as YYYY-MM-DD for <input type="date">
+      const d=csvData.date;
+      const yyyy=d.getFullYear();
+      const mm=String(d.getMonth()+1).padStart(2,'0');
+      const dd=String(d.getDate()).padStart(2,'0');
+      const dateEl=document.getElementById('t-date');
+      if(dateEl){ dateEl.value=`${yyyy}-${mm}-${dd}`; validateSunday(dateEl); }
+      summary.push(`📅 Date: ${d.toLocaleDateString()}`);
+    }
+    if(csvData.playerCount){
+      const el=document.getElementById('t-total');
+      if(el) el.value=csvData.playerCount;
+      summary.push(`👥 ${csvData.playerCount} players`);
+    }
+    // Trigger pool recalc
+    if(typeof recalcPools==='function') recalcPools();
+  }
+
+  // ── Fill Gross Winners ──────────────────────────────────────────────────────
+  if(csvData && csvData.grossWinners.length){
+    // Map gross winners into G01–G15 slots (by flight then place within flight)
+    // G01–G02: Flight A 1st, 2nd (G03: 3rd if ≥13)
+    // Then B, C, D the same
+    const GR_IDS=['G01','G02','G03','G04','G05','G06','G07','G08','G09','G10','G11','G12','G13','G14','G15'];
+    let slot=0;
+    const flights=['A','B','C','D'];
+    flights.forEach(flt=>{
+      const inFlt=csvData.grossWinners.filter(w=>w.flight===flt);
+      inFlt.forEach(w=>{
+        if(slot>=GR_IDS.length) return;
+        const id=GR_IDS[slot++];
+        const fltEl=document.getElementById(`gr-flt-${id}`);
+        const nameEl=document.getElementById(`gr-name-${id}`);
+        const scoreEl=document.getElementById(`gr-score-${id}`);
+        // out/in breakdown not in CSV at total level, skip those
+        if(fltEl)  fltEl.value=w.flight;
+        if(nameEl) nameEl.value=w.name+(w.tied?' [TIE?]':'');
+        if(scoreEl) scoreEl.value=w.gross;
+        autoGrossTotal(id);
+      });
+    });
+    summary.push(`🏌️ Gross: ${csvData.grossWinners.length} winners filled (flights A–D)`);
+    const ties=csvData.grossWinners.filter(w=>w.tied);
+    if(ties.length) summary.push(`⚠ Gross tie(s) flagged — verify: ${ties.map(t=>t.name).join(', ')}`);
+  }
+
+  // ── Fill Net Winners ────────────────────────────────────────────────────────
+  if(csvData && csvData.netWinners.length){
+    csvData.netWinners.forEach((w,i)=>{
+      const p=i+1;
+      const fltEl  =document.getElementById(`nf-${p}`);
+      const nameEl =document.getElementById(`nn-${p}`);
+      const grossEl=document.getElementById(`ng-${p}`);
+      const hcpEl  =document.getElementById(`nh-${p}`);
+      const netEl  =document.getElementById(`ns-${p}`);
+      if(fltEl)  { fltEl.value=w.flight; }
+      if(nameEl) { nameEl.value=w.name+(w.tied?' [TIE?]':''); }
+      if(grossEl){ grossEl.value=w.gross; }
+      if(hcpEl)  { hcpEl.value=w.hcp; }
+      if(netEl)  { netEl.value=w.net; }
+    });
+    summary.push(`📋 Net: top ${csvData.netWinners.length} filled (gross winners skipped)`);
+    const nties=csvData.netWinners.filter(w=>w.tied);
+    if(nties.length) summary.push(`⚠ Net tie(s) — resolve manually: ${nties.map(t=>t.name).join(', ')}`);
+  }
+
+  // ── Fill Skins ──────────────────────────────────────────────────────────────
+  if(pogData && Object.keys(pogData.skinsWinners).length){
+    let count=0;
+    Object.entries(pogData.skinsWinners).forEach(([hole,w])=>{
+      const h=parseInt(hole);
+      const nameEl =document.getElementById(`sk-name-${h}`);
+      const fltEl  =document.getElementById(`sk-flt-${h}`);
+      const scoreEl=document.getElementById(`sk-score-${h}`);
+      if(nameEl)  { nameEl.value=w.name; count++; }
+      if(fltEl && w.flight) { fltEl.value=w.flight; }
+      if(scoreEl && w.score){ scoreEl.value=w.score; }
+    });
+    summary.push(`🎯 Skins: ${count} hole(s) filled`);
+  }
+
+  // ── Fill POG ────────────────────────────────────────────────────────────────
+  if(pogData && Object.keys(pogData.pogWinners).length){
+    let count=0;
+    Object.entries(pogData.pogWinners).forEach(([hole,w])=>{
+      const h=parseInt(hole);
+      const nameEl=document.getElementById(`pog-name-${h}`);
+      const fltEl =document.getElementById(`pog-flt-${h}`);
+      if(nameEl)  { nameEl.value=w.name; count++; }
+      if(fltEl && w.flight) { fltEl.value=w.flight; }
+    });
+    summary.push(`💰 POG: ${count} hole(s) filled`);
+  }
+
+  // ── Show summary ────────────────────────────────────────────────────────────
+  msg.textContent='✓ Import complete — review all fields before committing.';
+  msg.style.color='var(--gm)';
+  if(errors.length) summary.push('⚠ '+errors.join(' | '));
+  prev.innerHTML=summary.map(s=>`<div>${s}</div>`).join('');
+  prev.style.display='block';
+
+  // Scroll to Tournament Details
+  document.getElementById('t-week').scrollIntoView({behavior:'smooth', block:'center'});
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
