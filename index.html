@@ -60,7 +60,7 @@ html,body{height:100%;width:100%;font-family:system-ui,-apple-system,sans-serif;
 .drag-handle{cursor:grab;color:var(--mut);font-size:13px;padding:0 4px;user-select:none;text-align:center;}
 .drag-handle:active{cursor:grabbing;}
 tr.drag-over{outline:2px solid var(--gm);outline-offset:-2px;background:var(--gl);}
-tr.dragging{opacity:.4;}
+tr.dragging{opacity:.4;pointer-events:none;}
 /* While a gross row is being dragged, kill pointer-events on all inputs in that table so dragover fires on the rows */
 .gr-flight-table.dragging-active input,
 .gr-flight-table.dragging-active select,
@@ -2978,21 +2978,14 @@ function initDragGross(){
     table.addEventListener('dragover',e=>{
       e.preventDefault(); e.dataTransfer.dropEffect='move';
       if(!_gDragSrc) return;
-      // Find target row — walk up from whatever element the cursor is over
-      let el=e.target;
-      let tr=null;
-      while(el && el!==table){
-        if(el.tagName==='TR' && el.dataset.gkey){ tr=el; break; }
-        el=el.parentElement;
-      }
-      if(!tr||tr===_gDragSrc) return;
-      // Make sure target row is in this table's tbody
-      if(!tbody.contains(tr)) return;
+      const tr=e.target.closest('tr[data-gkey]');
+      if(!tr||!tbody.contains(tr)) return;
       tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
       tr.classList.add('drag-over');
       const rows=Array.from(tbody.querySelectorAll('tr'));
       const srcIdx=rows.indexOf(_gDragSrc);
       const tgtIdx=rows.indexOf(tr);
+      if(srcIdx===tgtIdx) return;
       if(srcIdx<tgtIdx) tbody.insertBefore(_gDragSrc, tr.nextSibling);
       else              tbody.insertBefore(_gDragSrc, tr);
     });
