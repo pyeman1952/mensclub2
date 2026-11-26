@@ -2935,34 +2935,32 @@ function syncFromGitHub(manual=false){
 // ── Drag-and-drop: Gross (per-flight) ────────────────────────────────────────
 function initDragGross(){
   document.querySelectorAll('.gr-flight-tbody').forEach(tbody=>{
-    let dragSrc=null;
-    tbody.querySelectorAll('tr').forEach(tr=>addGrossDragListeners(tr,tbody));
-    tbody._addRow=tr=>addGrossDragListeners(tr,tbody);
-  });
-}
-function addGrossDragListeners(tr, tbody){
-  tr.addEventListener('dragstart',e=>{
-    tbody._drag=tr; tr.classList.add('dragging');
-    e.dataTransfer.effectAllowed='move';
-  });
-  tr.addEventListener('dragend',()=>{
-    tr.classList.remove('dragging');
-    tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
-    renumberGrossFlight(tbody);
-  });
-  tr.addEventListener('dragover',e=>{
-    e.preventDefault(); e.dataTransfer.dropEffect='move';
-    tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
-    if(tr!==tbody._drag) tr.classList.add('drag-over');
-  });
-  tr.addEventListener('drop',e=>{
-    e.preventDefault();
-    if(!tbody._drag||tbody._drag===tr) return;
-    const rows=Array.from(tbody.querySelectorAll('tr'));
-    const srcIdx=rows.indexOf(tbody._drag);
-    const tgtIdx=rows.indexOf(tr);
-    if(srcIdx<tgtIdx) tbody.insertBefore(tbody._drag, tr.nextSibling);
-    else              tbody.insertBefore(tbody._drag, tr);
+    tbody.addEventListener('dragstart',e=>{
+      const tr=e.target.closest('tr');
+      if(!tr) return;
+      tbody._drag=tr; tr.classList.add('dragging');
+      e.dataTransfer.effectAllowed='move';
+    });
+    tbody.addEventListener('dragend',e=>{
+      const tr=e.target.closest('tr');
+      if(tr) tr.classList.remove('dragging');
+      tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
+      renumberGrossFlight(tbody);
+    });
+    tbody.addEventListener('dragover',e=>{
+      e.preventDefault(); e.dataTransfer.dropEffect='move';
+      const tr=e.target.closest('tr');
+      if(!tr||tr===tbody._drag) return;
+      tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
+      tr.classList.add('drag-over');
+      // Live reorder on dragover (same as net)
+      const rows=Array.from(tbody.querySelectorAll('tr'));
+      const srcIdx=rows.indexOf(tbody._drag);
+      const tgtIdx=rows.indexOf(tr);
+      if(srcIdx<tgtIdx) tbody.insertBefore(tbody._drag, tr.nextSibling);
+      else              tbody.insertBefore(tbody._drag, tr);
+    });
+    tbody.addEventListener('drop',e=>{ e.preventDefault(); });
   });
 }
 function renumberGrossFlight(tbody){
