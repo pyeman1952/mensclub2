@@ -60,7 +60,8 @@ html,body{height:100%;width:100%;font-family:system-ui,-apple-system,sans-serif;
 .drag-handle{cursor:grab;color:var(--mut);font-size:13px;padding:0 4px;user-select:none;text-align:center;}
 .drag-handle:active{cursor:grabbing;}
 tr.drag-over{outline:2px solid var(--gm);outline-offset:-2px;background:var(--gl);}
-tr.dragging{opacity:.4;pointer-events:none;}
+tr.dragging{opacity:.4;}
+.gr-flight-table tr.dragging{pointer-events:none;}
 /* While a gross row is being dragged, kill pointer-events on all inputs in that table so dragover fires on the rows */
 .gr-flight-table.dragging-active input,
 .gr-flight-table.dragging-active select,
@@ -2937,59 +2938,51 @@ function syncFromGitHub(manual=false){
 }
 
 // ── Drag-and-drop: Gross (per-flight) ────────────────────────────────────────
-// Gross drag — delegate from <table> so events bubble past inputs/tds
-let _gDragSrc=null, _gDragFlt=null;
+// Gross drag — mirror net drag exactly, using tbody as the delegation point
 function initDragGross(){
-  document.querySelectorAll('.gr-flight-table').forEach(table=>{
-    const tbody=table.querySelector('.gr-flight-tbody');
-    const flt=tbody.dataset.flight;
+  document.querySelectorAll('.gr-flight-tbody').forEach(tbody=>{
+    const table=tbody.closest('table');
 
-    // Enable draggable only when mousedown is on the handle, so inputs still work
-    table.addEventListener('mousedown',e=>{
+    // Set draggable on mousedown of handle only, so inputs work normally
+    tbody.addEventListener('mousedown',e=>{
       const handle=e.target.closest('.drag-handle');
       if(!handle) return;
       const tr=handle.closest('tr[data-gkey]');
       if(tr) tr.draggable=true;
     });
-    document.addEventListener('mouseup',()=>{
-      // Clear draggable on all gross rows after any mouseup
-      tbody.querySelectorAll('tr[data-gkey]').forEach(r=>{ if(!_gDragSrc) r.draggable=false; });
+    tbody.addEventListener('mouseup',()=>{
+      tbody.querySelectorAll('tr[data-gkey]').forEach(r=>{ if(!tbody._drag) r.draggable=false; });
     });
 
-    table.addEventListener('dragstart',e=>{
+    tbody.addEventListener('dragstart',e=>{
       const tr=e.target.closest('tr[data-gkey]');
       if(!tr||!tr.draggable) { e.preventDefault(); return; }
-      _gDragSrc=tr; _gDragFlt=flt;
+      tbody._drag=tr;
       tr.classList.add('dragging');
       e.dataTransfer.effectAllowed='move';
-      e.dataTransfer.setData('text/plain', flt);
+      e.dataTransfer.setData('text/plain','gross');
       table.classList.add('dragging-active');
     });
-
-    table.addEventListener('dragend',()=>{
-      if(_gDragSrc) { _gDragSrc.draggable=false; _gDragSrc.classList.remove('dragging'); }
+    tbody.addEventListener('dragend',()=>{
+      if(tbody._drag){ tbody._drag.draggable=false; tbody._drag.classList.remove('dragging'); }
       tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
       table.classList.remove('dragging-active');
       renumberGrossFlight(tbody);
-      _gDragSrc=null; _gDragFlt=null;
+      tbody._drag=null;
     });
-
-    table.addEventListener('dragenter',e=>e.preventDefault());
-    table.addEventListener('dragover',e=>{
-      e.preventDefault(); e.dataTransfer.dropEffect='move';
-      if(!_gDragSrc) return;
+    tbody.addEventListener('dragover',e=>{
+      e.preventDefault();
       const tr=e.target.closest('tr[data-gkey]');
-      if(!tr||!tbody.contains(tr)) return;
+      if(!tr||tr===tbody._drag) return;
       tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
       tr.classList.add('drag-over');
       const rows=Array.from(tbody.querySelectorAll('tr'));
-      const srcIdx=rows.indexOf(_gDragSrc);
+      const srcIdx=rows.indexOf(tbody._drag);
       const tgtIdx=rows.indexOf(tr);
-      if(srcIdx===tgtIdx) return;
-      if(srcIdx<tgtIdx) tbody.insertBefore(_gDragSrc, tr.nextSibling);
-      else              tbody.insertBefore(_gDragSrc, tr);
+      if(srcIdx<tgtIdx) tbody.insertBefore(tbody._drag, tr.nextSibling);
+      else              tbody.insertBefore(tbody._drag, tr);
     });
-    table.addEventListener('drop',e=>e.preventDefault());
+    tbody.addEventListener('drop',e=>e.preventDefault());
   });
 }
 function renumberGrossFlight(tbody){
