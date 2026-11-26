@@ -2933,44 +2933,53 @@ function syncFromGitHub(manual=false){
 }
 
 // ── Drag-and-drop: Gross (per-flight) ────────────────────────────────────────
-// Gross drag state keyed by flight letter
+// Gross drag — use CSS to disable pointer events on inputs while dragging
 const _gDrag={};
 function initDragGross(){
   document.querySelectorAll('.gr-flight-tbody tr').forEach(tr=>{
     const tbody=tr.closest('tbody');
     const flt=tbody.dataset.flight;
+    const handle=tr.querySelector('.drag-handle');
+
+    // Only allow drag to start from the handle cell
+    if(handle){
+      handle.addEventListener('mousedown',()=>{ tr.draggable=true; });
+      handle.addEventListener('mouseleave',()=>{ if(!_gDrag[flt]) tr.draggable=false; });
+    }
+    // Start with draggable false so inputs work normally
+    tr.draggable=false;
 
     tr.addEventListener('dragstart',e=>{
+      if(!tr.draggable) { e.preventDefault(); return; }
       _gDrag[flt]=tr; tr.classList.add('dragging');
       e.dataTransfer.effectAllowed='move';
-      e.dataTransfer.setData('text/plain', flt); // required for Firefox
+      e.dataTransfer.setData('text/plain', flt);
+      // Disable pointer events on all inputs in this tbody during drag
+      tbody.querySelectorAll('input,select,textarea').forEach(el=>el.style.pointerEvents='none');
     });
     tr.addEventListener('dragend',()=>{
+      tr.draggable=false;
       tr.classList.remove('dragging');
       tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
+      // Re-enable inputs
+      tbody.querySelectorAll('input,select,textarea').forEach(el=>el.style.pointerEvents='');
       renumberGrossFlight(tbody);
       _gDrag[flt]=null;
     });
-
-    // Attach dragenter/dragover/drop to the row AND every child element
-    // so events fired on <td> or <input> children still trigger the reorder
-    [tr, ...tr.querySelectorAll('*')].forEach(el=>{
-      el.addEventListener('dragenter',e=>e.preventDefault());
-      el.addEventListener('dragover',e=>{
-        e.preventDefault(); e.stopPropagation();
-        e.dataTransfer.dropEffect='move';
-        const src=_gDrag[flt];
-        if(!src||src===tr) return;
-        tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
-        tr.classList.add('drag-over');
-        const rows=Array.from(tbody.querySelectorAll('tr'));
-        const srcIdx=rows.indexOf(src);
-        const tgtIdx=rows.indexOf(tr);
-        if(srcIdx<tgtIdx) tbody.insertBefore(src, tr.nextSibling);
-        else              tbody.insertBefore(src, tr);
-      });
-      el.addEventListener('drop',e=>{ e.preventDefault(); e.stopPropagation(); });
+    tr.addEventListener('dragenter',e=>e.preventDefault());
+    tr.addEventListener('dragover',e=>{
+      e.preventDefault(); e.dataTransfer.dropEffect='move';
+      const src=_gDrag[flt];
+      if(!src||src===tr) return;
+      tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
+      tr.classList.add('drag-over');
+      const rows=Array.from(tbody.querySelectorAll('tr'));
+      const srcIdx=rows.indexOf(src);
+      const tgtIdx=rows.indexOf(tr);
+      if(srcIdx<tgtIdx) tbody.insertBefore(src, tr.nextSibling);
+      else              tbody.insertBefore(src, tr);
     });
+    tr.addEventListener('drop',e=>e.preventDefault());
   });
 }
 function renumberGrossFlight(tbody){
