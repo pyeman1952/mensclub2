@@ -2933,34 +2933,44 @@ function syncFromGitHub(manual=false){
 }
 
 // ── Drag-and-drop: Gross (per-flight) ────────────────────────────────────────
+// Gross drag state keyed by flight letter
+const _gDrag={};
 function initDragGross(){
-  document.querySelectorAll('.gr-flight-tbody').forEach(tbody=>{
-    tbody.addEventListener('dragstart',e=>{
-      const tr=e.target.closest('tr');
-      if(!tr) return;
-      tbody._drag=tr; tr.classList.add('dragging');
+  document.querySelectorAll('.gr-flight-tbody tr').forEach(tr=>{
+    const tbody=tr.closest('tbody');
+    const flt=tbody.dataset.flight;
+
+    tr.addEventListener('dragstart',e=>{
+      _gDrag[flt]=tr; tr.classList.add('dragging');
       e.dataTransfer.effectAllowed='move';
+      e.dataTransfer.setData('text/plain', flt); // required for Firefox
     });
-    tbody.addEventListener('dragend',e=>{
-      const tr=e.target.closest('tr');
-      if(tr) tr.classList.remove('dragging');
+    tr.addEventListener('dragend',()=>{
+      tr.classList.remove('dragging');
       tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
       renumberGrossFlight(tbody);
+      _gDrag[flt]=null;
     });
-    tbody.addEventListener('dragover',e=>{
-      e.preventDefault(); e.dataTransfer.dropEffect='move';
-      const tr=e.target.closest('tr');
-      if(!tr||tr===tbody._drag) return;
-      tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
-      tr.classList.add('drag-over');
-      // Live reorder on dragover (same as net)
-      const rows=Array.from(tbody.querySelectorAll('tr'));
-      const srcIdx=rows.indexOf(tbody._drag);
-      const tgtIdx=rows.indexOf(tr);
-      if(srcIdx<tgtIdx) tbody.insertBefore(tbody._drag, tr.nextSibling);
-      else              tbody.insertBefore(tbody._drag, tr);
+
+    // Attach dragenter/dragover/drop to the row AND every child element
+    // so events fired on <td> or <input> children still trigger the reorder
+    [tr, ...tr.querySelectorAll('*')].forEach(el=>{
+      el.addEventListener('dragenter',e=>e.preventDefault());
+      el.addEventListener('dragover',e=>{
+        e.preventDefault(); e.stopPropagation();
+        e.dataTransfer.dropEffect='move';
+        const src=_gDrag[flt];
+        if(!src||src===tr) return;
+        tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
+        tr.classList.add('drag-over');
+        const rows=Array.from(tbody.querySelectorAll('tr'));
+        const srcIdx=rows.indexOf(src);
+        const tgtIdx=rows.indexOf(tr);
+        if(srcIdx<tgtIdx) tbody.insertBefore(src, tr.nextSibling);
+        else              tbody.insertBefore(src, tr);
+      });
+      el.addEventListener('drop',e=>{ e.preventDefault(); e.stopPropagation(); });
     });
-    tbody.addEventListener('drop',e=>{ e.preventDefault(); });
   });
 }
 function renumberGrossFlight(tbody){
