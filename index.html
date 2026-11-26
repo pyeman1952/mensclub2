@@ -2946,30 +2946,22 @@ function initDragGross(){
   document.querySelectorAll('.gr-flight-tbody').forEach(tbody=>{
     const table=tbody.closest('table');
 
-    // Set draggable on mousedown of handle only, so inputs work normally
-    tbody.addEventListener('mousedown',e=>{
-      const handle=e.target.closest('.drag-handle');
-      if(!handle) return;
-      const tr=handle.closest('tr[data-gkey]');
-      if(tr) tr.draggable=true;
-    });
-    tbody.addEventListener('mouseup',()=>{
-      tbody.querySelectorAll('tr[data-gkey]').forEach(r=>{ if(!tbody._drag) r.draggable=false; });
-    });
+    // Make all gross rows draggable permanently — same as net rows
+    tbody.querySelectorAll('tr[data-gkey]').forEach(tr=>{ tr.draggable=true; });
 
     tbody.addEventListener('dragstart',e=>{
       const tr=e.target.closest('tr[data-gkey]');
-      console.log('gross dragstart, tr:', tr?.dataset?.gkey, 'draggable:', tr?.draggable);
-      if(!tr||!tr.draggable) { e.preventDefault(); return; }
+      if(!tr) return;
+      // Only start drag if mouse is on the handle
+      if(!e.target.closest('.drag-handle')) { e.preventDefault(); return; }
       tbody._drag=tr;
-      console.log('gross drag started:', tr.dataset.gkey);
       tr.classList.add('dragging');
       e.dataTransfer.effectAllowed='move';
       e.dataTransfer.setData('text/plain','gross');
       table.classList.add('dragging-active');
     });
     tbody.addEventListener('dragend',()=>{
-      if(tbody._drag){ tbody._drag.draggable=false; tbody._drag.classList.remove('dragging'); }
+      if(tbody._drag) tbody._drag.classList.remove('dragging');
       tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
       table.classList.remove('dragging-active');
       renumberGrossFlight(tbody);
@@ -2977,9 +2969,8 @@ function initDragGross(){
     });
     tbody.addEventListener('dragover',e=>{
       e.preventDefault();
-      console.log('gross dragover fired, target:', e.target.tagName, e.target.className, 'drag:', tbody._drag?.dataset?.gkey);
+      if(!tbody._drag) return;
       const tr=e.target.closest('tr[data-gkey]');
-      console.log('  closest tr[data-gkey]:', tr?.dataset?.gkey);
       if(!tr||tr===tbody._drag) return;
       tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
       tr.classList.add('drag-over');
