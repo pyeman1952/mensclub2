@@ -2977,9 +2977,17 @@ function initDragGross(){
     table.addEventListener('dragenter',e=>e.preventDefault());
     table.addEventListener('dragover',e=>{
       e.preventDefault(); e.dataTransfer.dropEffect='move';
-      if(!_gDragSrc||_gDragFlt!==flt) return;
-      const tr=e.target.closest('tr[data-gkey]');
+      if(!_gDragSrc) return;
+      // Find target row — walk up from whatever element the cursor is over
+      let el=e.target;
+      let tr=null;
+      while(el && el!==table){
+        if(el.tagName==='TR' && el.dataset.gkey){ tr=el; break; }
+        el=el.parentElement;
+      }
       if(!tr||tr===_gDragSrc) return;
+      // Make sure target row is in this table's tbody
+      if(!tbody.contains(tr)) return;
       tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
       tr.classList.add('drag-over');
       const rows=Array.from(tbody.querySelectorAll('tr'));
