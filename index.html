@@ -1633,7 +1633,10 @@ function ordSfx(n){ const s=['th','st','nd','rd']; const v=n%100; return n+(s[(v
 // GolfSoftware gross output: "Position\tFlight\tName\tOut\tIn\tTotal"
 // Paste into any input in the gross table; fills from that row down.
 function initGrossPasteListeners(){
-  document.getElementById('gross-tbody').addEventListener('paste', e=>{
+  // gross-tbody replaced by per-flight tbodies; paste handled via import
+  const grossTbody = document.getElementById('gross-tbody');
+  if(!grossTbody) return;
+  grossTbody.addEventListener('paste', e=>{
     const target = e.target;
     const row = target.closest('tr[data-gplace]');
     if(!row) return;
@@ -2956,8 +2959,10 @@ function initDragGross(){
 
     tbody.addEventListener('dragstart',e=>{
       const tr=e.target.closest('tr[data-gkey]');
+      console.log('gross dragstart, tr:', tr?.dataset?.gkey, 'draggable:', tr?.draggable);
       if(!tr||!tr.draggable) { e.preventDefault(); return; }
       tbody._drag=tr;
+      console.log('gross drag started:', tr.dataset.gkey);
       tr.classList.add('dragging');
       e.dataTransfer.effectAllowed='move';
       e.dataTransfer.setData('text/plain','gross');
@@ -2972,7 +2977,9 @@ function initDragGross(){
     });
     tbody.addEventListener('dragover',e=>{
       e.preventDefault();
+      console.log('gross dragover fired, target:', e.target.tagName, e.target.className, 'drag:', tbody._drag?.dataset?.gkey);
       const tr=e.target.closest('tr[data-gkey]');
+      console.log('  closest tr[data-gkey]:', tr?.dataset?.gkey);
       if(!tr||tr===tbody._drag) return;
       tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
       tr.classList.add('drag-over');
