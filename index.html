@@ -61,6 +61,10 @@ html,body{height:100%;width:100%;font-family:system-ui,-apple-system,sans-serif;
 .drag-handle:active{cursor:grabbing;}
 tr.drag-over{outline:2px solid var(--gm);outline-offset:-2px;background:var(--gl);}
 tr.dragging{opacity:.4;}
+/* While a gross row is being dragged, kill pointer-events on all inputs in that table so dragover fires on the rows */
+.gr-flight-table.dragging-active input,
+.gr-flight-table.dragging-active select,
+.gr-flight-table.dragging-active textarea{pointer-events:none;}
 /* ── Gross-winner badge for players appearing in both gross and net ── */
 .gross-also{display:inline-block;font-size:9px;font-weight:700;background:#FFF3CD;color:#856404;border:1px solid #FFCA2C;border-radius:3px;padding:0 4px;margin-left:4px;vertical-align:middle;white-space:nowrap;}
 
@@ -371,7 +375,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
           <!-- Flight A: G01–G04 -->
           <div>
             <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;padding:3px 6px;background:var(--gl);border-radius:4px;">Flight A</div>
-            <table class="gt"><thead><tr><th style="width:18px;"></th><th style="width:22px;">#</th><th>Player Name</th><th style="width:52px;">Out</th><th style="width:52px;">In</th><th style="width:58px;">Total</th><th style="width:58px;">Prize ($)</th><th style="width:24px;">CB</th></tr></thead>
+            <table class="gt gr-flight-table"><thead><tr><th style="width:18px;"></th><th style="width:22px;">#</th><th>Player Name</th><th style="width:52px;">Out</th><th style="width:52px;">In</th><th style="width:58px;">Total</th><th style="width:58px;">Prize ($)</th><th style="width:24px;">CB</th></tr></thead>
             <tbody id="gross-tbody-A" class="gr-flight-tbody" data-flight="A">
               <tr draggable="true" data-gkey="G01"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G01">1st</span></td><td><input type="text" id="gr-name-G01" placeholder="Player name"><input type="hidden" id="gr-flt-G01" value="A"></td><td><input type="number" id="gr-out-G01" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G01')" inputmode="numeric"></td><td><input type="number" id="gr-in-G01" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G01')" inputmode="numeric"></td><td><input type="number" id="gr-score-G01" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G01" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G01" title="Countback"></td></tr>
               <tr draggable="true" data-gkey="G02"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G02">2nd</span></td><td><input type="text" id="gr-name-G02" placeholder="Player name"><input type="hidden" id="gr-flt-G02" value="A"></td><td><input type="number" id="gr-out-G02" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G02')" inputmode="numeric"></td><td><input type="number" id="gr-in-G02" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G02')" inputmode="numeric"></td><td><input type="number" id="gr-score-G02" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G02" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G02" title="Countback"></td></tr>
@@ -382,7 +386,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
           <!-- Flight B: G05–G08 -->
           <div>
             <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;padding:3px 6px;background:var(--gl);border-radius:4px;">Flight B</div>
-            <table class="gt"><thead><tr><th style="width:18px;"></th><th style="width:22px;">#</th><th>Player Name</th><th style="width:52px;">Out</th><th style="width:52px;">In</th><th style="width:58px;">Total</th><th style="width:58px;">Prize ($)</th><th style="width:24px;">CB</th></tr></thead>
+            <table class="gt gr-flight-table"><thead><tr><th style="width:18px;"></th><th style="width:22px;">#</th><th>Player Name</th><th style="width:52px;">Out</th><th style="width:52px;">In</th><th style="width:58px;">Total</th><th style="width:58px;">Prize ($)</th><th style="width:24px;">CB</th></tr></thead>
             <tbody id="gross-tbody-B" class="gr-flight-tbody" data-flight="B">
               <tr draggable="true" data-gkey="G05"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G05">1st</span></td><td><input type="text" id="gr-name-G05" placeholder="Player name"><input type="hidden" id="gr-flt-G05" value="B"></td><td><input type="number" id="gr-out-G05" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G05')" inputmode="numeric"></td><td><input type="number" id="gr-in-G05" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G05')" inputmode="numeric"></td><td><input type="number" id="gr-score-G05" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G05" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G05" title="Countback"></td></tr>
               <tr draggable="true" data-gkey="G06"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G06">2nd</span></td><td><input type="text" id="gr-name-G06" placeholder="Player name"><input type="hidden" id="gr-flt-G06" value="B"></td><td><input type="number" id="gr-out-G06" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G06')" inputmode="numeric"></td><td><input type="number" id="gr-in-G06" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G06')" inputmode="numeric"></td><td><input type="number" id="gr-score-G06" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G06" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G06" title="Countback"></td></tr>
@@ -393,7 +397,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
           <!-- Flight C: G09–G12 -->
           <div>
             <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;padding:3px 6px;background:var(--gl);border-radius:4px;">Flight C</div>
-            <table class="gt"><thead><tr><th style="width:18px;"></th><th style="width:22px;">#</th><th>Player Name</th><th style="width:52px;">Out</th><th style="width:52px;">In</th><th style="width:58px;">Total</th><th style="width:58px;">Prize ($)</th><th style="width:24px;">CB</th></tr></thead>
+            <table class="gt gr-flight-table"><thead><tr><th style="width:18px;"></th><th style="width:22px;">#</th><th>Player Name</th><th style="width:52px;">Out</th><th style="width:52px;">In</th><th style="width:58px;">Total</th><th style="width:58px;">Prize ($)</th><th style="width:24px;">CB</th></tr></thead>
             <tbody id="gross-tbody-C" class="gr-flight-tbody" data-flight="C">
               <tr draggable="true" data-gkey="G09"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G09">1st</span></td><td><input type="text" id="gr-name-G09" placeholder="Player name"><input type="hidden" id="gr-flt-G09" value="C"></td><td><input type="number" id="gr-out-G09" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G09')" inputmode="numeric"></td><td><input type="number" id="gr-in-G09" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G09')" inputmode="numeric"></td><td><input type="number" id="gr-score-G09" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G09" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G09" title="Countback"></td></tr>
               <tr draggable="true" data-gkey="G10"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G10">2nd</span></td><td><input type="text" id="gr-name-G10" placeholder="Player name"><input type="hidden" id="gr-flt-G10" value="C"></td><td><input type="number" id="gr-out-G10" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G10')" inputmode="numeric"></td><td><input type="number" id="gr-in-G10" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G10')" inputmode="numeric"></td><td><input type="number" id="gr-score-G10" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G10" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G10" title="Countback"></td></tr>
@@ -404,7 +408,7 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
           <!-- Flight D: G13–G15 + spare slot -->
           <div>
             <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;padding:3px 6px;background:var(--gl);border-radius:4px;">Flight D</div>
-            <table class="gt"><thead><tr><th style="width:18px;"></th><th style="width:22px;">#</th><th>Player Name</th><th style="width:52px;">Out</th><th style="width:52px;">In</th><th style="width:58px;">Total</th><th style="width:58px;">Prize ($)</th><th style="width:24px;">CB</th></tr></thead>
+            <table class="gt gr-flight-table"><thead><tr><th style="width:18px;"></th><th style="width:22px;">#</th><th>Player Name</th><th style="width:52px;">Out</th><th style="width:52px;">In</th><th style="width:58px;">Total</th><th style="width:58px;">Prize ($)</th><th style="width:24px;">CB</th></tr></thead>
             <tbody id="gross-tbody-D" class="gr-flight-tbody" data-flight="D">
               <tr draggable="true" data-gkey="G13"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G13">1st</span></td><td><input type="text" id="gr-name-G13" placeholder="Player name"><input type="hidden" id="gr-flt-G13" value="D"></td><td><input type="number" id="gr-out-G13" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G13')" inputmode="numeric"></td><td><input type="number" id="gr-in-G13" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G13')" inputmode="numeric"></td><td><input type="number" id="gr-score-G13" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G13" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G13" title="Countback"></td></tr>
               <tr draggable="true" data-gkey="G14"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G14">2nd</span></td><td><input type="text" id="gr-name-G14" placeholder="Player name"><input type="hidden" id="gr-flt-G14" value="D"></td><td><input type="number" id="gr-out-G14" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G14')" inputmode="numeric"></td><td><input type="number" id="gr-in-G14" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G14')" inputmode="numeric"></td><td><input type="number" id="gr-score-G14" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G14" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G14" title="Countback"></td></tr>
@@ -2933,53 +2937,51 @@ function syncFromGitHub(manual=false){
 }
 
 // ── Drag-and-drop: Gross (per-flight) ────────────────────────────────────────
-// Gross drag — use CSS to disable pointer events on inputs while dragging
-const _gDrag={};
+// Gross drag — delegate from <table> so events bubble past inputs/tds
+let _gDragSrc=null, _gDragTbody=null, _gDragFlt=null;
 function initDragGross(){
-  document.querySelectorAll('.gr-flight-tbody tr').forEach(tr=>{
-    const tbody=tr.closest('tbody');
+  document.querySelectorAll('.gr-flight-table').forEach(table=>{
+    const tbody=table.querySelector('.gr-flight-tbody');
     const flt=tbody.dataset.flight;
-    const handle=tr.querySelector('.drag-handle');
 
-    // Only allow drag to start from the handle cell
-    if(handle){
-      handle.addEventListener('mousedown',()=>{ tr.draggable=true; });
-      handle.addEventListener('mouseleave',()=>{ if(!_gDrag[flt]) tr.draggable=false; });
-    }
-    // Start with draggable false so inputs work normally
-    tr.draggable=false;
-
-    tr.addEventListener('dragstart',e=>{
-      if(!tr.draggable) { e.preventDefault(); return; }
-      _gDrag[flt]=tr; tr.classList.add('dragging');
+    // dragstart fires on the <tr> and bubbles to the table
+    table.addEventListener('dragstart',e=>{
+      const tr=e.target.closest('tr[data-gkey]');
+      if(!tr) return;
+      _gDragSrc=tr; _gDragTbody=tbody; _gDragFlt=flt;
+      tr.classList.add('dragging');
       e.dataTransfer.effectAllowed='move';
       e.dataTransfer.setData('text/plain', flt);
-      // Disable pointer events on all inputs in this tbody during drag
-      tbody.querySelectorAll('input,select,textarea').forEach(el=>el.style.pointerEvents='none');
+      // CSS class disables pointer-events on all inputs via stylesheet rule
+      table.classList.add('dragging-active');
     });
-    tr.addEventListener('dragend',()=>{
-      tr.draggable=false;
-      tr.classList.remove('dragging');
+
+    // dragend fires on the dragged element and bubbles to table
+    table.addEventListener('dragend',e=>{
+      const tr=e.target.closest('tr[data-gkey]');
+      if(tr) tr.classList.remove('dragging');
       tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
-      // Re-enable inputs
-      tbody.querySelectorAll('input,select,textarea').forEach(el=>el.style.pointerEvents='');
+      table.classList.remove('dragging-active');
       renumberGrossFlight(tbody);
-      _gDrag[flt]=null;
+      _gDragSrc=null; _gDragTbody=null; _gDragFlt=null;
     });
-    tr.addEventListener('dragenter',e=>e.preventDefault());
-    tr.addEventListener('dragover',e=>{
+
+    // dragover/dragenter/drop bubble from ANY descendant (tr, td, input) to table
+    table.addEventListener('dragenter',e=>e.preventDefault());
+    table.addEventListener('dragover',e=>{
       e.preventDefault(); e.dataTransfer.dropEffect='move';
-      const src=_gDrag[flt];
-      if(!src||src===tr) return;
+      if(!_gDragSrc||_gDragFlt!==flt) return;
+      const tr=e.target.closest('tr[data-gkey]');
+      if(!tr||tr===_gDragSrc) return;
       tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
       tr.classList.add('drag-over');
       const rows=Array.from(tbody.querySelectorAll('tr'));
-      const srcIdx=rows.indexOf(src);
+      const srcIdx=rows.indexOf(_gDragSrc);
       const tgtIdx=rows.indexOf(tr);
-      if(srcIdx<tgtIdx) tbody.insertBefore(src, tr.nextSibling);
-      else              tbody.insertBefore(src, tr);
+      if(srcIdx<tgtIdx) tbody.insertBefore(_gDragSrc, tr.nextSibling);
+      else              tbody.insertBefore(_gDragSrc, tr);
     });
-    tr.addEventListener('drop',e=>e.preventDefault());
+    table.addEventListener('drop',e=>e.preventDefault());
   });
 }
 function renumberGrossFlight(tbody){
