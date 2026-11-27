@@ -3346,8 +3346,99 @@ function parseScoresCSV(text){
     date       : exportDate,
     playerCount: players.length,
     grossWinners,
-    netWinners
+    netWinners,
+    _players   : players  // full array with holes[] for skins/POG calc
   };
+}
+
+// ── Auto-calculate Skins & POG from CSV scores ───────────────────────────────
+// Stroke index (hole 1–18): position 0 = hole 1
+const SK_SI  = [5,17,11,15,13,1,7,3,9,18,14,6,2,16,12,4,10,8];
+// Par by hole (index 0 = hole 1)
+const SK_PAR = [4,5,3,3,4,4,5,4,4,3,4,4,4,5,3,5,3,4];
+// Skins holes and POG holes
+const SKINS_HOLES = [1,2,5,6,7,8,9,11,12,13,14,16,18];
+const POG_HOLES   = [3,4,10,15,17];
+
+/**
+ * Returns { skinsWinners, pogWinners } each being
+ *   { [hole]: { name, flight, score, type } }
+ * where type is 'G' (gross skin), 'N' (net skin), or '' (POG).
+ * Guests (flight not in A/B/C/D) are excluded.
+ * players — array from parseScoresCSV: { name, flight, gross, hcp, holes[] }
+ *   holes[0] = hole 1 gross score, holes[17] = hole 18 gross score
+ */
+function calcSkinsPOGFromCSV(players){
+  // Eligible = non-guest (flight A-D), with valid hole scores
+  const eligible = players.filter(p=>['A','B','C','D'].includes(p.flight) && p.holes && p.holes.length===18);
+
+  // ── Strokes per hole for each player ────────────────────────────────────────
+  // Full handicap: each hole gets floor(hcp/18) strokes, plus 1 more if
+  // that hole's stroke index <= (hcp mod 18).  Handles hcp > 18 (2 strokes) and > 36 (3).
+  function strokesOnHole(hcp, holeNum){
+    const si = SK_SI[holeNum-1]; // 1-based SI for this hole
+    return Math.floor(hcp/18) + (si <= hcp%18 ? 1 : 0);
+  }
+
+  // ── Build per-hole arrays ────────────────────────────────────────────────────
+  // For each eligible player on each hole: gross score, net score
+  function holePlayers(holeNum){
+    return eligible.map(p=>{
+      const gross = p.holes[holeNum-1]; // NaN if missing
+      const st    = strokesOnHole(p.hcp, holeNum);
+      const net   = isNaN(gross) ? NaN : gross - st;
+      return { name:p.name, flight:p.flight, gross, net, hcp:p.hcp };
+    }).filter(p=>!isNaN(p.gross)); // skip players with no score on this hole
+  }
+
+  // ── Skins algorithm ──────────────────────────────────────────────────────────
+  // 1. Find lowest net score on this hole.
+  // 2. If exactly one player has that net — net skin.
+  // 3. If multiple players share that net — check whether one has a unique gross
+  //    score that is also <= every other tied player's gross (gross beats net on a tie).
+  //    If exactly one player has the unique lowest gross among the tied group — gross skin.
+  // 4. Otherwise — carry (no winner).
+  const skinsWinners = {};
+  SKINS_HOLES.forEach(h=>{
+    const hp = holePlayers(h);
+    if(hp.length === 0) return;
+
+    const minNet = Math.min(...hp.map(p=>p.net));
+    const netTied = hp.filter(p=>p.net===minNet);
+
+    if(netTied.length === 1){
+      // Unique net — net skin
+      const w = netTied[0];
+      skinsWinners[h] = { name:w.name, flight:w.flight, score:String(w.gross)+'N', type:'N' };
+    } else {
+      // Tied on net — check for unique gross among tied players
+      const minGross = Math.min(...netTied.map(p=>p.gross));
+      const grossTied = netTied.filter(p=>p.gross===minGross);
+      if(grossTied.length === 1){
+        // One player has unique lowest gross among net-tied group — gross skin
+        const w = grossTied[0];
+        skinsWinners[h] = { name:w.name, flight:w.flight, score:String(w.gross)+'G', type:'G' };
+      }
+      // else — carry, no entry
+    }
+  });
+
+  // ── POG algorithm ────────────────────────────────────────────────────────────
+  // On each POG hole, find players with gross ≤ par-1 (birdie or better).
+  // If exactly one — winner. If none or multiple — carry.
+  const pogWinners = {};
+  POG_HOLES.forEach(h=>{
+    const par = SK_PAR[h-1];
+    const hp  = holePlayers(h);
+    const birdieOrBetter = hp.filter(p=>p.gross <= par-1);
+    if(birdieOrBetter.length === 1){
+      const w = birdieOrBetter[0];
+      pogWinners[h] = { name:w.name, flight:w.flight, score:String(w.gross), type:'' };
+    }
+    // else carry (0 or 2+) — no entry
+  });
+
+  return { skinsWinners, pogWinners };
 }
 
 // ── Parse skins/POG HTML ──────────────────────────────────────────────────────
@@ -3449,9 +3540,45 @@ function runImport(){
     try{ pogData=parsePOGHTML(_importStore.html); }
     catch(e){ errors.push('HTML parse error: '+e.message); }
   }
+  // ── Auto-calculate skins/POG from CSV when no HTML provided ─────────────────
+  if(csvData && !pogData){
+    try{
+      const csvPOG = calcSkinsPOGFromCSV(csvData._players||[]);
+      // _players is attached below by parseScoresCSV (see patch); fall back gracefully
+      if(csvPOG && (Object.keys(csvPOG.skinsWinners).length || Object.keys(csvPOG.pogWinners).length)){
+        pogData = csvPOG;
+        errors.push('ℹ Skins & POG calculated from CSV scores (no HTML file provided).');
+      }
+    } catch(e){ errors.push('Skins/POG calc error: '+e.message); }
+  }
 
   if(!csvData && !pogData){
-    msg.textContent='⚠ No data could be parsed. See errors above.';
+    // Try to give a more specific diagnosis from the raw CSV
+    if(_importStore.csv){
+      try{
+        const lines=_importStore.csv.split(/\r?\n/).filter(l=>l.trim());
+        const delim=lines[0]&&lines[0].includes(';')?';':',';
+        const hdrs=lines[0]?lines[0].split(delim).map(h=>h.replace(/^"|"$/g,'').trim()):'(no headers)';
+        const hasName=hdrs.map(h=>h.toLowerCase()).includes('name');
+        const hasFlight=hdrs.map(h=>h.toLowerCase()).includes('flight');
+        const hasGross=hdrs.map(h=>h.toLowerCase()).includes('gross');
+        const missing=[];
+        if(!hasName) missing.push('Name');
+        if(!hasFlight) missing.push('Flight');
+        if(!hasGross) missing.push('Gross');
+        if(missing.length){
+          msg.textContent=`⚠ CSV missing required column(s): ${missing.join(', ')}. Found: ${hdrs.join(', ')}`;
+        } else {
+          // Headers OK — check if any rows pass the flight filter
+          const iF=hdrs.map(h=>h.toLowerCase()).indexOf('flight');
+          const flights=lines.slice(1).map(l=>{ const c=l.split(delim); return (c[iF]||'').replace(/^"|"$/g,'').trim().toUpperCase(); });
+          const unique=[...new Set(flights)].filter(Boolean);
+          msg.textContent=`⚠ No valid players found. Flight values in CSV: [${unique.join(', ')}] — expected A, B, C or D.`;
+        }
+      } catch(diagE){ msg.textContent='⚠ No data could be parsed. See errors above.'; }
+    } else {
+      msg.textContent='⚠ No data could be parsed. See errors above.';
+    }
     msg.style.color='var(--red)'; return;
   }
 
@@ -3541,30 +3668,46 @@ function runImport(){
 
   // ── Fill Skins ──────────────────────────────────────────────────────────────
   if(pogData && Object.keys(pogData.skinsWinners).length){
-    let count=0;
+    let countG=0, countN=0, countCarry=0;
+    // Holes with no winner = carry
+    SKINS_HOLES.forEach(h=>{ if(!pogData.skinsWinners[h]) countCarry++; });
     Object.entries(pogData.skinsWinners).forEach(([hole,w])=>{
       const h=parseInt(hole);
       const nameEl =document.getElementById(`sk-name-${h}`);
       const fltEl  =document.getElementById(`sk-flt-${h}`);
       const scoreEl=document.getElementById(`sk-score-${h}`);
-      if(nameEl)  { nameEl.value=w.name; count++; updateSkinRowHighlight('sk',h); }
+      if(nameEl)  { nameEl.value=w.name; updateSkinRowHighlight('sk',h); if(w.type==='G') countG++; else countN++; }
       if(fltEl && w.flight) { fltEl.value=w.flight; }
       if(scoreEl && w.score){ scoreEl.value=w.score; }
     });
-    summary.push(`🎯 Skins: ${count} hole(s) filled`);
+    const src = _importStore.html ? 'HTML' : 'CSV';
+    const parts=[];
+    if(countG) parts.push(`${countG} gross`);
+    if(countN) parts.push(`${countN} net`);
+    if(countCarry) parts.push(`${countCarry} carry`);
+    summary.push(`🎯 Skins (from ${src}): ${parts.join(', ')}`);
+  } else if(pogData && SKINS_HOLES.every(h=>!pogData.skinsWinners[h])){
+    summary.push(`🎯 Skins: all holes carry (ties on every hole)`);
   }
 
   // ── Fill POG ────────────────────────────────────────────────────────────────
   if(pogData && Object.keys(pogData.pogWinners).length){
-    let count=0;
+    let countWon=0, countCarry=0;
+    POG_HOLES.forEach(h=>{ if(!pogData.pogWinners[h]) countCarry++; });
     Object.entries(pogData.pogWinners).forEach(([hole,w])=>{
       const h=parseInt(hole);
       const nameEl=document.getElementById(`pog-name-${h}`);
       const fltEl =document.getElementById(`pog-flt-${h}`);
-      if(nameEl)  { nameEl.value=w.name; count++; updateSkinRowHighlight('pog',h); }
+      if(nameEl)  { nameEl.value=w.name; countWon++; updateSkinRowHighlight('pog',h); }
       if(fltEl && w.flight) { fltEl.value=w.flight; }
     });
-    summary.push(`💰 POG: ${count} hole(s) filled`);
+    const src = _importStore.html ? 'HTML' : 'CSV';
+    const parts2=[];
+    if(countWon) parts2.push(`${countWon} won`);
+    if(countCarry) parts2.push(`${countCarry} carry`);
+    summary.push(`💰 POG (from ${src}): ${parts2.join(', ')}`);
+  } else if(pogData){
+    summary.push(`💰 POG: all holes carry`);
   }
 
   // ── Show summary ────────────────────────────────────────────────────────────
