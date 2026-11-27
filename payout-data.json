@@ -10,7 +10,7 @@
       "gnPool": 420,
       "skinsPool": 195,
       "pogPool": 210,
-      "recordedAt": "2026-11-27T05:31:12.615Z",
+      "recordedAt": "2026-11-27T17:39:49.625Z",
       "grossRows": [
         {
           "key": "G01",
@@ -412,9 +412,9 @@
           "winner": "Erickson, Murray",
           "score": "2N",
           "gross": "",
-          "runPot": 77,
-          "payout": 77,
-          "stored": 62,
+          "runPot": 15,
+          "payout": 15,
+          "stored": 0,
           "weekly": 15,
           "paid": true,
           "guest": false,
@@ -425,9 +425,9 @@
           "winner": "Haigh, Iain",
           "score": "4G",
           "gross": "",
-          "runPot": 25,
-          "payout": 25,
-          "stored": 10,
+          "runPot": 15,
+          "payout": 15,
+          "stored": 0,
           "weekly": 15,
           "paid": true,
           "guest": false,
@@ -490,9 +490,9 @@
           "winner": "Phelan, Bryan",
           "score": "2N",
           "gross": "",
-          "runPot": 25,
-          "payout": 25,
-          "stored": 10,
+          "runPot": 15,
+          "payout": 15,
+          "stored": 0,
           "weekly": 15,
           "paid": true,
           "guest": false,
@@ -575,9 +575,9 @@
         {
           "hole": 15,
           "winner": "Haigh, Iain",
-          "runPot": 104,
-          "payout": 104,
-          "stored": 62,
+          "runPot": 42,
+          "payout": 42,
+          "stored": 0,
           "weekly": 42,
           "paid": true,
           "guest": false,
@@ -743,17 +743,17 @@
           "pref": {
             "bar": 0,
             "proshop": 0,
-            "cash": 107,
+            "cash": 45,
             "cheque": 0,
             "other": ""
           },
           "gross": 30,
           "net": 0,
-          "skins": 77,
+          "skins": 15,
           "pog": 0,
           "skill": 0,
           "draw": 0,
-          "total": 107,
+          "total": 45,
           "weeks": 1,
           "flt": "B"
         },
@@ -783,7 +783,7 @@
             "proshop": 0,
             "cash": 40,
             "cheque": 0,
-            "other": "Turkey entered as $40"
+            "other": ""
           },
           "gross": 0,
           "net": 40,
@@ -818,22 +818,22 @@
           "pref": {
             "bar": 0,
             "proshop": 0,
-            "cash": 154,
+            "cash": 82,
             "cheque": 0,
             "other": ""
           },
           "gross": 0,
           "net": 25,
-          "skins": 25,
-          "pog": 104,
+          "skins": 15,
+          "pog": 42,
           "skill": 0,
           "draw": 0,
-          "total": 154,
+          "total": 82,
           "weeks": 1,
           "flt": "A"
         },
         {
-          "name": "Hunt, Larry [TIE?]",
+          "name": "Hunt, Larry",
           "pref": {
             "bar": 15,
             "proshop": 0,
@@ -871,7 +871,7 @@
           "flt": "A"
         },
         {
-          "name": "Lund, Gordon [TIE?]",
+          "name": "Lund, Gordon",
           "pref": {
             "bar": 20,
             "proshop": 0,
@@ -927,7 +927,7 @@
           "flt": "D"
         },
         {
-          "name": "Murray, Scott [TIE?]",
+          "name": "Murray, Scott",
           "pref": {
             "bar": 20,
             "proshop": 0,
@@ -949,23 +949,23 @@
           "name": "Phelan, Bryan",
           "pref": {
             "bar": 0,
-            "proshop": 45,
+            "proshop": 35,
             "cash": 0,
             "cheque": 0,
             "other": ""
           },
           "gross": 20,
           "net": 0,
-          "skins": 25,
+          "skins": 15,
           "pog": 0,
           "skill": 0,
           "draw": 0,
-          "total": 45,
+          "total": 35,
           "weeks": 1,
           "flt": "B"
         },
         {
-          "name": "Pye, Dave [TIE?]",
+          "name": "Pye, Dave",
           "pref": {
             "bar": 15,
             "proshop": 0,
@@ -984,7 +984,7 @@
           "flt": "B"
         },
         {
-          "name": "Rallison, Gord [TIE?]",
+          "name": "Rallison, Gord",
           "pref": {
             "bar": 15,
             "proshop": 0,
@@ -1040,7 +1040,7 @@
           "flt": "C"
         },
         {
-          "name": "Smith, Darrell [TIE?]",
+          "name": "Smith, Darrell",
           "pref": {
             "bar": 20,
             "proshop": 0,
@@ -1097,7 +1097,7 @@
           "flt": "C"
         },
         {
-          "name": "Stewart, Yvonne [TIE?]",
+          "name": "Stewart, Yvonne",
           "pref": {
             "bar": 25,
             "proshop": 0,
@@ -1138,8 +1138,8 @@
       "totals": {
         "gross": 230,
         "net": 215,
-        "skins": 157,
-        "pog": 104,
+        "skins": 75,
+        "pog": 42,
         "skill": 80,
         "draw": 0
       }
@@ -1300,9 +1300,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0â5",
-        "B": "6â11",
-        "C": "12â17",
+        "A": "0Ã¢ÂÂ5",
+        "B": "6Ã¢ÂÂ11",
+        "C": "12Ã¢ÂÂ17",
         "D": "18+"
       },
       "net": [
@@ -6515,16 +6515,16 @@
       "pref": {
         "bar": 0,
         "proshop": 0,
-        "cash": 107,
+        "cash": 45,
         "cheque": 0,
         "other": ""
       },
       "gross": 30,
       "net": 0,
-      "skins": 77,
+      "skins": 15,
       "pog": 0,
       "draw": 0,
-      "total": 107,
+      "total": 45,
       "weeks": 1,
       "played": 0
     },
@@ -6575,29 +6575,23 @@
       "pref": "Pro Shop",
       "gross": 45,
       "net": 50,
-      "skins": 31,
-      "pog": 104,
+      "skins": 21,
+      "pog": 42,
       "draw": 0,
-      "total": 230,
+      "total": 158,
       "weeks": 4,
       "played": 0
     },
-    "Hunt, Larry [TIE?]": {
-      "name": "Hunt, Larry [TIE?]",
-      "pref": {
-        "bar": 15,
-        "proshop": 0,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 0,
-      "net": 15,
-      "skins": 0,
+    "Hunt, Larry": {
+      "name": "Hunt, Larry",
+      "pref": "Bar",
+      "gross": 20,
+      "net": 65,
+      "skins": 27,
       "pog": 0,
       "draw": 0,
-      "total": 15,
-      "weeks": 1,
+      "total": 132,
+      "weeks": 4,
       "played": 0
     },
     "Koster, Greg": {
@@ -6612,8 +6606,8 @@
       "weeks": 5,
       "played": 0
     },
-    "Lund, Gordon [TIE?]": {
-      "name": "Lund, Gordon [TIE?]",
+    "Lund, Gordon": {
+      "name": "Lund, Gordon",
       "pref": {
         "bar": 20,
         "proshop": 0,
@@ -6654,22 +6648,16 @@
       "weeks": 3,
       "played": 0
     },
-    "Murray, Scott [TIE?]": {
-      "name": "Murray, Scott [TIE?]",
-      "pref": {
-        "bar": 20,
-        "proshop": 0,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
+    "Murray, Scott": {
+      "name": "Murray, Scott",
+      "pref": "Bar",
       "gross": 0,
-      "net": 20,
+      "net": 60,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 20,
-      "weeks": 1,
+      "total": 60,
+      "weeks": 3,
       "played": 0
     },
     "Phelan, Bryan": {
@@ -6677,47 +6665,47 @@
       "pref": "Pro Shop",
       "gross": 20,
       "net": 25,
-      "skins": 35,
+      "skins": 25,
       "pog": 0,
       "draw": 0,
-      "total": 80,
+      "total": 70,
       "weeks": 3,
       "played": 0
     },
-    "Pye, Dave [TIE?]": {
-      "name": "Pye, Dave [TIE?]",
+    "Pye, Dave": {
+      "name": "Pye, Dave",
       "pref": {
-        "bar": 15,
-        "proshop": 0,
+        "bar": 0,
+        "proshop": 20,
         "cash": 0,
         "cheque": 0,
         "other": ""
       },
-      "gross": 0,
+      "gross": 20,
       "net": 15,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 15,
-      "weeks": 1,
+      "total": 35,
+      "weeks": 2,
       "played": 0
     },
-    "Rallison, Gord [TIE?]": {
-      "name": "Rallison, Gord [TIE?]",
+    "Rallison, Gord": {
+      "name": "Rallison, Gord",
       "pref": {
-        "bar": 15,
+        "bar": 25,
         "proshop": 0,
         "cash": 0,
         "cheque": 0,
         "other": ""
       },
-      "gross": 0,
+      "gross": 25,
       "net": 15,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 15,
-      "weeks": 1,
+      "total": 40,
+      "weeks": 2,
       "played": 0
     },
     "Rushton, Doug": {
@@ -6744,22 +6732,22 @@
       "weeks": 2,
       "played": 0
     },
-    "Smith, Darrell [TIE?]": {
-      "name": "Smith, Darrell [TIE?]",
+    "Smith, Darrell": {
+      "name": "Smith, Darrell",
       "pref": {
-        "bar": 20,
+        "bar": 10,
         "proshop": 0,
         "cash": 0,
         "cheque": 0,
         "other": ""
       },
       "gross": 0,
-      "net": 20,
+      "net": 60,
       "skins": 0,
-      "pog": 0,
+      "pog": 245,
       "draw": 0,
-      "total": 20,
-      "weeks": 1,
+      "total": 325,
+      "weeks": 5,
       "played": 0
     },
     "Smith, Rick": {
@@ -6792,22 +6780,16 @@
       "weeks": 4,
       "played": 0
     },
-    "Stewart, Yvonne [TIE?]": {
-      "name": "Stewart, Yvonne [TIE?]",
-      "pref": {
-        "bar": 25,
-        "proshop": 0,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
+    "Stewart, Yvonne": {
+      "name": "Stewart, Yvonne",
+      "pref": "Pro Shop",
       "gross": 0,
       "net": 25,
-      "skins": 0,
+      "skins": 38,
       "pog": 0,
       "draw": 0,
-      "total": 25,
-      "weeks": 1,
+      "total": 83,
+      "weeks": 3,
       "played": 0
     },
     "VanVelzen, Paul": {
@@ -6846,18 +6828,6 @@
       "weeks": 3,
       "played": 0
     },
-    "Hunt, Larry": {
-      "name": "Hunt, Larry",
-      "pref": "Bar",
-      "gross": 20,
-      "net": 50,
-      "skins": 27,
-      "pog": 0,
-      "draw": 0,
-      "total": 117,
-      "weeks": 3,
-      "played": 0
-    },
     "Nickerson, Corey": {
       "name": "Nickerson, Corey",
       "pref": "Pro Shop",
@@ -6892,24 +6862,6 @@
       "draw": 0,
       "total": 50,
       "weeks": 3,
-      "played": 0
-    },
-    "Smith, Darrell": {
-      "name": "Smith, Darrell",
-      "pref": {
-        "bar": 10,
-        "proshop": 0,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 0,
-      "net": 40,
-      "skins": 0,
-      "pog": 245,
-      "draw": 0,
-      "total": 305,
-      "weeks": 4,
       "played": 0
     },
     "Webber, Carl": {
@@ -6966,24 +6918,6 @@
       "weeks": 2,
       "played": 0
     },
-    "Pye, Dave": {
-      "name": "Pye, Dave",
-      "pref": {
-        "bar": 0,
-        "proshop": 20,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 20,
-      "net": 0,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 20,
-      "weeks": 1,
-      "played": 0
-    },
     "Rallison, Jordan": {
       "name": "Rallison, Jordan",
       "pref": {
@@ -7012,18 +6946,6 @@
       "draw": 0,
       "total": 220,
       "weeks": 3,
-      "played": 0
-    },
-    "Stewart, Yvonne": {
-      "name": "Stewart, Yvonne",
-      "pref": "Pro Shop",
-      "gross": 0,
-      "net": 0,
-      "skins": 38,
-      "pog": 0,
-      "draw": 0,
-      "total": 58,
-      "weeks": 2,
       "played": 0
     },
     "Allan, Keith": {
@@ -7144,36 +7066,6 @@
       "draw": 0,
       "total": 51,
       "weeks": 2,
-      "played": 0
-    },
-    "Murray, Scott": {
-      "name": "Murray, Scott",
-      "pref": "Bar",
-      "gross": 0,
-      "net": 40,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 40,
-      "weeks": 2,
-      "played": 0
-    },
-    "Rallison, Gord": {
-      "name": "Rallison, Gord",
-      "pref": {
-        "bar": 25,
-        "proshop": 0,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 25,
-      "net": 0,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 25,
-      "weeks": 1,
       "played": 0
     },
     "Sheldon, Rick": {
@@ -7365,94 +7257,82 @@
   },
   "pots": {
     "sk_1": {
-      "pot": 15,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-11-27T05:26:44.128Z"
     },
     "sk_2": {
-      "pot": 25,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
-      "lastWinner": null
+      "pot": 10,
+      "updatedAt": "2026-11-27T05:26:44.128Z"
     },
     "sk_5": {
-      "pot": 15,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-11-27T05:26:44.128Z"
     },
     "sk_6": {
       "pot": 0,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
+      "updatedAt": "2026-11-27T17:39:34.299Z",
       "lastWinner": "Erickson, Murray"
     },
     "sk_7": {
       "pot": 0,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
+      "updatedAt": "2026-11-27T17:39:34.300Z",
       "lastWinner": "Haigh, Iain"
     },
     "sk_8": {
-      "pot": 15,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-11-27T05:26:44.128Z"
     },
     "sk_9": {
-      "pot": 36,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
-      "lastWinner": null
+      "pot": 21,
+      "updatedAt": "2026-11-27T05:26:44.128Z"
     },
     "sk_11": {
       "pot": 0,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
+      "updatedAt": "2026-11-27T17:39:34.300Z",
       "lastWinner": "VanVelzen, Paul"
     },
     "sk_12": {
-      "pot": 25,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
-      "lastWinner": null
+      "pot": 10,
+      "updatedAt": "2026-11-27T05:26:44.128Z"
     },
     "sk_13": {
       "pot": 0,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
+      "updatedAt": "2026-11-27T17:39:34.300Z",
       "lastWinner": "Phelan, Bryan"
     },
     "sk_14": {
       "pot": 0,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
+      "updatedAt": "2026-11-27T17:39:34.300Z",
       "lastWinner": "Lychak, Dennis"
     },
     "sk_16": {
-      "pot": 58,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
-      "lastWinner": null
+      "pot": 43,
+      "updatedAt": "2026-11-27T05:26:44.128Z"
     },
     "sk_18": {
-      "pot": 36,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
-      "lastWinner": null
+      "pot": 21,
+      "updatedAt": "2026-11-27T05:26:44.128Z"
     },
     "pg_3": {
-      "pot": 315,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
-      "lastWinner": null
+      "pot": 273,
+      "updatedAt": "2026-11-27T05:26:44.128Z"
     },
     "pg_4": {
-      "pot": 217,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
-      "lastWinner": null
+      "pot": 175,
+      "updatedAt": "2026-11-27T05:26:44.128Z"
     },
     "pg_10": {
-      "pot": 70,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
-      "lastWinner": null
+      "pot": 28,
+      "updatedAt": "2026-11-27T05:26:44.128Z"
     },
     "pg_15": {
       "pot": 0,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
+      "updatedAt": "2026-11-27T17:39:34.300Z",
       "lastWinner": "Haigh, Iain"
     },
     "pg_17": {
-      "pot": 315,
-      "updatedAt": "2026-11-27T05:26:44.128Z",
-      "lastWinner": null
+      "pot": 273,
+      "updatedAt": "2026-11-27T05:26:44.128Z"
     }
   }
 }
