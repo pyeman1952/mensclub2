@@ -10,7 +10,7 @@
       "gnPool": 420,
       "skinsPool": 195,
       "pogPool": 210,
-      "recordedAt": "2026-11-27T18:05:14.839Z",
+      "recordedAt": "2026-11-27T18:27:42.762Z",
       "grossRows": [
         {
           "key": "G01",
@@ -783,7 +783,7 @@
             "proshop": 0,
             "cash": 40,
             "cheque": 0,
-            "other": ""
+            "other": "Turkey entered as $40"
           },
           "gross": 0,
           "net": 40,
@@ -1300,9 +1300,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0ÃÂ¢ÃÂÃÂ5",
-        "B": "6ÃÂ¢ÃÂÃÂ11",
-        "C": "12ÃÂ¢ÃÂÃÂ17",
+        "A": "0ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ5",
+        "B": "6ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ11",
+        "C": "12ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ17",
         "D": "18+"
       },
       "net": [
@@ -7270,12 +7270,12 @@
     },
     "sk_6": {
       "pot": 0,
-      "updatedAt": "2026-11-27T18:05:12.236Z",
+      "updatedAt": "2026-11-27T18:27:17.451Z",
       "lastWinner": "Erickson, Murray"
     },
     "sk_7": {
       "pot": 0,
-      "updatedAt": "2026-11-27T18:05:12.236Z",
+      "updatedAt": "2026-11-27T18:27:17.451Z",
       "lastWinner": "Haigh, Iain"
     },
     "sk_8": {
@@ -7288,7 +7288,7 @@
     },
     "sk_11": {
       "pot": 0,
-      "updatedAt": "2026-11-27T18:05:12.236Z",
+      "updatedAt": "2026-11-27T18:27:17.451Z",
       "lastWinner": "VanVelzen, Paul"
     },
     "sk_12": {
@@ -7297,12 +7297,12 @@
     },
     "sk_13": {
       "pot": 0,
-      "updatedAt": "2026-11-27T18:05:12.236Z",
+      "updatedAt": "2026-11-27T18:27:17.451Z",
       "lastWinner": "Phelan, Bryan"
     },
     "sk_14": {
       "pot": 0,
-      "updatedAt": "2026-11-27T18:05:12.236Z",
+      "updatedAt": "2026-11-27T18:27:17.451Z",
       "lastWinner": "Lychak, Dennis"
     },
     "sk_16": {
@@ -7327,7 +7327,7 @@
     },
     "pg_15": {
       "pot": 0,
-      "updatedAt": "2026-11-27T18:05:12.236Z",
+      "updatedAt": "2026-11-27T18:27:17.451Z",
       "lastWinner": "Haigh, Iain"
     },
     "pg_17": {
