@@ -2612,6 +2612,15 @@ function applyDemoMode(){
   document.querySelectorAll('.tbtn').forEach(btn=>{
     if(btn.dataset.tab==='opening-balances') btn.style.display='none';
   });
+  // Load weeks from public GitHub JSON so dropdowns populate on any device
+  if(!weeksLog.length){
+    fetch('https://raw.githubusercontent.com/pyeman1952/mensclub2/main/payout-data.json?cb='+Date.now())
+      .then(r=>r.ok?r.json():null).then(data=>{
+        if(!data||!data.weeks) return;
+        weeksLog = data.weeks;
+        populateWeekLoadSelect();
+      }).catch(()=>{});
+  }
 }
 
 function updatePinDots(){
