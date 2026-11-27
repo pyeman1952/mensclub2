@@ -1,6 +1,1150 @@
 {
   "weeks": [
     {
+      "id": "2026_11_22",
+      "name": "Week 7",
+      "date": "November 22, 2026",
+      "notes": "",
+      "cancelled": false,
+      "players": 42,
+      "gnPool": 420,
+      "skinsPool": 195,
+      "pogPool": 210,
+      "recordedAt": "2026-11-27T05:31:12.615Z",
+      "grossRows": [
+        {
+          "key": "G01",
+          "place": 1,
+          "posLabel": "1st",
+          "flt": "A",
+          "pname": "Koster, Greg",
+          "out": "35",
+          "inV": "36",
+          "score": "71",
+          "prize": "30",
+          "cb": false
+        },
+        {
+          "key": "G03",
+          "place": 2,
+          "posLabel": "2nd",
+          "flt": "A",
+          "pname": "Carr-Hilton, Mitch",
+          "out": "40",
+          "inV": "36",
+          "score": "76",
+          "prize": "20",
+          "cb": false
+        },
+        {
+          "key": "G05",
+          "place": 1,
+          "posLabel": "1st",
+          "flt": "B",
+          "pname": "Erickson, Murray",
+          "out": "36",
+          "inV": "40",
+          "score": "76",
+          "prize": "30",
+          "cb": false
+        },
+        {
+          "key": "G06",
+          "place": 2,
+          "posLabel": "2nd",
+          "flt": "B",
+          "pname": "Phelan, Bryan",
+          "out": "42",
+          "inV": "36",
+          "score": "78",
+          "prize": "20",
+          "cb": false
+        },
+        {
+          "key": "G07",
+          "place": 3,
+          "posLabel": "3rd",
+          "flt": "B",
+          "pname": "VanVelzen, Paul",
+          "out": "43",
+          "inV": "37",
+          "score": "80",
+          "prize": "15",
+          "cb": false
+        },
+        {
+          "key": "G09",
+          "place": 3,
+          "posLabel": "3rd",
+          "flt": "C",
+          "pname": "Slater, Brian",
+          "out": "41",
+          "inV": "47",
+          "score": "88",
+          "prize": "15",
+          "cb": false
+        },
+        {
+          "key": "G10",
+          "place": 1,
+          "posLabel": "1st",
+          "flt": "C",
+          "pname": "Stewart, Ham",
+          "out": "41",
+          "inV": "44",
+          "score": "85",
+          "prize": "30",
+          "cb": false
+        },
+        {
+          "key": "G11",
+          "place": 2,
+          "posLabel": "2nd",
+          "flt": "C",
+          "pname": "Smith, Rick",
+          "out": "44",
+          "inV": "42",
+          "score": "86",
+          "prize": "20",
+          "cb": false
+        },
+        {
+          "key": "G13",
+          "place": 1,
+          "posLabel": "1st",
+          "flt": "D",
+          "pname": "Dewitt, Steve",
+          "out": "46",
+          "inV": "50",
+          "score": "96",
+          "prize": "30",
+          "cb": false
+        },
+        {
+          "key": "G14",
+          "place": 2,
+          "posLabel": "2nd",
+          "flt": "D",
+          "pname": "Matheson, Mike",
+          "out": "50",
+          "inV": "49",
+          "score": "99",
+          "prize": "20",
+          "cb": false
+        }
+      ],
+      "flights": {
+        "A": [
+          {
+            "place": 1,
+            "pname": "Koster, Greg",
+            "out": "35",
+            "inV": "36",
+            "score": "71",
+            "prize": "30",
+            "cb": false
+          },
+          {
+            "place": 2,
+            "pname": "Carr-Hilton, Mitch",
+            "out": "40",
+            "inV": "36",
+            "score": "76",
+            "prize": "20",
+            "cb": false
+          }
+        ],
+        "B": [
+          {
+            "place": 1,
+            "pname": "Erickson, Murray",
+            "out": "36",
+            "inV": "40",
+            "score": "76",
+            "prize": "30",
+            "cb": false
+          },
+          {
+            "place": 2,
+            "pname": "Phelan, Bryan",
+            "out": "42",
+            "inV": "36",
+            "score": "78",
+            "prize": "20",
+            "cb": false
+          },
+          {
+            "place": 3,
+            "pname": "VanVelzen, Paul",
+            "out": "43",
+            "inV": "37",
+            "score": "80",
+            "prize": "15",
+            "cb": false
+          }
+        ],
+        "C": [
+          {
+            "place": 3,
+            "pname": "Slater, Brian",
+            "out": "41",
+            "inV": "47",
+            "score": "88",
+            "prize": "15",
+            "cb": false
+          },
+          {
+            "place": 1,
+            "pname": "Stewart, Ham",
+            "out": "41",
+            "inV": "44",
+            "score": "85",
+            "prize": "30",
+            "cb": false
+          },
+          {
+            "place": 2,
+            "pname": "Smith, Rick",
+            "out": "44",
+            "inV": "42",
+            "score": "86",
+            "prize": "20",
+            "cb": false
+          }
+        ],
+        "D": [
+          {
+            "place": 1,
+            "pname": "Dewitt, Steve",
+            "out": "46",
+            "inV": "50",
+            "score": "96",
+            "prize": "30",
+            "cb": false
+          },
+          {
+            "place": 2,
+            "pname": "Matheson, Mike",
+            "out": "50",
+            "inV": "49",
+            "score": "99",
+            "prize": "20",
+            "cb": false
+          }
+        ]
+      },
+      "flightNames": {
+        "A": "Flight A",
+        "B": "Flight B",
+        "C": "Flight C",
+        "D": "Flight D"
+      },
+      "flightRanges": {
+        "A": "0–5",
+        "B": "6–11",
+        "C": "12–17",
+        "D": "18+"
+      },
+      "net": [
+        {
+          "place": 1,
+          "pname": "Friesen, Crystal",
+          "gross": "83",
+          "netOut": "",
+          "netIn": "",
+          "score": "67",
+          "hcp": "16",
+          "cb": false,
+          "prize": "40",
+          "flt": "C"
+        },
+        {
+          "place": 2,
+          "pname": "Haigh, Iain",
+          "gross": "72",
+          "netOut": "",
+          "netIn": "",
+          "score": "68",
+          "hcp": "4",
+          "cb": false,
+          "prize": "25",
+          "flt": "A"
+        },
+        {
+          "place": 3,
+          "pname": "Stewart, Yvonne [TIE?]",
+          "gross": "104",
+          "netOut": "",
+          "netIn": "",
+          "score": "69",
+          "hcp": "35",
+          "cb": false,
+          "prize": "25",
+          "flt": "D"
+        },
+        {
+          "place": 4,
+          "pname": "Smith, Darrell [TIE?]",
+          "gross": "88",
+          "netOut": "",
+          "netIn": "",
+          "score": "71",
+          "hcp": "17",
+          "cb": false,
+          "prize": "20",
+          "flt": "C"
+        },
+        {
+          "place": 5,
+          "pname": "Follis, Craig",
+          "gross": "76",
+          "netOut": "",
+          "netIn": "",
+          "score": "72",
+          "hcp": "4",
+          "cb": false,
+          "prize": "20",
+          "flt": "A"
+        },
+        {
+          "place": 6,
+          "pname": "Murray, Scott [TIE?]",
+          "gross": "83",
+          "netOut": "",
+          "netIn": "",
+          "score": "72",
+          "hcp": "11",
+          "cb": false,
+          "prize": "20",
+          "flt": "B"
+        },
+        {
+          "place": 7,
+          "pname": "Lund, Gordon [TIE?]",
+          "gross": "89",
+          "netOut": "",
+          "netIn": "",
+          "score": "72",
+          "hcp": "17",
+          "cb": false,
+          "prize": "20",
+          "flt": "C"
+        },
+        {
+          "place": 8,
+          "pname": "Rallison, Gord [TIE?]",
+          "gross": "88",
+          "netOut": "",
+          "netIn": "",
+          "score": "73",
+          "hcp": "15",
+          "cb": false,
+          "prize": "15",
+          "flt": "B"
+        },
+        {
+          "place": 9,
+          "pname": "Pye, Dave [TIE?]",
+          "gross": "82",
+          "netOut": "",
+          "netIn": "",
+          "score": "73",
+          "hcp": "9",
+          "cb": false,
+          "prize": "15",
+          "flt": "B"
+        },
+        {
+          "place": 10,
+          "pname": "Hunt, Larry [TIE?]",
+          "gross": "85",
+          "netOut": "",
+          "netIn": "",
+          "score": "73",
+          "hcp": "12",
+          "cb": false,
+          "prize": "15",
+          "flt": "B"
+        }
+      ],
+      "skins": [
+        {
+          "hole": 1,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 15,
+          "payout": 15,
+          "stored": 0,
+          "weekly": 15,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 2,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 25,
+          "payout": 25,
+          "stored": 10,
+          "weekly": 15,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 5,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 15,
+          "payout": 15,
+          "stored": 0,
+          "weekly": 15,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 6,
+          "winner": "Erickson, Murray",
+          "score": "2N",
+          "gross": "",
+          "runPot": 77,
+          "payout": 77,
+          "stored": 62,
+          "weekly": 15,
+          "paid": true,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 7,
+          "winner": "Haigh, Iain",
+          "score": "4G",
+          "gross": "",
+          "runPot": 25,
+          "payout": 25,
+          "stored": 10,
+          "weekly": 15,
+          "paid": true,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 8,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 15,
+          "payout": 15,
+          "stored": 0,
+          "weekly": 15,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 9,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 36,
+          "payout": 36,
+          "stored": 21,
+          "weekly": 15,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 11,
+          "winner": "VanVelzen, Paul",
+          "score": "3G",
+          "gross": "",
+          "runPot": 15,
+          "payout": 15,
+          "stored": 0,
+          "weekly": 15,
+          "paid": true,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 12,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 25,
+          "payout": 25,
+          "stored": 10,
+          "weekly": 15,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 13,
+          "winner": "Phelan, Bryan",
+          "score": "2N",
+          "gross": "",
+          "runPot": 25,
+          "payout": 25,
+          "stored": 10,
+          "weekly": 15,
+          "paid": true,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 14,
+          "winner": "Lychak, Dennis",
+          "score": "4N",
+          "gross": "",
+          "runPot": 15,
+          "payout": 15,
+          "stored": 0,
+          "weekly": 15,
+          "paid": true,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 16,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 58,
+          "payout": 58,
+          "stored": 43,
+          "weekly": 15,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 18,
+          "winner": "",
+          "score": "",
+          "gross": "",
+          "runPot": 36,
+          "payout": 36,
+          "stored": 21,
+          "weekly": 15,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        }
+      ],
+      "pog": [
+        {
+          "hole": 3,
+          "winner": "",
+          "runPot": 315,
+          "payout": 315,
+          "stored": 273,
+          "weekly": 42,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 4,
+          "winner": "",
+          "runPot": 217,
+          "payout": 217,
+          "stored": 175,
+          "weekly": 42,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 10,
+          "winner": "",
+          "runPot": 70,
+          "payout": 70,
+          "stored": 28,
+          "weekly": 42,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 15,
+          "winner": "Haigh, Iain",
+          "runPot": 104,
+          "payout": 104,
+          "stored": 62,
+          "weekly": 42,
+          "paid": true,
+          "guest": false,
+          "flt": ""
+        },
+        {
+          "hole": 17,
+          "winner": "",
+          "runPot": 315,
+          "payout": 315,
+          "stored": 273,
+          "weekly": 42,
+          "paid": false,
+          "guest": false,
+          "flt": ""
+        }
+      ],
+      "skill": [
+        {
+          "hole": 2,
+          "winner": "Gray, Rod",
+          "prize": "LP Men's Club credit to bar",
+          "cash": 20,
+          "pref": ""
+        },
+        {
+          "hole": 3,
+          "winner": "Rushton, Doug",
+          "prize": "LP Men's Club credit to bar",
+          "cash": 20,
+          "pref": ""
+        },
+        {
+          "hole": 5,
+          "winner": "Lund, Gord",
+          "prize": "KP 2nd shot 14+ Sponsored by Speer Golf",
+          "cash": 0,
+          "pref": ""
+        },
+        {
+          "hole": 5,
+          "winner": "Alberti, Silvio",
+          "prize": "LP Men's Club  credit to Proshop",
+          "cash": 20,
+          "pref": ""
+        },
+        {
+          "hole": 9,
+          "winner": "Koster, Greg",
+          "prize": "KP 2nd shot 0-13 Sponsored by Speer Golf",
+          "cash": 0,
+          "pref": ""
+        },
+        {
+          "hole": 9,
+          "winner": "Barr, Bob",
+          "prize": "LP Sponsored by Speer Golf",
+          "cash": 0,
+          "pref": ""
+        },
+        {
+          "hole": 10,
+          "winner": "Koster, Greg",
+          "prize": "KP Subway",
+          "cash": 0,
+          "pref": ""
+        },
+        {
+          "hole": 10,
+          "winner": "Dawson, Rick",
+          "prize": "LP Men's Club credit to Proshop",
+          "cash": 20,
+          "pref": ""
+        },
+        {
+          "hole": 18,
+          "winner": "Guinan, Roger",
+          "prize": "LP Beer and Burger Sponsored by Mark and Becky",
+          "cash": 0,
+          "pref": ""
+        }
+      ],
+      "meat": [],
+      "ff": null,
+      "rdData": [],
+      "moneyWinners": [
+        {
+          "name": "Alberti, Silvio",
+          "pref": {
+            "bar": 0,
+            "proshop": 20,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "skill": 20,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1
+        },
+        {
+          "name": "Carr-Hilton, Mitch",
+          "pref": {
+            "bar": 0,
+            "proshop": 20,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 20,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1,
+          "flt": "A"
+        },
+        {
+          "name": "Dawson, Rick",
+          "pref": {
+            "bar": 0,
+            "proshop": 20,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "skill": 20,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1
+        },
+        {
+          "name": "Dewitt, Steve",
+          "pref": {
+            "bar": 0,
+            "proshop": 30,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 30,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 30,
+          "weeks": 1,
+          "flt": "D"
+        },
+        {
+          "name": "Erickson, Murray",
+          "pref": {
+            "bar": 0,
+            "proshop": 0,
+            "cash": 107,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 30,
+          "net": 0,
+          "skins": 77,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 107,
+          "weeks": 1,
+          "flt": "B"
+        },
+        {
+          "name": "Follis, Craig",
+          "pref": {
+            "bar": 0,
+            "proshop": 20,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 20,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1,
+          "flt": "A"
+        },
+        {
+          "name": "Friesen, Crystal",
+          "pref": {
+            "bar": 0,
+            "proshop": 0,
+            "cash": 40,
+            "cheque": 0,
+            "other": "Turkey entered as $40"
+          },
+          "gross": 0,
+          "net": 40,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 40,
+          "weeks": 1,
+          "flt": "C"
+        },
+        {
+          "name": "Gray, Rod",
+          "pref": {
+            "bar": 20,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "skill": 20,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1
+        },
+        {
+          "name": "Haigh, Iain",
+          "pref": {
+            "bar": 0,
+            "proshop": 0,
+            "cash": 154,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 25,
+          "skins": 25,
+          "pog": 104,
+          "skill": 0,
+          "draw": 0,
+          "total": 154,
+          "weeks": 1,
+          "flt": "A"
+        },
+        {
+          "name": "Hunt, Larry [TIE?]",
+          "pref": {
+            "bar": 15,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 15,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 15,
+          "weeks": 1,
+          "flt": "B"
+        },
+        {
+          "name": "Koster, Greg",
+          "pref": {
+            "bar": 0,
+            "proshop": 30,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 30,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 30,
+          "weeks": 1,
+          "flt": "A"
+        },
+        {
+          "name": "Lund, Gordon [TIE?]",
+          "pref": {
+            "bar": 20,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 20,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1,
+          "flt": "C"
+        },
+        {
+          "name": "Lychak, Dennis",
+          "pref": {
+            "bar": 0,
+            "proshop": 15,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 0,
+          "skins": 15,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 15,
+          "weeks": 1
+        },
+        {
+          "name": "Matheson, Mike",
+          "pref": {
+            "bar": 20,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 20,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1,
+          "flt": "D"
+        },
+        {
+          "name": "Murray, Scott [TIE?]",
+          "pref": {
+            "bar": 20,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 20,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1,
+          "flt": "B"
+        },
+        {
+          "name": "Phelan, Bryan",
+          "pref": {
+            "bar": 0,
+            "proshop": 45,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 20,
+          "net": 0,
+          "skins": 25,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 45,
+          "weeks": 1,
+          "flt": "B"
+        },
+        {
+          "name": "Pye, Dave [TIE?]",
+          "pref": {
+            "bar": 15,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 15,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 15,
+          "weeks": 1,
+          "flt": "B"
+        },
+        {
+          "name": "Rallison, Gord [TIE?]",
+          "pref": {
+            "bar": 15,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 15,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 15,
+          "weeks": 1,
+          "flt": "B"
+        },
+        {
+          "name": "Rushton, Doug",
+          "pref": {
+            "bar": 20,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "skill": 20,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1
+        },
+        {
+          "name": "Slater, Brian",
+          "pref": {
+            "bar": 15,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 15,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 15,
+          "weeks": 1,
+          "flt": "C"
+        },
+        {
+          "name": "Smith, Darrell [TIE?]",
+          "pref": {
+            "bar": 20,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 20,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1,
+          "flt": "C"
+        },
+        {
+          "name": "Smith, Rick",
+          "pref": {
+            "bar": 0,
+            "proshop": 20,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 20,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 20,
+          "weeks": 1,
+          "flt": "C"
+        },
+        {
+          "name": "Stewart, Ham",
+          "pref": {
+            "bar": 30,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 30,
+          "net": 0,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 30,
+          "weeks": 1,
+          "flt": "C"
+        },
+        {
+          "name": "Stewart, Yvonne [TIE?]",
+          "pref": {
+            "bar": 25,
+            "proshop": 0,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 0,
+          "net": 25,
+          "skins": 0,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 25,
+          "weeks": 1,
+          "flt": "D"
+        },
+        {
+          "name": "VanVelzen, Paul",
+          "pref": {
+            "bar": 0,
+            "proshop": 30,
+            "cash": 0,
+            "cheque": 0,
+            "other": ""
+          },
+          "gross": 15,
+          "net": 0,
+          "skins": 15,
+          "pog": 0,
+          "skill": 0,
+          "draw": 0,
+          "total": 30,
+          "weeks": 1,
+          "flt": "B"
+        }
+      ],
+      "totals": {
+        "gross": 230,
+        "net": 215,
+        "skins": 157,
+        "pog": 104,
+        "skill": 80,
+        "draw": 0
+      }
+    },
+    {
       "id": "2026_11_15",
       "name": "Week 6 Regular Golf",
       "date": "November 15, 2026",
@@ -156,9 +1300,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0–5",
-        "B": "6–11",
-        "C": "12–17",
+        "A": "0â5",
+        "B": "6â11",
+        "C": "12â17",
         "D": "18+"
       },
       "net": [
@@ -5326,19 +6470,361 @@
       "skins": 25,
       "pog": 0,
       "draw": 0,
-      "total": 115,
-      "weeks": 4,
+      "total": 135,
+      "weeks": 5,
       "played": 0
     },
     "Carr-Hilton, Mitch": {
       "name": "Carr-Hilton, Mitch",
       "pref": "Pro Shop",
-      "gross": 50,
+      "gross": 70,
       "net": 15,
       "skins": 0,
       "pog": 0,
       "draw": 0,
-      "total": 85,
+      "total": 105,
+      "weeks": 4,
+      "played": 0
+    },
+    "Dawson, Rick": {
+      "name": "Dawson, Rick",
+      "pref": "Bar",
+      "gross": 30,
+      "net": 10,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 60,
+      "weeks": 3,
+      "played": 0
+    },
+    "Dewitt, Steve": {
+      "name": "Dewitt, Steve",
+      "pref": "Pro Shop",
+      "gross": 30,
+      "net": 60,
+      "skins": 99,
+      "pog": 0,
+      "draw": 0,
+      "total": 189,
+      "weeks": 3,
+      "played": 0
+    },
+    "Erickson, Murray": {
+      "name": "Erickson, Murray",
+      "pref": {
+        "bar": 0,
+        "proshop": 0,
+        "cash": 107,
+        "cheque": 0,
+        "other": ""
+      },
+      "gross": 30,
+      "net": 0,
+      "skins": 77,
+      "pog": 0,
+      "draw": 0,
+      "total": 107,
+      "weeks": 1,
+      "played": 0
+    },
+    "Follis, Craig": {
+      "name": "Follis, Craig",
+      "pref": "Bar",
+      "gross": 45,
+      "net": 55,
+      "skins": 147,
+      "pog": 0,
+      "draw": 40,
+      "total": 287,
+      "weeks": 5,
+      "played": 0
+    },
+    "Friesen, Crystal": {
+      "name": "Friesen, Crystal",
+      "pref": {
+        "bar": 0,
+        "proshop": 25,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      },
+      "gross": 25,
+      "net": 40,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 65,
+      "weeks": 2,
+      "played": 0
+    },
+    "Gray, Rod": {
+      "name": "Gray, Rod",
+      "pref": "Bar",
+      "gross": 0,
+      "net": 20,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 40,
+      "weeks": 2,
+      "played": 0
+    },
+    "Haigh, Iain": {
+      "name": "Haigh, Iain",
+      "pref": "Pro Shop",
+      "gross": 45,
+      "net": 50,
+      "skins": 31,
+      "pog": 104,
+      "draw": 0,
+      "total": 230,
+      "weeks": 4,
+      "played": 0
+    },
+    "Hunt, Larry [TIE?]": {
+      "name": "Hunt, Larry [TIE?]",
+      "pref": {
+        "bar": 15,
+        "proshop": 0,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      },
+      "gross": 0,
+      "net": 15,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 15,
+      "weeks": 1,
+      "played": 0
+    },
+    "Koster, Greg": {
+      "name": "Koster, Greg",
+      "pref": "Cash",
+      "gross": 165,
+      "net": 0,
+      "skins": 0,
+      "pog": 98,
+      "draw": 0,
+      "total": 263,
+      "weeks": 5,
+      "played": 0
+    },
+    "Lund, Gordon [TIE?]": {
+      "name": "Lund, Gordon [TIE?]",
+      "pref": {
+        "bar": 20,
+        "proshop": 0,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      },
+      "gross": 0,
+      "net": 20,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 20,
+      "weeks": 1,
+      "played": 0
+    },
+    "Lychak, Dennis": {
+      "name": "Lychak, Dennis",
+      "pref": "Pro Shop",
+      "gross": 40,
+      "net": 60,
+      "skins": 48,
+      "pog": 0,
+      "draw": 0,
+      "total": 168,
+      "weeks": 5,
+      "played": 0
+    },
+    "Matheson, Mike": {
+      "name": "Matheson, Mike",
+      "pref": "Pro Shop",
+      "gross": 20,
+      "net": 60,
+      "skins": 38,
+      "pog": 0,
+      "draw": 0,
+      "total": 118,
+      "weeks": 3,
+      "played": 0
+    },
+    "Murray, Scott [TIE?]": {
+      "name": "Murray, Scott [TIE?]",
+      "pref": {
+        "bar": 20,
+        "proshop": 0,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      },
+      "gross": 0,
+      "net": 20,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 20,
+      "weeks": 1,
+      "played": 0
+    },
+    "Phelan, Bryan": {
+      "name": "Phelan, Bryan",
+      "pref": "Pro Shop",
+      "gross": 20,
+      "net": 25,
+      "skins": 35,
+      "pog": 0,
+      "draw": 0,
+      "total": 80,
+      "weeks": 3,
+      "played": 0
+    },
+    "Pye, Dave [TIE?]": {
+      "name": "Pye, Dave [TIE?]",
+      "pref": {
+        "bar": 15,
+        "proshop": 0,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      },
+      "gross": 0,
+      "net": 15,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 15,
+      "weeks": 1,
+      "played": 0
+    },
+    "Rallison, Gord [TIE?]": {
+      "name": "Rallison, Gord [TIE?]",
+      "pref": {
+        "bar": 15,
+        "proshop": 0,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      },
+      "gross": 0,
+      "net": 15,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 15,
+      "weeks": 1,
+      "played": 0
+    },
+    "Rushton, Doug": {
+      "name": "Rushton, Doug",
+      "pref": "Pro Shop",
+      "gross": 30,
+      "net": 50,
+      "skins": 38,
+      "pog": 0,
+      "draw": 0,
+      "total": 138,
+      "weeks": 6,
+      "played": 0
+    },
+    "Slater, Brian": {
+      "name": "Slater, Brian",
+      "pref": "Bar",
+      "gross": 55,
+      "net": 0,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 55,
+      "weeks": 2,
+      "played": 0
+    },
+    "Smith, Darrell [TIE?]": {
+      "name": "Smith, Darrell [TIE?]",
+      "pref": {
+        "bar": 20,
+        "proshop": 0,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      },
+      "gross": 0,
+      "net": 20,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 20,
+      "weeks": 1,
+      "played": 0
+    },
+    "Smith, Rick": {
+      "name": "Smith, Rick",
+      "pref": "Pro Shop",
+      "gross": 50,
+      "net": 10,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 60,
+      "weeks": 3,
+      "played": 0
+    },
+    "Stewart, Ham": {
+      "name": "Stewart, Ham",
+      "pref": {
+        "bar": 25,
+        "proshop": 0,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      },
+      "gross": 75,
+      "net": 15,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 90,
+      "weeks": 4,
+      "played": 0
+    },
+    "Stewart, Yvonne [TIE?]": {
+      "name": "Stewart, Yvonne [TIE?]",
+      "pref": {
+        "bar": 25,
+        "proshop": 0,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      },
+      "gross": 0,
+      "net": 25,
+      "skins": 0,
+      "pog": 0,
+      "draw": 0,
+      "total": 25,
+      "weeks": 1,
+      "played": 0
+    },
+    "VanVelzen, Paul": {
+      "name": "VanVelzen, Paul",
+      "pref": {
+        "bar": 0,
+        "proshop": 10,
+        "cash": 0,
+        "cheque": 0,
+        "other": ""
+      },
+      "gross": 45,
+      "net": 10,
+      "skins": 15,
+      "pog": 0,
+      "draw": 0,
+      "total": 70,
       "weeks": 3,
       "played": 0
     },
@@ -5358,48 +6844,6 @@
       "draw": 0,
       "total": 70,
       "weeks": 3,
-      "played": 0
-    },
-    "Dewitt, Steve": {
-      "name": "Dewitt, Steve",
-      "pref": "Pro Shop",
-      "gross": 0,
-      "net": 60,
-      "skins": 99,
-      "pog": 0,
-      "draw": 0,
-      "total": 159,
-      "weeks": 2,
-      "played": 0
-    },
-    "Follis, Craig": {
-      "name": "Follis, Craig",
-      "pref": "Bar",
-      "gross": 45,
-      "net": 35,
-      "skins": 147,
-      "pog": 0,
-      "draw": 40,
-      "total": 267,
-      "weeks": 4,
-      "played": 0
-    },
-    "Friesen, Crystal": {
-      "name": "Friesen, Crystal",
-      "pref": {
-        "bar": 0,
-        "proshop": 25,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 25,
-      "net": 0,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 25,
-      "weeks": 1,
       "played": 0
     },
     "Hunt, Larry": {
@@ -5424,18 +6868,6 @@
       "draw": 0,
       "total": 148,
       "weeks": 3,
-      "played": 0
-    },
-    "Phelan, Bryan": {
-      "name": "Phelan, Bryan",
-      "pref": "Pro Shop",
-      "gross": 0,
-      "net": 25,
-      "skins": 10,
-      "pog": 0,
-      "draw": 0,
-      "total": 35,
-      "weeks": 2,
       "played": 0
     },
     "Riordan, Kevin": {
@@ -5480,24 +6912,6 @@
       "weeks": 4,
       "played": 0
     },
-    "Stewart, Ham": {
-      "name": "Stewart, Ham",
-      "pref": {
-        "bar": 25,
-        "proshop": 0,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 45,
-      "net": 15,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 60,
-      "weeks": 3,
-      "played": 0
-    },
     "Webber, Carl": {
       "name": "Webber, Carl",
       "pref": "Pro Shop",
@@ -5540,18 +6954,6 @@
       "weeks": 2,
       "played": 0
     },
-    "Haigh, Iain": {
-      "name": "Haigh, Iain",
-      "pref": "Pro Shop",
-      "gross": 45,
-      "net": 25,
-      "skins": 6,
-      "pog": 0,
-      "draw": 0,
-      "total": 76,
-      "weeks": 3,
-      "played": 0
-    },
     "Johns, Mandy": {
       "name": "Johns, Mandy",
       "pref": "Bar",
@@ -5562,30 +6964,6 @@
       "draw": 0,
       "total": 49,
       "weeks": 2,
-      "played": 0
-    },
-    "Koster, Greg": {
-      "name": "Koster, Greg",
-      "pref": "Cash",
-      "gross": 135,
-      "net": 0,
-      "skins": 0,
-      "pog": 98,
-      "draw": 0,
-      "total": 233,
-      "weeks": 4,
-      "played": 0
-    },
-    "Lychak, Dennis": {
-      "name": "Lychak, Dennis",
-      "pref": "Pro Shop",
-      "gross": 40,
-      "net": 60,
-      "skins": 33,
-      "pog": 0,
-      "draw": 0,
-      "total": 153,
-      "weeks": 4,
       "played": 0
     },
     "Pye, Dave": {
@@ -5624,18 +7002,6 @@
       "weeks": 1,
       "played": 0
     },
-    "Rushton, Doug": {
-      "name": "Rushton, Doug",
-      "pref": "Pro Shop",
-      "gross": 30,
-      "net": 50,
-      "skins": 38,
-      "pog": 0,
-      "draw": 0,
-      "total": 118,
-      "weeks": 5,
-      "played": 0
-    },
     "Schwarz, Mike": {
       "name": "Schwarz, Mike",
       "pref": "Pro Shop",
@@ -5657,24 +7023,6 @@
       "pog": 0,
       "draw": 0,
       "total": 58,
-      "weeks": 2,
-      "played": 0
-    },
-    "VanVelzen, Paul": {
-      "name": "VanVelzen, Paul",
-      "pref": {
-        "bar": 0,
-        "proshop": 10,
-        "cash": 0,
-        "cheque": 0,
-        "other": ""
-      },
-      "gross": 30,
-      "net": 10,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 40,
       "weeks": 2,
       "played": 0
     },
@@ -5718,18 +7066,6 @@
       "draw": 0,
       "total": 88,
       "weeks": 3,
-      "played": 0
-    },
-    "Dawson, Rick": {
-      "name": "Dawson, Rick",
-      "pref": "Bar",
-      "gross": 30,
-      "net": 10,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 40,
-      "weeks": 2,
       "played": 0
     },
     "Fauteux, Dave": {
@@ -5796,18 +7132,6 @@
       "draw": 0,
       "total": 25,
       "weeks": 1,
-      "played": 0
-    },
-    "Matheson, Mike": {
-      "name": "Matheson, Mike",
-      "pref": "Pro Shop",
-      "gross": 0,
-      "net": 60,
-      "skins": 38,
-      "pog": 0,
-      "draw": 0,
-      "total": 98,
-      "weeks": 2,
       "played": 0
     },
     "Mullock, Kelly": {
@@ -5930,18 +7254,6 @@
       "weeks": 1,
       "played": 0
     },
-    "Smith, Rick": {
-      "name": "Smith, Rick",
-      "pref": "Pro Shop",
-      "gross": 30,
-      "net": 10,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 40,
-      "weeks": 2,
-      "played": 0
-    },
     "Arduini, Randy": {
       "name": "Arduini, Randy",
       "pref": "Bar",
@@ -5964,18 +7276,6 @@
       "draw": 0,
       "total": 93,
       "weeks": 2,
-      "played": 0
-    },
-    "Gray, Rod": {
-      "name": "Gray, Rod",
-      "pref": "Bar",
-      "gross": 0,
-      "net": 20,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 20,
-      "weeks": 1,
       "played": 0
     },
     "Houg, Gary": {
@@ -6011,18 +7311,6 @@
       "pog": 0,
       "draw": 0,
       "total": 57,
-      "weeks": 1,
-      "played": 0
-    },
-    "Slater, Brian": {
-      "name": "Slater, Brian",
-      "pref": "Bar",
-      "gross": 40,
-      "net": 0,
-      "skins": 0,
-      "pog": 0,
-      "draw": 0,
-      "total": 40,
       "weeks": 1,
       "played": 0
     },
@@ -6077,93 +7365,93 @@
   },
   "pots": {
     "sk_1": {
-      "pot": 0,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
-      "lastWinner": "Yarrow, Ben"
+      "pot": 15,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
+      "lastWinner": null
     },
     "sk_2": {
-      "pot": 10,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
+      "pot": 25,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
       "lastWinner": null
     },
     "sk_5": {
-      "pot": 0,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
-      "lastWinner": "Yarrow, Ben"
+      "pot": 15,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
+      "lastWinner": null
     },
     "sk_6": {
-      "pot": 62,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
+      "lastWinner": "Erickson, Murray"
     },
     "sk_7": {
-      "pot": 10,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
+      "lastWinner": "Haigh, Iain"
     },
     "sk_8": {
-      "pot": 0,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
-      "lastWinner": "Dewitt, Steve"
+      "pot": 15,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
+      "lastWinner": null
     },
     "sk_9": {
-      "pot": 21,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
+      "pot": 36,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
       "lastWinner": null
     },
     "sk_11": {
       "pot": 0,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
-      "lastWinner": "Dewitt, Steve"
+      "updatedAt": "2026-11-27T05:26:44.128Z",
+      "lastWinner": "VanVelzen, Paul"
     },
     "sk_12": {
-      "pot": 10,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
+      "pot": 25,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
       "lastWinner": null
     },
     "sk_13": {
-      "pot": 10,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
+      "lastWinner": "Phelan, Bryan"
     },
     "sk_14": {
       "pot": 0,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
-      "lastWinner": "Phelan, Bryan"
+      "updatedAt": "2026-11-27T05:26:44.128Z",
+      "lastWinner": "Lychak, Dennis"
     },
     "sk_16": {
-      "pot": 43,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
+      "pot": 58,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
       "lastWinner": null
     },
     "sk_18": {
-      "pot": 21,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
+      "pot": 36,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
       "lastWinner": null
     },
     "pg_3": {
-      "pot": 273,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
+      "pot": 315,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
       "lastWinner": null
     },
     "pg_4": {
-      "pot": 175,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
+      "pot": 217,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
       "lastWinner": null
     },
     "pg_10": {
-      "pot": 28,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
+      "pot": 70,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
       "lastWinner": null
     },
     "pg_15": {
-      "pot": 62,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
-      "lastWinner": null
+      "pot": 0,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
+      "lastWinner": "Haigh, Iain"
     },
     "pg_17": {
-      "pot": 273,
-      "updatedAt": "2026-11-18T01:48:14.268Z",
+      "pot": 315,
+      "updatedAt": "2026-11-27T05:26:44.128Z",
       "lastWinner": null
     }
   }
