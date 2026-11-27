@@ -336,6 +336,18 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
           <button id="import-btn" onclick="runImport()" style="padding:9px 20px;font-size:13px;font-weight:700;background:var(--gm);color:#fff;border:none;border-radius:var(--rad);cursor:pointer;opacity:.4;pointer-events:none;" disabled>⬇ Pre-fill from Files</button>
           <span id="import-msg" style="font-size:12px;color:var(--mut);"></span>
         </div>
+        <div style="margin-top:10px;padding:10px 12px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:var(--rad);display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <span style="font-size:12px;font-weight:700;color:#1D4ED8;">📋 Roster Upload</span>
+          <span style="font-size:11px;color:#1E40AF;">Save all player names from a CSV to a past week (for the Player Stats picker) without changing any results.</span>
+          <select id="roster-week-select" style="font-size:12px;padding:5px 8px;border:1px solid #BFDBFE;border-radius:4px;background:#fff;color:#1A1A1A;">
+            <option value="">— select week —</option>
+          </select>
+          <label style="display:inline-flex;align-items:center;gap:6px;padding:7px 14px;background:#1D4ED8;color:#fff;border-radius:var(--rad);font-size:12px;font-weight:700;cursor:pointer;">
+            📂 Choose CSV
+            <input type="file" id="roster-csv-input" accept=".csv,text/csv" style="display:none;" onchange="handleRosterFileSelected()">
+          </label>
+          <span id="roster-msg" style="font-size:12px;color:var(--mut);"></span>
+        </div>
         <div id="import-preview" style="display:none;margin-top:10px;padding:10px 12px;background:var(--gl);border:1px solid #95D5B2;border-radius:var(--rad);font-size:12px;line-height:1.7;"></div>
       </div>
     </div>
@@ -1696,6 +1708,7 @@ function populateWeekLoadSelect(){
     sel.appendChild(opt);
   });
   if(cur) sel.value=cur;
+  populateRosterWeekSelect();
 }
 
 // ── Load committed week back into entry form ──────────────────────────────────
@@ -3524,12 +3537,117 @@ function runImport(){
   document.getElementById('t-week').scrollIntoView({behavior:'smooth', block:'center'});
 }
 
+// ── Roster-only upload ────────────────────────────────────────────────────────
+function populateRosterWeekSelect(){
+  const sel = document.getElementById('roster-week-select');
+  if(!sel) return;
+  while(sel.options.length > 1) sel.remove(1);
+  const weeks = LS.get('weeks', []);
+  weeks.slice().sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(wk=>{
+    const opt = document.createElement('option');
+    opt.value = wk.id;
+    opt.textContent = `${wk.name||wk.id} (${wk.date||''})`;
+    sel.appendChild(opt);
+  });
+}
+
+function handleRosterFileSelected(){
+  const input = document.getElementById('roster-csv-input');
+  const msg   = document.getElementById('roster-msg');
+  if(!input.files.length){ msg.textContent=''; return; }
+  msg.textContent = input.files[0].name + ' — ready. Select a week above then the file uploads automatically.';
+  msg.style.color = 'var(--mut)';
+  // If a week is already selected, upload immediately
+  const weekId = document.getElementById('roster-week-select').value;
+  if(weekId) uploadRosterOnly();
+}
+
+document.addEventListener('change', e=>{
+  if(e.target.id === 'roster-week-select'){
+    const input = document.getElementById('roster-csv-input');
+    if(input && input.files.length) uploadRosterOnly();
+  }
+});
+
+async function uploadRosterOnly(){
+  const msg    = document.getElementById('roster-msg');
+  const weekId = document.getElementById('roster-week-select').value;
+  const input  = document.getElementById('roster-csv-input');
+  if(!weekId){ msg.textContent='⚠ Please select a week first.'; msg.style.color='var(--red)'; return; }
+  if(!input.files.length){ msg.textContent='⚠ Please choose a CSV file.'; msg.style.color='var(--red)'; return; }
+
+  msg.textContent = 'Reading CSV…'; msg.style.color='var(--mut)';
+  const text = await input.files[0].text();
+  let csvData;
+  try{ csvData = parseScoresCSV(text); }
+  catch(e){ msg.textContent='⚠ CSV parse error: '+e.message; msg.style.color='var(--red)'; return; }
+  if(!csvData || !csvData.netWinners){ msg.textContent='⚠ Could not read player names from CSV.'; msg.style.color='var(--red)'; return; }
+
+  // Collect all unique player names from the parsed players array
+  // parseScoresCSV returns netWinners (all players sorted by net); use that for the full field
+  // We need the raw players — re-parse to get them all
+  const lines = text.split(/\r?\n/).filter(l=>l.trim());
+  const delim = lines[0].includes(';') ? ';' : ',';
+  function parseLine(line){ const cols=[]; let cur='', inQ=false; for(let i=0;i<line.length;i++){ const c=line[i]; if(c==='"'){inQ=!inQ;} else if(c===delim&&!inQ){cols.push(cur.trim());cur='';} else{cur+=c;} } cols.push(cur.trim()); return cols; }
+  const headers = parseLine(lines[0]).map(h=>h.replace(/^"|"$/g,'').trim().toLowerCase());
+  const iName   = headers.indexOf('name');
+  const iFlight = headers.indexOf('flight');
+  if(iName===-1){ msg.textContent='⚠ No "Name" column found in CSV.'; msg.style.color='var(--red)'; return; }
+  const roster = [];
+  for(let i=1;i<lines.length;i++){
+    const c = parseLine(lines[i]);
+    if(c.length < 2) continue;
+    if(iFlight>=0){ const flt=(c[iFlight]||'').replace(/^"|"$/g,'').trim().toUpperCase(); if(!['A','B','C','D'].includes(flt)) continue; }
+    const name = (c[iName]||'').replace(/^"|"$/g,'').trim();
+    if(name && !roster.includes(name)) roster.push(name);
+  }
+  if(!roster.length){ msg.textContent='⚠ No player names found.'; msg.style.color='var(--red)'; return; }
+
+  msg.textContent = `Saving ${roster.length} players to Week ${weekId}…`; msg.style.color='var(--mut)';
+
+  // Update localStorage
+  const weeks = LS.get('weeks', []);
+  const idx = weeks.findIndex(w=>w.id===weekId);
+  if(idx<0){ msg.textContent='⚠ Week not found in local data.'; msg.style.color='var(--red)'; return; }
+  weeks[idx].roster = roster;
+  LS.set('weeks', weeks);
+
+  // Push to GitHub
+  const token = getGHToken();
+  if(!token){ msg.textContent=`✓ ${roster.length} players saved locally (no GitHub token to publish).`; msg.style.color='var(--gm)'; return; }
+
+  try{
+    const headers2 = { 'Authorization':`token ${token}`, 'Accept':'application/vnd.github.v3+json', 'Content-Type':'application/json' };
+    const apiUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+    let sha=null, existingData={weeks:[],season:{},pots:{}};
+    try{ const cur=await fetch(apiUrl,{headers:headers2}); if(cur.ok){ const j=await cur.json(); sha=j.sha; existingData=JSON.parse(atob(j.content.replace(/\n/g,''))); } }catch(e){}
+
+    // Patch just the roster on the matching week in GitHub data
+    const ghWeeks = existingData.weeks||[];
+    const ghIdx = ghWeeks.findIndex(w=>w.id===weekId);
+    if(ghIdx>=0){ ghWeeks[ghIdx].roster=roster; }
+    else{ msg.textContent=`✓ ${roster.length} players saved locally (week not yet published to GitHub).`; msg.style.color='var(--gm)'; return; }
+
+    const newData = { ...existingData, weeks:ghWeeks };
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(newData,null,2))));
+    const body = { message:`Roster update: week ${weekId} (${roster.length} players)`, content };
+    if(sha) body.sha=sha;
+    const res = await fetch(apiUrl,{method:'PUT',headers:headers2,body:JSON.stringify(body)});
+    if(res.ok){ msg.textContent=`✓ ${roster.length} players saved & published for week ${weekId}.`; msg.style.color='var(--gm)'; }
+    else{ const err=await res.json(); msg.textContent=`⚠ GitHub error: ${err.message}`; msg.style.color='var(--red)'; }
+  }catch(e){ msg.textContent=`⚠ Upload error: ${e.message}`; msg.style.color='var(--red)'; }
+
+  // Reset file input
+  input.value='';
+}
+
 // ── Init ──────────────────────────────────────────────────────────────────────
 function init(){
   loadState();
   buildNet(); buildSkins(); buildPOG(); buildSkill();
   recalcPools();
   populateWeekLoadSelect();
+  populateRosterWeekSelect();
   initGrossPasteListeners();
   initNetPasteListeners();
   initSkinsPasteListeners();
