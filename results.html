@@ -812,45 +812,75 @@ function dispName(n){
   return s;
 }
 
+// Canonical key: sort words lowercased so "Yarrow, Ben" and "Ben Yarrow" collapse to same key
+function normKey(n){
+  return (n||'').toLowerCase().replace(/,/g,'').trim().split(/\s+/).sort().join(' ');
+}
+
 // Build per-player stats by scanning all weeks
+// Keys in idx are normKey(name); each entry stores its canonical raw name
 function buildPlayerIndex(){
-  const idx={}; // keyed by pname (raw, as stored)
+  const idx={};        // normKey → player record
+  const rawToNorm={};  // raw name string → normKey (cache)
   const weeks=appData.weeks||[];
 
+  const nk=name=>{
+    if(!name) return null;
+    const r=name.trim();
+    if(!rawToNorm[r]) rawToNorm[r]=normKey(r);
+    return rawToNorm[r];
+  };
+
+  // getP: find-or-create by normalized key; prefer "Last, First" as canonical raw
+  const getP=rawName=>{
+    if(!rawName) return null;
+    const key=nk(rawName);
+    if(!key) return null;
+    if(!idx[key]){
+      idx[key]={name:rawName.trim(), weeks:[], flights:{}};
+    } else {
+      // Prefer the "Last, First" form as canonical display name
+      const existing=idx[key].name;
+      if(rawName.includes(',') && !existing.includes(',')) idx[key].name=rawName.trim();
+    }
+    return idx[key];
+  };
+
+  // getWk: find-or-create week record using stable wk.id
+  const getWk=(p,wkId,wkDate,wkName,flt)=>{
+    let wr=p.weeks.find(w=>w.wkKey===wkId);
+    if(!wr){
+      wr={wkKey:wkId,wkDate,wkName,flt:flt||null,
+          grossPlace:null,grossScore:null,grossPrize:0,
+          netPlace:null,netScore:null,hcp:null,netPrize:0,
+          skinsHoles:[],skinsPrize:0,pogHoles:[],pogPrize:0};
+      p.weeks.push(wr);
+    }
+    if(flt){
+      p.flights[flt]=(p.flights[flt]||0)+1;
+      if(!wr.flt) wr.flt=flt;
+    }
+    return wr;
+  };
+
+  // Seed from season so every player appears, even those with $0 winnings from prizes
+  Object.entries(appData.season||{}).forEach(([rawName])=>{ getP(rawName); });
+
+  // Seed from per-week rosters (uploaded via "Upload Roster Only" in admin app)
   weeks.forEach(wk=>{
-    const wkDate=wk.date||wk.id||'';
-    const wkName=wk.name||wk.id||'';
+    if(wk.cancelled || !Array.isArray(wk.roster)) return;
+    const wkFlt = null; // roster entries don't have per-player flight here
+    wk.roster.forEach(rawName=>{ getP(rawName); });
+  });
+
+  weeks.forEach(wk=>{
     if(wk.cancelled) return;
-
-    // helper: get or create player entry
-    const getP=name=>{
-      if(!name) return null;
-      const key=name.trim();
-      if(!idx[key]) idx[key]={
-        name:key,
-        weeks:[],      // per-week records
-        flights:{}     // {flt: count} to determine majority flight
-      };
-      return idx[key];
-    };
-
-    // helper: add or find week entry in player record
-    const getWk=(p,wkKey,flt)=>{
-      let wr=p.weeks.find(w=>w.wkKey===wkKey);
-      if(!wr){
-        wr={wkKey,wkDate,wkName,flt:flt||null,grossPlace:null,grossScore:null,grossPrize:0,
-            netPlace:null,netScore:null,hcp:null,netPrize:0,
-            skinsHoles:[],skinsPrize:0,pogHoles:[],pogPrize:0};
-        p.weeks.push(wr);
-      }
-      // track flights seen for this player
-      if(flt){p.flights[flt]=(p.flights[flt]||0)+1; if(!wr.flt) wr.flt=flt;}
-      return wr;
-    };
+    const wkId   = wk.id   || wk.date || '';
+    const wkDate = wk.date || wk.id   || '';
+    const wkName = wk.name || wk.id   || '';
 
     // Gross rows
     const grossRows=wk.grossRows||[];
-    // Also check old flights object as fallback
     const allGrossRows=[...grossRows];
     if(!grossRows.length && wk.flights){
       ['A','B','C','D'].forEach(f=>{
@@ -859,30 +889,33 @@ function buildPlayerIndex(){
     }
     allGrossRows.forEach(r=>{
       const p=getP(r.pname); if(!p) return;
-      const wr=getWk(p,wk.id||wkDate,r.flt);
+      const wr=getWk(p,wkId,wkDate,wkName,r.flt);
       wr.flt=r.flt||wr.flt;
-      if(r.place && (!wr.grossPlace || r.place<wr.grossPlace)){
-        wr.grossPlace=r.place; wr.grossScore=r.score||null; wr.grossPrize=(parseFloat(r.prize)||0);
-      } else if(!wr.grossPlace){
-        wr.grossScore=r.score||null;
+      if(r.place!=null && (!wr.grossPlace || r.place<wr.grossPlace)){
+        wr.grossPlace=r.place;
+        wr.grossScore=r.score!=null?r.score:wr.grossScore;
+        if(parseFloat(r.prize)) wr.grossPrize=parseFloat(r.prize);
+      } else if(wr.grossScore==null && r.score!=null){
+        wr.grossScore=r.score;
       }
     });
 
     // Net rows
     (wk.net||[]).forEach(r=>{
       const p=getP(r.pname); if(!p) return;
-      const wr=getWk(p,wk.id||wkDate,r.flt);
+      const wr=getWk(p,wkId,wkDate,wkName,r.flt);
       wr.flt=r.flt||wr.flt;
-      wr.netPlace=r.place||null; wr.netScore=r.score||null;
-      wr.hcp=r.hcp!=null?r.hcp:wr.hcp;
-      wr.netPrize=(parseFloat(r.prize)||0);
+      if(r.place!=null) wr.netPlace=r.place;
+      if(r.score!=null) wr.netScore=r.score;
+      if(r.hcp!=null)   wr.hcp=r.hcp;
+      if(parseFloat(r.prize)) wr.netPrize=parseFloat(r.prize);
     });
 
-    // Skins
+    // Skins — look up winner by normalized key to merge with existing entry
     (wk.skins||[]).forEach(r=>{
       if(!r.winner) return;
       const p=getP(r.winner); if(!p) return;
-      const wr=getWk(p,wk.id||wkDate,r.flt);
+      const wr=getWk(p,wkId,wkDate,wkName,r.flt);
       wr.flt=r.flt||wr.flt;
       wr.skinsHoles.push(r.hole);
       if(r.paid) wr.skinsPrize+=(parseFloat(r.runPot)||0);
@@ -892,7 +925,7 @@ function buildPlayerIndex(){
     (wk.pog||[]).forEach(r=>{
       if(!r.winner) return;
       const p=getP(r.winner); if(!p) return;
-      const wr=getWk(p,wk.id||wkDate,r.flt);
+      const wr=getWk(p,wkId,wkDate,wkName,r.flt);
       wr.flt=r.flt||wr.flt;
       wr.pogHoles.push(r.hole);
       if(r.paid) wr.pogPrize+=(parseFloat(r.runPot)||0);
@@ -901,6 +934,9 @@ function buildPlayerIndex(){
 
   return idx;
 }
+
+// normKey is also needed in showPlayerStats for season lookup
+// (already defined above)
 
 // Determine a player's majority flight
 function majorityFlight(p){
@@ -920,27 +956,35 @@ function initStatsTab(){
 
 function populateStatsPicker(){
   const sel=document.getElementById('sp-select');
-  // Sort by display name
-  const names=Object.keys(statsIdx).sort((a,b)=>dispName(a).localeCompare(dispName(b)));
-  sel.innerHTML=`<option value="">— select a player —</option>`+
-    names.map(n=>`<option value="${n}">${dispName(n)}</option>`).join('');
+  // entries: [{nk, label}] sorted by display name
+  const entries=Object.entries(statsIdx)
+    .map(([nk,p])=>({nk, label:dispName(p.name)}))
+    .sort((a,b)=>a.label.localeCompare(b.label));
 
-  // Search filter
+  const buildOptions=(list)=>
+    `<option value="">— select a player —</option>`+
+    list.map(e=>`<option value="${e.nk}">${e.label}</option>`).join('');
+
+  sel.innerHTML=buildOptions(entries);
+
   const search=document.getElementById('sp-search');
+  // Guard against duplicate listener registrations on re-init
+  if(search._statsInited) return;
+  search._statsInited=true;
+
   search.addEventListener('input',()=>{
     const q=search.value.trim().toLowerCase();
     if(!q){
-      sel.innerHTML=`<option value="">— select a player —</option>`+
-        names.map(n=>`<option value="${n}">${dispName(n)}</option>`).join('');
+      sel.innerHTML=buildOptions(entries);
       sel.size=1;
       return;
     }
-    const filtered=names.filter(n=>dispName(n).toLowerCase().includes(q)||n.toLowerCase().includes(q));
-    sel.innerHTML=filtered.map(n=>`<option value="${n}">${dispName(n)}</option>`).join('');
+    const filtered=entries.filter(e=>e.label.toLowerCase().includes(q)||e.nk.includes(q));
+    sel.innerHTML=filtered.map(e=>`<option value="${e.nk}">${e.label}</option>`).join('');
     sel.size=Math.min(filtered.length,6)||1;
-    if(filtered.length===1){ sel.value=filtered[0]; showPlayerStats(filtered[0]); }
+    if(filtered.length===1){ sel.value=filtered[0].nk; showPlayerStats(filtered[0].nk); }
   });
-  search.addEventListener('blur',()=>{ setTimeout(()=>{ sel.size=1; },200); });
+  search.addEventListener('blur',()=>{ setTimeout(()=>{ if(!sel.value) sel.size=1; },200); });
 
   sel.addEventListener('change',()=>{
     if(sel.value){ sel.size=1; showPlayerStats(sel.value); }
@@ -948,6 +992,7 @@ function populateStatsPicker(){
 }
 
 function showPlayerStats(pKey){
+  // pKey coming from the select is the normKey stored in option value
   const p=statsIdx[pKey];
   if(!p){ document.getElementById('sp-content').innerHTML='<div class="sp-no-data">Player not found.</div>'; return; }
 
@@ -972,14 +1017,16 @@ function showPlayerStats(pKey){
     pogHolesList.push(...wr.pogHoles);
   });
 
-  const played=weeks.length;
+  // Count weeks played: prefer roster appearances (most accurate), then season.weeks, then prize weeks
+  const rosterWeeks = (appData.weeks||[]).filter(wk=>!wk.cancelled && Array.isArray(wk.roster) && wk.roster.some(n=>normKey(n)===pKey)).length;
+  const played = rosterWeeks || seasonData?.weeks || weeks.length;
   const avgGross=grossScores.length?(grossScores.reduce((s,v)=>s+v.v,0)/grossScores.length).toFixed(1):'—';
   const bestGross=grossScores.length?Math.min(...grossScores.map(v=>v.v)):'—';
   const latestHcp=weeks.find(w=>w.hcp!=null)?.hcp;
   const fmt=n=>'$'+Number(n||0).toFixed(2);
 
-  // Season data from appData.season for cross-check / draw winnings
-  const seasonEntry=Object.entries(appData.season||{}).find(([k])=>k===pKey||dispName(k)===dispName(pKey));
+  // Season data from appData.season for draw winnings (keyed by raw name, match by normKey)
+  const seasonEntry=Object.entries(appData.season||{}).find(([k])=>normKey(k)===pKey);
   const seasonData=seasonEntry?seasonEntry[1]:null;
   const drawWinnings=seasonData?(parseFloat(seasonData.draw)||0):0;
 
@@ -1028,9 +1075,9 @@ function showPlayerStats(pKey){
   // Flight standing
   if(myFlight!=='?'){
     // Build flight roster from statsIdx
-    const flightPlayers=Object.values(statsIdx)
-      .filter(pl=>majorityFlight(pl)===myFlight)
-      .map(pl=>{
+    const flightPlayers=Object.entries(statsIdx)
+      .filter(([,pl])=>majorityFlight(pl)===myFlight)
+      .map(([plNk,pl])=>{
         let gW=0,nW=0,sW=0,pgW=0,t3=0,win=0;
         pl.weeks.forEach(wr=>{
           if(wr.grossPlace===1) gW++;
@@ -1041,9 +1088,9 @@ function showPlayerStats(pKey){
           win+=wr.grossPrize+wr.netPrize+wr.skinsPrize+wr.pogPrize;
         });
         // Add draw from season
-        const se=Object.entries(appData.season||{}).find(([k])=>k===pl.name||dispName(k)===dispName(pl.name));
+        const se=Object.entries(appData.season||{}).find(([k])=>normKey(k)===plNk);
         if(se) win+=parseFloat(se[1].draw)||0;
-        return {name:pl.name,grossW:gW,netW:nW,skins:sW,pog:pgW,top3:t3,winnings:win,isYou:pl.name===pKey};
+        return {nk:plNk,name:pl.name,grossW:gW,netW:nW,skins:sW,pog:pgW,top3:t3,winnings:win,isYou:plNk===pKey};
       })
       .sort((a,b)=>{
         const ta=a.grossW+a.netW+a.skins+a.pog;
@@ -1066,7 +1113,7 @@ function showPlayerStats(pKey){
       const rc=rk===1?'sp-r1':rk===2?'sp-r2':rk===3?'sp-r3':'sp-rn';
       html+=`<tr${fp.isYou?' class="you-row"':''}>
         <td><span class="sp-rank ${rc}">${rk}</span></td>
-        <td>${fp.isYou?'<span class="sp-you-arrow">▶</span>':''}<strong>${dispName(fp.name)}</strong></td>
+        <td>${fp.isYou?'<span class="sp-you-arrow">▶</span>':''}<strong>${dispName(fp.name||'')}</strong></td>
         <td class="r">${fp.grossW||'—'}</td>
         <td class="r">${fp.netW||'—'}</td>
         <td class="r">${fp.skins||'—'}</td>
