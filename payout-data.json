@@ -240,9 +240,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0–5",
-        "B": "6–11",
-        "C": "12–17",
+        "A": "0â5",
+        "B": "6â11",
+        "C": "12â17",
         "D": "18+"
       },
       "net": [
@@ -1300,9 +1300,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ5",
-        "B": "6ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ11",
-        "C": "12ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ17",
+        "A": "0ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ5",
+        "B": "6ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ11",
+        "C": "12ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ17",
         "D": "18+"
       },
       "net": [
@@ -6458,6 +6458,57 @@
           "prize": "20",
           "cb": false
         }
+      ],
+      "roster": [
+        "Alberti, Silvio",
+        "Allan, Keith",
+        "Baker, Ted",
+        "Barr, Bob",
+        "Barr, Mike",
+        "Bennett, Randy",
+        "Bohmer, Gordon",
+        "Carr-Hilton, Mitch",
+        "Cox, Jason",
+        "Dawson, Rick",
+        "Dewitt, Steve",
+        "Dietrich, Steve",
+        "Erickson, Murray",
+        "Follis, Craig",
+        "French, Tim",
+        "Friesen, Crystal",
+        "Gray, Rod",
+        "Green, Jim",
+        "Hunt, Larry",
+        "Johns, Mandy",
+        "Johnson, Bobby",
+        "Koster, Gerry",
+        "Koster, Greg",
+        "LUND, BRENDA",
+        "Lund, Gordon",
+        "Lund, Paul",
+        "Lychak, Dennis",
+        "Matheson, Mike",
+        "Mattoon, Wade",
+        "McLean, Ian",
+        "Murray, Scott",
+        "Nickerson, Corey",
+        "Noble, Matt",
+        "Parsons, Scott",
+        "Phelan, Bryan",
+        "Rallison, Gord",
+        "Rallison, Joan",
+        "Riordan, Kevin",
+        "Rushton, Doug",
+        "Schwarz, Mike",
+        "Sheldon, Rick",
+        "Skinner, Trent",
+        "Slater, Brian",
+        "Stewart, Ham",
+        "Stewart, Yvonne",
+        "Tarbuck, Bob",
+        "VanVelzen, Paul",
+        "Webber, Carl",
+        "Yarrow, Ben"
       ]
     }
   ],
