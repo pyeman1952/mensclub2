@@ -1948,7 +1948,7 @@ async function loadCommittedWeek(){
       const key=row.key||(i<9?'G0'+(i+1):'G'+(i+1));
       const ps=document.getElementById(`gr-pos-${key}`);   if(ps&&(row.posLabel||row.place)) ps.textContent=row.posLabel||ordSfx(row.place);
       const fi=document.getElementById(`gr-flt-${key}`);   if(fi) fi.value=row.flt||'';
-      const ni=document.getElementById(`gr-name-${key}`);  if(ni) ni.value=row.pname||row.name||'';
+      const ni=document.getElementById(`gr-name-${key}`);  if(ni) ni.value=(row.pname||row.name||'').replace(/\s*\[TIE\?\]/gi,'').trim();
       const oi=document.getElementById(`gr-out-${key}`);   if(oi) oi.value=row.out||'';
       const ii=document.getElementById(`gr-in-${key}`);    if(ii) ii.value=row.inV||'';
       const si=document.getElementById(`gr-score-${key}`); if(si) si.value=row.score||'';
@@ -1963,7 +1963,7 @@ async function loadCommittedWeek(){
       const key=i<9?'G0'+(i+1):'G'+(i+1);
       if(!document.getElementById(`gr-name-${key}`)) return;
       const fi=document.getElementById(`gr-flt-${key}`);   if(fi) fi.value=row.flt||'';
-      const ni=document.getElementById(`gr-name-${key}`);  if(ni) ni.value=row.pname||'';
+      const ni=document.getElementById(`gr-name-${key}`);  if(ni) ni.value=(row.pname||'').replace(/\s*\[TIE\?\]/gi,'').trim();
       const oi=document.getElementById(`gr-out-${key}`);   if(oi) oi.value=row.out||'';
       const ii=document.getElementById(`gr-in-${key}`);    if(ii) ii.value=row.inV||'';
       const si=document.getElementById(`gr-score-${key}`); if(si) si.value=row.score||'';
@@ -1978,7 +1978,7 @@ async function loadCommittedWeek(){
   const netSrc=wk.netData||(jsonWk&&jsonWk.net)||[];
   netSrc.forEach(row=>{
     const p=row.place; if(p<1||p>15) return;
-    const nn=document.getElementById(`nn-${p}`); if(nn) nn.value=row.pname||'';
+    const nn=document.getElementById(`nn-${p}`); if(nn) nn.value=(row.pname||'').replace(/\s*\[TIE\?\]/gi,'').trim();
     const ng=document.getElementById(`ng-${p}`); if(ng) ng.value=row.gross||'';
     const no=document.getElementById(`no-${p}`); if(no) no.value=row.netOut||'';
     const ni=document.getElementById(`ni-${p}`); if(ni) ni.value=row.netIn||'';
