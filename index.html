@@ -61,14 +61,14 @@ html,body{height:100%;width:100%;font-family:system-ui,-apple-system,sans-serif;
 .drag-handle:active{cursor:grabbing;}
 tr.drag-over{outline:2px solid var(--gm);outline-offset:-2px;background:var(--gl);}
 tr.dragging{opacity:.4;}
-.gr-flight-table tr.dragging{pointer-events:none;}
+.gr-flight-tbody tr.dragging{pointer-events:none;}
 .del-btn{pointer-events:all !important; cursor:pointer;}
-/* While a gross row is being dragged, kill pointer-events on all inputs in that table so dragover fires on the rows */
-.gr-flight-table.dragging-active input,
-.gr-flight-table.dragging-active select,
-.gr-flight-table.dragging-active textarea,
-.gr-flight-table.dragging-active td,
-.gr-flight-table.dragging-active span{pointer-events:none;}
+/* While a gross row is being dragged, kill pointer-events so dragover fires on tr/tbody */
+.gr-flight-tbody.dragging-active input,
+.gr-flight-tbody.dragging-active select,
+.gr-flight-tbody.dragging-active textarea,
+.gr-flight-tbody.dragging-active td,
+.gr-flight-tbody.dragging-active span{pointer-events:none;}
 /* ── Gross-winner badge for players appearing in both gross and net ── */
 .gross-also{display:inline-block;font-size:9px;font-weight:700;background:#FFF3CD;color:#856404;border:1px solid #FFCA2C;border-radius:3px;padding:0 4px;margin-left:4px;vertical-align:middle;white-space:nowrap;}
 
@@ -1409,9 +1409,11 @@ function clearEntries(){
   }
   // Clear imported CSV/HTML so re-importing works cleanly
   if(typeof _importStore!=='undefined'){_importStore.csv=null;_importStore.html=null;}
-  // Reset file input status indicators
+  // Reset file input status indicators and import preview box
   ['csv-status','html-status'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent='';el.style.color='';}});
-  ['import-csv','import-html'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';})
+  ['import-csv','import-html'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  const importPreview=document.getElementById('import-preview');if(importPreview)importPreview.innerHTML='';
+  const importMsg=document.getElementById('import-msg');if(importMsg)importMsg.textContent='';
   SKINS_HOLES.forEach(h=>{
     const n=document.getElementById(`sk-name-${h}`);if(n)n.value='';
     const s=document.getElementById(`sk-score-${h}`);if(s)s.value='';
@@ -2976,26 +2978,23 @@ function syncFromGitHub(manual=false){
 // Gross drag — mirror net drag exactly, using tbody as the delegation point
 function initDragGross(){
   document.querySelectorAll('.gr-flight-tbody').forEach(tbody=>{
-    const table=tbody.closest('table');
-
-    // Make all gross rows draggable permanently — same as net rows
+    // Make all gross rows draggable permanently
     tbody.querySelectorAll('tr[data-gkey]').forEach(tr=>{ tr.draggable=true; });
 
     tbody.addEventListener('dragstart',e=>{
       const tr=e.target.closest('tr[data-gkey]');
       if(!tr) return;
-      // Only start drag if mouse is on the handle
       if(!e.target.closest('.drag-handle')) { return; }
       tbody._drag=tr;
       tr.classList.add('dragging');
       e.dataTransfer.effectAllowed='move';
       e.dataTransfer.setData('text/plain','gross');
-      table.classList.add('dragging-active');
+      tbody.classList.add('dragging-active'); // use tbody, not table
     });
     tbody.addEventListener('dragend',()=>{
       if(tbody._drag) tbody._drag.classList.remove('dragging');
       tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
-      table.classList.remove('dragging-active');
+      tbody.classList.remove('dragging-active');
       renumberGrossFlight(tbody);
       tbody._drag=null;
     });
