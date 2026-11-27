@@ -61,14 +61,7 @@ html,body{height:100%;width:100%;font-family:system-ui,-apple-system,sans-serif;
 .drag-handle:active{cursor:grabbing;}
 tr.drag-over{outline:2px solid var(--gm);outline-offset:-2px;background:var(--gl);}
 tr.dragging{opacity:.4;}
-.gr-flight-tbody tr.dragging{pointer-events:none;}
 .del-btn{pointer-events:all !important; cursor:pointer;}
-/* While a gross row is being dragged, kill pointer-events so dragover fires on tr/tbody */
-.gr-flight-tbody.dragging-active input,
-.gr-flight-tbody.dragging-active select,
-.gr-flight-tbody.dragging-active textarea,
-.gr-flight-tbody.dragging-active td,
-.gr-flight-tbody.dragging-active span{pointer-events:none;}
 /* ── Gross-winner badge for players appearing in both gross and net ── */
 .gross-also{display:inline-block;font-size:9px;font-weight:700;background:#FFF3CD;color:#856404;border:1px solid #FFCA2C;border-radius:3px;padding:0 4px;margin-left:4px;vertical-align:middle;white-space:nowrap;}
 
@@ -2975,26 +2968,19 @@ function syncFromGitHub(manual=false){
 }
 
 // ── Drag-and-drop: Gross (per-flight) ────────────────────────────────────────
-// Gross drag — mirror net drag exactly, using tbody as the delegation point
 function initDragGross(){
   document.querySelectorAll('.gr-flight-tbody').forEach(tbody=>{
-    // Make all gross rows draggable permanently
     tbody.querySelectorAll('tr[data-gkey]').forEach(tr=>{ tr.draggable=true; });
-
     tbody.addEventListener('dragstart',e=>{
       const tr=e.target.closest('tr[data-gkey]');
       if(!tr) return;
-      if(!e.target.closest('.drag-handle')) { return; }
-      tbody._drag=tr;
-      tr.classList.add('dragging');
+      tbody._drag=tr; tr.classList.add('dragging');
       e.dataTransfer.effectAllowed='move';
-      e.dataTransfer.setData('text/plain','gross');
-      tbody.classList.add('dragging-active'); // use tbody, not table
     });
-    tbody.addEventListener('dragend',()=>{
-      if(tbody._drag) tbody._drag.classList.remove('dragging');
+    tbody.addEventListener('dragend',e=>{
+      const tr=e.target.closest('tr[data-gkey]');
+      if(tr) tr.classList.remove('dragging');
       tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('drag-over'));
-      tbody.classList.remove('dragging-active');
       renumberGrossFlight(tbody);
       tbody._drag=null;
     });
@@ -3008,8 +2994,8 @@ function initDragGross(){
       const rows=Array.from(tbody.querySelectorAll('tr'));
       const srcIdx=rows.indexOf(tbody._drag);
       const tgtIdx=rows.indexOf(tr);
-      if(srcIdx<tgtIdx) tbody.insertBefore(tbody._drag, tr.nextSibling);
-      else              tbody.insertBefore(tbody._drag, tr);
+      if(srcIdx<tgtIdx) tbody.insertBefore(tbody._drag,tr.nextSibling);
+      else              tbody.insertBefore(tbody._drag,tr);
     });
     tbody.addEventListener('drop',e=>e.preventDefault());
   });
