@@ -100,6 +100,85 @@ table.gt td{padding:7px 8px;border-bottom:1px solid #F0F0F0;}
 /* Footer */
 .footer{text-align:center;padding:24px;font-size:11px;color:var(--mut);border-top:1px solid var(--bdr);margin-top:32px;}
 
+/* ── Club Badge ─────────────────────────────────────────────────── */
+.club-badge{display:flex;align-items:center;gap:11px;}
+.badge-crest{width:42px;height:42px;border-radius:50%;background:#fff;border:2.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:22px;font-weight:700;color:var(--gd);flex-shrink:0;letter-spacing:0;}
+.badge-text{}
+.badge-name{font-family:Georgia,serif;font-size:18px;font-weight:normal;letter-spacing:.06em;color:#fff;line-height:1.1;}
+.badge-sub{font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.04em;margin-top:2px;}
+.hdr-divider{width:1px;height:34px;background:rgba(255,255,255,.18);margin:0 4px;}
+
+/* ── Stats Tab ──────────────────────────────────────────────────── */
+/* Picker */
+.sp-picker-row{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.sp-picker-row label{font-size:12px;color:var(--mut);font-weight:600;white-space:nowrap;}
+.sp-search{padding:7px 10px;border:1px solid var(--bdr);border-radius:var(--rad);font-size:13px;width:220px;}
+.sp-select{padding:6px 10px;border:1px solid var(--bdr);border-radius:var(--rad);font-size:13px;min-width:200px;max-width:280px;}
+
+/* Summary tiles */
+.sp-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-bottom:20px;}
+.sp-tile{background:var(--wh);border:1px solid var(--bdr);border-radius:var(--rad);padding:12px 14px;}
+.sp-tile .tl-val{font-size:22px;font-weight:700;color:var(--gd);line-height:1;}
+.sp-tile .tl-val.money{color:var(--gold);}
+.sp-tile .tl-lbl{font-size:11px;color:var(--mut);margin-top:4px;}
+
+/* Scoring trend chart */
+.sp-chart-wrap{background:var(--wh);border:1px solid var(--bdr);border-radius:var(--rad);padding:14px 16px;margin-bottom:20px;}
+.sp-chart-wrap h3{font-family:Georgia,serif;font-size:14px;font-weight:normal;color:var(--gd);margin-bottom:10px;}
+.sp-chart-legend{display:flex;gap:16px;margin-bottom:8px;flex-wrap:wrap;}
+.sp-chart-legend span{font-size:11px;color:var(--mut);display:flex;align-items:center;gap:4px;}
+.sp-chart-legend span::before{content:'';display:inline-block;width:18px;height:3px;border-radius:2px;}
+.leg-gross::before{background:#1B4332;}
+.leg-net::before{background:#2563eb;}
+.leg-par::before{background:#ccc;border-top:2px dashed #ccc;height:0;}
+#sp-chart{width:100%;height:140px;display:block;}
+
+/* Win breakdown */
+.sp-wins-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:20px;}
+.sp-win-block{background:var(--wh);border:1px solid var(--bdr);border-radius:var(--rad);padding:12px 14px;}
+.sp-win-block .wb-num{font-size:26px;font-weight:700;color:var(--gd);}
+.sp-win-block .wb-label{font-size:11px;color:var(--mut);margin-top:2px;}
+.sp-win-block .wb-detail{font-size:11px;color:var(--mut);margin-top:5px;border-top:1px solid var(--bdr);padding-top:5px;}
+
+/* Flight standing */
+.sp-section{background:var(--wh);border:1px solid var(--bdr);border-radius:var(--rad);overflow:hidden;margin-bottom:20px;}
+.sp-sec-hdr{background:var(--gd);color:#fff;padding:8px 14px;font-family:Georgia,serif;font-size:13px;font-weight:normal;letter-spacing:.04em;}
+.sp-table{width:100%;border-collapse:collapse;font-size:13px;}
+.sp-table th{background:var(--surf);padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:var(--mut);border-bottom:2px solid var(--bdr);text-transform:uppercase;letter-spacing:.03em;}
+.sp-table th.r{text-align:right;}
+.sp-table td{padding:7px 10px;border-bottom:1px solid var(--surf);}
+.sp-table td.r{text-align:right;}
+.sp-table tr:last-child td{border-bottom:1px solid var(--bdr);}
+.sp-table tr.you-row td{background:#EFF4FF;}
+.sp-rank{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;font-weight:700;font-size:11px;font-family:system-ui,sans-serif;}
+.sp-r1{background:#C9A84C;color:#fff;} .sp-r2{background:#9E9E9E;color:#fff;} .sp-r3{background:#8B6914;color:#fff;} .sp-rn{background:var(--surf);color:var(--mut);}
+.sp-you-arrow{color:#2563eb;font-weight:700;margin-right:3px;}
+
+/* Week history */
+.sp-hist-tbl{width:100%;border-collapse:collapse;font-size:12px;}
+.sp-hist-tbl th{background:var(--surf);padding:6px 8px;text-align:left;font-size:10px;font-weight:700;color:var(--mut);border-bottom:2px solid var(--bdr);text-transform:uppercase;letter-spacing:.03em;}
+.sp-hist-tbl th.r{text-align:right;}
+.sp-hist-tbl td{padding:6px 8px;border-bottom:1px solid var(--surf);}
+.sp-hist-tbl td.r{text-align:right;}
+.sp-hist-tbl tr:last-child td{border-bottom:1px solid var(--bdr);}
+.sp-hist-tbl tr:nth-child(even) td{background:#FAFAFA;}
+.migr-badge{display:inline-block;padding:1px 5px;background:#FFF3CD;border:1px solid #FFCA2C;border-radius:3px;font-size:9px;font-weight:700;color:#856404;margin-left:4px;}
+.win-pill{display:inline-block;padding:1px 5px;border-radius:3px;font-size:10px;font-weight:700;margin-left:3px;}
+.wp-gross{background:var(--gl);color:var(--gd);}
+.wp-net{background:#EFF4FF;color:#1D4ED8;}
+.wp-skin{background:#FDF6E3;color:#92400E;}
+.wp-pog{background:#FDF6E3;color:#92400E;border:1px solid var(--gold);}
+
+.sp-no-data{text-align:center;padding:40px;color:var(--mut);}
+.sp-placeholder{text-align:center;padding:60px 20px;color:var(--mut);}
+.sp-placeholder .icon{font-size:40px;margin-bottom:10px;}
+
+@media(max-width:600px){
+  .sp-tiles{grid-template-columns:repeat(2,1fr);}
+  .sp-wins-row{grid-template-columns:repeat(2,1fr);}
+  .sp-table th:nth-child(n+5),.sp-table td:nth-child(n+5){display:none;}
+}
+
 @media print{
   .tabs,.week-bar,.footer{display:none!important;}
   .sheet{border:none;padding:0;}
@@ -113,10 +192,16 @@ table.gt td{padding:7px 8px;border-bottom:1px solid #F0F0F0;}
 <body>
 
 <div class="hdr">
-  <div class="hdr-logo">⛳</div>
+  <div class="club-badge">
+    <div class="badge-crest">S</div>
+    <div class="badge-text">
+      <div class="badge-name">Sunnydale</div>
+      <div class="badge-sub">Men's Club · Est. 1923</div>
+    </div>
+  </div>
+  <div class="hdr-divider"></div>
   <div class="hdr-title">
-    <h1>Sunnydale Men's Club</h1>
-    <p>Weekly Payout Results</p>
+    <h1 style="font-size:16px;">Weekly Payout Results</h1>
   </div>
 </div>
 
@@ -125,6 +210,7 @@ table.gt td{padding:7px 8px;border-bottom:1px solid #F0F0F0;}
   <button class="tab" data-tab="leaderboard">Season Leaderboard</button>
   <button class="tab" data-tab="pots">Pot History</button>
   <button class="tab" data-tab="flightreport">Flight Report</button>
+  <button class="tab" data-tab="stats">Player Stats</button>
 </div>
 
 <div class="content">
@@ -166,6 +252,22 @@ table.gt td{padding:7px 8px;border-bottom:1px solid #F0F0F0;}
   <!-- Pots tab -->
   <div id="tab-pots" class="hidden">
     <div id="pots-content"><div class="loading"><div class="spinner"></div>Loading pot history…</div></div>
+  </div>
+
+  <!-- Player Stats tab -->
+  <div id="tab-stats" class="hidden">
+    <!-- Picker -->
+    <div class="sp-picker-row">
+      <label>Player:</label>
+      <input type="text" id="sp-search" class="sp-search" placeholder="Search name…" autocomplete="off">
+      <select id="sp-select" class="sp-select" size="1">
+        <option value="">— select a player —</option>
+      </select>
+    </div>
+    <!-- Dynamic content area -->
+    <div id="sp-content">
+      <div class="sp-placeholder"><div class="icon">⛳</div><p>Select a player above to see their season stats.</p></div>
+    </div>
   </div>
 
   <!-- Flight Report tab -->
@@ -522,7 +624,7 @@ document.querySelectorAll('.tab').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    ['results','leaderboard','pots','flightreport'].forEach(t=>{
+    ['results','leaderboard','pots','flightreport','stats'].forEach(t=>{
       document.getElementById(`tab-${t}`).classList.toggle('hidden',`tab-${t}`!==`tab-${btn.dataset.tab}`);
     });
     if(btn.dataset.tab==='leaderboard'){
@@ -530,6 +632,9 @@ document.querySelectorAll('.tab').forEach(btn=>{
     }
     if(btn.dataset.tab==='flightreport'){
       if(frPinUnlocked()) showFrContent(); else showFrGate();
+    }
+    if(btn.dataset.tab==='stats'){
+      initStatsTab();
     }
   });
 });
@@ -694,8 +799,403 @@ function renderFlightReport(){
 
 // Fix tab data attr
 document.querySelectorAll('.tab').forEach((btn,i)=>{
-  btn.dataset.tab=['results','leaderboard','pots','flightreport'][i];
+  btn.dataset.tab=['results','leaderboard','pots','flightreport','stats'][i];
 });
+
+// ── Player Stats ──────────────────────────────────────────────────────────────
+
+// Display name helper: "Flynn, Dave" → "Dave Flynn"
+function dispName(n){
+  const s=(n||'').replace(/\s*\[TIE\?\]/gi,'').trim();
+  const ci=s.indexOf(',');
+  if(ci>-1){const last=s.slice(0,ci).trim();const first=s.slice(ci+1).trim();return first?`${first} ${last}`:last;}
+  return s;
+}
+
+// Build per-player stats by scanning all weeks
+function buildPlayerIndex(){
+  const idx={}; // keyed by pname (raw, as stored)
+  const weeks=appData.weeks||[];
+
+  weeks.forEach(wk=>{
+    const wkDate=wk.date||wk.id||'';
+    const wkName=wk.name||wk.id||'';
+    if(wk.cancelled) return;
+
+    // helper: get or create player entry
+    const getP=name=>{
+      if(!name) return null;
+      const key=name.trim();
+      if(!idx[key]) idx[key]={
+        name:key,
+        weeks:[],      // per-week records
+        flights:{}     // {flt: count} to determine majority flight
+      };
+      return idx[key];
+    };
+
+    // helper: add or find week entry in player record
+    const getWk=(p,wkKey,flt)=>{
+      let wr=p.weeks.find(w=>w.wkKey===wkKey);
+      if(!wr){
+        wr={wkKey,wkDate,wkName,flt:flt||null,grossPlace:null,grossScore:null,grossPrize:0,
+            netPlace:null,netScore:null,hcp:null,netPrize:0,
+            skinsHoles:[],skinsPrize:0,pogHoles:[],pogPrize:0};
+        p.weeks.push(wr);
+      }
+      // track flights seen for this player
+      if(flt){p.flights[flt]=(p.flights[flt]||0)+1; if(!wr.flt) wr.flt=flt;}
+      return wr;
+    };
+
+    // Gross rows
+    const grossRows=wk.grossRows||[];
+    // Also check old flights object as fallback
+    const allGrossRows=[...grossRows];
+    if(!grossRows.length && wk.flights){
+      ['A','B','C','D'].forEach(f=>{
+        (wk.flights[f]||[]).forEach(r=>{if(r.pname) allGrossRows.push({...r,flt:f});});
+      });
+    }
+    allGrossRows.forEach(r=>{
+      const p=getP(r.pname); if(!p) return;
+      const wr=getWk(p,wk.id||wkDate,r.flt);
+      wr.flt=r.flt||wr.flt;
+      if(r.place && (!wr.grossPlace || r.place<wr.grossPlace)){
+        wr.grossPlace=r.place; wr.grossScore=r.score||null; wr.grossPrize=(parseFloat(r.prize)||0);
+      } else if(!wr.grossPlace){
+        wr.grossScore=r.score||null;
+      }
+    });
+
+    // Net rows
+    (wk.net||[]).forEach(r=>{
+      const p=getP(r.pname); if(!p) return;
+      const wr=getWk(p,wk.id||wkDate,r.flt);
+      wr.flt=r.flt||wr.flt;
+      wr.netPlace=r.place||null; wr.netScore=r.score||null;
+      wr.hcp=r.hcp!=null?r.hcp:wr.hcp;
+      wr.netPrize=(parseFloat(r.prize)||0);
+    });
+
+    // Skins
+    (wk.skins||[]).forEach(r=>{
+      if(!r.winner) return;
+      const p=getP(r.winner); if(!p) return;
+      const wr=getWk(p,wk.id||wkDate,r.flt);
+      wr.flt=r.flt||wr.flt;
+      wr.skinsHoles.push(r.hole);
+      if(r.paid) wr.skinsPrize+=(parseFloat(r.runPot)||0);
+    });
+
+    // POG
+    (wk.pog||[]).forEach(r=>{
+      if(!r.winner) return;
+      const p=getP(r.winner); if(!p) return;
+      const wr=getWk(p,wk.id||wkDate,r.flt);
+      wr.flt=r.flt||wr.flt;
+      wr.pogHoles.push(r.hole);
+      if(r.paid) wr.pogPrize+=(parseFloat(r.runPot)||0);
+    });
+  });
+
+  return idx;
+}
+
+// Determine a player's majority flight
+function majorityFlight(p){
+  const fl=p.flights;
+  let best=null,bestN=0;
+  Object.entries(fl).forEach(([f,n])=>{if(n>bestN){bestN=n;best=f;}});
+  return best;
+}
+
+let statsIdx=null; // built once after data loads
+
+function initStatsTab(){
+  if(!appData) return;
+  if(!statsIdx) statsIdx=buildPlayerIndex();
+  populateStatsPicker();
+}
+
+function populateStatsPicker(){
+  const sel=document.getElementById('sp-select');
+  // Sort by display name
+  const names=Object.keys(statsIdx).sort((a,b)=>dispName(a).localeCompare(dispName(b)));
+  sel.innerHTML=`<option value="">— select a player —</option>`+
+    names.map(n=>`<option value="${n}">${dispName(n)}</option>`).join('');
+
+  // Search filter
+  const search=document.getElementById('sp-search');
+  search.addEventListener('input',()=>{
+    const q=search.value.trim().toLowerCase();
+    if(!q){
+      sel.innerHTML=`<option value="">— select a player —</option>`+
+        names.map(n=>`<option value="${n}">${dispName(n)}</option>`).join('');
+      sel.size=1;
+      return;
+    }
+    const filtered=names.filter(n=>dispName(n).toLowerCase().includes(q)||n.toLowerCase().includes(q));
+    sel.innerHTML=filtered.map(n=>`<option value="${n}">${dispName(n)}</option>`).join('');
+    sel.size=Math.min(filtered.length,6)||1;
+    if(filtered.length===1){ sel.value=filtered[0]; showPlayerStats(filtered[0]); }
+  });
+  search.addEventListener('blur',()=>{ setTimeout(()=>{ sel.size=1; },200); });
+
+  sel.addEventListener('change',()=>{
+    if(sel.value){ sel.size=1; showPlayerStats(sel.value); }
+  });
+}
+
+function showPlayerStats(pKey){
+  const p=statsIdx[pKey];
+  if(!p){ document.getElementById('sp-content').innerHTML='<div class="sp-no-data">Player not found.</div>'; return; }
+
+  const myFlight=majorityFlight(p)||'?';
+  const weeks=p.weeks.slice().sort((a,b)=>b.wkKey.localeCompare(a.wkKey)); // newest first
+
+  // Aggregates
+  let totalWinnings=0, grossWins=0, netWins=0, skinsWins=0, pogWins=0, top3Count=0;
+  let grossScores=[], netScores=[];
+  let skinsHolesList=[], pogHolesList=[];
+
+  weeks.forEach(wr=>{
+    totalWinnings+=wr.grossPrize+wr.netPrize+wr.skinsPrize+wr.pogPrize;
+    if(wr.grossPlace===1) grossWins++;
+    if(wr.netPlace===1) netWins++;
+    if(wr.skinsHoles.length) skinsWins+=wr.skinsHoles.length;
+    if(wr.pogHoles.length) pogWins+=wr.pogHoles.length;
+    if(wr.grossPlace&&wr.grossPlace<=3) top3Count++;
+    if(wr.grossScore!=null&&!isNaN(Number(wr.grossScore))) grossScores.push({k:wr.wkKey,v:Number(wr.grossScore)});
+    if(wr.netScore!=null&&!isNaN(Number(wr.netScore))) netScores.push({k:wr.wkKey,v:Number(wr.netScore)});
+    skinsHolesList.push(...wr.skinsHoles);
+    pogHolesList.push(...wr.pogHoles);
+  });
+
+  const played=weeks.length;
+  const avgGross=grossScores.length?(grossScores.reduce((s,v)=>s+v.v,0)/grossScores.length).toFixed(1):'—';
+  const bestGross=grossScores.length?Math.min(...grossScores.map(v=>v.v)):'—';
+  const latestHcp=weeks.find(w=>w.hcp!=null)?.hcp;
+  const fmt=n=>'$'+Number(n||0).toFixed(2);
+
+  // Season data from appData.season for cross-check / draw winnings
+  const seasonEntry=Object.entries(appData.season||{}).find(([k])=>k===pKey||dispName(k)===dispName(pKey));
+  const seasonData=seasonEntry?seasonEntry[1]:null;
+  const drawWinnings=seasonData?(parseFloat(seasonData.draw)||0):0;
+
+  // ── Build HTML ────────────────────────────────────────────────────
+  let html='';
+
+  // Summary tiles
+  html+=`<div class="sp-tiles">
+    <div class="sp-tile"><div class="tl-val">${played}</div><div class="tl-lbl">Weeks Played</div></div>
+    <div class="sp-tile"><div class="tl-val money">${fmt(totalWinnings+drawWinnings)}</div><div class="tl-lbl">Season Winnings</div></div>
+    <div class="sp-tile"><div class="tl-val">${latestHcp!=null?latestHcp:'—'}</div><div class="tl-lbl">Handicap</div></div>
+    <div class="sp-tile"><div class="tl-val">${myFlight!=='?'?myFlight:'—'}</div><div class="tl-lbl">Flight</div></div>
+    <div class="sp-tile"><div class="tl-val">${avgGross}</div><div class="tl-lbl">Avg Gross</div></div>
+    <div class="sp-tile"><div class="tl-val">${bestGross}</div><div class="tl-lbl">Best Gross</div></div>
+  </div>`;
+
+  // Scoring trend chart
+  const chartWeeks=grossScores.slice().sort((a,b)=>a.k.localeCompare(b.k));
+  const chartNet=netScores.slice().sort((a,b)=>a.k.localeCompare(b.k));
+  if(chartWeeks.length>1){
+    html+=`<div class="sp-chart-wrap">
+      <h3>Scoring Trend</h3>
+      <div class="sp-chart-legend">
+        <span class="leg-gross">Gross score</span>
+        <span class="leg-net">Net score</span>
+        <span class="leg-par">Par 72</span>
+      </div>
+      <canvas id="sp-chart"></canvas>
+    </div>`;
+  }
+
+  // Win breakdown blocks
+  html+=`<div class="sp-wins-row">
+    <div class="sp-win-block"><div class="wb-num">${grossWins}</div><div class="wb-label">Gross Win${grossWins!==1?'s':''}</div></div>
+    <div class="sp-win-block"><div class="wb-num">${netWins}</div><div class="wb-label">Net Win${netWins!==1?'s':''}</div></div>
+    <div class="sp-win-block"><div class="wb-num">${skinsWins}</div><div class="wb-label">Skin${skinsWins!==1?'s':''} Won</div>
+      ${skinsHolesList.length?`<div class="wb-detail">Holes: ${[...new Set(skinsHolesList)].sort((a,b)=>a-b).join(', ')}</div>`:''}
+    </div>
+    <div class="sp-win-block"><div class="wb-num">${pogWins}</div><div class="wb-label">POG Win${pogWins!==1?'s':''}</div>
+      ${pogHolesList.length?`<div class="wb-detail">Holes: ${[...new Set(pogHolesList)].sort((a,b)=>a-b).join(', ')}</div>`:''}
+    </div>
+    <div class="sp-win-block"><div class="wb-num">${top3Count}</div><div class="wb-label">Top-3 Gross Finishes</div></div>
+    <div class="sp-win-block"><div class="wb-num">${fmt(drawWinnings)}</div><div class="wb-label">Draw Winnings</div></div>
+  </div>`;
+
+  // Flight standing
+  if(myFlight!=='?'){
+    // Build flight roster from statsIdx
+    const flightPlayers=Object.values(statsIdx)
+      .filter(pl=>majorityFlight(pl)===myFlight)
+      .map(pl=>{
+        let gW=0,nW=0,sW=0,pgW=0,t3=0,win=0;
+        pl.weeks.forEach(wr=>{
+          if(wr.grossPlace===1) gW++;
+          if(wr.netPlace===1) nW++;
+          sW+=wr.skinsHoles.length;
+          pgW+=wr.pogHoles.length;
+          if(wr.grossPlace&&wr.grossPlace<=3) t3++;
+          win+=wr.grossPrize+wr.netPrize+wr.skinsPrize+wr.pogPrize;
+        });
+        // Add draw from season
+        const se=Object.entries(appData.season||{}).find(([k])=>k===pl.name||dispName(k)===dispName(pl.name));
+        if(se) win+=parseFloat(se[1].draw)||0;
+        return {name:pl.name,grossW:gW,netW:nW,skins:sW,pog:pgW,top3:t3,winnings:win,isYou:pl.name===pKey};
+      })
+      .sort((a,b)=>{
+        const ta=a.grossW+a.netW+a.skins+a.pog;
+        const tb=b.grossW+b.netW+b.skins+b.pog;
+        if(tb!==ta) return tb-ta;
+        return b.winnings-a.winnings;
+      });
+
+    html+=`<div class="sp-section">
+      <div class="sp-sec-hdr">Flight ${myFlight} Standing — All Players</div>
+      <table class="sp-table"><thead><tr>
+        <th>Rank</th><th>Player</th>
+        <th class="r">Gross W</th><th class="r">Net W</th>
+        <th class="r">Skins</th><th class="r">POG</th>
+        <th class="r">Top-3</th><th class="r">Winnings</th>
+      </tr></thead><tbody>`;
+
+    flightPlayers.forEach((fp,i)=>{
+      const rk=i+1;
+      const rc=rk===1?'sp-r1':rk===2?'sp-r2':rk===3?'sp-r3':'sp-rn';
+      html+=`<tr${fp.isYou?' class="you-row"':''}>
+        <td><span class="sp-rank ${rc}">${rk}</span></td>
+        <td>${fp.isYou?'<span class="sp-you-arrow">▶</span>':''}<strong>${dispName(fp.name)}</strong></td>
+        <td class="r">${fp.grossW||'—'}</td>
+        <td class="r">${fp.netW||'—'}</td>
+        <td class="r">${fp.skins||'—'}</td>
+        <td class="r">${fp.pog||'—'}</td>
+        <td class="r">${fp.top3||'—'}</td>
+        <td class="r"><strong style="color:var(--gold);">${fmt(fp.winnings)}</strong></td>
+      </tr>`;
+    });
+    html+=`</tbody></table></div>`;
+  }
+
+  // Week-by-week history
+  html+=`<div class="sp-section">
+    <div class="sp-sec-hdr">Week-by-Week History</div>
+    <table class="sp-hist-tbl"><thead><tr>
+      <th>Week</th><th>Flight</th>
+      <th class="r">Gross</th><th class="r">Net</th>
+      <th>Skins</th><th>POG</th>
+      <th class="r">Winnings</th>
+    </tr></thead><tbody>`;
+
+  if(!weeks.length){
+    html+=`<tr><td colspan="7" class="sp-no-data">No weeks recorded.</td></tr>`;
+  } else {
+    weeks.forEach(wr=>{
+      const migrated=wr.flt&&wr.flt!==myFlight;
+      const wkWin=wr.grossPrize+wr.netPrize+wr.skinsPrize+wr.pogPrize;
+      const fltCell=wr.flt?`<span class="flt-badge">Flt ${wr.flt}</span>${migrated?`<span class="migr-badge">${wr.flt} Flt</span>`:''}`:
+                            (myFlight!=='?'?`<span class="flt-badge">Flt ${myFlight}</span>`:'—');
+      html+=`<tr>
+        <td><strong>${wr.wkName}</strong><br><span style="font-size:10px;color:var(--mut);">${wr.wkDate}</span></td>
+        <td>${fltCell}</td>
+        <td class="r">${wr.grossScore!=null?wr.grossScore:'—'}${wr.grossPlace?` <span style="font-size:10px;color:var(--mut);">(${wr.grossPlace}${wr.grossPlace===1?'st':wr.grossPlace===2?'nd':wr.grossPlace===3?'rd':'th'})</span>`:''}${wr.grossPrize?` <span class="win-pill wp-gross">${fmt(wr.grossPrize)}</span>`:''}
+        </td>
+        <td class="r">${wr.netScore!=null?wr.netScore:'—'}${wr.netPlace?` <span style="font-size:10px;color:var(--mut);">(${wr.netPlace}${wr.netPlace===1?'st':wr.netPlace===2?'nd':wr.netPlace===3?'rd':'th'})</span>`:''}${wr.netPrize?` <span class="win-pill wp-net">${fmt(wr.netPrize)}</span>`:''}
+        </td>
+        <td>${wr.skinsHoles.length?wr.skinsHoles.map(h=>`<span class="win-pill wp-skin">H${h}</span>`).join(' '):'—'}${wr.skinsPrize?` <span style="font-size:10px;color:var(--mut);">${fmt(wr.skinsPrize)}</span>`:''}</td>
+        <td>${wr.pogHoles.length?wr.pogHoles.map(h=>`<span class="win-pill wp-pog">H${h}</span>`).join(' '):'—'}${wr.pogPrize?` <span style="font-size:10px;color:var(--mut);">${fmt(wr.pogPrize)}</span>`:''}</td>
+        <td class="r">${wkWin?`<strong style="color:var(--gold);">${fmt(wkWin)}</strong>`:'<span style="color:var(--mut);">—</span>'}</td>
+      </tr>`;
+    });
+  }
+  html+=`</tbody></table></div>`;
+
+  document.getElementById('sp-content').innerHTML=html;
+
+  // Draw chart if enough data
+  if(chartWeeks.length>1){
+    setTimeout(()=>drawStatsChart(chartWeeks,chartNet),0);
+  }
+}
+
+function drawStatsChart(grossPts, netPts){
+  const canvas=document.getElementById('sp-chart');
+  if(!canvas) return;
+  const ctx=canvas.getContext('2d');
+  const dpr=window.devicePixelRatio||1;
+  const rect=canvas.getBoundingClientRect();
+  canvas.width=rect.width*dpr;
+  canvas.height=rect.height*dpr;
+  ctx.scale(dpr,dpr);
+  const W=rect.width, H=rect.height;
+  const PAD={l:34,r:12,t:10,b:22};
+  const cW=W-PAD.l-PAD.r, cH=H-PAD.t-PAD.b;
+
+  // All values for scale
+  const allVals=[...grossPts.map(p=>p.v),...netPts.map(p=>p.v),72];
+  const minV=Math.floor(Math.min(...allVals)/5)*5-5;
+  const maxV=Math.ceil(Math.max(...allVals)/5)*5+5;
+  const range=maxV-minV||1;
+
+  const xScale=(i,total)=>PAD.l+(i/(total-1))*cW;
+  const yScale=v=>PAD.t+(1-(v-minV)/range)*cH;
+
+  // Grid
+  ctx.strokeStyle='#e2e6ea'; ctx.lineWidth=1;
+  for(let v=minV;v<=maxV;v+=5){
+    const y=yScale(v);
+    ctx.beginPath(); ctx.moveTo(PAD.l,y); ctx.lineTo(W-PAD.r,y); ctx.stroke();
+    ctx.fillStyle='#8e97a3'; ctx.font='9px system-ui'; ctx.textAlign='right';
+    ctx.fillText(v,PAD.l-3,y+3);
+  }
+
+  // Par 72 dashed
+  ctx.strokeStyle='#ccc'; ctx.lineWidth=1.5; ctx.setLineDash([4,3]);
+  const y72=yScale(72);
+  ctx.beginPath(); ctx.moveTo(PAD.l,y72); ctx.lineTo(W-PAD.r,y72); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Net line (blue, behind gross)
+  if(netPts.length>1){
+    ctx.strokeStyle='#2563eb'; ctx.lineWidth=2;
+    ctx.beginPath();
+    netPts.forEach((p,i)=>{
+      const x=xScale(i,netPts.length), y=yScale(p.v);
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+    netPts.forEach((p,i)=>{
+      ctx.beginPath(); ctx.arc(xScale(i,netPts.length),yScale(p.v),3,0,Math.PI*2);
+      ctx.fillStyle='#2563eb'; ctx.fill();
+    });
+  }
+
+  // Gross line (dark green)
+  ctx.strokeStyle='#1B4332'; ctx.lineWidth=2;
+  ctx.beginPath();
+  grossPts.forEach((p,i)=>{
+    const x=xScale(i,grossPts.length), y=yScale(p.v);
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  grossPts.forEach((p,i)=>{
+    ctx.beginPath(); ctx.arc(xScale(i,grossPts.length),yScale(p.v),3.5,0,Math.PI*2);
+    ctx.fillStyle='#1B4332'; ctx.fill();
+  });
+
+  // X axis labels (abbreviated week names)
+  ctx.fillStyle='#8e97a3'; ctx.font='9px system-ui'; ctx.textAlign='center';
+  const step=Math.max(1,Math.round(grossPts.length/8));
+  grossPts.forEach((p,i)=>{
+    if(i%step===0||i===grossPts.length-1){
+      const lbl=(p.k||'').slice(5)||p.k; // just MM-DD portion of YYYY-MM-DD
+      ctx.fillText(lbl,xScale(i,grossPts.length),H-PAD.b+14);
+    }
+  });
+}
+
+// ── Stats tab ─── end ─────────────────────────────────────────────────────────
 
 // Increment hit counter on every page load (silently — display only shown after PIN)
 fetch('https://api.counterapi.dev/v1/pyeman1952-mensclub2/visits/up').catch(()=>{});
