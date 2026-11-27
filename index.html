@@ -66,7 +66,9 @@ tr.dragging{opacity:.4;}
 /* While a gross row is being dragged, kill pointer-events on all inputs in that table so dragover fires on the rows */
 .gr-flight-table.dragging-active input,
 .gr-flight-table.dragging-active select,
-.gr-flight-table.dragging-active textarea{pointer-events:none;}
+.gr-flight-table.dragging-active textarea,
+.gr-flight-table.dragging-active td,
+.gr-flight-table.dragging-active span{pointer-events:none;}
 /* ── Gross-winner badge for players appearing in both gross and net ── */
 .gross-also{display:inline-block;font-size:9px;font-weight:700;background:#FFF3CD;color:#856404;border:1px solid #FFCA2C;border-radius:3px;padding:0 4px;margin-left:4px;vertical-align:middle;white-space:nowrap;}
 
@@ -918,13 +920,13 @@ function buildWeeklySummary(){
   // Gross winners
   for(let i=1;i<=15;i++){
     const key='G'+String(i).padStart(2,'0');
-    const name=(document.getElementById(`gr-name-${key}`)?.value||'').trim();
+    const name=(document.getElementById(`gr-name-${key}`)?.value||'').trim().replace(/\s*\[TIE\?\]/g,'');
     const prize=parseFloat(document.getElementById(`gr-prize-${key}`)?.value)||0;
     add(name,'gross',prize);
   }
   // Net winners
-  for(let p=1;p<=15;p++){
-    const name=(document.getElementById(`nn-${p}`)?.value||'').trim();
+  for(let p=1;p<=20;p++){
+    const name=(document.getElementById(`nn-${p}`)?.value||'').trim().replace(/\s*\[TIE\?\]/g,'');
     const prize=parseFloat(document.getElementById(`npz-${p}`)?.value)||0;
     add(name,'net',prize);
   }
@@ -1397,10 +1399,19 @@ function clearEntries(){
     ['gr-flt','gr-name','gr-out','gr-in','gr-score','gr-prize'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${key}`);if(el)el.value='';});
     const cb=document.getElementById(`gr-cb-${key}`);if(cb)cb.checked=false;
   }
-  for(let p=1;p<=15;p++){
-    ['nn','ng','no','ni','ns','nh','np'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${p}`);if(el)el.value='';});
+  for(let p=1;p<=20;p++){
+    ['nn','ng','no','ni','ns','nh','np','npz'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${p}`);if(el)el.value='';});
+    const nf=document.getElementById(`nf-${p}`);if(nf)nf.value='';
     const cb=document.getElementById(`nc-${p}`);if(cb)cb.checked=false;
+    // Remove gross-also badges
+    const nameCell=document.getElementById(`nn-${p}`);
+    if(nameCell){const badge=nameCell.parentNode?.querySelector('.gross-also');if(badge)badge.remove();}
   }
+  // Clear imported CSV/HTML so re-importing works cleanly
+  if(typeof _importStore!=='undefined'){_importStore.csv=null;_importStore.html=null;}
+  // Reset file input status indicators
+  ['csv-status','html-status'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent='';el.style.color='';}});
+  ['import-csv','import-html'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';})
   SKINS_HOLES.forEach(h=>{
     const n=document.getElementById(`sk-name-${h}`);if(n)n.value='';
     const s=document.getElementById(`sk-score-${h}`);if(s)s.value='';
