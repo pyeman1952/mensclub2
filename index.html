@@ -1650,65 +1650,57 @@ function populateWeekLoadSelect(){
 function ordSfx(n){ const s=['th','st','nd','rd']; const v=n%100; return n+(s[(v-20)%10]||s[v]||s[0]); }
 
 // GolfSoftware gross output: "Position\tFlight\tName\tOut\tIn\tTotal"
-// Paste into any input in the gross table; fills from that row down.
+// Paste into any gr-name input; parses the line and fills that row's fields.
 function initGrossPasteListeners(){
-  // gross-tbody replaced by per-flight tbodies; paste handled via import
-  const grossTbody = document.getElementById('gross-tbody');
-  if(!grossTbody) return;
-  grossTbody.addEventListener('paste', e=>{
-    const target = e.target;
-    const row = target.closest('tr[data-gplace]');
-    if(!row) return;
-    const text = (e.clipboardData||window.clipboardData).getData('text');
-    const lines = text.split('\n').map(l=>l.trim()).filter(Boolean);
-    if(!lines.length) return;
-    const firstParts = lines[0].split('\t');
-    if(firstParts.length < 2) return; // plain text — let through
-    e.preventDefault();
-    const allRows = Array.from(document.querySelectorAll('#gross-tbody tr[data-gplace]'));
-    const startIdx = allRows.indexOf(row);
-    lines.forEach((line, i) => {
-      const r = allRows[startIdx + i];
-      if(!r) return;
-      const gplace = parseInt(r.dataset.gplace);
-      const key = 'G' + String(gplace).padStart(2,'0');
-      const parts = line.split('\t');
-      // GS format: Position | Flight | Name | Out | In | Total
-      let pos='', flt='', name='', out='', inV='', total='';
-      if(parts.length >= 6 && /^\d+$/.test(parts[0].trim())){
-        pos   = parts[0].trim();
-        flt   = parts[1].trim();
-        name  = parts[2].trim();
-        out   = parts[3].trim();
-        inV   = parts[4].trim();
-        total = parts[5].trim();
-      } else if(parts.length >= 5){
-        flt   = parts[0].trim();
-        name  = parts[1].trim();
-        out   = parts[2].trim();
-        inV   = parts[3].trim();
-        total = parts[4].trim();
-      } else if(parts.length >= 4){
-        name  = parts[0].trim();
-        out   = parts[1].trim();
-        inV   = parts[2].trim();
-        total = parts[3].trim();
-      } else {
-        name  = parts[0].trim();
-        total = parts[parts.length-1].trim();
-      }
-      const posSpan = document.getElementById(`gr-pos-${key}`);
-      const fi = document.getElementById(`gr-flt-${key}`);
-      const ni = document.getElementById(`gr-name-${key}`);
-      const oi = document.getElementById(`gr-out-${key}`);
-      const ii = document.getElementById(`gr-in-${key}`);
-      const si = document.getElementById(`gr-score-${key}`);
-      if(posSpan && pos) posSpan.textContent = ordSfx(parseInt(pos));
-      if(fi && flt)      fi.value = flt.toUpperCase();
-      if(ni)             ni.value = name;
-      if(oi && out)      oi.value = out;
-      if(ii && inV)      ii.value = inV;
-      if(si && total)    si.value = total;
+  document.querySelectorAll('.gr-flight-tbody').forEach(tbody=>{
+    tbody.addEventListener('paste', e=>{
+      const target = e.target;
+      if(!target.id || !target.id.startsWith('gr-name-')) return;
+      const text = (e.clipboardData||window.clipboardData).getData('text');
+      const lines = text.split('\n').map(l=>l.trim()).filter(Boolean);
+      if(!lines.length) return;
+      // Only intercept if it looks like tabular GS data (has tabs or multiple spaces)
+      if(!lines[0].includes('\t') && !/\s{2,}/.test(lines[0])) return;
+      e.preventDefault();
+      // Find the starting row within this tbody
+      const tbodyRows = Array.from(tbody.querySelectorAll('tr[data-gkey]'));
+      const startRow = target.closest('tr[data-gkey]');
+      const startIdx = tbodyRows.indexOf(startRow);
+      lines.forEach((line, i) => {
+        const row = tbodyRows[startIdx + i];
+        if(!row) return;
+        const key = row.dataset.gkey;
+        // Split on tabs; fall back to splitting on 2+ spaces
+        const parts = line.includes('\t')
+          ? line.split('\t').map(s=>s.trim())
+          : line.trim().split(/\s{2,}/).map(s=>s.trim());
+        // GS format variants:
+        // 6-col: Position | Flight | Name | Out | In | Total
+        // 5-col: Flight | Name | Out | In | Total
+        // 4-col: Name | Out | In | Total
+        let name='', out='', inV='', total='';
+        if(parts.length >= 6 && /^\d+$/.test(parts[0])){
+          name=parts[2]; out=parts[3]; inV=parts[4]; total=parts[5];
+        } else if(parts.length >= 5 && /^[A-D]$/i.test(parts[0])){
+          name=parts[1]; out=parts[2]; inV=parts[3]; total=parts[4];
+        } else if(parts.length >= 5 && /^\d+$/.test(parts[0])){
+          // pos | flight merged or pos only — try pos|flt|name|out|in
+          name=parts[2]||parts[1]; out=parts[3]; inV=parts[4]; total=parts[5]||parts[4];
+        } else if(parts.length >= 4){
+          name=parts[0]; out=parts[1]; inV=parts[2]; total=parts[3];
+        } else {
+          name=parts[0]; total=parts[parts.length-1];
+        }
+        const ni = document.getElementById(`gr-name-${key}`);
+        const oi = document.getElementById(`gr-out-${key}`);
+        const ii = document.getElementById(`gr-in-${key}`);
+        const si = document.getElementById(`gr-score-${key}`);
+        if(ni) ni.value = name;
+        if(oi && out)   { oi.value = out;   }
+        if(ii && inV)   { ii.value = inV;   }
+        if(si && total) { si.value = total; }
+        autoGrossTotal(key);
+      });
     });
   });
 }
