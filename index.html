@@ -213,6 +213,11 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
 </head>
 <body>
 
+<!-- DEMO MODE BANNER -->
+<div id="demo-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:8000;background:#C9A84C;color:#1A1A1A;padding:7px 16px;font-size:12px;font-weight:700;align-items:center;gap:10px;justify-content:center;letter-spacing:.03em;">
+  👁 DEMO MODE — Import &amp; drag functions are live. Changes cannot be saved or published.
+</div>
+
 <!-- PIN OVERLAY -->
 <div id="pin-overlay">
   <div class="pin-logo">⛳ Men's Club<small>Payout Administration</small></div>
@@ -2581,10 +2586,33 @@ function confirmCommit(){
 
 // ── PIN logic ─────────────────────────────────────────────────────────────────
 let pinEntry='';
+const DEMO_PIN = '1952';
+let demoMode = false;
 const getPIN=()=>{ try{return localStorage.getItem('club_pin')||'1234';}catch(e){return'1234';} };
 const setPIN=p=>{ try{localStorage.setItem('club_pin',p);}catch(e){} };
 const markSession=()=>{ try{localStorage.setItem('pin_session',new Date().toDateString());}catch(e){} };
 const sessionOK=()=>{ try{return localStorage.getItem('pin_session')===new Date().toDateString();}catch(e){return false;} };
+
+function applyDemoMode(){
+  demoMode = true;
+  // Show demo banner and shift shell down to avoid overlap
+  const banner = document.getElementById('demo-banner');
+  if(banner) banner.style.display='flex';
+  const shell = document.querySelector('.shell');
+  if(shell) shell.style.marginTop='34px';
+  // Hide admin-only buttons
+  ['btn-commit','btn-publish-pots','btn-fix-public','btn-clear','btn-save-draft','btn-load-draft'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.style.display='none';
+  });
+  // Hide admin sidebar nav items
+  ['change-pin'].forEach(tab=>{
+    const el=document.querySelector(`.tbtn[data-tab="${tab}"]`); if(el) el.style.display='none';
+  });
+  // Hide Edit POG & Skins nav item
+  document.querySelectorAll('.tbtn').forEach(btn=>{
+    if(btn.dataset.tab==='opening-balances') btn.style.display='none';
+  });
+}
 
 function updatePinDots(){
   for(let i=0;i<4;i++) document.getElementById(`pd${i}`).classList.toggle('filled',i<pinEntry.length);
@@ -2597,6 +2625,10 @@ function pinDigit(d){
     if(pinEntry===getPIN()){
       document.getElementById('pin-overlay').classList.add('unlocked');
       markSession(); pinEntry=''; updatePinDots();
+    } else if(pinEntry===DEMO_PIN){
+      document.getElementById('pin-overlay').classList.add('unlocked');
+      pinEntry=''; updatePinDots();
+      applyDemoMode();
     } else {
       document.getElementById('pin-error').textContent='Incorrect PIN — try again';
       const dots=document.querySelector('.pin-dots');
@@ -2637,7 +2669,7 @@ document.addEventListener('click',function(e){
   switch(id){
     case 'btn-commit':   generatePayout(false); break;
     case 'btn-preview':  generatePayout(true);  break;
-    case 'btn-confirm-commit': confirmCommit(); break;
+    case 'btn-confirm-commit': if(demoMode){alert('Demo mode — changes cannot be saved.');return;} confirmCommit(); break;
     case 'btn-print':    window.print();         break;
     case 'btn-clear':      clearEntries();   break;
     case 'btn-save-draft': saveDraft();      break;
@@ -2730,7 +2762,7 @@ async function publishToGitHub(weekKey, name, date, notes, cancelled, total,
       grossRows: grossRows,
       flights: fdata,
       flightNames: {A:document.getElementById('f-a-name')?.value||'Flight A', B:document.getElementById('f-b-name')?.value||'Flight B', C:document.getElementById('f-c-name')?.value||'Flight C', D:document.getElementById('f-d-name')?.value||'Flight D'},
-      flightRanges: {A:document.getElementById('f-a-range')?.value||'0–5', B:document.getElementById('f-b-range')?.value||'6–11', C:document.getElementById('f-c-range')?.value||'12–17', D:document.getElementById('f-d-range')?.value||'18+'},
+      flightRanges: {A:document.getElementById('f-a-range')?.value||'0-5', B:document.getElementById('f-b-range')?.value||'6-11', C:document.getElementById('f-c-range')?.value||'12-17', D:document.getElementById('f-d-range')?.value||'18+'},
       net: netData,
       skins: skinsData,
       pog: pogData,
