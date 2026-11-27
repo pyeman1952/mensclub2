@@ -10,7 +10,7 @@
       "gnPool": 420,
       "skinsPool": 195,
       "pogPool": 210,
-      "recordedAt": "2026-11-27T17:39:49.625Z",
+      "recordedAt": "2026-11-27T18:05:14.839Z",
       "grossRows": [
         {
           "key": "G01",
@@ -272,7 +272,7 @@
         },
         {
           "place": 3,
-          "pname": "Stewart, Yvonne [TIE?]",
+          "pname": "Stewart, Yvonne",
           "gross": "104",
           "netOut": "",
           "netIn": "",
@@ -284,7 +284,7 @@
         },
         {
           "place": 4,
-          "pname": "Smith, Darrell [TIE?]",
+          "pname": "Smith, Darrell",
           "gross": "88",
           "netOut": "",
           "netIn": "",
@@ -308,7 +308,7 @@
         },
         {
           "place": 6,
-          "pname": "Murray, Scott [TIE?]",
+          "pname": "Murray, Scott",
           "gross": "83",
           "netOut": "",
           "netIn": "",
@@ -320,7 +320,7 @@
         },
         {
           "place": 7,
-          "pname": "Lund, Gordon [TIE?]",
+          "pname": "Lund, Gordon",
           "gross": "89",
           "netOut": "",
           "netIn": "",
@@ -332,7 +332,7 @@
         },
         {
           "place": 8,
-          "pname": "Rallison, Gord [TIE?]",
+          "pname": "Rallison, Gord",
           "gross": "88",
           "netOut": "",
           "netIn": "",
@@ -344,7 +344,7 @@
         },
         {
           "place": 9,
-          "pname": "Pye, Dave [TIE?]",
+          "pname": "Pye, Dave",
           "gross": "82",
           "netOut": "",
           "netIn": "",
@@ -356,7 +356,7 @@
         },
         {
           "place": 10,
-          "pname": "Hunt, Larry [TIE?]",
+          "pname": "Hunt, Larry",
           "gross": "85",
           "netOut": "",
           "netIn": "",
@@ -1300,9 +1300,9 @@
         "D": "Flight D"
       },
       "flightRanges": {
-        "A": "0Ã¢ÂÂ5",
-        "B": "6Ã¢ÂÂ11",
-        "C": "12Ã¢ÂÂ17",
+        "A": "0ÃÂ¢ÃÂÃÂ5",
+        "B": "6ÃÂ¢ÃÂÃÂ11",
+        "C": "12ÃÂ¢ÃÂÃÂ17",
         "D": "18+"
       },
       "net": [
@@ -7270,12 +7270,12 @@
     },
     "sk_6": {
       "pot": 0,
-      "updatedAt": "2026-11-27T17:39:34.299Z",
+      "updatedAt": "2026-11-27T18:05:12.236Z",
       "lastWinner": "Erickson, Murray"
     },
     "sk_7": {
       "pot": 0,
-      "updatedAt": "2026-11-27T17:39:34.300Z",
+      "updatedAt": "2026-11-27T18:05:12.236Z",
       "lastWinner": "Haigh, Iain"
     },
     "sk_8": {
@@ -7288,7 +7288,7 @@
     },
     "sk_11": {
       "pot": 0,
-      "updatedAt": "2026-11-27T17:39:34.300Z",
+      "updatedAt": "2026-11-27T18:05:12.236Z",
       "lastWinner": "VanVelzen, Paul"
     },
     "sk_12": {
@@ -7297,12 +7297,12 @@
     },
     "sk_13": {
       "pot": 0,
-      "updatedAt": "2026-11-27T17:39:34.300Z",
+      "updatedAt": "2026-11-27T18:05:12.236Z",
       "lastWinner": "Phelan, Bryan"
     },
     "sk_14": {
       "pot": 0,
-      "updatedAt": "2026-11-27T17:39:34.300Z",
+      "updatedAt": "2026-11-27T18:05:12.236Z",
       "lastWinner": "Lychak, Dennis"
     },
     "sk_16": {
@@ -7327,7 +7327,7 @@
     },
     "pg_15": {
       "pot": 0,
-      "updatedAt": "2026-11-27T17:39:34.300Z",
+      "updatedAt": "2026-11-27T18:05:12.236Z",
       "lastWinner": "Haigh, Iain"
     },
     "pg_17": {
