@@ -3574,7 +3574,17 @@ function populateRosterWeekSelect(){
   const sel = document.getElementById('roster-week-select');
   if(!sel) return;
   while(sel.options.length > 1) sel.remove(1);
-  const weeks = LS.get('weeks', []);
+  let weeks = weeksLog.length ? weeksLog : LS.get('weeks', []);
+  if(!weeks.length){
+    // In demo mode (or no local data), fetch from public JSON
+    fetch('https://raw.githubusercontent.com/pyeman1952/mensclub2/main/payout-data.json?cb='+Date.now())
+      .then(r=>r.ok?r.json():null).then(data=>{
+        if(!data||!data.weeks) return;
+        weeksLog = data.weeks;
+        populateRosterWeekSelect();
+      }).catch(()=>{});
+    return;
+  }
   weeks.slice().sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(wk=>{
     const opt = document.createElement('option');
     opt.value = wk.id;
@@ -3603,6 +3613,7 @@ document.addEventListener('change', e=>{
 
 async function uploadRosterOnly(){
   const msg    = document.getElementById('roster-msg');
+  if(demoMode){ msg.textContent='Demo mode — roster uploads are disabled.'; msg.style.color='var(--mut)'; return; }
   const weekId = document.getElementById('roster-week-select').value;
   const input  = document.getElementById('roster-csv-input');
   if(!weekId){ msg.textContent='⚠ Please select a week first.'; msg.style.color='var(--red)'; return; }
