@@ -370,7 +370,10 @@ function renderWeek(w){
     // GROSS
     const flights = w.flights||{A:[],B:[],C:[],D:[]};
     const flightNames = w.flightNames||{A:'Flight A',B:'Flight B',C:'Flight C',D:'Flight D'};
-    const flightRanges = w.flightRanges||{A:'0–5',B:'6–11',C:'12–17',D:'18+'};
+    const _rawRanges = w.flightRanges||{A:'0-5',B:'6-11',C:'12-17',D:'18+'};
+    // Sanitize: strip garbled multi-byte artifacts (ÂÃ sequences from double-encoding)
+    const flightRanges = Object.fromEntries(Object.entries(_rawRanges).map(([k,v])=>[k, v.replace(/[^\x00-\x7F\-+0-9 ]/g,'').trim() || {A:'0-5',B:'6-11',C:'12-17',D:'18+'}[k]]));
+
     html+=`<div class="psec"><div class="ptitle">Gross Winners — Flight Results</div>
       <table class="pt"><thead><tr><th>Flight</th><th>Place</th><th>Player</th><th>Score</th><th class="r">Prize</th></tr></thead><tbody>`;
     ['A','B','C','D'].forEach(f=>{
@@ -525,24 +528,42 @@ function renderLeaderboard(q=''){
 
 // ── Pots ──────────────────────────────────────────────────────────────────────
 function renderPots(){
-  const pots = appData.pots||{};
   const fmt=n=>'$'+Number(n||0).toFixed(2);
-  let html=`<div class="pot-grid">
+
+  // Use the most recent non-cancelled week's skins/pog runPot values as the
+  // current balances — these match what appears on that week's payout sheet.
+  const weeks = (appData.weeks||[]).filter(w=>!w.cancelled).sort((a,b)=>a.id>b.id?-1:1);
+  const lastWk = weeks[0]||null;
+  const lastDate = lastWk?.date || lastWk?.id || '';
+
+  // Build maps: hole → runPot from most recent week
+  const skinsMap={}, pogMap={};
+  if(lastWk){
+    (lastWk.skins||[]).forEach(r=>{ if(r.hole!=null) skinsMap[r.hole]=r.runPot||0; });
+    (lastWk.pog||[]).forEach(r=>{ if(r.hole!=null) pogMap[r.hole]=r.runPot||0; });
+  }
+
+  // Fallback: appData.pots for any hole not covered by last week
+  const pots = appData.pots||{};
+
+  let html=`<div style="font-size:11px;color:var(--mut);margin-bottom:12px;">
+    Balances after ${lastDate?`week ending ${lastDate}`:'most recent week'} — matches the payout sheet.
+  </div>
+  <div class="pot-grid">
     <div class="card"><h2>Skins — Current Pot by Hole</h2><div class="cb">
-      <table class="gt"><thead><tr><th>Hole</th><th class="r">Current Pot</th><th>Last Updated</th></tr></thead><tbody>`;
+      <table class="gt"><thead><tr><th>Hole</th><th class="r">Pot Balance</th></tr></thead><tbody>`;
   SKINS_HOLES.forEach(h=>{
-    const d=pots[`sk_${h}`]||{pot:0};
-    html+=`<tr><td style="font-weight:600;">${h}</td><td style="text-align:right;font-weight:700;color:var(--gold);">${fmt(d.pot)}</td>
-      <td style="color:var(--mut);font-size:11px;">${d.updatedAt?new Date(d.updatedAt).toLocaleDateString():'—'}</td></tr>`;
+    const bal = skinsMap[h]!=null ? skinsMap[h] : (pots[`sk_${h}`]?.pot||0);
+    html+=`<tr><td style="font-weight:600;">${h}</td>
+      <td style="text-align:right;font-weight:700;color:var(--gold);">${fmt(bal)}</td></tr>`;
   });
   html+=`</tbody></table></div></div>
     <div class="card"><h2>Pots of Gold — Current Pot by Hole</h2><div class="cb">
-      <table class="gt"><thead><tr><th>Hole</th><th class="r">Current Pot</th><th>Last Updated</th></tr></thead><tbody>`;
+      <table class="gt"><thead><tr><th>Hole</th><th class="r">Pot Balance</th></tr></thead><tbody>`;
   POG_HOLES.forEach(h=>{
-    const d=pots[`pg_${h}`]||{pot:0};
+    const bal = pogMap[h]!=null ? pogMap[h] : (pots[`pg_${h}`]?.pot||0);
     html+=`<tr><td style="font-weight:600;"><span class="pog-dot"></span>${h}</td>
-      <td style="text-align:right;font-weight:700;color:var(--gold);">${fmt(d.pot)}</td>
-      <td style="color:var(--mut);font-size:11px;">${d.updatedAt?new Date(d.updatedAt).toLocaleDateString():'—'}</td></tr>`;
+      <td style="text-align:right;font-weight:700;color:var(--gold);">${fmt(bal)}</td></tr>`;
   });
   html+=`</tbody></table></div></div></div>`;
   document.getElementById('pots-content').innerHTML=html;
