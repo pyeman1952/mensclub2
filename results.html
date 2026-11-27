@@ -280,7 +280,7 @@ function renderWeek(w){
           const sfx=r.place===1?'st':r.place===2?'nd':r.place===3?'rd':'th';
           const bc=r.place<=3?`p${r.place}b`:'pnb';
           html+=`<tr><td></td><td><span class="pbadge ${bc}">${r.place}</span>${r.place}${sfx}${r.cb?' <span class="countback-badge">CB</span>':''}</td>
-            <td>${r.pname||'—'}</td><td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
+            <td>${(r.pname||'').replace(/\s*\[TIE\?\]/gi,'').trim()||'—'}</td><td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
             <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td></tr>`;
         });
       }
@@ -296,7 +296,7 @@ function renderWeek(w){
       const sfx=r.place===1?'st':r.place===2?'nd':r.place===3?'rd':'th';
       const bc=r.place<=3?`p${r.place}b`:'pnb';
       html+=`<tr><td><span class="pbadge ${bc}">${r.place}</span>${r.place}${sfx}${r.cb?' <span class="countback-badge">CB</span>':''}</td>
-        <td>${r.pname||'—'}</td>
+        <td>${(r.pname||'').replace(/\s*\[TIE\?\]/gi,'').trim()||'—'}</td>
         <td>${r.flt?`<span class="flt-badge">Flt ${r.flt}</span>`:'—'}</td>
         <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
         <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td></tr>`;
@@ -358,7 +358,7 @@ function renderWeek(w){
     // MONEY WINNERS
     const mwList = w.moneyWinners||[];
     if(mwList.length){
-      const displayName=n=>{ const s=(n||'').trim(); const ci=s.indexOf(','); if(ci>-1){const last=s.slice(0,ci).trim();const first=s.slice(ci+1).trim();return first?`${first} ${last}`:last;} return s; };
+      const displayName=n=>{ const s=(n||'').trim().replace(/\s*\[TIE\?\]/gi,'').trim(); const ci=s.indexOf(','); if(ci>-1){const last=s.slice(0,ci).trim();const first=s.slice(ci+1).trim();return first?`${first} ${last}`:last;} return s; };
       html+=`<div class="psec"><div class="ptitle" style="background:#0D47A1;">Weekly Money Winners</div>
         <table class="pt"><thead><tr><th>Player</th><th class="r">Total</th><th class="r">Bar</th><th class="r">Pro Shop</th><th class="r">Cash</th><th class="r">Cheque</th><th>Other</th></tr></thead><tbody>`;
       let wkTotal=0;
@@ -409,7 +409,8 @@ function renderLeaderboard(q=''){
   </tr></thead><tbody>`;
   rows.forEach((r,i)=>{
     const rk=i+1; const rc=rk===1?'lb1':rk===2?'lb2':rk===3?'lb3':'lbn';
-    html+=`<tr><td><span class="lbr ${rc}">${rk}</span></td><td><strong>${r.name||'—'}</strong></td>
+    const lbName=(r.name||'').replace(/\s*\[TIE\?\]/gi,'').trim();
+    html+=`<tr><td><span class="lbr ${rc}">${rk}</span></td><td><strong>${lbName||'—'}</strong></td>
       <td class="r money">$${(r.gross||0).toFixed(2)}</td><td class="r money">$${(r.net||0).toFixed(2)}</td>
       <td class="r money">$${(r.skins||0).toFixed(2)}</td><td class="r money">$${(r.pog||0).toFixed(2)}</td>
       <td class="r money">$${(r.draw||0).toFixed(2)}</td>
