@@ -60,6 +60,9 @@ html,body{height:100%;width:100%;font-family:system-ui,-apple-system,sans-serif;
 .drag-handle{cursor:grab;color:var(--mut);font-size:13px;padding:0 4px;user-select:none;text-align:center;}
 .drag-handle:active{cursor:grabbing;}
 tr.drag-over{outline:2px solid var(--gm);outline-offset:-2px;background:var(--gl);}
+tr.skin-winner{background:#e8f5e9;}
+@media (prefers-color-scheme:dark){tr.skin-winner{background:#1b3a1f;}}
+[data-theme="dark"] tr.skin-winner{background:#1b3a1f;}
 tr.dragging{opacity:.4;}
 .del-btn{pointer-events:all !important; cursor:pointer;}
 /* ── Gross-winner badge for players appearing in both gross and net ── */
@@ -712,7 +715,7 @@ function parseDateToISO(str){
 // Handles both "Last, First" and "First Last" inputs
 const mwKey=(name)=>{
   if(!name) return null;
-  const s=name.trim();
+  const s=name.trim().replace(/\s*\[TIE\?\]/gi,'').trim();
   if(s.indexOf(',')>-1) return s; // already "Last, First"
   const parts=s.split(/\s+/);
   if(parts.length>=2){ const last=parts[parts.length-1]; const first=parts.slice(0,-1).join(' '); return `${last}, ${first}`; }
@@ -838,13 +841,19 @@ function autoNetScore(p){
 }
 
 // ── Build skins tbody ─────────────────────────────────────────────────────────
+function updateSkinRowHighlight(prefix, h){
+  const inp=document.getElementById(`${prefix}-name-${h}`);
+  const row=document.getElementById(`${prefix==='sk'?'sk':'pog'}-row-${h}`);
+  if(inp&&row) row.classList.toggle('skin-winner', inp.value.trim()!=='');
+}
+
 function buildSkins(){
   const tbody=document.getElementById('skins-tbody');
   SKINS_HOLES.forEach(h=>{
     const tr=document.createElement('tr'); tr.id=`sk-row-${h}`;
     tr.innerHTML=`
       <td style="font-weight:600;">${h}</td>
-      <td><input type="text" id="sk-name-${h}" placeholder="Winner or blank"></td>
+      <td><input type="text" id="sk-name-${h}" placeholder="Winner or blank" oninput="this.closest('tr').classList.toggle('skin-winner',this.value.trim()!=='')"></td>
       <td><select id="sk-flt-${h}" style="font-size:12px;padding:4px 3px;width:54px;"><option value="">--</option>${FLIGHT_OPTS}</select></td>
       <td><input type="text" id="sk-score-${h}" placeholder="e.g. 3G" style="width:60px;text-align:center;"></td>
       <td class="tdr"><span id="sk-prev-${h}" style="color:var(--mut);font-size:12px;">$0.00</span></td>
@@ -863,7 +872,7 @@ function buildPOG(){
     const tr=document.createElement('tr'); tr.id=`pog-row-${h}`;
     tr.innerHTML=`
       <td style="font-weight:600;"><span class="pog-dot"></span>${h}</td>
-      <td><input type="text" id="pog-name-${h}" placeholder="Unique birdie winner"></td>
+      <td><input type="text" id="pog-name-${h}" placeholder="Unique birdie winner" oninput="this.closest('tr').classList.toggle('skin-winner',this.value.trim()!=='')"></td>
       <td><select id="pog-flt-${h}" style="font-size:12px;padding:4px 3px;width:54px;"><option value="">--</option>${FLIGHT_OPTS}</select></td>
       <td class="tdr"><span id="pog-prev-${h}" style="color:var(--mut);font-size:12px;">$0.00</span></td>
       <td class="tdr"><span id="pog-add-${h}" style="color:var(--gm);font-size:12px;">+$0.00</span></td>
@@ -901,6 +910,29 @@ function addSkillRow(h, isFirst){
   }
 }
 function buildWeeklySummary(){
+  // ── Snapshot current pref selections by player name before rebuilding ────────
+  const _prefSnap={};
+  const _existingTable=document.getElementById('ws-table');
+  if(_existingTable){
+    _existingTable.querySelectorAll('tbody tr[id^="ws-row-"]').forEach(tr=>{
+      const idx=tr.id.replace('ws-row-','');
+      const nameCell=tr.querySelector('td');
+      const sel=document.getElementById(`ws-pref-${idx}`);
+      if(!nameCell||!sel) return;
+      const rawName=nameCell.textContent.trim(); // "First Last"
+      const pref=sel.value;
+      // Also capture split amounts if Split chosen
+      const splitData={};
+      if(pref==='Split'){
+        ['bar','pro','cash','cheque'].forEach(k=>{
+          const el=document.getElementById(`ws-${k}-${idx}`);
+          if(el&&el.value) splitData[k]=el.value;
+        });
+      }
+      _prefSnap[rawName]={pref, splitData};
+    });
+  }
+
   const fmt=n=>n?'$'+Number(n).toFixed(2):'';
   const totals={}; // {pname: {gross,net,skins,pog,skill,draws}}
   const add=(pname,cat,amt)=>{
@@ -1066,6 +1098,25 @@ function buildWeeklySummary(){
         else selEl.value='Bar';
       } else if(typeof p==='string'){
         selEl.value=p; // legacy string pref
+      }
+    });
+  }
+
+  // ── Restore in-session pref snapshot (overrides committed data for unsaved edits) ──
+  if(Object.keys(_prefSnap).length){
+    rows.forEach((r,i)=>{
+      const dispName=(n=>{const s=(n||'').trim();const ci=s.indexOf(',');if(ci>-1){const last=s.slice(0,ci).trim();const first=s.slice(ci+1).trim();return first?`${first} ${last}`:last;}return s;})(r.name);
+      const snap=_prefSnap[dispName];
+      if(!snap) return;
+      const selEl=document.getElementById(`ws-pref-${i}`);
+      if(!selEl) return;
+      selEl.value=snap.pref;
+      if(snap.pref==='Split'){
+        wsSplitToggle(i,r.total);
+        if(snap.splitData.bar){const el=document.getElementById(`ws-bar-${i}`);if(el)el.value=snap.splitData.bar;}
+        if(snap.splitData.pro){const el=document.getElementById(`ws-pro-${i}`);if(el)el.value=snap.splitData.pro;}
+        if(snap.splitData.cash){const el=document.getElementById(`ws-cash-${i}`);if(el)el.value=snap.splitData.cash;}
+        if(snap.splitData.cheque){const el=document.getElementById(`ws-cheque-${i}`);if(el)el.value=snap.splitData.cheque;}
       }
     });
   }
@@ -1412,11 +1463,13 @@ function clearEntries(){
     const s=document.getElementById(`sk-score-${h}`);if(s)s.value='';
     const c=document.getElementById(`sk-paid-${h}`);if(c)c.checked=false;
     const g=document.getElementById(`sk-guest-${h}`);if(g)g.checked=false;
+    const row=document.getElementById(`sk-row-${h}`);if(row)row.classList.remove('skin-winner');
   });
   POG_HOLES.forEach(h=>{
     const n=document.getElementById(`pog-name-${h}`);if(n)n.value='';
     const c=document.getElementById(`pog-paid-${h}`);if(c)c.checked=false;
     const g=document.getElementById(`pog-guest-${h}`);if(g)g.checked=false;
+    const row=document.getElementById(`pog-row-${h}`);if(row)row.classList.remove('skin-winner');
   });
   // Clear skill prizes — rebuild to wipe extra rows too
   buildSkill();
@@ -1576,6 +1629,7 @@ function loadDraft(){
     const c=document.getElementById(`sk-paid-${h}`); if(c) c.checked=!!r.paid;
     const g=document.getElementById(`sk-guest-${h}`); if(g) g.checked=!!r.guest;
     const f=document.getElementById(`sk-flt-${h}`); if(f) f.value=r.flt||'';
+    updateSkinRowHighlight('sk',h);
   });
   // POG
   if(d.pgRows) POG_HOLES.forEach(h=>{
@@ -1584,6 +1638,7 @@ function loadDraft(){
     const c=document.getElementById(`pog-paid-${h}`); if(c) c.checked=!!r.paid;
     const g=document.getElementById(`pog-guest-${h}`); if(g) g.checked=!!r.guest;
     const f=document.getElementById(`pog-flt-${h}`); if(f) f.value=r.flt||'';
+    updateSkinRowHighlight('pog',h);
   });
   // Skill shots
   if(d.spRows && Array.isArray(d.spRows)){
@@ -1945,6 +2000,7 @@ async function loadCommittedWeek(){
     const c=document.getElementById(`sk-paid-${h}`); if(c) c.checked=!!r.paid;
     const g=document.getElementById(`sk-guest-${h}`); if(g) g.checked=!!r.guest;
     const f=document.getElementById(`sk-flt-${h}`); if(f) f.value=r.flt||'';
+    updateSkinRowHighlight('sk',h);
   });
 
   // ── POG ──
@@ -1957,6 +2013,7 @@ async function loadCommittedWeek(){
     const c=document.getElementById(`pog-paid-${h}`); if(c) c.checked=!!r.paid;
     const g=document.getElementById(`pog-guest-${h}`); if(g) g.checked=!!r.guest;
     const f=document.getElementById(`pog-flt-${h}`); if(f) f.value=r.flt||'';
+    updateSkinRowHighlight('pog',h);
   });
 
   // ── Skill shots ──
@@ -3202,14 +3259,9 @@ function parseScoresCSV(text){
     for(let p=0;p<Math.min(places+2, sorted.length);p++){
       const player = sorted[p];
       if(grossWinners.filter(w=>w.flight===flt).length >= places) break;
-      let isTied = false;
-      if(prev && player.gross === prev.gross){
-        const cb = compareCountback(player, prev);
-        if(cb===0) isTied=true;
-      }
       pos++;
       grossWinners.push({ flight:flt, name:player.name, gross:player.gross, hcp:player.hcp,
-                          holes:player.holes, pos, tied:isTied });
+                          holes:player.holes, pos });
       grossWinnerNames.add(player.name);
       prev = player;
     }
@@ -3229,16 +3281,10 @@ function parseScoresCSV(text){
   for(const p of netSorted){
     if(netWinners.length >= 20) break;
     if(usedNames.has(p.name)) continue;
-    // Check tie with previous net winner
-    let tied = false;
-    if(netWinners.length>0){
-      const last = netWinners[netWinners.length-1];
-      if(last.net === p.net) tied=true;
-    }
     netPos++;
     // Flag if this player also won a gross flight (but still include them)
     const grossWinner = grossWinnerNames.has(p.name);
-    netWinners.push({ pos:netPos, flight:p.flight, name:p.name, gross:p.gross, hcp:p.hcp, net:p.net, tied, grossWinner });
+    netWinners.push({ pos:netPos, flight:p.flight, name:p.name, gross:p.gross, hcp:p.hcp, net:p.net, grossWinner });
     usedNames.add(p.name);
   }
 
@@ -3395,7 +3441,7 @@ function runImport(){
         const outEl  =document.getElementById(`gr-out-${id}`);
         const inEl   =document.getElementById(`gr-in-${id}`);
         // gr-flt-* is now a hidden input pre-set to the flight letter — no need to change it
-        if(nameEl)  nameEl.value=w.name+(w.tied?' [TIE?]':'');
+        if(nameEl)  nameEl.value=w.name;
         if(scoreEl) scoreEl.value=w.gross;
         // Fill out/in from hole scores if available
         if(w.holes && w.holes.length===18){
@@ -3409,8 +3455,6 @@ function runImport(){
       });
     });
     summary.push(`🏌️ Gross: ${total} winners filled across 4 flights`);
-    const ties=csvData.grossWinners.filter(w=>w.tied);
-    if(ties.length) summary.push(`⚠ Gross tie(s) — verify: ${ties.map(t=>t.name).join(', ')}`);
   }
 
   // ── Fill Net Winners — include gross winners, flag them with badge ───────────
@@ -3427,7 +3471,7 @@ function runImport(){
       if(hcpEl)   hcpEl.value=w.hcp;
       if(netEl)   netEl.value=w.net;
       if(nameEl){
-        nameEl.value=w.name+(w.tied?' [TIE?]':'');
+        nameEl.value=w.name;
         // Add gross-winner badge as a sibling span (non-editable, for visibility)
         let badge=nameEl.parentNode.querySelector('.gross-also');
         if(w.grossWinner){
@@ -3439,8 +3483,6 @@ function runImport(){
       }
     });
     summary.push(`📋 Net: top ${csvData.netWinners.length} filled — gross winners included & flagged`);
-    const nties=csvData.netWinners.filter(w=>w.tied);
-    if(nties.length) summary.push(`⚠ Net tie(s) — resolve manually: ${nties.map(t=>t.name).join(', ')}`);
   }
 
   // ── Fill Skins ──────────────────────────────────────────────────────────────
@@ -3451,7 +3493,7 @@ function runImport(){
       const nameEl =document.getElementById(`sk-name-${h}`);
       const fltEl  =document.getElementById(`sk-flt-${h}`);
       const scoreEl=document.getElementById(`sk-score-${h}`);
-      if(nameEl)  { nameEl.value=w.name; count++; }
+      if(nameEl)  { nameEl.value=w.name; count++; updateSkinRowHighlight('sk',h); }
       if(fltEl && w.flight) { fltEl.value=w.flight; }
       if(scoreEl && w.score){ scoreEl.value=w.score; }
     });
@@ -3465,7 +3507,7 @@ function runImport(){
       const h=parseInt(hole);
       const nameEl=document.getElementById(`pog-name-${h}`);
       const fltEl =document.getElementById(`pog-flt-${h}`);
-      if(nameEl)  { nameEl.value=w.name; count++; }
+      if(nameEl)  { nameEl.value=w.name; count++; updateSkinRowHighlight('pog',h); }
       if(fltEl && w.flight) { fltEl.value=w.flight; }
     });
     summary.push(`💰 POG: ${count} hole(s) filled`);
