@@ -371,8 +371,19 @@ function renderWeek(w){
     const flights = w.flights||{A:[],B:[],C:[],D:[]};
     const flightNames = w.flightNames||{A:'Flight A',B:'Flight B',C:'Flight C',D:'Flight D'};
     const _rawRanges = w.flightRanges||{A:'0-5',B:'6-11',C:'12-17',D:'18+'};
-    // Sanitize: strip garbled multi-byte artifacts (ÂÃ sequences from double-encoding)
-    const flightRanges = Object.fromEntries(Object.entries(_rawRanges).map(([k,v])=>[k, v.replace(/[^\x00-\x7F\-+0-9 ]/g,'').trim() || {A:'0-5',B:'6-11',C:'12-17',D:'18+'}[k]]));
+    // Sanitize: strip ALL non-ASCII bytes first (handles UTF-8 double-encoding like ÃÂ from en-dash corruption),
+    // then normalise separators (en-dash, 'to', extra spaces) to hyphen-minus.
+    // Fall back to defaults if result doesn't start with a digit.
+    const _flightDefaults = {A:'0-5',B:'6-11',C:'12-17',D:'18+'};
+    const flightRanges = Object.fromEntries(Object.entries(_rawRanges).map(([k,v])=>{
+      // 1) strip non-ASCII (kills the double-encoded en-dash blobs)
+      let s = v.replace(/[^\x00-\x7F]+/g,'-');
+      // 2) normalise word "to" (e.g. "0 to 5") and any remaining non-digit/non-+/non-- to a hyphen
+      s = s.replace(/\s*\bto\b\s*/gi,'-').replace(/[^0-9+\-]/g,'-');
+      // 3) collapse multiple consecutive dashes/spaces to one dash
+      s = s.replace(/-+/g,'-').replace(/^-|-$/g,'').trim();
+      return [k, /^\d/.test(s) ? s : _flightDefaults[k]||v];
+    }));
 
     html+=`<div class="psec"><div class="ptitle">Gross Winners — Flight Results</div>
       <table class="pt"><thead><tr><th>Flight</th><th>Place</th><th>Player</th><th>Score</th><th class="r">Prize</th></tr></thead><tbody>`;
