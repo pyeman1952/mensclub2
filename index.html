@@ -2441,10 +2441,10 @@ function confirmCommit(){
   // Save week (replace if overwrite)
   if(pc.isOverwrite){
     const idx=weeksLog.findIndex(w=>w.id===pc.weekKey);
-    const rec={id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData,rdData:pc.rdData,mwList:pc.mwList};
+    const rec={id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),flights:pc.fdata,netData:pc.netData,net:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData,rdData:pc.rdData,mwList:pc.mwList};
     if(idx>=0) weeksLog[idx]=rec; else weeksLog.push(rec);
   } else {
-    saveWeek({id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData,rdData:pc.rdData,mwList:pc.mwList});
+    saveWeek({id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),flights:pc.fdata,netData:pc.netData,net:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData,rdData:pc.rdData,mwList:pc.mwList});
   }
   LS.set('weeks',weeksLog);
   populateWeekLoadSelect(); // keep dropdown in sync after commit
@@ -3335,6 +3335,7 @@ function calcSkinsPOGFromCSV(players){
   // Full handicap: each hole gets floor(hcp/18) strokes, plus 1 more if
   // that hole's stroke index <= (hcp mod 18).  Handles hcp > 18 (2 strokes) and > 36 (3).
   function strokesOnHole(hcp, holeNum){
+    if(hcp <= 0) return 0; // plus handicaps / scratch get no strokes
     const si = SK_SI[holeNum-1]; // 1-based SI for this hole
     return Math.floor(hcp/18) + (si <= hcp%18 ? 1 : 0);
   }
@@ -3351,12 +3352,8 @@ function calcSkinsPOGFromCSV(players){
   }
 
   // ── Skins algorithm ──────────────────────────────────────────────────────────
-  // 1. Find lowest net score on this hole.
-  // 2. If exactly one player has that net — net skin.
-  // 3. If multiple players share that net — check whether one has a unique gross
-  //    score that is also <= every other tied player's gross (gross beats net on a tie).
-  //    If exactly one player has the unique lowest gross among the tied group — gross skin.
-  // 4. Otherwise — carry (no winner).
+  // Per-hole: unique lowest net = net skin. Tied on net → unique lowest gross = gross skin.
+  // Any tie = no winner this week (pot carries to next week via running balance).
   const skinsWinners = {};
   SKINS_HOLES.forEach(h=>{
     const hp = holePlayers(h);
@@ -3366,7 +3363,6 @@ function calcSkinsPOGFromCSV(players){
     const netTied = hp.filter(p=>p.net===minNet);
 
     if(netTied.length === 1){
-      // Unique net — net skin
       const w = netTied[0];
       skinsWinners[h] = { name:w.name, flight:w.flight, score:String(w.gross)+'N', type:'N' };
     } else {
@@ -3374,17 +3370,16 @@ function calcSkinsPOGFromCSV(players){
       const minGross = Math.min(...netTied.map(p=>p.gross));
       const grossTied = netTied.filter(p=>p.gross===minGross);
       if(grossTied.length === 1){
-        // One player has unique lowest gross among net-tied group — gross skin
         const w = grossTied[0];
         skinsWinners[h] = { name:w.name, flight:w.flight, score:String(w.gross)+'G', type:'G' };
       }
-      // else — carry, no entry
+      // else — tie, pot carries to next week
     }
   });
 
   // ── POG algorithm ────────────────────────────────────────────────────────────
   // On each POG hole, find players with gross ≤ par-1 (birdie or better).
-  // If exactly one — winner. If none or multiple — carry.
+  // Exactly one birdie → winner. 0 or 2+ birdies → carry to next week.
   const pogWinners = {};
   POG_HOLES.forEach(h=>{
     const par = SK_PAR[h-1];
@@ -3394,7 +3389,7 @@ function calcSkinsPOGFromCSV(players){
       const w = birdieOrBetter[0];
       pogWinners[h] = { name:w.name, flight:w.flight, score:String(w.gross), type:'' };
     }
-    // else carry (0 or 2+) — no entry
+    // else carry (0 or 2+) — pot rolls to next week
   });
 
   return { skinsWinners, pogWinners };
