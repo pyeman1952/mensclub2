@@ -390,70 +390,18 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
     </div>
 
 
-    <!-- Gross Winners — 4 per-flight mini-tables in a 2×2 grid -->
+    <!-- Net Winners per Flight — 3 flights × 6 spots -->
     <div class="card s2">
-      <h2>Gross Winners <em>drag ☰ to reorder within each flight · CB = countback</em></h2>
+      <h2>Net Winners <em>by flight — drag ☰ to reorder · CB = countback</em></h2>
       <div class="cb">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <!-- Flight A: G01–G04 -->
-          <div>
-            <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;padding:3px 6px;background:var(--gl);border-radius:4px;">Flight A</div>
-            <table class="gt gr-flight-table"><thead><tr><th style="width:18px;"></th><th style="width:22px;">#</th><th>Player Name</th><th style="width:52px;">Out</th><th style="width:52px;">In</th><th style="width:58px;">Total</th><th style="width:58px;">Prize ($)</th><th style="width:24px;">CB</th></tr></thead>
-            <tbody id="gross-tbody-A" class="gr-flight-tbody" data-flight="A">
-              <tr data-gkey="G01"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G01">1st</span></td><td><input type="text" id="gr-name-G01" placeholder="Player name"><input type="hidden" id="gr-flt-G01" value="A"></td><td><input type="number" id="gr-out-G01" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G01')" inputmode="numeric"></td><td><input type="number" id="gr-in-G01" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G01')" inputmode="numeric"></td><td><input type="number" id="gr-score-G01" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G01" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G01" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearGrossRow('G01')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr>
-              <tr data-gkey="G02"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G02">2nd</span></td><td><input type="text" id="gr-name-G02" placeholder="Player name"><input type="hidden" id="gr-flt-G02" value="A"></td><td><input type="number" id="gr-out-G02" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G02')" inputmode="numeric"></td><td><input type="number" id="gr-in-G02" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G02')" inputmode="numeric"></td><td><input type="number" id="gr-score-G02" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G02" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G02" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearGrossRow('G02')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr>
-              <tr data-gkey="G03"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G03">3rd</span></td><td><input type="text" id="gr-name-G03" placeholder="Player name"><input type="hidden" id="gr-flt-G03" value="A"></td><td><input type="number" id="gr-out-G03" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G03')" inputmode="numeric"></td><td><input type="number" id="gr-in-G03" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G03')" inputmode="numeric"></td><td><input type="number" id="gr-score-G03" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G03" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G03" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearGrossRow('G03')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr>
-              <tr data-gkey="G04"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G04">4th</span></td><td><input type="text" id="gr-name-G04" placeholder="Player name"><input type="hidden" id="gr-flt-G04" value="A"></td><td><input type="number" id="gr-out-G04" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G04')" inputmode="numeric"></td><td><input type="number" id="gr-in-G04" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G04')" inputmode="numeric"></td><td><input type="number" id="gr-score-G04" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G04" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G04" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearGrossRow('G04')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr>
-            </tbody></table>
-          </div>
-          <!-- Flight B: G05–G08 -->
-          <div>
-            <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;padding:3px 6px;background:var(--gl);border-radius:4px;">Flight B</div>
-            <table class="gt gr-flight-table"><thead><tr><th style="width:18px;"></th><th style="width:22px;">#</th><th>Player Name</th><th style="width:52px;">Out</th><th style="width:52px;">In</th><th style="width:58px;">Total</th><th style="width:58px;">Prize ($)</th><th style="width:24px;">CB</th></tr></thead>
-            <tbody id="gross-tbody-B" class="gr-flight-tbody" data-flight="B">
-              <tr data-gkey="G05"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G05">1st</span></td><td><input type="text" id="gr-name-G05" placeholder="Player name"><input type="hidden" id="gr-flt-G05" value="B"></td><td><input type="number" id="gr-out-G05" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G05')" inputmode="numeric"></td><td><input type="number" id="gr-in-G05" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G05')" inputmode="numeric"></td><td><input type="number" id="gr-score-G05" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G05" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G05" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearGrossRow('G05')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr>
-              <tr data-gkey="G06"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G06">2nd</span></td><td><input type="text" id="gr-name-G06" placeholder="Player name"><input type="hidden" id="gr-flt-G06" value="B"></td><td><input type="number" id="gr-out-G06" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G06')" inputmode="numeric"></td><td><input type="number" id="gr-in-G06" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G06')" inputmode="numeric"></td><td><input type="number" id="gr-score-G06" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G06" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G06" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearGrossRow('G06')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr>
-              <tr data-gkey="G07"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G07">3rd</span></td><td><input type="text" id="gr-name-G07" placeholder="Player name"><input type="hidden" id="gr-flt-G07" value="B"></td><td><input type="number" id="gr-out-G07" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G07')" inputmode="numeric"></td><td><input type="number" id="gr-in-G07" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G07')" inputmode="numeric"></td><td><input type="number" id="gr-score-G07" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G07" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G07" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearGrossRow('G07')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr>
-              <tr data-gkey="G08"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G08">4th</span></td><td><input type="text" id="gr-name-G08" placeholder="Player name"><input type="hidden" id="gr-flt-G08" value="B"></td><td><input type="number" id="gr-out-G08" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G08')" inputmode="numeric"></td><td><input type="number" id="gr-in-G08" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G08')" inputmode="numeric"></td><td><input type="number" id="gr-score-G08" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G08" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G08" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearGrossRow('G08')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr>
-            </tbody></table>
-          </div>
-          <!-- Flight C: G09–G12 -->
-          <div>
-            <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;padding:3px 6px;background:var(--gl);border-radius:4px;">Flight C</div>
-            <table class="gt gr-flight-table"><thead><tr><th style="width:18px;"></th><th style="width:22px;">#</th><th>Player Name</th><th style="width:52px;">Out</th><th style="width:52px;">In</th><th style="width:58px;">Total</th><th style="width:58px;">Prize ($)</th><th style="width:24px;">CB</th></tr></thead>
-            <tbody id="gross-tbody-C" class="gr-flight-tbody" data-flight="C">
-              <tr data-gkey="G09"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G09">1st</span></td><td><input type="text" id="gr-name-G09" placeholder="Player name"><input type="hidden" id="gr-flt-G09" value="C"></td><td><input type="number" id="gr-out-G09" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G09')" inputmode="numeric"></td><td><input type="number" id="gr-in-G09" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G09')" inputmode="numeric"></td><td><input type="number" id="gr-score-G09" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G09" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G09" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearGrossRow('G09')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr>
-              <tr data-gkey="G10"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G10">2nd</span></td><td><input type="text" id="gr-name-G10" placeholder="Player name"><input type="hidden" id="gr-flt-G10" value="C"></td><td><input type="number" id="gr-out-G10" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G10')" inputmode="numeric"></td><td><input type="number" id="gr-in-G10" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G10')" inputmode="numeric"></td><td><input type="number" id="gr-score-G10" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G10" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G10" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearGrossRow('G10')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr>
-              <tr data-gkey="G11"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G11">3rd</span></td><td><input type="text" id="gr-name-G11" placeholder="Player name"><input type="hidden" id="gr-flt-G11" value="C"></td><td><input type="number" id="gr-out-G11" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G11')" inputmode="numeric"></td><td><input type="number" id="gr-in-G11" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G11')" inputmode="numeric"></td><td><input type="number" id="gr-score-G11" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G11" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G11" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearGrossRow('G11')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr>
-              <tr data-gkey="G12"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G12">4th</span></td><td><input type="text" id="gr-name-G12" placeholder="Player name"><input type="hidden" id="gr-flt-G12" value="C"></td><td><input type="number" id="gr-out-G12" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G12')" inputmode="numeric"></td><td><input type="number" id="gr-in-G12" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G12')" inputmode="numeric"></td><td><input type="number" id="gr-score-G12" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G12" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G12" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearGrossRow('G12')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr>
-            </tbody></table>
-          </div>
-          <!-- Flight D: G13–G15 + spare slot -->
-          <div>
-            <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;padding:3px 6px;background:var(--gl);border-radius:4px;">Flight D</div>
-            <table class="gt gr-flight-table"><thead><tr><th style="width:18px;"></th><th style="width:22px;">#</th><th>Player Name</th><th style="width:52px;">Out</th><th style="width:52px;">In</th><th style="width:58px;">Total</th><th style="width:58px;">Prize ($)</th><th style="width:24px;">CB</th></tr></thead>
-            <tbody id="gross-tbody-D" class="gr-flight-tbody" data-flight="D">
-              <tr data-gkey="G13"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G13">1st</span></td><td><input type="text" id="gr-name-G13" placeholder="Player name"><input type="hidden" id="gr-flt-G13" value="D"></td><td><input type="number" id="gr-out-G13" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G13')" inputmode="numeric"></td><td><input type="number" id="gr-in-G13" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G13')" inputmode="numeric"></td><td><input type="number" id="gr-score-G13" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G13" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G13" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearGrossRow('G13')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr>
-              <tr data-gkey="G14"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G14">2nd</span></td><td><input type="text" id="gr-name-G14" placeholder="Player name"><input type="hidden" id="gr-flt-G14" value="D"></td><td><input type="number" id="gr-out-G14" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G14')" inputmode="numeric"></td><td><input type="number" id="gr-in-G14" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G14')" inputmode="numeric"></td><td><input type="number" id="gr-score-G14" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G14" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G14" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearGrossRow('G14')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr>
-              <tr data-gkey="G15"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="gr-pos-G15">3rd</span></td><td><input type="text" id="gr-name-G15" placeholder="Player name"><input type="hidden" id="gr-flt-G15" value="D"></td><td><input type="number" id="gr-out-G15" placeholder="out" style="width:46px;" oninput="autoGrossTotal('G15')" inputmode="numeric"></td><td><input type="number" id="gr-in-G15" placeholder="in" style="width:46px;" oninput="autoGrossTotal('G15')" inputmode="numeric"></td><td><input type="number" id="gr-score-G15" placeholder="total" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="gr-prize-G15" placeholder="$" style="width:52px;"></td><td class="tdc"><input type="checkbox" id="gr-cb-G15" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearGrossRow('G15')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr>
-            </tbody></table>
-          </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+<div><div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;padding:3px 6px;background:var(--gl);border-radius:4px;">Flight A</div><table class="gt nf-flight-table"><thead><tr><th style="width:18px;"></th><th style="width:28px;">#</th><th>Player Name</th><th style="width:52px;">Gross</th><th style="width:46px;">Hcp</th><th style="width:52px;">Net</th><th style="width:58px;">Prize ($)</th><th style="width:24px;">CB</th></tr></thead><tbody id="net-tbody-A" class="nf-flight-tbody" data-flight="A"><tr data-nkey="NFA1"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFA1">1st</span></td><td><input type="text" id="nf-name-NFA1" placeholder="Player name"><input type="hidden" id="nf-flt-NFA1" value="A"></td><td><input type="number" id="nf-gross-NFA1" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFA1" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFA1" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFA1" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFA1" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFA1')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr><tr data-nkey="NFA2"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFA2">2nd</span></td><td><input type="text" id="nf-name-NFA2" placeholder="Player name"><input type="hidden" id="nf-flt-NFA2" value="A"></td><td><input type="number" id="nf-gross-NFA2" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFA2" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFA2" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFA2" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFA2" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFA2')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr><tr data-nkey="NFA3"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFA3">3rd</span></td><td><input type="text" id="nf-name-NFA3" placeholder="Player name"><input type="hidden" id="nf-flt-NFA3" value="A"></td><td><input type="number" id="nf-gross-NFA3" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFA3" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFA3" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFA3" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFA3" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFA3')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr><tr data-nkey="NFA4"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFA4">4th</span></td><td><input type="text" id="nf-name-NFA4" placeholder="Player name"><input type="hidden" id="nf-flt-NFA4" value="A"></td><td><input type="number" id="nf-gross-NFA4" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFA4" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFA4" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFA4" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFA4" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFA4')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr><tr data-nkey="NFA5"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFA5">5th</span></td><td><input type="text" id="nf-name-NFA5" placeholder="Player name"><input type="hidden" id="nf-flt-NFA5" value="A"></td><td><input type="number" id="nf-gross-NFA5" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFA5" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFA5" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFA5" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFA5" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFA5')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr><tr data-nkey="NFA6"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFA6">6th</span></td><td><input type="text" id="nf-name-NFA6" placeholder="Player name"><input type="hidden" id="nf-flt-NFA6" value="A"></td><td><input type="number" id="nf-gross-NFA6" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFA6" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFA6" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFA6" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFA6" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFA6')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr></tbody></table></div>
+<div><div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;padding:3px 6px;background:var(--gl);border-radius:4px;">Flight B</div><table class="gt nf-flight-table"><thead><tr><th style="width:18px;"></th><th style="width:28px;">#</th><th>Player Name</th><th style="width:52px;">Gross</th><th style="width:46px;">Hcp</th><th style="width:52px;">Net</th><th style="width:58px;">Prize ($)</th><th style="width:24px;">CB</th></tr></thead><tbody id="net-tbody-B" class="nf-flight-tbody" data-flight="B"><tr data-nkey="NFB1"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFB1">1st</span></td><td><input type="text" id="nf-name-NFB1" placeholder="Player name"><input type="hidden" id="nf-flt-NFB1" value="B"></td><td><input type="number" id="nf-gross-NFB1" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFB1" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFB1" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFB1" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFB1" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFB1')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr><tr data-nkey="NFB2"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFB2">2nd</span></td><td><input type="text" id="nf-name-NFB2" placeholder="Player name"><input type="hidden" id="nf-flt-NFB2" value="B"></td><td><input type="number" id="nf-gross-NFB2" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFB2" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFB2" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFB2" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFB2" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFB2')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr><tr data-nkey="NFB3"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFB3">3rd</span></td><td><input type="text" id="nf-name-NFB3" placeholder="Player name"><input type="hidden" id="nf-flt-NFB3" value="B"></td><td><input type="number" id="nf-gross-NFB3" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFB3" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFB3" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFB3" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFB3" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFB3')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr><tr data-nkey="NFB4"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFB4">4th</span></td><td><input type="text" id="nf-name-NFB4" placeholder="Player name"><input type="hidden" id="nf-flt-NFB4" value="B"></td><td><input type="number" id="nf-gross-NFB4" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFB4" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFB4" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFB4" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFB4" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFB4')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr><tr data-nkey="NFB5"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFB5">5th</span></td><td><input type="text" id="nf-name-NFB5" placeholder="Player name"><input type="hidden" id="nf-flt-NFB5" value="B"></td><td><input type="number" id="nf-gross-NFB5" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFB5" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFB5" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFB5" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFB5" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFB5')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr><tr data-nkey="NFB6"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFB6">6th</span></td><td><input type="text" id="nf-name-NFB6" placeholder="Player name"><input type="hidden" id="nf-flt-NFB6" value="B"></td><td><input type="number" id="nf-gross-NFB6" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFB6" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFB6" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFB6" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFB6" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFB6')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr></tbody></table></div>
+<div><div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;padding:3px 6px;background:var(--gl);border-radius:4px;">Flight C</div><table class="gt nf-flight-table"><thead><tr><th style="width:18px;"></th><th style="width:28px;">#</th><th>Player Name</th><th style="width:52px;">Gross</th><th style="width:46px;">Hcp</th><th style="width:52px;">Net</th><th style="width:58px;">Prize ($)</th><th style="width:24px;">CB</th></tr></thead><tbody id="net-tbody-C" class="nf-flight-tbody" data-flight="C"><tr data-nkey="NFC1"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFC1">1st</span></td><td><input type="text" id="nf-name-NFC1" placeholder="Player name"><input type="hidden" id="nf-flt-NFC1" value="C"></td><td><input type="number" id="nf-gross-NFC1" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFC1" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFC1" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFC1" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFC1" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFC1')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr><tr data-nkey="NFC2"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFC2">2nd</span></td><td><input type="text" id="nf-name-NFC2" placeholder="Player name"><input type="hidden" id="nf-flt-NFC2" value="C"></td><td><input type="number" id="nf-gross-NFC2" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFC2" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFC2" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFC2" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFC2" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFC2')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr><tr data-nkey="NFC3"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFC3">3rd</span></td><td><input type="text" id="nf-name-NFC3" placeholder="Player name"><input type="hidden" id="nf-flt-NFC3" value="C"></td><td><input type="number" id="nf-gross-NFC3" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFC3" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFC3" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFC3" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFC3" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFC3')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr><tr data-nkey="NFC4"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFC4">4th</span></td><td><input type="text" id="nf-name-NFC4" placeholder="Player name"><input type="hidden" id="nf-flt-NFC4" value="C"></td><td><input type="number" id="nf-gross-NFC4" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFC4" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFC4" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFC4" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFC4" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFC4')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr><tr data-nkey="NFC5"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFC5">5th</span></td><td><input type="text" id="nf-name-NFC5" placeholder="Player name"><input type="hidden" id="nf-flt-NFC5" value="C"></td><td><input type="number" id="nf-gross-NFC5" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFC5" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFC5" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFC5" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFC5" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFC5')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr><tr data-nkey="NFC6"><td class="drag-handle" title="Drag to reorder">☰</td><td style="color:var(--mut);font-size:10px;"><span id="nf-pos-NFC6">6th</span></td><td><input type="text" id="nf-name-NFC6" placeholder="Player name"><input type="hidden" id="nf-flt-NFC6" value="C"></td><td><input type="number" id="nf-gross-NFC6" placeholder="gross" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-hcp-NFC6" placeholder="hcp" style="width:46px;" inputmode="numeric"></td><td><input type="number" id="nf-net-NFC6" placeholder="net" style="width:52px;" inputmode="numeric"></td><td><input type="number" id="nf-prize-NFC6" placeholder="$" style="width:58px;"></td><td class="tdc"><input type="checkbox" id="nf-cb-NFC6" title="Countback"></td><td><button type="button" onmousedown="event.stopPropagation()" onclick="clearNetFlightRow('NFC6')" title="Clear this row" class="del-btn" style="background:none;border:none;cursor:pointer;color:var(--mut);font-size:14px;padding:2px 4px;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='var(--mut)'">✕</button></td></tr></tbody></table></div>
         </div>
       </div>
     </div>
 
-    <!-- Net Winners -->
-    <div class="card s2">
-      <h2>Net Winners <em>overall — drag ☰ to reorder · CB = countback</em></h2>
-      <div class="cb">
-        <table class="gt">
-          <thead><tr>
-            <th style="width:18px;"></th><th>#</th><th>Flt</th><th>Player</th><th>Gross</th><th>Hcp</th><th style="width:58px;">Net</th><th>Prize ($)</th><th>CB</th>
-          </tr></thead>
-          <tbody id="net-tbody"></tbody>
-        </table>
-      </div>
-    </div>
 
     <!-- Draw Winners -->
     <div class="card">
@@ -1261,18 +1209,14 @@ function renderFlightReport(){
   const summary=document.getElementById('flight-weeks-summary');
   if(!tbody) return;
   // Aggregate by flight
-  const flights=['A','B','C','D'];
+  const flights=['A','B','C'];
   const totals={};
   flights.forEach(f=>totals[f]={gross:0,net:0,skins:0,pog:0,skill:0,draws:0});
   totals['?']={gross:0,net:0,skins:0,pog:0,skill:0,draws:0}; // unassigned
   let weeksWithData=0;
   weeksLog.forEach(wk=>{
     let had=false;
-    (wk.grossRows||[]).forEach(r=>{
-      const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
-      totals[f].gross+=(parseFloat(r.prize)||0);
-      had=true;
-    });
+;
     (wk.net||[]).forEach(r=>{
       const f=r.flt&&flights.includes(r.flt)?r.flt:'?';
       totals[f].net+=(parseFloat(r.prize)||0);
@@ -1462,14 +1406,11 @@ function clearEntries(){
   document.getElementById('t-cancelled').checked=false;
   for(let i=1;i<=15;i++){
     const key='G'+String(i).padStart(2,'0');
-    const ps=document.getElementById(`gr-pos-${key}`); if(ps) ps.textContent=ordSfx(i);
-    ['gr-flt','gr-name','gr-out','gr-in','gr-score','gr-prize'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${key}`);if(el)el.value='';});
-    const cb=document.getElementById(`gr-cb-${key}`);if(cb)cb.checked=false;
+    // gross rows removed — nothing to clear
   }
   for(let p=1;p<=20;p++){
     ['nn','ng','no','ni','ns','nh','np','npz'].forEach(pfx=>{const el=document.getElementById(`${pfx}-${p}`);if(el)el.value='';});
-    const nf=document.getElementById(`nf-${p}`);if(nf)nf.value='';
-    const cb=document.getElementById(`nc-${p}`);if(cb)cb.checked=false;
+
     // Remove gross-also badges
     const nameCell=document.getElementById(`nn-${p}`);
     if(nameCell){const badge=nameCell.parentNode?.querySelector('.gross-also');if(badge)badge.remove();}
@@ -1539,21 +1480,23 @@ function saveDraft(){
     });
   }
   d.grossRows=grossRows;
-  // Net rows
+  // Net rows — 3 flights × 6 spots
   const netRows=[];
-  for(let p=1;p<=15;p++){
-    netRows.push({
-      n:document.getElementById(`nn-${p}`)?.value||'',
-      g:document.getElementById(`ng-${p}`)?.value||'',
-      no:document.getElementById(`no-${p}`)?.value||'',
-      ni:document.getElementById(`ni-${p}`)?.value||'',
-      s:document.getElementById(`ns-${p}`)?.value||'',
-      h:document.getElementById(`nh-${p}`)?.value||'',
-      cb:document.getElementById(`nc-${p}`)?.checked||false,
-      pr:document.getElementById(`npz-${p}`)?.value||'',
-      flt:document.getElementById(`nf-${p}`)?.value||''
-    });
-  }
+  ['A','B','C'].forEach(flt=>{
+    for(let i=1;i<=6;i++){
+      const key=`NF${flt}${i}`;
+      netRows.push({
+        flt,
+        place:i,
+        n:document.getElementById(`nf-name-${key}`)?.value||'',
+        g:document.getElementById(`nf-gross-${key}`)?.value||'',
+        h:document.getElementById(`nf-hcp-${key}`)?.value||'',
+        s:document.getElementById(`nf-net-${key}`)?.value||'',
+        cb:document.getElementById(`nf-cb-${key}`)?.checked||false,
+        pr:document.getElementById(`nf-prize-${key}`)?.value||''
+      });
+    }
+  });
   d.netRows=netRows;
   // Skins
   const skRows={};
@@ -1620,29 +1563,18 @@ function loadDraft(){
   });
   const canc=document.getElementById('t-cancelled'); if(canc) canc.checked=!!d['t-cancelled'];
   // Gross — restore flat G01–G15 rows
-  if(d.grossRows) d.grossRows.forEach((row,i)=>{
-    const key=row.key||(i<9?'G0'+(i+1):'G'+(i+1));
-    const ps=document.getElementById(`gr-pos-${key}`);   if(ps&&row.pos) ps.textContent=row.pos;
-    const fi=document.getElementById(`gr-flt-${key}`);   if(fi) fi.value=row.flt||'';
-    const ni=document.getElementById(`gr-name-${key}`);  if(ni) ni.value=row.name||'';
-    const oi=document.getElementById(`gr-out-${key}`);   if(oi) oi.value=row.out||'';
-    const ii=document.getElementById(`gr-in-${key}`);    if(ii) ii.value=row.inV||'';
-    const si=document.getElementById(`gr-score-${key}`); if(si) si.value=row.score||'';
-    const pi=document.getElementById(`gr-prize-${key}`); if(pi) pi.value=row.prize||'';
-    const ci=document.getElementById(`gr-cb-${key}`);    if(ci) ci.checked=!!row.cb;
-  });
-  // Net
-  if(d.netRows) d.netRows.forEach((row,i)=>{
-    const p=i+1;
-    const nn=document.getElementById(`nn-${p}`); if(nn) nn.value=row.n;
-    const ng=document.getElementById(`ng-${p}`); if(ng) ng.value=row.g;
-    const no=document.getElementById(`no-${p}`); if(no) no.value=row.no||'';
-    const ni=document.getElementById(`ni-${p}`); if(ni) ni.value=row.ni||'';
-    const ns=document.getElementById(`ns-${p}`); if(ns) ns.value=row.s;
-    const nh=document.getElementById(`nh-${p}`); if(nh) nh.value=row.h;
-    const nc=document.getElementById(`nc-${p}`); if(nc) nc.checked=!!row.cb;
-    const np=document.getElementById(`npz-${p}`); if(np) np.value=row.pr;
-    const nf=document.getElementById(`nf-${p}`); if(nf) nf.value=row.flt||'';
+;
+  // Net — 3 flights × 6 spots
+  if(d.netRows) d.netRows.forEach(row=>{
+    const flt=(row.flt||'A').toUpperCase();
+    const place=row.place||1;
+    const key=`NF${flt}${place}`;
+    const ni=document.getElementById(`nf-name-${key}`); if(ni) ni.value=row.n||'';
+    const gi=document.getElementById(`nf-gross-${key}`); if(gi) gi.value=row.g||'';
+    const hi=document.getElementById(`nf-hcp-${key}`); if(hi) hi.value=row.h||'';
+    const si=document.getElementById(`nf-net-${key}`); if(si) si.value=row.s||'';
+    const pi=document.getElementById(`nf-prize-${key}`); if(pi) pi.value=row.pr||'';
+    const ci=document.getElementById(`nf-cb-${key}`); if(ci) ci.checked=!!row.cb;
   });
   // Skins
   if(d.skRows) SKINS_HOLES.forEach(h=>{
@@ -1860,6 +1792,13 @@ function initNetPasteListeners(){
 }
 
 // Auto-sum Out+In into Total for gross rows
+function clearNetFlightRow(key){
+  ['nf-name','nf-gross','nf-hcp','nf-net','nf-prize'].forEach(pfx=>{
+    const el=document.getElementById(`${pfx}-${key}`); if(el) el.value='';
+  });
+  const cb=document.getElementById(`nf-cb-${key}`); if(cb) cb.checked=false;
+}
+
 function clearGrossRow(key){
   ['gr-name','gr-out','gr-in','gr-score','gr-prize'].forEach(pfx=>{
     const el=document.getElementById(`${pfx}-${key}`);
@@ -1997,21 +1936,22 @@ async function loadCommittedWeek(){
   }
 
   // ── Net rows ──
-  // localStorage: wk.netData [{place,pname,gross,netOut,netIn,score,hcp,cb,prize,flt}]
-  // JSON fallback: jsonWk.net [{place,pname,gross,score,hcp,cb,prize,flt}]
+  // Restore net winners — 3 flights × 6 spots (NFA1-NFC6)
   const netSrc=wk.netData||(jsonWk&&jsonWk.net)||[];
   netSrc.forEach(row=>{
-    const p=row.place; if(p<1||p>15) return;
-    const nn=document.getElementById(`nn-${p}`); if(nn) nn.value=(row.pname||'').replace(/\s*\[TIE\?\]/gi,'').trim();
-    const ng=document.getElementById(`ng-${p}`); if(ng) ng.value=row.gross||'';
-    const no=document.getElementById(`no-${p}`); if(no) no.value=row.netOut||'';
-    const ni=document.getElementById(`ni-${p}`); if(ni) ni.value=row.netIn||'';
-    const ns=document.getElementById(`ns-${p}`); if(ns) ns.value=row.score||'';
-    const nh=document.getElementById(`nh-${p}`); if(nh) nh.value=row.hcp||'';
-    const nc=document.getElementById(`nc-${p}`); if(nc) nc.checked=!!row.cb;
-    const np=document.getElementById(`npz-${p}`); if(np) np.value=row.prize||'';
-    const nf=document.getElementById(`nf-${p}`); if(nf) nf.value=row.flt||'';
+    const flt=(row.flt||'A').toUpperCase();
+    const place=row.place||1;
+    if(place<1||place>6) return;
+    if(!['A','B','C'].includes(flt)) return;
+    const key=`NF${flt}${place}`;
+    const ni=document.getElementById(`nf-name-${key}`); if(ni) ni.value=(row.pname||row.n||'').replace(/\s*\[TIE\?\]/gi,'').trim();
+    const gi=document.getElementById(`nf-gross-${key}`); if(gi) gi.value=row.gross||row.g||'';
+    const hi=document.getElementById(`nf-hcp-${key}`);  if(hi) hi.value=row.hcp||row.h||'';
+    const si=document.getElementById(`nf-net-${key}`);  if(si) si.value=row.score||row.s||'';
+    const pi=document.getElementById(`nf-prize-${key}`); if(pi) pi.value=row.prize||row.pr||'';
+    const ci=document.getElementById(`nf-cb-${key}`);   if(ci) ci.checked=!!row.cb;
   });
+
 
   // ── Skins ──
   // localStorage: wk.skinsData [{hole,winner,score,gross,runPot,stored,weekly,paid,flt}]
@@ -2129,39 +2069,23 @@ async function generatePayout(previewOnly=false){
   const prefBadge=p=>{const cl=p==='Bar'?'pref-bar':p==='Pro Shop'?'pref-pro':'pref-cash';return`<span class="pref-bar ${cl}" style="font-size:10px;">${p}</span>`;};
 
   // Collect gross — flat G01–G15
-  const grossRows=[];
-  const fdata={A:[],B:[],C:[],D:[]};
-  for(let i=1;i<=15;i++){
-    const key='G'+String(i).padStart(2,'0');
-    const posText=(document.getElementById(`gr-pos-${key}`)?.textContent||'').trim();
-    const posNum =parseInt(posText)||i; // numeric position from GS (resets per flight)
-    const flt  =(document.getElementById(`gr-flt-${key}`)?.value||'').trim().toUpperCase();
-    const pname=(document.getElementById(`gr-name-${key}`)?.value||'').trim();
-    const out  = document.getElementById(`gr-out-${key}`)?.value||'';
-    const inV  = document.getElementById(`gr-in-${key}`)?.value||'';
-    const score= document.getElementById(`gr-score-${key}`)?.value||'';
-    const prize= document.getElementById(`gr-prize-${key}`)?.value||'';
-    const cb   = document.getElementById(`gr-cb-${key}`)?.checked||false;
-    if(pname||prize){
-      grossRows.push({key,place:posNum,posLabel:posText,flt,pname,out,inV,score,prize,cb});
-      if(fdata[flt]) fdata[flt].push({place:posNum,pname,out,inV,score,prize,cb});
-    }
-  }
+  const grossRows=[]; // kept for backward-compat with old committed weeks
+  const fdata={A:[],B:[],C:[]};
 
-  // Collect net
+  // Collect net — 3 flights × 6 spots (NFA1-NFA6, NFB1-NFB6, NFC1-NFC6)
   const netData=[];
-  for(let p=1;p<=15;p++){
-    const n=(document.getElementById(`nn-${p}`)?.value||'').trim();
-    const g=document.getElementById(`ng-${p}`)?.value||'';
-    const no=document.getElementById(`no-${p}`)?.value||'';
-    const ni=document.getElementById(`ni-${p}`)?.value||'';
-    const s=document.getElementById(`ns-${p}`)?.value||'';
-    const h=document.getElementById(`nh-${p}`)?.value||'';
-    const cb=document.getElementById(`nc-${p}`)?.checked;
-    const pr=document.getElementById(`npz-${p}`)?.value||'';
-    const flt=document.getElementById(`nf-${p}`)?.value||'';
-    if(n||pr) netData.push({place:p,pname:n,gross:g,netOut:no,netIn:ni,score:s,hcp:h,cb,prize:pr,flt});
-  }
+  ['A','B','C'].forEach(flt=>{
+    for(let i=1;i<=6;i++){
+      const key=`NF${flt}${i}`;
+      const n=(document.getElementById(`nf-name-${key}`)?.value||'').trim();
+      const g=document.getElementById(`nf-gross-${key}`)?.value||'';
+      const h=document.getElementById(`nf-hcp-${key}`)?.value||'';
+      const s=document.getElementById(`nf-net-${key}`)?.value||'';
+      const cb=document.getElementById(`nf-cb-${key}`)?.checked||false;
+      const pr=document.getElementById(`nf-prize-${key}`)?.value||'';
+      if(n||pr) netData.push({place:i,pname:n,gross:g,score:s,hcp:h,cb,prize:pr,flt});
+    }
+  });
 
   // Collect skins
   const skinsData=[];
@@ -2249,12 +2173,10 @@ async function generatePayout(previewOnly=false){
     mwMap[k][cat]+=(parseFloat(amount)||0);
     mwMap[k].total=mwMap[k].gross+mwMap[k].net+mwMap[k].skins+mwMap[k].pog+mwMap[k].draw+(mwMap[k].skill||0);
   };
-  // Build name→flight lookup from grossRows and netData (both carry flt field)
+  // Build name→flight lookup from netData
   const playerFltMap={};
-  grossRows.forEach(r=>{ if(r.pname&&r.flt) playerFltMap[mwKey(r.pname)]=r.flt; });
-  netData.forEach(r=>{ if(r.pname&&r.flt&&!playerFltMap[mwKey(r.pname)]) playerFltMap[mwKey(r.pname)]=r.flt; });
+  netData.forEach(r=>{ if(r.pname&&r.flt) playerFltMap[mwKey(r.pname)]=r.flt; });
 
-  grossRows.forEach(r=>addMW(r.pname,'gross',r.prize));
   netData.forEach(r=>addMW(r.pname,'net',r.prize));
   skinsData.filter(r=>(r.paid||r.guest)&&r.winner).forEach(r=>addMW(r.winner,'skins',r.payout));
   pogData.filter(r=>(r.paid||r.guest)&&r.winner).forEach(r=>addMW(r.winner,'pog',r.payout));
@@ -2312,12 +2234,11 @@ async function generatePayout(previewOnly=false){
   if(!previewOnly){
     // Store pending commit data for confirmCommit() to finalize
     window._pendingCommit={weekKey,name,date,notes,cancelled,total,gnPool,skPool,pgPool,
-      grossRows,fdata,netData,skinsData,pogData,skillData,meatData,ffWinner,ffAmount,ffPref,rdData,mwList,isOverwrite};
+      fdata,netData,skinsData,pogData,skillData,meatData,ffWinner,ffAmount,ffPref,rdData,mwList,isOverwrite};
     refreshSkinsPotDisplayAll(); refreshPOGPotDisplayAll();
   }
 
   // Totals
-  let grossPaid=0; grossRows.forEach(r=>grossPaid+=parseFloat(r.prize)||0);
   const netPaid  =netData.reduce((s,r)=>s+(parseFloat(r.prize)||0),0);
   const skinsPaid=skinsData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runPot,0);
   const pogPaid  =pogData.filter(r=>r.paid&&r.winner).reduce((s,r)=>s+r.runPot,0);
@@ -2339,42 +2260,28 @@ async function generatePayout(previewOnly=false){
     </div>`;
 
   if(!cancelled){
-    // GROSS
-    html+=`<div class="psec"><div class="ptitle">Gross Winners</div>
-      <table class="pt"><thead><tr><th>Flt</th><th>Player</th><th>Out</th><th>In</th><th>Score</th><th class="r">Prize</th></tr></thead><tbody>`;
-    if(!grossRows.length){
-      html+=`<tr><td colspan="6" style="color:var(--mut);padding:8px 9px;">No entries</td></tr>`;
-    } else {
-      grossRows.forEach(r=>{
-        html+=`<tr>
-          <td style="color:var(--mut);font-size:11px;">${r.flt||'—'}</td>
-          <td>${r.pname||'—'}${r.cb?' <span class="countback-badge">CB</span>':''}</td>
-          <td style="color:var(--mut);font-size:11px;">${r.out||'—'}</td>
-          <td style="color:var(--mut);font-size:11px;">${r.inV||'—'}</td>
-          <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
-          <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td></tr>`;
-      });
-    }
-    html+=`</tbody></table></div>`;
-
-    // NET
-    html+=`<div class="psec"><div class="ptitle">Net Winners — Overall</div>
-      <table class="pt"><thead><tr><th>Place</th><th>Player</th><th>Gross</th><th>Hcp</th><th>Net</th><th class="r">Prize</th></tr></thead><tbody>`;
-    if(!netData.length){
-      html+=`<tr><td colspan="6" style="color:var(--mut);padding:8px 9px;">No entries</td></tr>`;
-    } else {
-      netData.forEach(r=>{
-        const sfx=r.place===1?'st':r.place===2?'nd':r.place===3?'rd':'th';
-        const bc=r.place<=3?`p${r.place}b`:'pnb';
-        html+=`<tr><td><span class="pbadge ${bc}">${r.place}</span>${r.place}${sfx}${r.cb?' <span class="countback-badge">CB</span>':''}</td>
-          <td>${r.pname||'—'}</td>
-          <td style="color:var(--mut);font-size:11px;">${r.gross||'—'}</td>
-          <td style="color:var(--mut);font-size:11px;">${r.hcp||'—'}</td>
-          <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
-          <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td></tr>`;
-      });
-    }
-    html+=`</tbody></table></div>`;
+    // NET by flight
+    ['A','B','C'].forEach(flt=>{
+      const flightRows=netData.filter(r=>r.flt===flt);
+      const flLabel=getFL(flt);
+      const sfx=n=>n===1?'st':n===2?'nd':n===3?'rd':'th';
+      html+=`<div class="psec"><div class="ptitle">Net Winners — Flight ${flt} (${flLabel})</div>
+        <table class="pt"><thead><tr><th>Place</th><th>Player</th><th>Gross</th><th>Hcp</th><th>Net</th><th class="r">Prize</th></tr></thead><tbody>`;
+      if(!flightRows.length){
+        html+=`<tr><td colspan="6" style="color:var(--mut);padding:8px 9px;">No entries</td></tr>`;
+      } else {
+        flightRows.forEach(r=>{
+          const bc=r.place<=3?`p${r.place}b`:'pnb';
+          html+=`<tr><td><span class="pbadge ${bc}">${r.place}</span>${r.place}${sfx(r.place)}${r.cb?' <span class="countback-badge">CB</span>':''}</td>
+            <td>${r.pname||'—'}</td>
+            <td style="color:var(--mut);font-size:11px;">${r.gross||'—'}</td>
+            <td style="color:var(--mut);font-size:11px;">${r.hcp||'—'}</td>
+            <td style="color:var(--mut);font-size:11px;">${r.score||'—'}</td>
+            <td class="r"><span class="money">${r.prize?fmt(r.prize):'—'}</span></td></tr>`;
+        });
+      }
+      html+=`</tbody></table></div>`;
+    });
 
     // SKINS
     html+=`<div class="psec"><div class="ptitle">Skins — Lowest Score per Hole</div>
@@ -2503,7 +2410,6 @@ async function generatePayout(previewOnly=false){
 
   // TOTALS
   html+=`<div class="tbar">
-    <div class="ti"><strong>${fmt(grossPaid)}</strong><span>Gross paid</span></div>
     <div class="ti"><strong>${fmt(netPaid)}</strong><span>Net paid</span></div>
     <div class="ti"><strong>${fmt(skinsPaid)}</strong><span>Skins paid (pool ${fmt(skPool)})</span></div>
     <div class="ti"><strong>${fmt(pogPaid)}</strong><span>POG paid (pool ${fmt(pgPool)})</span></div>
@@ -2535,10 +2441,10 @@ function confirmCommit(){
   // Save week (replace if overwrite)
   if(pc.isOverwrite){
     const idx=weeksLog.findIndex(w=>w.id===pc.weekKey);
-    const rec={id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),grossRows:pc.grossRows,flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData,rdData:pc.rdData,mwList:pc.mwList};
+    const rec={id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData,rdData:pc.rdData,mwList:pc.mwList};
     if(idx>=0) weeksLog[idx]=rec; else weeksLog.push(rec);
   } else {
-    saveWeek({id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),grossRows:pc.grossRows,flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData,rdData:pc.rdData,mwList:pc.mwList});
+    saveWeek({id:pc.weekKey,name:pc.name,date:pc.date,players:parseInt(pc.total)||0,gnPool:pc.gnPool,skinsPool:pc.skPool,pogPool:pc.pgPool,cancelled:pc.cancelled,notes:pc.notes,recordedAt:new Date().toISOString(),flights:pc.fdata,netData:pc.netData,skinsData:pc.skinsData,pogData:pc.pogData,rdData:pc.rdData,mwList:pc.mwList});
   }
   LS.set('weeks',weeksLog);
   populateWeekLoadSelect(); // keep dropdown in sync after commit
@@ -3179,41 +3085,35 @@ function renumberNetRows(){
 }
 
 // ── Sample CSV for demo mode ──────────────────────────────────────────────────
-const DEMO_SAMPLE_CSV = `Date,Flight,Name,Hcp,Gross,Net,AdjustedGross,H1,H2,H3,H4,H5,H6,H7,H8,H9,H10,H11,H12,H13,H14,H15,H16,H17,H18
-2026-11-22,A,Anderson Dave,2,64,62,64,5,3,2,2,5,5,7,2,4,1,3,4,2,4,4,5,2,4
-2026-11-22,A,Mitchell Rob,4,81,77,81,6,3,5,4,4,3,8,4,2,2,6,4,6,6,3,8,3,4
-2026-11-22,A,Thompson Ken,5,69,64,69,6,5,5,3,5,2,4,3,2,2,3,3,5,5,3,4,2,7
-2026-11-22,A,Williams Steve,6,77,71,77,5,5,2,4,3,4,8,5,4,4,6,6,3,3,2,4,2,7
-2026-11-22,A,Patterson Jim,7,75,68,75,6,5,4,3,7,4,4,3,4,2,4,6,4,4,6,5,2,2
-2026-11-22,A,Harrison Paul,8,78,70,78,3,6,5,3,2,4,8,4,7,5,2,5,5,5,2,6,2,4
-2026-11-22,A,Campbell Gary,9,80,71,80,4,8,5,2,4,3,8,6,3,4,5,3,5,5,5,5,1,4
-2026-11-22,B,MacDonald Brian,10,78,68,78,2,8,5,5,4,2,7,7,3,3,2,5,5,4,3,5,2,6
-2026-11-22,B,Ferguson Doug,11,69,58,69,4,4,3,4,3,4,8,5,4,3,3,3,4,5,2,4,1,5
-2026-11-22,B,Robertson Neil,12,75,63,75,3,7,5,1,3,5,4,3,7,3,4,6,6,4,2,5,3,4
-2026-11-22,B,Murray Scott,13,77,64,77,5,6,6,2,4,4,7,3,3,3,4,4,3,8,3,7,3,2
-2026-11-22,B,Johnston Al,13,89,76,89,7,7,6,6,6,3,5,3,4,1,4,7,3,6,3,5,6,7
-2026-11-22,B,Fraser Mike,14,79,65,79,4,6,2,3,7,5,5,5,2,4,4,6,3,8,2,4,4,5
-2026-11-22,B,Stewart Barry,15,77,62,77,3,4,5,2,5,5,5,5,4,6,3,5,3,5,4,5,3,5
-2026-11-22,C,Graham Rick,16,84,68,84,2,5,6,6,2,3,5,7,6,5,4,3,6,6,4,8,4,2
-2026-11-22,C,Hamilton Terry,17,79,62,79,6,5,4,6,3,3,4,4,4,4,5,3,5,5,3,7,5,3
-2026-11-22,C,Morrison Glen,18,75,57,75,4,5,1,4,5,4,6,5,4,1,3,6,6,5,5,6,2,3
-2026-11-22,C,Reid Tom,19,91,72,91,4,7,4,5,6,3,5,3,5,5,4,5,3,8,5,8,5,6
-2026-11-22,C,Watson Don,20,83,63,83,2,6,3,6,5,6,7,4,5,2,6,6,3,7,3,5,4,3
-2026-11-22,C,Burns Larry,20,83,63,83,2,4,3,5,7,4,6,4,7,3,7,3,7,4,6,5,2,4
-2026-11-22,C,Mackenzie Bill,21,79,58,79,5,5,4,3,4,5,5,5,2,5,5,5,5,6,3,4,4,4
-2026-11-22,D,Douglas Ron,22,79,57,79,4,7,4,3,4,4,5,4,3,3,7,5,6,6,3,6,1,4
-2026-11-22,D,Cameron Frank,24,78,54,78,4,6,4,3,4,3,5,6,5,2,3,4,5,5,5,6,4,4
-2026-11-22,D,Wallace Ed,26,70,44,70,3,3,3,3,6,3,5,5,3,4,4,4,5,3,4,6,2,4
-2026-11-22,D,Ross George,28,91,63,91,3,8,4,1,4,6,5,5,5,6,5,7,6,6,4,6,5,5
-2026-11-22,D,Black Norm,30,78,48,78,6,6,3,3,4,5,6,5,5,3,3,4,4,5,4,4,3,5
-2026-11-22,D,Clark Pete,33,83,50,83,5,4,3,4,4,4,5,6,5,4,6,5,4,3,3,6,5,7
-2026-11-22,D,Shaw Herb,36,73,37,73,4,6,4,4,4,4,5,2,4,4,4,4,5,4,4,3,3,5`;
+const DEMO_SAMPLE_CSV = `Name,Flight,Gross,Hcp,H1,H2,H3,H4,H5,H6,H7,H8,H9,H10,H11,H12,H13,H14,H15,H16,H17,H18
+Date,2026-11-22,,,,,,,,,,,,,,,,,,,,
+Anderson, Tom,A,86,2,4,5,5,4,5,5,5,4,7,3,4,4,5,6,3,6,6,5
+Barrett, Steve,A,97,5,7,7,3,4,7,6,7,5,5,5,4,4,7,5,5,7,5,4
+Collins, Mike,A,96,7,7,5,6,3,6,6,6,4,4,4,6,4,5,5,6,7,6,6
+Davis, Rick,A,96,9,5,7,5,4,6,4,6,5,5,6,7,6,5,7,3,6,3,6
+Evans, Paul,A,105,10,7,7,3,4,6,5,8,7,7,4,6,5,5,7,6,8,5,5
+Foster, Dan,A,95,11,5,8,3,3,4,5,6,7,4,6,7,7,6,5,3,7,5,4
+Green, Jim,A,95,12,6,8,4,6,4,6,6,4,6,4,5,6,5,5,5,8,3,4
+Hayes, Bob,B,95,13,6,7,4,3,5,4,5,7,4,4,5,7,5,7,6,6,4,6
+Irving, Kurt,B,89,15,7,7,6,6,4,5,6,4,6,3,5,5,4,5,3,6,3,4
+Jensen, Lee,B,103,16,6,5,4,5,7,5,6,7,5,6,7,5,4,5,6,7,6,7
+Kelly, Tim,B,96,17,7,5,3,3,7,6,5,5,5,4,7,5,7,6,5,8,4,4
+Lewis, Gary,B,101,18,7,9,3,3,8,4,5,5,5,6,7,7,5,8,3,6,6,4
+Morris, Sean,B,106,19,7,7,6,5,7,8,8,5,5,5,5,4,8,9,3,7,3,4
+Nelson, Brad,B,109,20,8,8,7,7,5,4,9,4,5,3,8,4,5,8,3,9,4,8
+Owen, Carl,C,113,21,8,5,7,3,7,8,9,8,6,5,5,6,5,7,6,6,5,7
+Parker, Neil,C,103,23,6,5,3,6,8,8,5,4,8,4,8,6,5,7,3,6,5,6
+Quinn, Dave,C,107,24,5,8,7,5,8,8,5,8,6,3,5,6,4,5,7,6,5,6
+Roberts, Al,C,101,25,8,6,5,4,6,8,8,6,4,3,7,6,4,5,5,6,5,5
+Stone, Ed,C,116,27,8,8,7,7,7,8,5,4,4,7,5,8,4,7,7,9,4,7
+Turner, Chris,C,107,28,5,5,5,5,4,6,6,8,5,7,4,6,8,8,7,9,4,5
+Unger, Mark,C,108,30,5,6,6,3,5,8,7,7,8,7,5,6,5,9,3,8,3,7`;
 
 function loadDemoSample(){
   _importStore.csv = DEMO_SAMPLE_CSV;
   _importStore.html = null;
   const csvSt = document.getElementById('csv-status');
-  if(csvSt){ csvSt.textContent='✓ Sample week loaded (28 players, 4 flights)'; csvSt.style.color='var(--gm)'; }
+  if(csvSt){ csvSt.textContent='✓ Sample week loaded (21 players, 3 flights)'; csvSt.style.color='var(--gm)'; }
   const htmlSt = document.getElementById('html-status');
   if(htmlSt){ htmlSt.textContent=''; }
   const btn = document.getElementById('import-btn');
@@ -3390,16 +3290,16 @@ function parseScoresCSV(text){
     return a.gross - b.gross;
   });
 
+  // Top 6 per flight (A, B, C)
   const netWinners = [];
   const usedNames = new Set();
-  let netPos = 0;
+  const byFltCount = {A:0,B:0,C:0};
   for(const p of netSorted){
-    if(netWinners.length >= 20) break;
+    if(!['A','B','C'].includes(p.flight)) continue;
     if(usedNames.has(p.name)) continue;
-    netPos++;
-    // Flag if this player also won a gross flight (but still include them)
-    const grossWinner = grossWinnerNames.has(p.name);
-    netWinners.push({ pos:netPos, flight:p.flight, name:p.name, gross:p.gross, hcp:p.hcp, net:p.net, grossWinner });
+    if((byFltCount[p.flight]||0) >= 6) continue;
+    byFltCount[p.flight] = (byFltCount[p.flight]||0) + 1;
+    netWinners.push({ pos:byFltCount[p.flight], flight:p.flight, name:p.name, gross:p.gross, hcp:p.hcp, net:p.net });
     usedNames.add(p.name);
   }
 
@@ -3429,7 +3329,7 @@ const SK_PAR = [4,5,3,3,4,4,5,4,4,3,4,4,4,5,3,5,3,4];
  */
 function calcSkinsPOGFromCSV(players){
   // Eligible = non-guest (flight A-D), with valid hole scores
-  const eligible = players.filter(p=>['A','B','C','D'].includes(p.flight) && p.holes && p.holes.length===18);
+  const eligible = players.filter(p=>['A','B','C'].includes(p.flight) && p.holes && p.holes.length===18);
 
   // ── Strokes per hole for each player ────────────────────────────────────────
   // Full handicap: each hole gets floor(hcp/18) strokes, plus 1 more if
@@ -3664,65 +3564,22 @@ function runImport(){
     if(typeof recalcPools==='function') recalcPools();
   }
 
-  // ── Fill Gross Winners — per flight into their dedicated mini-tables ─────────
-  // Flight A → G01–G04, B → G05–G08, C → G09–G12, D → G13–G15
-  if(csvData && csvData.grossWinners.length){
-    const fltBase={A:1,B:5,C:9,D:13};
-    const flights=['A','B','C','D'];
+  // ── Fill Net Winners — 3 flights × 6 spots ──────────────────────────────────
+  if(csvData && csvData.netWinners.length){
+    const byFlt={A:[],B:[],C:[]};
+    csvData.netWinners.forEach(w=>{ const f=(w.flight||'').toUpperCase(); if(byFlt[f]) byFlt[f].push(w); });
     let total=0;
-    flights.forEach(flt=>{
-      const base=fltBase[flt];
-      const inFlt=csvData.grossWinners.filter(w=>w.flight===flt).slice(0,4); // max 4 slots
-      inFlt.forEach((w,i)=>{
-        const num=base+i;
-        const id='G'+String(num).padStart(2,'0');
-        const nameEl =document.getElementById(`gr-name-${id}`);
-        const scoreEl=document.getElementById(`gr-score-${id}`);
-        const outEl  =document.getElementById(`gr-out-${id}`);
-        const inEl   =document.getElementById(`gr-in-${id}`);
-        // gr-flt-* is now a hidden input pre-set to the flight letter — no need to change it
-        if(nameEl)  nameEl.value=w.name;
-        if(scoreEl) scoreEl.value=w.gross;
-        // Fill out/in from hole scores if available
-        if(w.holes && w.holes.length===18){
-          const outScore=w.holes.slice(0,9).reduce((s,v)=>s+(isNaN(v)?0:v),0);
-          const inScore =w.holes.slice(9,18).reduce((s,v)=>s+(isNaN(v)?0:v),0);
-          if(outEl) outEl.value=outScore||'';
-          if(inEl)  inEl.value=inScore||'';
-        }
-        autoGrossTotal(id);
-        total++;
+    ['A','B','C'].forEach(flt=>{
+      byFlt[flt].forEach((w,i)=>{
+        if(i>=6) return;
+        const key=`NF${flt}${i+1}`;
+        const ni=document.getElementById(`nf-name-${key}`); if(ni){ ni.value=w.name; total++; }
+        const gi=document.getElementById(`nf-gross-${key}`); if(gi) gi.value=w.gross||'';
+        const hi=document.getElementById(`nf-hcp-${key}`);  if(hi) hi.value=w.hcp||'';
+        const si=document.getElementById(`nf-net-${key}`);  if(si) si.value=w.net||'';
       });
     });
-    summary.push(`🏌️ Gross: ${total} winners filled across 4 flights`);
-  }
-
-  // ── Fill Net Winners — include gross winners, flag them with badge ───────────
-  if(csvData && csvData.netWinners.length){
-    csvData.netWinners.forEach((w,i)=>{
-      const p=i+1;
-      const fltEl  =document.getElementById(`nf-${p}`);
-      const nameEl =document.getElementById(`nn-${p}`);
-      const grossEl=document.getElementById(`ng-${p}`);
-      const hcpEl  =document.getElementById(`nh-${p}`);
-      const netEl  =document.getElementById(`ns-${p}`);
-      if(fltEl)   fltEl.value=w.flight;
-      if(grossEl) grossEl.value=w.gross;
-      if(hcpEl)   hcpEl.value=w.hcp;
-      if(netEl)   netEl.value=w.net;
-      if(nameEl){
-        nameEl.value=w.name;
-        // Add gross-winner badge as a sibling span (non-editable, for visibility)
-        let badge=nameEl.parentNode.querySelector('.gross-also');
-        if(w.grossWinner){
-          if(!badge){ badge=document.createElement('span'); badge.className='gross-also'; nameEl.after(badge); }
-          badge.textContent='also gross';
-        } else {
-          if(badge) badge.remove();
-        }
-      }
-    });
-    summary.push(`📋 Net: top ${csvData.netWinners.length} filled — gross winners included & flagged`);
+    summary.push(`📋 Net: ${total} winners filled across 3 flights`);
   }
 
   // ── Fill Skins ──────────────────────────────────────────────────────────────
