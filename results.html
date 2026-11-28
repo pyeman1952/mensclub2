@@ -547,18 +547,23 @@ function renderPots(){
   const lastWk = weeks[0]||null;
   const lastDate = lastWk?.date || lastWk?.id || '';
 
-  // Build maps: hole → runPot from most recent week
+  // appData.pots (written by "Publish Pots") is the authoritative current balance.
+  // Use it when present; fall back to runPot from the last committed week only for
+  // holes not covered by the published pots snapshot.
+  const pots = appData.pots||{};
+  const hasPots = Object.keys(pots).length > 0;
+
+  // Build maps: hole → runPot from most recent week (fallback only)
   const skinsMap={}, pogMap={};
-  if(lastWk){
+  if(lastWk && !hasPots){
     (lastWk.skins||[]).forEach(r=>{ if(r.hole!=null) skinsMap[r.hole]=r.runPot||0; });
     (lastWk.pog||[]).forEach(r=>{ if(r.hole!=null) pogMap[r.hole]=r.runPot||0; });
   }
 
-  // Fallback: appData.pots for any hole not covered by last week
-  const pots = appData.pots||{};
-
+  const potsDate = hasPots && pots._updatedAt ? new Date(pots._updatedAt).toLocaleDateString() : null;
+  const potsLabel = potsDate ? `Updated ${potsDate}` : lastDate ? `After week ending ${lastDate}` : 'Most recent week';
   let html=`<div style="font-size:11px;color:var(--mut);margin-bottom:12px;">
-    Balances after ${lastDate?`week ending ${lastDate}`:'most recent week'} — matches the payout sheet.
+    Balances: ${potsLabel} — matches the payout sheet.
   </div>
   <div class="pot-grid">
     <div class="card"><h2>Skins — Current Pot by Hole</h2><div class="cb">
