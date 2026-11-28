@@ -2783,7 +2783,7 @@ async function publishPots(){
     const data = JSON.parse(decoded);
 
     // Replace only pots, keep weeks and season as-is
-    const pots = {};
+    const pots = { _updatedAt: new Date().toISOString() };
     SKINS_HOLES.forEach(h=>{ pots[`sk_${h}`]=skinsPots[h]||{pot:0}; });
     POG_HOLES.forEach(h=>{ pots[`pg_${h}`]=pogPots[h]||{pot:0}; });
     data.pots = pots;
