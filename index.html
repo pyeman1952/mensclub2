@@ -766,6 +766,7 @@ function refreshFlightLabels(){
 const FLIGHT_OPTS=['A','B','C','D'].map(f=>`<option value="${f}">${f}</option>`).join('');
 function buildNet(){
   const tbody=document.getElementById('net-tbody');
+  if(!tbody) return; // flight-based layout: net-tbody-A/B/C used instead
   for(let p=1;p<=20;p++){
     const sfx=p===1?'st':p===2?'nd':p===3?'rd':'th';
     const tr=document.createElement('tr');
