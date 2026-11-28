@@ -315,6 +315,12 @@ table.pt tr:last-child td{border-bottom:1px solid var(--bdr);}
     <div class="card s2" id="import-card">
       <h2>Import from Scoring Software <em>pre-fills form fields — all results remain editable</em></h2>
       <div class="cb">
+        <!-- Demo mode: one-click sample loader -->
+        <div id="demo-sample-bar" style="display:none;margin-bottom:14px;padding:12px 14px;background:#FFF8E7;border:2px solid #C9A84C;border-radius:var(--rad);display:none;align-items:center;gap:14px;flex-wrap:wrap;">
+          <span style="font-size:13px;font-weight:700;color:#7A5800;">👁 Demo Mode</span>
+          <span style="font-size:12px;color:#7A5800;flex:1;">No file needed — click to load a sample week with 28 players across 4 flights.</span>
+          <button onclick="loadDemoSample()" style="padding:9px 20px;font-size:13px;font-weight:700;background:#C9A84C;color:#1A1A1A;border:none;border-radius:var(--rad);cursor:pointer;white-space:nowrap;">⛳ Load Sample Week</button>
+        </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;">
           <div>
             <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;">📄 Scores CSV</div>
@@ -2489,7 +2495,7 @@ async function generatePayout(previewOnly=false){
     if(isCommitting&&mwList.length){
       html+=`<div style="margin-top:10px;padding:10px;background:#EDE7FF;border-radius:4px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
         <span style="font-size:12px;font-weight:700;color:#6300CC;">✓ Set payout preferences above, then confirm to save.</span>
-        <button id="btn-confirm-commit" style="padding:8px 20px;background:#6300CC;color:#fff;border:none;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;">Confirm &amp; Save</button>
+        <button id="btn-confirm-commit" style="padding:8px 20px;background:${demoMode?'#999':'#6300CC'};color:#fff;border:none;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;">${demoMode?'👁 Demo — Cannot Save':'Confirm &amp; Save'}</button>
       </div>`;
     }
     html+=`</div>`;
@@ -2600,10 +2606,19 @@ function applyDemoMode(){
   if(banner) banner.style.display='flex';
   const shell = document.querySelector('.shell');
   if(shell) shell.style.marginTop='34px';
-  // Hide admin-only buttons
-  ['btn-commit','btn-publish-pots','btn-fix-public','btn-clear','btn-save-draft','btn-load-draft'].forEach(id=>{
+  // Hide publish/admin buttons — keep btn-commit visible so the full workflow is demonstrable
+  ['btn-publish-pots','btn-fix-public','btn-clear','btn-save-draft','btn-load-draft'].forEach(id=>{
     const el=document.getElementById(id); if(el) el.style.display='none';
   });
+  // Show demo sample loader bar on import tab
+  const sampleBar=document.getElementById('demo-sample-bar');
+  if(sampleBar) sampleBar.style.display='flex';
+  // Style the commit button as demo-only (greyed, labelled)
+  const commitBtn=document.getElementById('btn-commit');
+  if(commitBtn){
+    commitBtn.style.opacity='0.6';
+    commitBtn.title='Demo mode — preview is available but results cannot be saved or published.';
+  }
   // Hide admin sidebar nav items
   ['change-pin'].forEach(tab=>{
     const el=document.querySelector(`.tbtn[data-tab="${tab}"]`); if(el) el.style.display='none';
@@ -3161,6 +3176,52 @@ function renumberNetRows(){
     });
     tr.dataset.npos=p;
   });
+}
+
+// ── Sample CSV for demo mode ──────────────────────────────────────────────────
+const DEMO_SAMPLE_CSV = `Date,Flight,Name,Hcp,Gross,Net,AdjustedGross,H1,H2,H3,H4,H5,H6,H7,H8,H9,H10,H11,H12,H13,H14,H15,H16,H17,H18
+2026-11-22,A,Anderson Dave,2,64,62,64,5,3,2,2,5,5,7,2,4,1,3,4,2,4,4,5,2,4
+2026-11-22,A,Mitchell Rob,4,81,77,81,6,3,5,4,4,3,8,4,2,2,6,4,6,6,3,8,3,4
+2026-11-22,A,Thompson Ken,5,69,64,69,6,5,5,3,5,2,4,3,2,2,3,3,5,5,3,4,2,7
+2026-11-22,A,Williams Steve,6,77,71,77,5,5,2,4,3,4,8,5,4,4,6,6,3,3,2,4,2,7
+2026-11-22,A,Patterson Jim,7,75,68,75,6,5,4,3,7,4,4,3,4,2,4,6,4,4,6,5,2,2
+2026-11-22,A,Harrison Paul,8,78,70,78,3,6,5,3,2,4,8,4,7,5,2,5,5,5,2,6,2,4
+2026-11-22,A,Campbell Gary,9,80,71,80,4,8,5,2,4,3,8,6,3,4,5,3,5,5,5,5,1,4
+2026-11-22,B,MacDonald Brian,10,78,68,78,2,8,5,5,4,2,7,7,3,3,2,5,5,4,3,5,2,6
+2026-11-22,B,Ferguson Doug,11,69,58,69,4,4,3,4,3,4,8,5,4,3,3,3,4,5,2,4,1,5
+2026-11-22,B,Robertson Neil,12,75,63,75,3,7,5,1,3,5,4,3,7,3,4,6,6,4,2,5,3,4
+2026-11-22,B,Murray Scott,13,77,64,77,5,6,6,2,4,4,7,3,3,3,4,4,3,8,3,7,3,2
+2026-11-22,B,Johnston Al,13,89,76,89,7,7,6,6,6,3,5,3,4,1,4,7,3,6,3,5,6,7
+2026-11-22,B,Fraser Mike,14,79,65,79,4,6,2,3,7,5,5,5,2,4,4,6,3,8,2,4,4,5
+2026-11-22,B,Stewart Barry,15,77,62,77,3,4,5,2,5,5,5,5,4,6,3,5,3,5,4,5,3,5
+2026-11-22,C,Graham Rick,16,84,68,84,2,5,6,6,2,3,5,7,6,5,4,3,6,6,4,8,4,2
+2026-11-22,C,Hamilton Terry,17,79,62,79,6,5,4,6,3,3,4,4,4,4,5,3,5,5,3,7,5,3
+2026-11-22,C,Morrison Glen,18,75,57,75,4,5,1,4,5,4,6,5,4,1,3,6,6,5,5,6,2,3
+2026-11-22,C,Reid Tom,19,91,72,91,4,7,4,5,6,3,5,3,5,5,4,5,3,8,5,8,5,6
+2026-11-22,C,Watson Don,20,83,63,83,2,6,3,6,5,6,7,4,5,2,6,6,3,7,3,5,4,3
+2026-11-22,C,Burns Larry,20,83,63,83,2,4,3,5,7,4,6,4,7,3,7,3,7,4,6,5,2,4
+2026-11-22,C,Mackenzie Bill,21,79,58,79,5,5,4,3,4,5,5,5,2,5,5,5,5,6,3,4,4,4
+2026-11-22,D,Douglas Ron,22,79,57,79,4,7,4,3,4,4,5,4,3,3,7,5,6,6,3,6,1,4
+2026-11-22,D,Cameron Frank,24,78,54,78,4,6,4,3,4,3,5,6,5,2,3,4,5,5,5,6,4,4
+2026-11-22,D,Wallace Ed,26,70,44,70,3,3,3,3,6,3,5,5,3,4,4,4,5,3,4,6,2,4
+2026-11-22,D,Ross George,28,91,63,91,3,8,4,1,4,6,5,5,5,6,5,7,6,6,4,6,5,5
+2026-11-22,D,Black Norm,30,78,48,78,6,6,3,3,4,5,6,5,5,3,3,4,4,5,4,4,3,5
+2026-11-22,D,Clark Pete,33,83,50,83,5,4,3,4,4,4,5,6,5,4,6,5,4,3,3,6,5,7
+2026-11-22,D,Shaw Herb,36,73,37,73,4,6,4,4,4,4,5,2,4,4,4,4,5,4,4,3,3,5`;
+
+function loadDemoSample(){
+  _importStore.csv = DEMO_SAMPLE_CSV;
+  _importStore.html = null;
+  const csvSt = document.getElementById('csv-status');
+  if(csvSt){ csvSt.textContent='✓ Sample week loaded (28 players, 4 flights)'; csvSt.style.color='var(--gm)'; }
+  const htmlSt = document.getElementById('html-status');
+  if(htmlSt){ htmlSt.textContent=''; }
+  const btn = document.getElementById('import-btn');
+  if(btn){ btn.disabled=false; btn.style.opacity='1'; btn.style.pointerEvents='auto'; }
+  document.getElementById('import-msg').textContent='';
+  document.getElementById('import-preview').style.display='none';
+  // Auto-run import immediately
+  runImport();
 }
 
 // ── CSV / HTML Import ─────────────────────────────────────────────────────────
